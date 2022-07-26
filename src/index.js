@@ -3,8 +3,9 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {ChakraProvider} from "@chakra-ui/react"
 import Layout from "./layout";
-import Home from "./components/home";
+import Home from "./components/Home/home";
 import Login from "./components/Login/Login";
+import Registration from "./components/Registration/Registration";
 import theme from './theme/index'
 import Test from "./components/Test";
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/test" element={<Test />}></Route>
             <Route path="/Login" element={<Login />}></Route>
+            <Route path="/Registration" element={<Registration />}></Route>
           </Routes>
         </Router>
       </Layout>

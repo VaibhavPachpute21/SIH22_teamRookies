@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Home from "./home";
+import Home from "./Home/home";
 export default function Test() {
   const [number, setNumber] = useState(0);
   const nav = useNavigate();

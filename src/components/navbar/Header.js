@@ -18,7 +18,7 @@ export default function Header() {
 
                             <Link href='/'>Home</Link>
                             <Link>About</Link>
-                            <Link>Register</Link>
+                            <Link href='/Registration'>Register</Link>
                             <Link href='/Login'>Login</Link>
                         </HStack>
                     </Flex>
