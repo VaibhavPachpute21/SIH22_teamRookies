@@ -1,0 +1,59 @@
+.container {
+    background-color: aquamarine;
+    height: 90vh;
+    padding: 100px 350px;
+    width: 100vw;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.loginBox{
+    padding: 20px 20px 35px 20px;
+    background-color: lightgrey;
+    border-radius: 15px;
+}
+
+.loginBox .heading{
+    padding: 20px;
+}
+
+.loginBox .form{
+    column-count: 1;
+}
+
+.loginBox .form .inputBox input{
+    width: 250px;
+    padding: 10px;
+    margin: 10px;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+.loginBox .form span{
+    font-size: 16px;
+}
+
+.loginBox .form .loginBtn{
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+    border-radius: 10px;
+    background-color: #1a75ff;
+    margin: 10px;
+    width: 200px;
+    height: 50px;
+}
+
+.loginBox .form strong{
+    font-size: 18px;
+}
+
+
+.Login-Form {
+    width: 100%;
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    
+
+}
