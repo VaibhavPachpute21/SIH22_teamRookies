@@ -1,55 +1,116 @@
 import React from 'react'
 import './Login.css';
-import { Heading, Input, InputGroup, InputRightElement, Button,Link, color } from '@chakra-ui/react';
+import {
+  Heading, Box,
+  SimpleGrid,
+  FormControl,
+  GridItem, Input, Flex, FormLabel, Button, Link, main, Checkbox, HStack, Icon,Text, ButtonGroup
+} from '@chakra-ui/react';
+import './Login.css'
+import {AiOutlineMail} from 'react-icons/ai'
+import {RiLockPasswordFill} from 'react-icons/ri'
+import {TbCapture} from 'react-icons/tb'
+
 
 export default function Login() {
 
-  const [show, setShow] = React.useState(false)
-  const handleClick = () => setShow(!show)
 
   return (
-    <div className='container'>
-      <div className='loginBox'>
-        <div className='heading'>
-          <Heading color={''}>Welcome to Grievance portal</Heading>
-          <Heading as='h2' size='2xl'>Login</Heading>
-        </div>
-        <div className='form'>
-          <div className='inputBox'>
-            <input type='email' placeholder='Enter Email ID' />
-          </div>
-          <div className='inputBox'>
-            <input type={show ? 'text' : 'password'} placeholder='Enter Password' />
-          </div>
-          <span><input type='checkbox' onClick={handleClick} /> Show Password</span>
-          <div>
-            <button className='loginBtn'>Login</button>
-          </div>
+    <Box
+      className='Login-Background'
+      w={"100vw"} minH={"90vh"}>
+      <Flex w="100%" h="100%" flex-direction={'column'}
+        alignItems={'center'}
+        justifyContent={'center'}
+        paddingTop={'7vh'}
+      >
+        <Box w={['90%','60%','40%']} bg="white" border={'lg'} boxShadow={'2xl'}>
+          <form className='Login-Form'>
+            <FormControl
+              paddingTop={'10'}
+              w="80%">
+              <SimpleGrid
+                row={6}
+                column={1}
+                spacing={10}
+              >
 
-          <div><strong>Don't have Account?<Link href='/Registration' color='blue.500'>Register now</Link></strong></div>
+                <GridItem >
+                  <Heading
+                  fontFamily={'monospace'}
+                  size={'lg'}>Grievance login portal</Heading>
+                </GridItem>
 
-        </div>
+                <GridItem>
+                  <FormLabel
+                  fontFamily={'monospace'}
+                  >
+                    <Icon w={9} h={9} pt={1}>
+                      <AiOutlineMail/>
+                    </Icon>
+                    Email</FormLabel>
+                  <Input type="email" placeholder='Email' />
+                </GridItem>
 
-      </div>
-    </div>
+                <GridItem>
+                  <FormLabel
+                  fontFamily={'monospace'}
+                  >
+                  <Icon w={9} h={9} pt={1}>
+                      <RiLockPasswordFill/>
+                    </Icon>
+                    Password</FormLabel>
+                  <Input type="text" placeholder='Password' />
+                </GridItem>
+
+                <GridItem>
+                  <FormLabel
+                  fontFamily={'monospace'}
+                  >
+                  <Icon w={9} h={9} pt={1}>
+                      <TbCapture/>
+                    </Icon>
+                    Captcha</FormLabel>
+                  <Input type="text" placeholder='Captcha' />
+                </GridItem>
+
+                <GridItem>
+                  <HStack>
+                    <Checkbox />
+                    <Text
+                    fontSize={'md'}
+                    fontFamily={'monospace'}
+                    >Remember me</Text>
+                  </HStack>
+                </GridItem>
+
+                <GridItem>
+                  <Flex w="100%" h="100%" alignItems={'center'} justifyContent={'flex-end'}>
+                    <ButtonGroup>
+                      <Button>
+                        Submit
+                      </Button>
+                    </ButtonGroup>
+                  </Flex>
+                </GridItem>
+
+                <GridItem w="70%">
+                  <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'flex-start'} justifyContent={'space-between'}>
+                  
+                  <Link 
+                  fontWeight={500}
+                  paddingBottom={5}
+                  fontFamily={'monospace'}
+                  >Register</Link>
+                  </Flex>
+                </GridItem>
+
+              </SimpleGrid>
+            </FormControl>
+          </form>
+        </Box>
+      </Flex>
+    </Box>
   )
 }
 
-function PasswordInput() {
-  const [show, setShow] = React.useState(false)
-  const handleClick = () => setShow(!show)
-
-  return (
-    <InputGroup size='md' width={'250px'}>
-      <Input
-        type={show ? 'text' : 'password'}
-        placeholder='Enter password'
-      />
-      <InputRightElement>
-        <Button h='1.75rem' size='sm' onClick={handleClick}>
-          {show ? 'Hide' : 'Show'}
-        </Button>
-      </InputRightElement>
-    </InputGroup>
-  )
-}

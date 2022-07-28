@@ -1,13 +1,12 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import {Divider, Flex, Box} from '@chakra-ui/react'
 
 export default function Home() {
-  const location = useLocation();
+
 
   return (
-    <div>
-      Home
-      <p></p>
-    </div>
+    <Box>
+      
+    </Box>
   );
 }

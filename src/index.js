@@ -7,7 +7,6 @@ import Home from "./components/Home/home";
 import Login from "./components/Login/Login";
 import Registration from "./components/Registration/Registration";
 import theme from './theme/index'
-import Test from "./components/Test";
 const App = () => {
   return (
     <div>
@@ -15,7 +14,6 @@ const App = () => {
         <Router>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/test" element={<Test />}></Route>
             <Route path="/Login" element={<Login />}></Route>
             <Route path="/Registration" element={<Registration />}></Route>
           </Routes>
@@ -30,4 +28,5 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
 <ChakraProvider>
   <App theme={theme}/>
-  </ChakraProvider>)
+  </ChakraProvider>
+  )
