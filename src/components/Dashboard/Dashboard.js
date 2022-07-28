@@ -1,16 +1,25 @@
 import React, { useState } from 'react'
-import { HStack, Flex, Box, VStack, IconButton, Divider } from '@chakra-ui/react'
+import { HStack, Flex, Box, VStack, IconButton, Divider, Text } from '@chakra-ui/react'
 import { AiOutlineHome } from 'react-icons/ai'
-import {MdOutlineRecentActors} from 'react-icons/md'
-import {MdPendingActions} from 'react-icons/md'
-import {IoMdAddCircleOutline} from 'react-icons/io'
-import {FiSettings} from 'react-icons/fi'
-import {AiOutlineUser} from 'react-icons/ai'
+import { MdOutlineRecentActors } from 'react-icons/md'
+import { MdPendingActions } from 'react-icons/md'
+import { IoMdAddCircleOutline } from 'react-icons/io'
+import { FiSettings } from 'react-icons/fi'
+import { AiOutlineUser } from 'react-icons/ai'
+
+import DashboardAdd from '../Slides/add'
+import DashboardHistory from '../Slides/history'
+import DashboardHome from '../Slides/home'
+import DashboardRecents from '../Slides/recents'
+import DashboardSettings from '../Slides/settings'
+
 
 export default function Dashboard() {
 
-  const [shutter,setShutter] = useState(0)
-  
+  const [shutter, setShutter] = useState(0)
+  const [darkColor, setDarkColor] = useState(0)
+
+
 
   return (
     <HStack
@@ -19,17 +28,32 @@ export default function Dashboard() {
       padding={6}
     >
       <VStack
-      boxShadow={'2xl'}
+        boxShadow={'2xl'}
         spacing={3}
-        w="10%" h="100%" bg="#5A4FCF" borderRadius={'2xl'}>
-        <Box
+        w="7%" h="100%" bg="#5A4FCF" borderRadius={'2xl'}>
 
+        <Box
+          w="100%" h="10%">
+          <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
+            <Text color={'white'}
+            fontSize={'lg'}
+            fontFamily={'monospace'}
+            >koo
+            </Text>
+          </Flex>
+
+        </Box>
+
+        <Divider w="50%" />
+
+
+        <Box
           w="100%" h="10%">
           <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
             <IconButton
-            p={5}
-            borderRadius={10}
-              background={'transparent'}
+              onClick={() => { setShutter(0) }}
+              borderRadius={10}
+              background={shutter==0?'#362ca0':'#5A4FCF'}
               _hover={{ background: '#5247cd' }}
               color={'white'}
               fontSize={'3xl'}
@@ -41,9 +65,10 @@ export default function Dashboard() {
         <Box w="100%" h="10%">
           <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
             <IconButton
-            p={5}
-               borderRadius={10}
-              background={'transparent'}
+              onClick={() => { setShutter(1) }}
+              background={shutter==1?'#362ca0':'#5A4FCF'}
+              borderRadius={10}
+              
               color={'white'}
               _hover={{ background: '#5247cd' }}
               fontSize={'3xl'}
@@ -54,9 +79,10 @@ export default function Dashboard() {
         <Box w="100%" h="10%">
           <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
             <IconButton
-            p={5}
-               borderRadius={10}
-              background={'transparent'}
+              onClick={() => { setShutter(2) }}
+              background={shutter==2?'#362ca0':'#5A4FCF'}
+              borderRadius={10}
+            
               color={'white'}
               _hover={{ background: '#5247cd' }}
               fontSize={'3xl'}
@@ -67,24 +93,26 @@ export default function Dashboard() {
         <Box w="100%" h="10%">
           <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
             <IconButton
-            p={5}
-               borderRadius={10}
-              background={'transparent'}
+              onClick={() => { setShutter(3) }}
+              background={shutter==3?'#362ca0':'#5A4FCF'}
+              borderRadius={10}
+      
               color={'white'}
               _hover={{ background: '#5247cd' }}
               fontSize={'3xl'}
               icon={<IoMdAddCircleOutline />} />
           </Flex>
         </Box>
-        
-        <Divider w="50%"/>
-        
+
+        <Divider w="50%" />
+
         <Box w="100%" h="10%">
           <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
             <IconButton
-            p={5}
-               borderRadius={10}
-              background={'transparent'}
+              onClick={() => { setShutter(4) }}
+              background={shutter==4?'#362ca0':'#5A4FCF'}
+              borderRadius={10}
+         
               color={'white'}
               _hover={{ background: '#5247cd' }}
               fontSize={'2xl'}
@@ -94,20 +122,53 @@ export default function Dashboard() {
 
         <Box w="100%" h="50%">
           <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'flex-end'}>
-          <IconButton
-              marginBottom={5}
-              p={5}
-               borderRadius={10}
-              background={'transparent'}
+            <IconButton
+              onClick={() => { setShutter(5) }}
+              background={shutter==5?'#362ca0':'#5A4FCF'}
+              marginBottom={5}    
+              borderRadius={10}
+        
               color={'white'}
               _hover={{ background: '#5247cd' }}
               fontSize={'3xl'}
               icon={<AiOutlineUser />} />
           </Flex>
         </Box>
-        
+
 
       </VStack>
+
+      <Box 
+      borderRadius={10}
+      w="93%" h="100%">
+        {
+          shutter === 0 ? (
+            <DashboardHome/>
+          ):(null)
+        }
+        {
+          shutter === 1 ? (
+            <DashboardHistory/>
+          ):(null)
+        }
+        {
+          shutter === 2 ? (
+            <DashboardRecents/>
+          ):(null)
+        }
+        {
+          shutter === 3 ? (
+            <DashboardAdd/>
+          ):(null)
+        }
+        {
+          shutter === 4 ? (
+            <DashboardSettings/>
+          ):(null)
+        }
+        
+      </Box>
+
     </HStack>
   )
 }
