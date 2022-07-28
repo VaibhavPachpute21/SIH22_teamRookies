@@ -4,9 +4,14 @@ import {
   Heading, Box,
   SimpleGrid,
   FormControl,
-  GridItem, Input, Flex, FormLabel, InputGroup, InputRightElement, Button, Link, main, Checkbox, HStack, Text, ButtonGroup
+  GridItem, Input, Flex, FormLabel, Button, Link, main, Checkbox, HStack, Icon,Text, ButtonGroup
 } from '@chakra-ui/react';
 import './Login.css'
+import {AiOutlineMail} from 'react-icons/ai'
+import {RiLockPasswordFill} from 'react-icons/ri'
+import {TbCapture} from 'react-icons/tb'
+
+
 export default function Login() {
 
 
@@ -32,29 +37,50 @@ export default function Login() {
 
                 <GridItem >
                   <Heading
-                  fontWeight={'400'}
+                  fontFamily={'monospace'}
                   size={'lg'}>Grievance login portal</Heading>
                 </GridItem>
 
                 <GridItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel
+                  fontFamily={'monospace'}
+                  >
+                    <Icon w={9} h={9} pt={1}>
+                      <AiOutlineMail/>
+                    </Icon>
+                    Email</FormLabel>
                   <Input type="email" placeholder='Email' />
                 </GridItem>
 
                 <GridItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel
+                  fontFamily={'monospace'}
+                  >
+                  <Icon w={9} h={9} pt={1}>
+                      <RiLockPasswordFill/>
+                    </Icon>
+                    Password</FormLabel>
                   <Input type="text" placeholder='Password' />
                 </GridItem>
 
                 <GridItem>
-                  <FormLabel>Captcha</FormLabel>
+                  <FormLabel
+                  fontFamily={'monospace'}
+                  >
+                  <Icon w={9} h={9} pt={1}>
+                      <TbCapture/>
+                    </Icon>
+                    Captcha</FormLabel>
                   <Input type="text" placeholder='Captcha' />
                 </GridItem>
 
                 <GridItem>
                   <HStack>
                     <Checkbox />
-                    <Text>Remember me</Text>
+                    <Text
+                    fontSize={'md'}
+                    fontFamily={'monospace'}
+                    >Remember me</Text>
                   </HStack>
                 </GridItem>
 
@@ -70,11 +96,11 @@ export default function Login() {
 
                 <GridItem w="70%">
                   <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'flex-start'} justifyContent={'space-between'}>
-                  <Text>Don't have an account ?</Text>
                   
                   <Link 
                   fontWeight={500}
-                  color={'#FC9601'}
+                  paddingBottom={5}
+                  fontFamily={'monospace'}
                   >Register</Link>
                   </Flex>
                 </GridItem>
