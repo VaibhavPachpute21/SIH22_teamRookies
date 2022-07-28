@@ -4,7 +4,7 @@ import { HStack, Link, Box, Flex } from '@chakra-ui/react'
 export default function Header() {
     return (
         <HStack
-        bg="#ededed"
+    
             minH={'10vh'} w={"100vw"}>
             <Flex w={'100%'} h={'100%'} flexDirection={'row'} alignItems={'flex-start'} >
                 <Box w={'20%'} h='100%' ></Box>

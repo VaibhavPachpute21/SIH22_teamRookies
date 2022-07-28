@@ -1,57 +1,26 @@
-.container {
-    background-color: aquamarine;
-    height: 90vh;
-    padding: 100px 350px;
-    width: 100vw;
-    box-sizing: border-box;
-    text-align: center;
-}
 
-.loginBox{
-    padding: 20px 20px 35px 20px;
-    background-color: lightgrey;
-    border-radius: 15px;
-}
 
-.loginBox .heading{
-    padding: 20px;
+.Login-Background{
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
 }
-
-.loginBox .form{
-    column-count: 1;
-}
-
-.loginBox .form .inputBox input{
-    width: 250px;
-    padding: 10px;
-    margin: 10px;
-    font-size: 20px;
-    border-radius: 5px;
-}
-
-.loginBox .form span{
-    font-size: 16px;
-}
-
-.loginBox .form .loginBtn{
-    color: white;
-    font-size: 20px;
-    font-weight: 700;
-    border-radius: 10px;
-    background-color: #1a75ff;
-    margin: 10px;
-    width: 200px;
-    height: 50px;
-}
-
-.loginBox .form strong{
-    font-size: 18px;
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
 
 
 .Login-Form {
     width: 100%;
-    min-height: 80vh;
+    min-height: 75vh;
     display: flex;
     justify-content: center;
     
