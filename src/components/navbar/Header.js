@@ -1,17 +1,21 @@
 import React from 'react'
-import { HStack, Link, Box, Flex } from '@chakra-ui/react'
+import { HStack, Link, Box, Flex, Icon } from '@chakra-ui/react'
+import {GiHamburgerMenu} from 'react-icons/gi'
 
 export default function Header() {
     return (
         <HStack
     
-            minH={'10vh'} w={"100vw"}>
+            minH={[
+                '5vh','7vh','10vh'
+            ]} w={"100vw"}>
             <Flex w={'100%'} h={'100%'} flexDirection={'row'} alignItems={'flex-start'} >
                 <Box w={'20%'} h='100%' ></Box>
                 <Box w={'80%'} h='100%'>
                     <Flex
                         w={'100%'} h='100%' flexDirection={'row'} alignItems={'flex-end'}>
                         <HStack
+                        display={{md:'flex',base:'none'}}
                             flexDirection={'row'}
                             alignItems={'flex-end'}
                             justifyContent={'flex-end'} spacing={10} w="90%">
@@ -33,6 +37,23 @@ export default function Header() {
                             _hover={{'textDecoration':'none'}}
                             href='/Login'>Login</Link>
                         </HStack>
+
+                        <Flex
+                        flexDirection={'row'}
+                        justifyContent={
+                            'flex-end'
+                        }
+                        alignItems={'flex-end'}
+                        paddingTop={3}
+                        w="90%">
+                        <Icon
+                        
+                        display={{md:'none',base:'flex'}}
+                        w={8} h={8}>
+                            <GiHamburgerMenu/>
+                        </Icon>
+                        </Flex>
+
                     </Flex>
                 </Box>
             </Flex>
