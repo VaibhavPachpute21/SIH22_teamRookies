@@ -5,7 +5,7 @@ import {GiHamburgerMenu} from 'react-icons/gi'
 export default function Header() {
     return (
         <HStack
-    
+            bg="red.200"
             minH={[
                 '5vh','7vh','10vh'
             ]} w={"100vw"}>

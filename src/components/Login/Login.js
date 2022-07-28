@@ -4,6 +4,7 @@ import {
   Heading, Box,
   SimpleGrid,
   FormControl,
+  Image,
   GridItem, Input, Flex, FormLabel, Button, Link, main, Checkbox, HStack, Icon,Text, ButtonGroup
 } from '@chakra-ui/react';
 import './Login.css'
@@ -18,13 +19,20 @@ export default function Login() {
   return (
     <Box
       className='Login-Background'
+      overflow={'none'}
       w={"100vw"} minH={"90vh"}>
-      <Flex w="100%" h="100%" flex-direction={'column'}
+      <Flex w="100%" h="100%" flex-direction={'row'}
         alignItems={'center'}
-        justifyContent={'center'}
+        justifyContent={'space-around'}
         paddingTop={'7vh'}
       >
-        <Box w={['90%','60%','40%']} bg="white" border={'lg'} boxShadow={'2xl'}>
+
+        <Box w={["0%",'0%','30%']}>
+          <Image src='./image/bg1.jpg'/>
+        </Box>
+
+
+        <Box w={['90%','60%','40%']} maxH="90vh" bg="white" border={'lg'} boxShadow={'2xl'} paddingBottom={100}>
           <form className='Login-Form'>
             <FormControl
               paddingTop={'10'}
