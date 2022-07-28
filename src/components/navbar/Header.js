@@ -5,8 +5,7 @@ import {GiHamburgerMenu} from 'react-icons/gi'
 export default function Header() {
     return (
         <HStack
-            bg="red.200"
-            minH={[
+      minH={[
                 '5vh','7vh','10vh'
             ]} w={"100vw"}>
             <Flex w={'100%'} h={'100%'} flexDirection={'row'} alignItems={'flex-start'} >
@@ -36,6 +35,11 @@ export default function Header() {
                             fontWeight={500}
                             _hover={{'textDecoration':'none'}}
                             href='/Login'>Login</Link>
+
+                            <Link
+                            fontWeight={500}
+                            _hover={{'textDecoration':'none'}}
+                            href='/Dashboard'>Dashboard</Link>
                         </HStack>
 
                         <Flex
