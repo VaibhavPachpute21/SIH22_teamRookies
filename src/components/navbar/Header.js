@@ -9,7 +9,7 @@ export default function Header() {
                 '5vh','7vh','10vh'
             ]} w={"100vw"}>
             <Flex w={'100%'} h={'100%'} flexDirection={'row'} alignItems={'flex-start'} >
-                <Box w={'20%'} h='100px' paddingLeft={5} ><Image src='./image/logo.png' height={'100px'} /> </Box>
+               {/*  <Box w={'20%'} h='100px' paddingLeft={5} ><Image src='./image/logo.png' height={'100px'} /> </Box> */}
                 <Box w={'80%'} h='100%'>
                     <Flex
                         w={'100%'} h='100%' flexDirection={'row'} alignItems={'flex-end'}>
