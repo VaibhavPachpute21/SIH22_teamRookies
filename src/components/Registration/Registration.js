@@ -6,6 +6,7 @@ import { Box, Flex, Input, Icon, FormControl, SimpleGrid, GridItem, Heading, For
 export default function Registration() {
   return (
     <Box className='Login-Background' minH={'max-content'} maxWidth={"100vw"} overflow={'hidden'} align="center" padding={[4,5,10]}>
+      
       <Flex  height="100%" align={'center'} width={"100%"} flexDirection={'row'} justifyContent={'space-around'} >
         <Box w={["0%",'0%','30%']} margin={['0px','0px','10px']}>
           <Image src='./image/bg1.jpg' />
