@@ -160,6 +160,7 @@ const DashboardHistory = () => {
 
                                                     w="100%" h="20vh" alignItems={'center'} justifyContent={'center'}>
                                                     <Avatar
+                                                    src='https://bit.ly/dan-abramov'
                                                         size={'xl'}
                                                     />
                                                 </Flex>
