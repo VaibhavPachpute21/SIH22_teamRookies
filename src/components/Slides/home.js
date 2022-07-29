@@ -91,7 +91,7 @@ const DashboardHome = () => {
                                     p={5}
                                     w="100%" h="50%">
                                     <Heading
-                                        size={'2xl'}
+                                        size={'xl'}
                                     >
                                         {item.number}
                                     </Heading>
