@@ -1,5 +1,5 @@
 import React from 'react'
-import { HStack, Link, Box, Flex, Icon } from '@chakra-ui/react'
+import { HStack, Link, Box, Flex, Icon,Image } from '@chakra-ui/react'
 import {GiHamburgerMenu} from 'react-icons/gi'
 
 export default function Header() {
@@ -9,11 +9,11 @@ export default function Header() {
                 '5vh','7vh','10vh'
             ]} w={"100vw"}>
             <Flex w={'100%'} h={'100%'} flexDirection={'row'} alignItems={'flex-start'} >
-                <Box w={'20%'} h='100%' ></Box>
+                <Box w={'20%'} h='100px' paddingLeft={5} ><Image src='./image/logo.png' height={'100px'} /> </Box>
                 <Box w={'80%'} h='100%'>
                     <Flex
                         w={'100%'} h='100%' flexDirection={'row'} alignItems={'flex-end'}>
-                        <HStack
+                        <HStack paddingTop={5}
                         display={{md:'flex',base:'none'}}
                             flexDirection={'row'}
                             alignItems={'flex-end'}
