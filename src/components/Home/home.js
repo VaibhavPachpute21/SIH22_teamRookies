@@ -10,21 +10,19 @@ export default function Home() {
 
   return (
     <>
-      <div>
-        <div className="bg1">
+        <div className="bg1 myDiv">
         </div>
-        <Flex flexDirection={'row'} justifyContent={'space-around'} minH={'100%'} >
-          <Box>
-            <div className="heading" >
-              <span>Welcome to the</span>
-              <h2>Centralized assistance cell</h2>
-              <span>of University Grants Commission.</span>
-              <p>Resolution of all grievances, complaints, and malpractices brought by individuals, organisations, the administration,  governmental and  professional bodies.</p>
-              <Button className="mt-5" bg={'#F5822E'} color='white' >Register Grievance</Button>
-            </div>
+        <Flex flexDirection={'row'} justifyContent={'space-around'} minH={{md:'100%',base:'92vh'}} >
+          <Box paddingLeft={{md:'30vh',base:'10px' }} paddingTop={{md:'20vh',base:'10vh'}}>
+          <Text fontSize='2xl' color="blue">Welcome to the</Text>
+          <Text fontSize='3xl' color={'#F5822E'}>Centralized assistance cell</Text>
+          <Text  fontSize='2xl' color="blue">of University Grants Commission.</Text>
+          <Text fontSize='2xl' color='black' width={{md:'600px'}}>Resolution of all grievances, complaints, and malpractices brought by individuals,
+             organisations, the administration,  governmental and  professional bodies.</Text>
+             <Button className="mt-5" bg={'#F5822E'} color='white' >Register Grievance</Button>
           </Box>
-          <Box maxH={'87vh'}>
-            <Image src="../../image/college-student.png" minH={'87vh'} height={"100%"} />
+          <Box maxH={'87vh'} display={{md:'block',base:'none'}} >
+            <Image src="../../image/college-student.png" minH={['87vh']} height={"100%"} />
           </Box>
         </Flex>
 
@@ -123,12 +121,6 @@ export default function Home() {
             </Box>
           </Box>
         </Box>
-
-
-
-
-      </div>
     </>
-
   );
 }

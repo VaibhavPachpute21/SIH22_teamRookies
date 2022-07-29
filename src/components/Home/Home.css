@@ -1,4 +1,4 @@
-/* div {
+.myDiv {
     width: 100% !important;
     overflow: hidden !important;
 }
@@ -12,41 +12,43 @@
     background-image: linear-gradient(to bottom right, #f96e0b5b, rgba(22, 234, 22, 0.269));
 }
 
-.heading{
-    padding-top: 30vh;
-    padding-left: 10vw;
-    color: black;
-}
-
-.heading span{
-    color: blue;
-    font-size: 30px;
-}
-
-.heading h2{
-    font-size: 35px;
-    color: #F5822E;
-}
-
-.heading p{
-    width: 600px;
-    padding-top: 20px;
-    color: black;
-    font-size: 20px;
-}
-
-.mt-5{
+.mt-5 {
     margin-top: 15px;
 }
 
-.secTwo{
+.secTwo {
     color: black;
     padding: 100px 50px;
     background-image: "../../image/backimg1.jpg";
 }
 
-.secTwo p{
+.secTwo p {
     text-align: center;
     font-size: 25px;
     color: #ffffff;
-} */
+}
+
+@media only screen and (max-width: 600px) {
+
+    .bg1 {
+        z-index: -1;
+        position: absolute;
+        top: -10vh;
+        height: 110vh;
+        background-color: #ffffff;
+        background-image: linear-gradient(to bottom right, #f96e0b5b, rgba(22, 234, 22, 0.269));
+    }
+    
+    .secTwo{
+        color: black;
+        padding: 10px 10px;
+        background-image: "../../image/backimg1.jpg";
+    }
+
+    .secTwo p {
+        text-align: justify;
+        font-size: 25px;
+        color: #ffffff;
+    }
+
+}
