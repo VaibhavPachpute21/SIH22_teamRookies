@@ -16,68 +16,51 @@ import {
 import { Step, Steps, useSteps } from 'chakra-ui-steps';
 import { BsFilePostFill, BsFillFileImageFill } from 'react-icons/bs'
 import { AiOutlineVideoCamera } from 'react-icons/ai'
-import { Editor } from 'slate-react'
-import { Value } from 'slate'
+import ControlledEditor from './editor'
 
 
+const tableKeys = [
+    
+        "Name",
+        "State",
+        "Office",
+        "Phone",
+        "Email",
+        "Type"
+  
+]
 
+const tableValues = [
+        "Forrest Gump",
+        "Colorado",
+        "Western",
+        "43298502",
+        "gumpForrest@gmail.com",
+        "Grievance"
+]
 
 const content1 = (
     <Flex w="85vw" h="65vh" py={4}>
         <Box w="100%" h="100%">
         <TableContainer py={10} h="100%">
-  <Table variant='striped' colorScheme='purple'>
+  <Table variant='striped'>
     <TableCaption>Verify your personal details and proceed</TableCaption>
 
     <Tbody>
-      <Tr w="100%" h="8vh">
+        {
+            tableKeys?.map((item,i)=>(
+        <Tr key={i} background={i%2==0 ? "#5A4FCF":"white"} w="100%" h="8vh">
         <Td
         fontWeight={600}
-        w="50%">Name</Td>
+        w="50%">{item}</Td>
         <Td
          fontWeight={600}
-        w="50%">Forrest Gump</Td>
+        w="50%">{tableValues[i]}</Td>
       </Tr>
-      <Tr w="100%" h="8vh">
-        <Td  
-         fontWeight={600}
-        w="50%">State/UT</Td>
-        <Td 
-         fontWeight={600}
-        w="50%">Texas</Td>
-      </Tr>
-      <Tr w="100%" h="8vh">
-        <Td  
-         fontWeight={600}
-        w="50%">Regional Office</Td>
-        <Td  
-         fontWeight={600}
-        w="50%">Western</Td>
-      </Tr>
-      <Tr w="100%" h="8vh">
-        <Td  
-         fontWeight={600}
-        w="50%">Phone Number</Td>
-        <Td  
-         fontWeight={600}
-        w="50%">4938092052</Td>
-      </Tr>
-      <Tr w="100%" h="8vh">
-        <Td  
-         fontWeight={600}
-        w="50%">Primary Email</Td>
-        <Td  
-         fontWeight={600}
-        w="50%">gumpForrest@gmail.com</Td>
-      </Tr>
-      <Tr w="100%" h="8vh">
-        <Td  
-         fontWeight={600}
-        w="50%">Type</Td>
-        <Td  
-         fontWeight={600}
-        w="50%">Grievance</Td>
-      </Tr>
+      
+            ))
+        }
+      
     </Tbody>
   </Table>
 </TableContainer>
@@ -136,17 +119,13 @@ const content2 = (
     </Flex>
 );
 
-const content3 = (
-    <div>
-        
-    </div>
-);
+
 
 
 const steps = [
      content1 ,
      content2 ,
-     content1 ,
+     <ControlledEditor/>
 ];
 
 
