@@ -33,7 +33,7 @@ class ControlledEditor extends Component {
   }
 
   render() {
-  console.log(this.state.Final)    
+   
     
     const { editorState } = this.state;
     return (
