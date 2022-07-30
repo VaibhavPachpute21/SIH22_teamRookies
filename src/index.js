@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { ChakraProvider } from "@chakra-ui/react"
+import { ChakraProvider, extendTheme } from "@chakra-ui/react"
 import Layout from "./layout";
 import Home from "./components/Home/home";
 import Login from "./components/Login/Login";
@@ -11,9 +11,40 @@ import Contact from "./components/Contact/Contact";
 import Solved from "./components/Solved/Solved";
 import List from "./components/List/List";
 import Temp from "./components/Temp/temp";
+import { StepsStyleConfig } from 'chakra-ui-steps';
+
+const CustomSteps = {
+  ...StepsStyleConfig,
+  baseStyle: props => {
+    return {
+      ...StepsStyleConfig.baseStyle(props),
+      icon: {
+        ...StepsStyleConfig.baseStyle(props).icon,
+        strokeWidth: '1px',
+      },
+      label:{
+        ...StepsStyleConfig.baseStyle(props).label,
+        color:"white",
+      },
+      stepIconContainer:{
+        ...StepsStyleConfig.baseStyle(props).stepIconContainer,
+        background:"#5A4FCF",
+        
+      }
+    };
+  },
+};
 
 
-import theme from './theme/index'
+const theme = extendTheme({
+  components: {
+    Steps: CustomSteps,
+  },
+});
+
+
+
+
 const App = () => {
   return (
     <div>
@@ -38,7 +69,7 @@ const App = () => {
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  <ChakraProvider>
-    <App theme={theme} />
+  <ChakraProvider theme={theme} >
+    <App/>
   </ChakraProvider>
 )

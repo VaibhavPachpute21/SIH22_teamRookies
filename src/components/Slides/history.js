@@ -2,8 +2,8 @@ import { Box, VStack, HStack, Flex, Text, Checkbox, IconButton, Avatar, Heading,
 import { useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi'
 import './styles/drawer.css'
-import {BiLinkExternal} from 'react-icons/bi'
-import {BsChat} from 'react-icons/bs'
+import { BiLinkExternal } from 'react-icons/bi'
+import { BsChat } from 'react-icons/bs'
 
 
 const DashboardHistory = () => {
@@ -160,7 +160,7 @@ const DashboardHistory = () => {
 
                                                     w="100%" h="20vh" alignItems={'center'} justifyContent={'center'}>
                                                     <Avatar
-                                                    src='https://bit.ly/dan-abramov'
+                                                        src='https://bit.ly/dan-abramov'
                                                         size={'xl'}
                                                     />
                                                 </Flex>
@@ -177,7 +177,7 @@ const DashboardHistory = () => {
                                                         size="md"
                                                         fontWeight={500}
                                                     >
-                                                  
+
                                                         {item.user_role}</Heading>
 
                                                     <VStack
@@ -204,7 +204,7 @@ const DashboardHistory = () => {
                                             </Box>
 
                                             <Box w="25%" h="20vh" >
-                                            <VStack
+                                                <VStack
                                                     spacing={9}
                                                     alignItems={'center'}
                                                     justifyContent={'center'}
@@ -217,7 +217,7 @@ const DashboardHistory = () => {
                                                         w="100%" h="40%">
                                                         <Box w="100%">
                                                             <Text w="100%"
-                                                                
+
                                                                 fontWeight={500}>
                                                                 {item.user_committee}
                                                             </Text>
@@ -227,20 +227,20 @@ const DashboardHistory = () => {
                                                             <Text w="100%"
                                                                 color={'gray.600'}
                                                                 fontWeight={500}>
-                                                                    {
-                                                                        item.grievance_status === "SOLVED" ? (
-                                                                            <Tag
+                                                                {
+                                                                    item.grievance_status === "SOLVED" ? (
+                                                                        <Tag
                                                                             borderRadius={'20'}
                                                                             background={'whatsapp.400'}>{" "}</Tag>
-                                                                        ):(<Tag 
-                                                                            borderRadius={'20'}
-                                                                            background={'red.400'}>{" "}</Tag>)
-                                                                    }
-                                                                    {" "}
+                                                                    ) : (<Tag
+                                                                        borderRadius={'20'}
+                                                                        background={'red.400'}>{" "}</Tag>)
+                                                                }
+                                                                {" "}
                                                                 {item.grievance_status}
                                                             </Text>
                                                         </Box>
-                                                        
+
                                                     </VStack>
                                                 </VStack>
                                             </Box>
@@ -248,39 +248,39 @@ const DashboardHistory = () => {
                                             <Box w="30%" h="20vh">
                                                 <VStack spacing={0} w="100%" h="100%">
                                                     <Box
-                                                     w="100%" h="5vh">
-                                                      <Flex 
-                                                      py={2}
-                                                      w="95%" h="100%" alignItems={'flex-end'} justifyContent={'flex-end'}>
-                                                        <Text>
-                                                            {item.post_date}
-                                                        </Text>
-                                                      </Flex>
+                                                        w="100%" h="5vh">
+                                                        <Flex
+                                                            py={2}
+                                                            w="95%" h="100%" alignItems={'flex-end'} justifyContent={'flex-end'}>
+                                                            <Text>
+                                                                {item.post_date}
+                                                            </Text>
+                                                        </Flex>
                                                     </Box>
 
                                                     <Box w="100%" h="15vh">
-                                                     <Flex w="100%" h="100%" alignItems={'center'} justifyContent={'flex-end'}>
-                                                        <Box
-                                                        h="100%"
-                                                        w="50%">       
-                                                        <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
-                                                          <IconButton
-                                                          bg="#D9CEFF"
-                                                          color={'black'}
-                                                          icon={<BiLinkExternal/>}/>
+                                                        <Flex w="100%" h="100%" alignItems={'center'} justifyContent={'flex-end'}>
+                                                            <Box
+                                                                h="100%"
+                                                                w="50%">
+                                                                <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
+                                                                    <IconButton
+                                                                        bg="#D9CEFF"
+                                                                        color={'black'}
+                                                                        icon={<BiLinkExternal />} />
+                                                                </Flex>
+                                                            </Box>
+                                                            <Box
+                                                                h="100%"
+                                                                w="50%">
+                                                                <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
+                                                                    <IconButton
+                                                                        bg="#D9CEFF"
+                                                                        color={'black'}
+                                                                        icon={<BsChat />} />
+                                                                </Flex>
+                                                            </Box>
                                                         </Flex>
-                                                        </Box>
-                                                        <Box 
-                                                        h="100%"
-                                                        w="50%">       
-                                                        <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
-                                                        <IconButton 
-                                                        bg="#D9CEFF"
-                                                        color={'black'}
-                                                        icon={<BsChat/>}/>
-                                                        </Flex>
-                                                        </Box>
-                                                     </Flex>
                                                     </Box>
 
                                                 </VStack>
