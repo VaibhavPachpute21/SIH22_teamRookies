@@ -37,8 +37,8 @@ class ControlledEditor extends Component {
     
     const { editorState } = this.state;
     return (
-      <Flex  w="85vw" h="65vh" py={10} flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
-        <Box w="70%" h="100%" >
+      <Flex  w="90%" h="65%" py={10} flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
+        <Box w="100%" h="100%" >
         <Editor
           editorState={editorState}
           wrapperClassName="demo-wrapper"
