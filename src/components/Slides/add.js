@@ -17,6 +17,8 @@ import { Step, Steps, useSteps } from 'chakra-ui-steps';
 import { BsFilePostFill, BsFillFileImageFill } from 'react-icons/bs'
 import { AiOutlineVideoCamera } from 'react-icons/ai'
 import ControlledEditor from './editor'
+import ImageUpload from './ImageUploader';
+
 
 
 const tableKeys = [
@@ -200,9 +202,9 @@ const DashboardAdd = () => {
                     index == 0 ? (
                         <Box 
                         py={5}
-                        w="100%" h="100%">
+                        w="100%" h="90%">
                             <VStack
-                            maxH={'80vh'}
+                            maxH={'70vh'}
                             w="100%" h="100%">
 
                                 <Flex
@@ -250,8 +252,8 @@ const DashboardAdd = () => {
 
                 {
                     index == 1 ? (
-                        <Box>
-                            May
+                        <Box w="100%" h="90%">
+                            <ImageUpload/>
                         </Box>
                     ) : (null)
                 }

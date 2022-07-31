@@ -1,13 +1,26 @@
-import { Avatar, Box, Flex, HStack, VStack, Image, Heading, Text, Spacer } from '@chakra-ui/react'
-
+import { Avatar, Box, Flex, HStack, VStack, Image, Heading, Text, Spacer, IconButton } from '@chakra-ui/react'
+import {TiExportOutline} from 'react-icons/ti'
 
 const Grievance = () => {
 
     return (
         <Box w="100vw"
-            h="90vh">
-            <Flex w="100%" h="100%" flexDir={'column'} alignItems={'center'} justifyContent={'center'}>
-                <Box w="80%" h="100%" bg={'red.200'}  >
+            h="100vh">
+                <Box h="5%" w="95%">
+                    <Flex w="100%" h="100%"> 
+                        <Box
+                         w="100%" h="100%">
+                            <Flex w="100%" h="100%" justifyContent={'flex-end'} alignItems={'center'}>
+                            <IconButton
+                            color={'white'}
+                            background={'#'}
+                            icon={<TiExportOutline/>}/>
+                            </Flex>
+                        </Box>
+                    </Flex>
+                </Box>
+            <Flex w="100%" h="95%" flexDir={'column'} alignItems={'center'} justifyContent={'center'}>
+                <Box w="80%" h="100%"  >
                     <VStack w="100%" h="100%">
                         <HStack
                             spacing={5}
@@ -26,7 +39,7 @@ const Grievance = () => {
                                         justifyContent={'flex-start'} w="100%" h="20%">
                                         <Heading
                                             pt={4}
-                                            fontSize={'5xl'}
+                                            fontSize={['xl','2x;','5xl']}
                                             fontFamily={'monospace'}
                                             fontWeight={600}>
                                             Grievance form
@@ -41,7 +54,7 @@ const Grievance = () => {
 
                                     <HStack w="100%" h="20%">
                                         <Text
-
+                                            fontSize={['sm','md','lg']}
                                             fontWeight={700}
                                             w="100%" textAlign={'flex-start'} h="50%">
                                             University Grants Commission (UGC) Bahadur Shah Zafar Marg, New Delhi - 110002.
@@ -50,13 +63,17 @@ const Grievance = () => {
 
                                     <HStack w="100%" h="10%">
                                         <Box py={5} h="100%">
-                                            <Text h="100%">
+                                            <Text
+                                            fontSize={['sm','md','lg']}
+                                            h="100%">
                                                 <strong>Phone number</strong>: 2498-108-01824
                                             </Text>
                                         </Box>
 
                                         <Box py={5} h="100%">
-                                            <Text h="100%">
+                                            <Text 
+                                            fontSize={['sm','md','lg']}
+                                            h="100%">
                                                 <strong>Email address</strong>: vaibhav@gmail.com
                                             </Text>
                                         </Box>
@@ -64,7 +81,8 @@ const Grievance = () => {
                                 </VStack>
                             </Box>
                         </HStack>
-                        <Box borderRadius={8} padding={2} bg={'blue.200'} width={'90%'}>
+                        <VStack w="100%" h="90%" spacing={10}>
+                        <Box borderRadius={8} padding={2} width={'90%'}>
                             <Heading textAlign={'center'} >Grievant(s) Information</Heading>
                             <Box w={'100%'}>
                                 
@@ -80,7 +98,7 @@ const Grievance = () => {
                             </Box>
                         </Box>
 
-                        <Box borderRadius={8} padding={2} bg={'blue.200'} width={'90%'}>
+                        <Box borderRadius={8} padding={2} width={'90%'}>
                             <Heading textAlign={'center'} >Grievance</Heading>
                             <Box w={'100%'}>
                                 
@@ -98,11 +116,12 @@ const Grievance = () => {
                         </Box>
 
 
-                        <Box borderRadius={8} padding={2} bg={'blue.200'} width={'90%'} >
+                        <Box borderRadius={8} padding={2} width={'90%'} >
                             <Box w={'100%'}>
                                 <Box padding={2} h={'15vh'} border={'1px solid black'} w={'100%'}><Text ><strong>Description of Grievance:</strong>something</Text></Box>
                             </Box>
                         </Box>
+                        </VStack>
                     </VStack>
 
 
