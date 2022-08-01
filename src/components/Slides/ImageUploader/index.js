@@ -143,7 +143,7 @@ const ImageUpload = () => {
 
                                             <Box
                                                 py={5}
-                                                w="60%" h="80%">
+                                                w="60%" h="70%">
                                                 <Image
                                                     boxShadow={'xl'}
                                                     src={item.src}
@@ -151,9 +151,6 @@ const ImageUpload = () => {
 
                                             </Box>
 
-                                            <Box>
-
-                                            </Box>
                                         </Flex>
                                     ))
                                 ) : (

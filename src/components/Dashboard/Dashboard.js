@@ -10,14 +10,14 @@ import { AiOutlineUser } from 'react-icons/ai'
 import DashboardAdd from '../Slides/add'
 import DashboardHistory from '../Slides/history'
 import DashboardHome from '../Slides/home'
-import DashboardRecents from '../Slides/recents'
+import DashboardTracker from '../Slides/tracker'
 import DashboardSettings from '../Slides/settings'
 
 
 export default function Dashboard() {
 
   const [shutter, setShutter] = useState(0)
-  const [darkColor, setDarkColor] = useState(0)
+  
 
 
 
@@ -153,7 +153,7 @@ export default function Dashboard() {
         }
         {
           shutter === 2 ? (
-            <DashboardRecents/>
+            <DashboardTracker/>
           ):(null)
         }
         {
