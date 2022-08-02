@@ -27,14 +27,14 @@ export default function Header() {
                             fontWeight={500}
                             _hover={{'textDecoration':'none'}}
                             >About</Link>
+                            {/* <Link
+                            fontWeight={500}
+                            _hover={{'textDecoration':'none'}}
+                            href='/Registration'>Register</Link> */}
                             <Link
                             fontWeight={500}
                             _hover={{'textDecoration':'none'}}
-                            href='/Registration'>Register</Link>
-                            <Link
-                            fontWeight={500}
-                            _hover={{'textDecoration':'none'}}
-                            href='/Login'>Login</Link>
+                            href='/Login'>Login/ Register</Link>
 
                             <Link
                             fontWeight={500}
