@@ -20,7 +20,7 @@
 
 .Login-Form {
     width: 100%;
-    min-height: 60vh;
+    height: 100%;
     display: flex;
     justify-content: center;
     

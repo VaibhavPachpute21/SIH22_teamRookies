@@ -18,42 +18,47 @@ export default function Login() {
 
   return (
     <Box
-      // className='Login-Background'
-
-      // paddingBottom={'10'}
       overflow={'none'}
-      w={"100vw"} minH={"90vh"}>
-      <Flex w="100%" h="100%" flex-direction={'row'}
-        alignItems={'center'}
-      // paddingTop={'4vh'}
-      >
-
-        {/* <Box w={["0%", '0%', '40%']} bg={"#5A4FCF"} height={"90vh"} paddingTop={10}>
-          <Image src='./image/bg1.jpg' />
-        </Box> */}
-
-        <Flex className='Login-Background'
-          w={['90%', '60%', '100%']} height="90vh" padding={1} flexDirection={"row"} alignItems={'center'} justifyContent={'center'}>
-          <Box flex-direction={'row'} w={"70%"} bg={'white'} border={'lg'} alignItems={'center'} justifyContent={'space-between'} boxShadow={'2xl'} borderRadius={15}>
-            <HStack>
-            <Box w={["0%", '0%', '60%']} height={'100%'}>
-              <Image src='./image/bg1.jpg' w={'100%'} height={'100%'} />
+      w={"100vw"} h={"90vh"}>
+      <Flex
+      className='Login-Background'
+      w="100%" h="100%" flexDirection={'row'} alignItems={'center'} justifyContent={'center'}>
+        <Box 
+        boxShadow={'2xl'}
+        borderRadius={'2xl'}
+        bg="white"
+        h="60%"
+         w="20%">
+          <Flex w="100%" h="100%" alignItems={'center'} justifyContent={'center'}>
+            <Box w="100%" h="100%">
+              <Image
+              borderLeftRadius={'2xl'}
+              h="100%"
+              src="./image/landscape.jpg" alt="landscape"/>
             </Box>
-            <form className='Login-Form'>
+          </Flex> 
+        </Box>
+        <Box 
+        boxShadow={'2xl'}
+        borderRightRadius={'2xl'}
+        bg="white"
+         h="60%"
+         w="50%">
+          <form className='Login-Form'>
               <FormControl
-                paddingTop={'5'}
+              px={5}
                 paddingBottom={5}
-                w="40%">
+                w="100%">
                 <SimpleGrid
-                  row={6}
-                  column={1}
-                  spacing={10}
+                spacing={5}
+                row={6}
+                column={1}
                 >
 
-                  <GridItem >
+                  <GridItem py={3}>
                     <Heading
                       fontFamily={'monospace'}
-                      size={'lg'}>Grievance login portal</Heading>
+                      size={'md'}>Grievance login portal</Heading>
                   </GridItem>
 
                   <GridItem>
@@ -99,28 +104,25 @@ export default function Login() {
                     </HStack>
                   </GridItem>
 
-                  {/* <GridItem colSpan={1}>
-                    <ButtonGroup>
-                      <Button>
-                        Submit
-                      </Button>
-                    </ButtonGroup>
-                </GridItem> */}
 
-                  <GridItem w="100%">
+                  <GridItem 
+                  
+                  w="100%">
                     <Flex w="100%" h="100%" flexDirection={'row'} alignItems={'flex-start'} justifyContent={'space-between'}>
                       <ButtonGroup>
-                        <Button size={"lg"} bg={"#5A4FCF"} color={'white'}>
+                        <Button size={"md"} bg={"#5A4FCF"} color={'white'}>
                           Submit
                         </Button>
                       </ButtonGroup>
-                      <Text paddingBottom={5} fontSize={16} fontWeight={500}>Don't have Account?<Link w={"30%"}
+
+
+                      <Text py={3} fontSize={16} fontWeight={500}>Don't have Account{" "}?<Link w={"30%"}
                         href='/Registration'
                         fontWeight={500}
                         fontSize={16}
                         color={'blue'}
                         fontFamily={'monospace'}
-                      >Register</Link></Text>
+                      >{" "}Register</Link></Text>
 
                     </Flex>
                   </GridItem>
@@ -128,10 +130,15 @@ export default function Login() {
                 </SimpleGrid>
               </FormControl>
             </form>
-            </HStack>
-          </Box>
-        </Flex>
+        </Box>
+
       </Flex>
+
+
+
+        
+      
+
     </Box>
   )
 }
