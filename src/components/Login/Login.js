@@ -5,30 +5,32 @@ import {
   SimpleGrid,
   FormControl,
   Image,
-  GridItem, Input, Flex, FormLabel, Button, Link, main, Checkbox, HStack, Icon, Text, ButtonGroup
+  GridItem, Input, Flex, FormLabel, Button,
+  InputLeftAddon, InputGroup,
+  Link, main, Checkbox, HStack, Icon, Text, ButtonGroup, VStack, Divider, IconButton
 } from '@chakra-ui/react';
 import './Login.css'
-import { AiOutlineMail } from 'react-icons/ai'
-import { RiLockPasswordFill } from 'react-icons/ri'
-import { TbCapture } from 'react-icons/tb'
+import GoogleButton from 'react-google-button'
+import { RiGoogleFill, RiLockPasswordFill } from 'react-icons/ri'
+import { MdEmail } from 'react-icons/md'
 import { UserAuth } from '../../context/AuthContext';
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 export default function Login() {
 
-  const {user, logout, signIn} = UserAuth()
+  const { user, logout, signIn } = UserAuth()
   const navigate = useNavigate()
 
 
   const HandleLogin = async (e) => {
-     e.preventDefault()
+    e.preventDefault()
 
-     try {
-      await signIn("testme@gmail.com","1234562")
+    try {
+      await signIn("testme@gmail.com", "1234562")
       navigate("/")
-     } catch (error) {
+    } catch (error) {
       console.log(error.message)
-     }
+    }
   }
 
 
@@ -40,136 +42,154 @@ export default function Login() {
       console.log(error.message)
     }
   }
-  
+
 
 
   return (
     <Box
       overflow={'none'}
-      w={"100vw"} h={"90vh"}>
-      <Flex
-      className='Login-Background'
-      w="100%" h="100%" flexDirection={'row'} alignItems={'center'} justifyContent={'center'}>
-        <Box boxShadow={'2xl'} borderRadius={'2xl'}
-        bg="white" h="80%" w="20%">
-          <Flex w="100%" h="100%" alignItems={'center'} justifyContent={'center'}>
-            <Box w="100%" h="100%">
-              <Image
-              borderLeftRadius={'2xl'}
-              h="100%"
-              src="./image/landscape.jpg" alt="landscape"/>
+      w={"100vw"} h={"100vh"}>
+      <HStack w="100%" h="100%" >
+        <Box w="60%" h="100%"
+        >
+          <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
+            <Box w="80%" h="10%">
+              <Flex w="100%" h="100%">
+                <HStack justifyContent={'center'} w="62%">
+                  <Text
+                    fontSize={'md'}
+                    fontFamily={'monospace'}>
+                    Don't have an account?
+                  </Text>
+                  <Link
+                    fontWeight={600}
+                    color={"#5A4FCF"}>
+                    Sign up
+                  </Link>
+                </HStack>
+              </Flex>
             </Box>
-          </Flex> 
-        </Box>
-        <Box 
-        boxShadow={'2xl'}
-        borderRightRadius={'2xl'}
-        bg="white"
-         h="80%"
-         w="50%">
-          <form className='Login-Form'>
-              <FormControl
-              px={5}
-                paddingBottom={5}
-                w="100%">
-                <SimpleGrid
-                spacing={5}
-                row={6}
-                column={1}
-                >
+            <Box w="80%" h="20%">
+              <VStack w="100%" h="100%" justifyContent={'center'}>
+                <Box w="80%">
+                  <Heading
+                    fontSize={'5xl'}
+                    fontWeight={700} fontFamily={'monospace'}>
+                    Howdy User!
+                  </Heading>
+                </Box>
+                <Box w="80%">
+                  <Text
+                    fontSize={'sm'}
+                    fontWeight={600} opacity={.6}>
+                    Start complaining! &#128540;.
+                    Kidding, we got everything covered from sending, tracking and managing your grievances.
+                    All you need to do is say.
+                  </Text>
+                </Box>
+              </VStack>
+            </Box>
+            <Box py={8} w="80%" h="70%">
+              <form className='Login-Form'>
 
-                  <GridItem py={3}>
-                    <Heading
-                      fontFamily={'monospace'}
-                      size={'md'}>Grievance login portal {user && user.email}</Heading>
-                  </GridItem>
+                <FormControl w="80%">
+                  <SimpleGrid spacing={10} columns={'1'} rows={5}>
+                    <GridItem>
+                      <FormLabel>
+                        Email
+                      </FormLabel>
+                      <InputGroup size={'lg'}>
+                        <InputLeftAddon
+                          bg="#5A4FCF"
 
-                  <GridItem>
-                    <FormLabel
-                      fontFamily={'monospace'}
-                    >
-                      <Icon w={9} h={9} pt={1}>
-                        <AiOutlineMail />
-                      </Icon>
-                      Email</FormLabel>
-                    <Input type="email" placeholder='Email' borderLeft={"5px solid #5A4FCF"} borderLeftRadius={2} />
-                  </GridItem>
+                          children={<MdEmail color={'white'} />} />
+                        <Input
 
-                  <GridItem>
-                    <FormLabel
-                      fontFamily={'monospace'}
-                    >
-                      <Icon w={9} h={9} pt={1}>
-                        <RiLockPasswordFill />
-                      </Icon>
-                      Password</FormLabel>
-                    <Input type="text" placeholder='Password' borderLeft={"5px solid #5A4FCF"} borderLeftRadius={2} />
-                  </GridItem>
+                          type='tel' placeholder='Email address' />
+                      </InputGroup>
+                    </GridItem>
 
-                  <GridItem>
-                    <FormLabel
-                      fontFamily={'monospace'}
-                    >
-                      <Icon w={9} h={9} pt={1}>
-                        <TbCapture />
-                      </Icon>
-                      Captcha</FormLabel>
-                    <Input type="text" placeholder='Captcha' borderLeft={"5px solid #5A4FCF"} borderLeftRadius={2} />
-                  </GridItem>
+                    <GridItem>
+                      <FormLabel>
+                        Password
+                      </FormLabel>
+                      <InputGroup size={'lg'}>
+                        <InputLeftAddon
+                          bg="#5A4FCF"
+                          children={<RiLockPasswordFill color={'white'} />} />
+                        <Input type='tel' placeholder='Password' />
+                      </InputGroup>
+                    </GridItem>
 
-                  <GridItem>
-                    <HStack>
-                      <Checkbox />
-                      <Text
-                        fontSize={'md'}
-                        fontFamily={'monospace'}
-                      >Remember me</Text>
-                    </HStack>
-                  </GridItem>
+                    <GridItem py={5}>
+                      <Button
+                        w="100%"
+                        h="5vh"
+                        borderRadius={'sm'}
+                        bg={"#5A4FCF"} color={'white'} fontWeight={600}>
+                        Login
+                      </Button>
+                    </GridItem>
 
-
-                  <GridItem 
-                  
-                  w="100%">
-                    <Flex w="100%" h="100%" flexDirection={'row'} alignItems={'flex-start'} justifyContent={'space-between'}>
-                      <ButtonGroup>
-                        <Button
-                        onClick={HandleLogin}
-                        size={"md"} bg={"#5A4FCF"} color={'white'}>
-                          Submit
-                        </Button>
-                      </ButtonGroup>
+                    <GridItem>
+                      <HStack>
+                        <Divider />
+                        <Text fontWeight={600} opacity={.6} w="4%">
+                          or
+                        </Text>
+                        <Divider />
+                      </HStack>
+                    </GridItem>
 
 
-                      <Text py={3} fontSize={16} fontWeight={500}>Don't have Account{" "}?<Link w={"30%"}
-                        href='/Registration'
-                        fontWeight={500}
-                        fontSize={16}
-                        color={'blue'}
-                        fontFamily={'monospace'}
-                      >{" "}Register</Link></Text>
+                    <GridItem w="100%">
+                      <Flex w="100%" justifyContent={'center'}>
+                        <GoogleButton
+                          type="light"
+                          onClick={() => { console.log('Google button clicked') }}
+                        />
+                      </Flex>
 
-                    </Flex>
-                  </GridItem>
-                  <GridItem>
+                    </GridItem>
+                  </SimpleGrid>
+                </FormControl>
+              </form>
+            </Box>
 
-                    <Button onClick={handleLogOut}>
-                      Log-out
-                    </Button>
-                  </GridItem>
-
-                </SimpleGrid>
-              </FormControl>
-            </form>
+          </Flex>
         </Box>
 
-      </Flex>
-
-
-
-        
-      
-
+        <Box w="40%" h="100%"
+          bg="#5A4FCF"
+        ><Flex
+        flexDirection={'column'}
+        w="100%" h="100%">
+          <Box w="100%" h="70%">
+            <VStack w="100%" h="100%" alignItems={'center'} justifyContent={'center'}>
+              <Box>
+                <Heading 
+                fontSize={'5xl'}
+                color={'white'} fontFamily={'monospace'}>
+                  Lorem Ispum
+                </Heading>
+              </Box>
+              <Box w="60%">
+                <Text color={'white'} fontWeight={600}>
+                &#129505; Leave a review! Lorem ipsum dolor sit amet, consectetur adipiscing elit. In mollis lacus orci, eget laoreet diam elementum in. Curabitur libero justo, volutpat at nunc non, fermentum efficitur sem.
+                </Text>
+              </Box>
+            </VStack>
+            </Box>
+          <Box
+          bgRepeat={'no-repeat'}
+          bgSize={'cover'}
+          bgImage={'./image/pd.png'}
+          w="100%"
+          h="40%"
+          ></Box>
+          </Flex>
+          </Box>
+      </HStack>
     </Box>
   )
 }
