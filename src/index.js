@@ -11,7 +11,7 @@ import Contact from "./components/Contact/Contact";
 import Solved from "./components/Solved/Solved";
 import List from "./components/List/List";
 import Temp from "./components/Temp/temp";
-
+import { AuthContextProvider } from "./context/AuthContext";
 import Grievance from "./components/Grievance/index"
 
 import { StepsStyleConfig } from 'chakra-ui-steps';
@@ -53,7 +53,8 @@ const App = () => {
     <div>
       <Layout>
         <Router>
-          <Routes>
+        <AuthContextProvider>
+        <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/Login" element={<Login />}></Route>
             <Route path="/Registration" element={<Registration />}></Route>
@@ -64,6 +65,7 @@ const App = () => {
             <Route path="/Contact" element={<Contact />} />
             <Route path="/Grievance/:id" element={<Grievance />} />
           </Routes>
+        </AuthContextProvider>
         </Router>
       </Layout>
     </div>

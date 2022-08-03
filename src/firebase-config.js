@@ -1,6 +1,8 @@
-//old method
-import firebase from "firebase";
-import { initializeApp } from "firebase/app";
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
+
+
 
 const firebaseApp = firebase.initializeApp({
   apiKey: "AIzaSyARMtOjQl91mfPYGNgpYWvlbVK83Xcj444",
@@ -11,12 +13,15 @@ const firebaseApp = firebase.initializeApp({
   appId: "1:583121800457:web:7d18065f71db04381b17d8",
 });
 
+
+
+
 const db = firebaseApp.firestore();
 const auth = firebase.auth();
-const storage = firebase.storage();
-export { db, auth, storage };
 
-//new method
+export { auth, db };
+
+
 // // Import the functions you need from the SDKs you need
 // import { initializeApp } from "firebase/app";
 // import { getFirestore } from "@firebase/firestore";

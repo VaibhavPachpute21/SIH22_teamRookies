@@ -11,9 +11,36 @@ import './Login.css'
 import { AiOutlineMail } from 'react-icons/ai'
 import { RiLockPasswordFill } from 'react-icons/ri'
 import { TbCapture } from 'react-icons/tb'
-
+import { UserAuth } from '../../context/AuthContext';
+import {useNavigate} from 'react-router-dom'
 
 export default function Login() {
+
+  const {user, logout, signIn} = UserAuth()
+  const navigate = useNavigate()
+
+
+  const HandleLogin = async (e) => {
+     e.preventDefault()
+
+     try {
+      await signIn("testme@gmail.com","1234562")
+      navigate("/")
+     } catch (error) {
+      console.log(error.message)
+     }
+  }
+
+
+  const handleLogOut = async () => {
+    try {
+      await logout()
+      navigate("/")
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+  
 
 
   return (
@@ -54,7 +81,7 @@ export default function Login() {
                   <GridItem py={3}>
                     <Heading
                       fontFamily={'monospace'}
-                      size={'md'}>Grievance login portal</Heading>
+                      size={'md'}>Grievance login portal {user && user.email}</Heading>
                   </GridItem>
 
                   <GridItem>
@@ -106,7 +133,9 @@ export default function Login() {
                   w="100%">
                     <Flex w="100%" h="100%" flexDirection={'row'} alignItems={'flex-start'} justifyContent={'space-between'}>
                       <ButtonGroup>
-                        <Button size={"md"} bg={"#5A4FCF"} color={'white'}>
+                        <Button
+                        onClick={HandleLogin}
+                        size={"md"} bg={"#5A4FCF"} color={'white'}>
                           Submit
                         </Button>
                       </ButtonGroup>
@@ -121,6 +150,12 @@ export default function Login() {
                       >{" "}Register</Link></Text>
 
                     </Flex>
+                  </GridItem>
+                  <GridItem>
+
+                    <Button onClick={handleLogOut}>
+                      Log-out
+                    </Button>
                   </GridItem>
 
                 </SimpleGrid>
