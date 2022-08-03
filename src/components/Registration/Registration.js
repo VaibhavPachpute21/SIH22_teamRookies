@@ -5,15 +5,14 @@ import { Box, Flex, Input, Icon, FormControl, SimpleGrid, GridItem, Heading, For
 
 export default function Registration() {
   return (
-    <Box className='Login-Background' minH={'max-content'} maxWidth={"100vw"} overflow={'hidden'} align="center" padding={[4,5,10]}>
+    <Box className='Login-Background' minH={'max-content'} maxWidth={"100vw"} overflow={'hidden'} align="center" padding={[4,5,5]}>
       
       <Flex  height="100%" align={'center'} width={"100%"} flexDirection={'row'} justifyContent={'space-around'} >
-        <Box w={["0%",'0%','30%']} margin={['0px','0px','10px']}>
+        {/* <Box w={["0%",'0%','30%']} margin={['0px','0px','10px']}>
           <Image src='./image/bg1.jpg' />
-        </Box>
+        </Box> */}
         
-       
-        <Box  w={['100%','60%','60%']} bg={'white'}>
+        <Box  w={['100%','60%','60%']} bg={'white'} borderRadius={15}>
           <Heading paddingTop={5} fontFamily={'monospace'} textAlign={'center'} size={'lg'}>Register Here
           </Heading>
 
@@ -24,7 +23,7 @@ export default function Registration() {
               <SimpleGrid
                 overflow={'hidden'}
                 columns={2}
-                spacing={10}
+                spacing={5}
                 row={7}
               // spacingX={['10', '10', '150']}
               >
@@ -90,7 +89,7 @@ export default function Registration() {
 
               </SimpleGrid>
               <FormLabel marginTop={5}>Address</FormLabel>
-              <Textarea  type="text" padding={5} placeholder={'Address'} rows={5}/>
+              <Textarea  type="text" padding={5} placeholder={'Address'} rows={3}/>
 
               <Box marginTop={5}><span><input type='checkbox'/> I declare that all the above mentioned information is correct</span></Box>
               <Button marginTop={5}>Register</Button>

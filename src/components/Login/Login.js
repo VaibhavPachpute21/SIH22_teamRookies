@@ -23,12 +23,8 @@ export default function Login() {
       <Flex
       className='Login-Background'
       w="100%" h="100%" flexDirection={'row'} alignItems={'center'} justifyContent={'center'}>
-        <Box 
-        boxShadow={'2xl'}
-        borderRadius={'2xl'}
-        bg="white"
-        h="60%"
-         w="20%">
+        <Box boxShadow={'2xl'} borderRadius={'2xl'}
+        bg="white" h="80%" w="20%">
           <Flex w="100%" h="100%" alignItems={'center'} justifyContent={'center'}>
             <Box w="100%" h="100%">
               <Image
@@ -42,7 +38,7 @@ export default function Login() {
         boxShadow={'2xl'}
         borderRightRadius={'2xl'}
         bg="white"
-         h="60%"
+         h="80%"
          w="50%">
           <form className='Login-Form'>
               <FormControl
