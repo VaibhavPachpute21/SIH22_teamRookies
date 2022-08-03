@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import './../Login/Login.css'
-import {createUserWithEmailAndPassword} from 'firebase/auth'
-
+import {UserAuth} from '../../context/AuthContext'
 import { Box, Flex, Input, Icon, FormControl, SimpleGrid, GridItem, Heading, FormLabel,Textarea, Checkbox,Button,Image,Select } from '@chakra-ui/react';
-
+import {Link, useNavigate} from 'react-router-dom'
 
 const initState={
   fName:"",
@@ -22,26 +21,40 @@ const initState={
 }
 
 export default function Registration() {
-  const [inputState,setInputState]=useState(initState)
+
+
+ const {createUser} = UserAuth()
+
+ const [inputState,setInputState]=useState(initState)
   const [password,setPassword]=useState();
   const [cpassword,setcpassword]=useState();
 
+  const [error,SetError] = useState('')
+
   const { fName,lName,phone,collage,enrollment,course,email,role,pass,DOB,academicYear,address } = inputState;
 
-
+  const navigate = useNavigate()
   const handleInputChnage =(e)=>{
     const {name,value}=e.target;
     setInputState({...inputState,[name]:value});
   }
 
   const registerUser=(e)=>{
-    e.preventDefault();
-    createUserWithEmailAndPassword( email,pass).then((value)=>{
-      console.log(value);
-    })
-    console.log(inputState);
+
 
   }
+
+  const HandleSubmit = async (e) => {
+    
+    try {
+      await createUser("testme@gmail.com","1234562")
+      navigate('/')
+    } catch (error) {
+      SetError(e.message)
+    }
+    e.preventDefault()
+  }
+
 
 
 
@@ -137,7 +150,7 @@ export default function Registration() {
               <Textarea  type="text" value={address} name="address" id="address" onChange={handleInputChnage} padding={5} placeholder={'Address'} rows={3}/>
 
               <Box marginTop={5}><span><input type='checkbox'/> I declare that all the above mentioned information is correct</span></Box>
-              <Button marginTop={5} onClick={registerUser}>Register</Button>
+              <Button marginTop={5} onClick={HandleSubmit}>Register</Button>
             </FormControl>
           </form>
         </Box>
