@@ -18,7 +18,7 @@ import { useForm } from 'react-hook-form'
 import CreateUserHook from '../hooks/CreateUserHook'
 
 export default function Login() {
-  
+
   const [emailRed, setEmailRed] = useState("black")
   const [passwordRed, setPasswordRed] = useState("black")
   
@@ -60,6 +60,7 @@ export default function Login() {
   function SubmitTheForm(data) {
     
   }
+  
   useEffect(() => {
     if (errors.mail && errors.mail.message) {
       setEmailRed("red")

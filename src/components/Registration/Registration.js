@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
 import './../Login/Login.css'
-import { UserAuth } from '../../context/AuthContext'
 import { Box, Flex, Input, Icon, FormControl, SimpleGrid, GridItem, Heading, FormLabel, Textarea, Checkbox, Button, Image, Select,VStack,Text, InputGroup,InputLeftAddon } from '@chakra-ui/react';
-import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form';
 import { MdEmail,MdSchool,MdDateRange,MdFormatListNumbered } from 'react-icons/md'
 import {AiOutlineUser,AiOutlinePhone,AiOutlineLock} from 'react-icons/ai'
-import {IoBookOutline} from 'react-icons/io'
+
 
 const initState = {
   fName: "",
