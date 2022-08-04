@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useForm } from 'react-hook-form';
 import './../Login/Login.css'
 import {UserAuth} from '../../context/AuthContext'
 import { Box, Flex, Input, Icon, FormControl, SimpleGrid, GridItem, Heading, FormLabel,Textarea, Checkbox,Button,Image,Select } from '@chakra-ui/react';
@@ -24,28 +25,22 @@ export default function Registration() {
 
 
  const {createUser} = UserAuth()
-
  const [inputState,setInputState]=useState(initState)
-  const [password,setPassword]=useState();
   const [cpassword,setcpassword]=useState();
-
   const [error,SetError] = useState('')
-
   const { fName,lName,phone,collage,enrollment,course,email,role,pass,DOB,academicYear,address } = inputState;
+  const {register,handleFormSubmit,errors}=useForm();
+
+
 
   const navigate = useNavigate()
+
   const handleInputChnage =(e)=>{
     const {name,value}=e.target;
     setInputState({...inputState,[name]:value});
   }
 
-  const registerUser=(e)=>{
-
-
-  }
-
-  const HandleSubmit = async (e) => {
-    
+  const registerUser = async (e) => {
     try {
       await createUser("testme@gmail.com","1234562")
       navigate('/')
@@ -55,7 +50,9 @@ export default function Registration() {
     e.preventDefault()
   }
 
-
+  const onSubmit = (data) => {
+    console.log(data);
+  }
 
 
 
@@ -70,7 +67,7 @@ export default function Registration() {
           <Heading paddingTop={5} fontFamily={'monospace'} textAlign={'center'} size={'lg'}>Register Here
           </Heading>
 
-          <form>
+          <form onSubmit={handleFormSubmit(onSubmit)}>
             <FormControl
               padding={[2,3,10]} align={'center'}
             >
@@ -83,7 +80,7 @@ export default function Registration() {
               >
                 <GridItem>
                   <FormLabel>First Name</FormLabel>
-                  <Input type={'text'} value={fName} name={"fName"} id="fName" onChange={handleInputChnage} placeholder='Name' />
+                  <Input type={'text'} value={fName} name={"fName"} id="fName" ref={register} onChange={handleInputChnage} placeholder='Name' />
                 </GridItem>
 
                 <GridItem>
@@ -150,7 +147,7 @@ export default function Registration() {
               <Textarea  type="text" value={address} name="address" id="address" onChange={handleInputChnage} padding={5} placeholder={'Address'} rows={3}/>
 
               <Box marginTop={5}><span><input type='checkbox'/> I declare that all the above mentioned information is correct</span></Box>
-              <Button marginTop={5} onClick={HandleSubmit}>Register</Button>
+              <Button marginTop={5} onClick={registerUser}>Register</Button>
             </FormControl>
           </form>
         </Box>
