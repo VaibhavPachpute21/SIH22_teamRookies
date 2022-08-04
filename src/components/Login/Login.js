@@ -1,22 +1,34 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './Login.css';
 import {
   Heading, Box,
   SimpleGrid,
   FormControl,
-  Image,
   GridItem, Input, Flex, FormLabel, Button,
   InputLeftAddon, InputGroup,
-  Link, main, Checkbox, HStack, Icon, Text, ButtonGroup, VStack, Divider, IconButton
+  Link, HStack, Icon, Text, VStack, Divider, FormErrorMessage
 } from '@chakra-ui/react';
 import './Login.css'
 import GoogleButton from 'react-google-button'
-import { RiGoogleFill, RiLockPasswordFill } from 'react-icons/ri'
+import { RiLockPasswordFill } from 'react-icons/ri'
 import { MdEmail } from 'react-icons/md'
 import { UserAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
 
 export default function Login() {
+
+
+  const [emailRed, setEmailRed] = useState("black")
+  const [passwordRed, setPasswordRed] = useState("black")
+
+  const {
+    handleSubmit,
+    register,
+    formState: { errors, isSubmitting },
+  } = useForm(
+    { mode: 'onChange' }
+  )
 
   const { user, logout, signIn } = UserAuth()
   const navigate = useNavigate()
@@ -44,6 +56,29 @@ export default function Login() {
   }
 
 
+  function SubmitTheForm(data) {
+
+  }
+
+
+  useEffect(() => {
+    if (errors.mail && errors.mail.message) {
+      setEmailRed("red")
+    }
+    else {
+      setEmailRed("black")
+    }
+  }, [errors.mail])
+
+  useEffect(() => {
+    if (errors.password && errors.password.message) {
+      setPasswordRed("red")
+    }
+    else {
+      setPasswordRed("black")
+    }
+  }, [errors.password])
+
 
   return (
     <Box
@@ -62,6 +97,7 @@ export default function Login() {
                     Don't have an account?
                   </Text>
                   <Link
+                    href='/Registration'
                     fontWeight={600}
                     color={"#5A4FCF"}>
                     Sign up
@@ -90,7 +126,9 @@ export default function Login() {
               </VStack>
             </Box>
             <Box py={8} w="80%" h="70%">
-              <form className='Login-Form'>
+              <form className='Login-Form'
+                onSubmit={handleSubmit(SubmitTheForm)}
+              >
 
                 <FormControl w="80%">
                   <SimpleGrid spacing={10} columns={'1'} rows={5}>
@@ -98,15 +136,46 @@ export default function Login() {
                       <FormLabel>
                         Email
                       </FormLabel>
-                      <InputGroup size={'lg'}>
+                      <InputGroup
+                        size={'lg'}>
                         <InputLeftAddon
                           bg="#5A4FCF"
 
                           children={<MdEmail color={'white'} />} />
                         <Input
 
-                          type='tel' placeholder='Email address' />
+                          border={emailRed === "black" ? "0px" : "1px"}
+                          borderColor={emailRed}
+                          id="mail"
+                          type="email"
+                          placeholder="email"
+                          {...register("mail",
+                            {
+                              required: {
+                                value: true,
+                                message: "Email is required",
+                              },
+                              pattern: {
+                                value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                                message: "Enter valid email"
+                              }
+                            })}
+
+                        />
                       </InputGroup>
+                      {
+                        errors.mail && errors.mail.message ? (
+                          <Box
+                            position={'fixed'}
+                            fontSize={'12px'}
+                            py={1}
+                            maxH={'0px'}
+                            color={'red'}>
+                            {errors.mail.message}
+                          </Box>
+                        ) : (null)
+
+                      }
                     </GridItem>
 
                     <GridItem>
@@ -117,8 +186,28 @@ export default function Login() {
                         <InputLeftAddon
                           bg="#5A4FCF"
                           children={<RiLockPasswordFill color={'white'} />} />
-                        <Input type='tel' placeholder='Password' />
+                        <Input
+                          border={passwordRed === "black" ? "0px" : "1px"}
+                          borderColor={passwordRed}
+                          id="password"
+                          type="password"
+                          placeholder="password"
+                          {...register('password', { required: "Password is required" })}
+                        />
                       </InputGroup>
+                      {
+                        errors.password && errors.password.message ? (
+                          <Box
+                            position={'fixed'}
+                            fontSize={'12px'}
+                            py={1}
+                            maxH={'0px'}
+                            color={'red'}>
+                            {errors.password.message}
+                          </Box>
+                        ) : (null)
+
+                      }
                     </GridItem>
 
                     <GridItem py={5}>
@@ -126,6 +215,7 @@ export default function Login() {
                         w="100%"
                         h="5vh"
                         borderRadius={'sm'}
+                        type="submit"
                         bg={"#5A4FCF"} color={'white'} fontWeight={600}>
                         Login
                       </Button>
@@ -162,33 +252,33 @@ export default function Login() {
         <Box w="40%" h="100%"
           bg="#5A4FCF"
         ><Flex
-        flexDirection={'column'}
-        w="100%" h="100%">
-          <Box w="100%" h="70%">
-            <VStack w="100%" h="100%" alignItems={'center'} justifyContent={'center'}>
-              <Box>
-                <Heading 
-                fontSize={'5xl'}
-                color={'white'} fontFamily={'monospace'}>
-                  Lorem Ispum
-                </Heading>
-              </Box>
-              <Box w="60%">
-                <Text color={'white'} fontWeight={600}>
-                &#129505; Leave a review! Lorem ipsum dolor sit amet, consectetur adipiscing elit. In mollis lacus orci, eget laoreet diam elementum in. Curabitur libero justo, volutpat at nunc non, fermentum efficitur sem.
-                </Text>
-              </Box>
-            </VStack>
+          flexDirection={'column'}
+          w="100%" h="100%">
+            <Box w="100%" h="70%">
+              <VStack w="100%" h="100%" alignItems={'center'} justifyContent={'center'}>
+                <Box>
+                  <Heading
+                    fontSize={'5xl'}
+                    color={'white'} fontFamily={'monospace'}>
+                    Lorem Ispum
+                  </Heading>
+                </Box>
+                <Box w="60%">
+                  <Text color={'white'} fontWeight={600}>
+                    &#129505; Leave a review! Lorem ipsum dolor sit amet, consectetur adipiscing elit. In mollis lacus orci, eget laoreet diam elementum in. Curabitur libero justo, volutpat at nunc non, fermentum efficitur sem.
+                  </Text>
+                </Box>
+              </VStack>
             </Box>
-          <Box
-          bgRepeat={'no-repeat'}
-          bgSize={'cover'}
-          bgImage={'./image/pd.png'}
-          w="100%"
-          h="40%"
-          ></Box>
+            <Box
+              bgRepeat={'no-repeat'}
+              bgSize={'cover'}
+              bgImage={'./image/pd.png'}
+              w="100%"
+              h="40%"
+            ></Box>
           </Flex>
-          </Box>
+        </Box>
       </HStack>
     </Box>
   )
