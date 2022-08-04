@@ -12,7 +12,7 @@ import DashboardHistory from '../Slides/history'
 import DashboardHome from '../Slides/home'
 import DashboardTracker from '../Slides/tracker'
 import DashboardSettings from '../Slides/settings'
-
+import UserProfile from '../Slides/userProfile'
 
 export default function Dashboard() {
 
@@ -164,6 +164,11 @@ export default function Dashboard() {
         {
           shutter === 4 ? (
             <DashboardSettings/>
+          ):(null)
+        }
+        {
+          shutter === 5 ? (
+            <UserProfile/>
           ):(null)
         }
         
