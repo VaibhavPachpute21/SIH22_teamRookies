@@ -8,7 +8,7 @@ let path = window.location
     <div>
       <div>
         {
-          path && path.pathname !== "/Login" ? ( <Header/>):(null)
+          path && path.pathname !== "/Login" && path && path.pathname !== "/Registration" ? ( <Header/>):(null)
         }
       </div>
      {props.children}
