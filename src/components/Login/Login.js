@@ -62,6 +62,7 @@ export default function Login() {
                     Don't have an account?
                   </Text>
                   <Link
+                    href='/Registration'
                     fontWeight={600}
                     color={"#5A4FCF"}>
                     Sign up
