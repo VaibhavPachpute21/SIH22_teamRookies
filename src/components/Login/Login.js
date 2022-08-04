@@ -15,16 +15,13 @@ import { MdEmail } from 'react-icons/md'
 import { UserAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import { db } from '../../firebase-config';
-import { useCollection } from 'react-firebase-hooks/firestore';
+import CreateUserHook from '../hooks/CreateUserHook'
+
 export default function Login() {
-
-
+  
   const [emailRed, setEmailRed] = useState("black")
   const [passwordRed, setPasswordRed] = useState("black")
-
   
-
   const {
     handleSubmit,
     register,
@@ -34,14 +31,6 @@ export default function Login() {
   )
   
  
-  const [value, loading, error] = useCollection(
-    db.collection('grievances'),
-    {
-      snapshotListenOptions: { includeMetadataChanges: true },
-    }
-  ) 
-  
-
   const { user, logout, signIn } = UserAuth()
   const navigate = useNavigate()
 
@@ -89,7 +78,10 @@ export default function Login() {
     }
   }, [errors.password])
 
-
+  const AddFakeUser = () => {
+    const made = CreateUserHook("abhinav@gmail.com","241513",{firstName:"abhinav"})
+    console.log(made)
+  }
   return (
     <Box
       overflow={'none'}
@@ -202,7 +194,7 @@ export default function Login() {
                           id="password"
                           type="password"
                           placeholder="password"
-                          {...register('password', { required: "Password is required" })}
+                          {...register('password', { required: "Password is required", minLength:'' })}
                         />
                       </InputGroup>
                       {
@@ -247,7 +239,7 @@ export default function Login() {
                       <Flex w="100%" justifyContent={'center'}>
                         <GoogleButton
                           type="light"
-                          onClick={() => { console.log('Google button clicked') }}
+                          onClick={() => { AddFakeUser() }}
                         />
                       </Flex>
 
