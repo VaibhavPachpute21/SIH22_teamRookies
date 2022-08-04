@@ -15,12 +15,15 @@ import { MdEmail } from 'react-icons/md'
 import { UserAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-
+import { db } from '../../firebase-config';
+import { useCollection } from 'react-firebase-hooks/firestore';
 export default function Login() {
 
 
   const [emailRed, setEmailRed] = useState("black")
   const [passwordRed, setPasswordRed] = useState("black")
+
+  
 
   const {
     handleSubmit,
@@ -29,6 +32,15 @@ export default function Login() {
   } = useForm(
     { mode: 'onChange' }
   )
+  
+ 
+  const [value, loading, error] = useCollection(
+    db.collection('grievances'),
+    {
+      snapshotListenOptions: { includeMetadataChanges: true },
+    }
+  ) 
+  
 
   const { user, logout, signIn } = UserAuth()
   const navigate = useNavigate()
@@ -57,10 +69,8 @@ export default function Login() {
 
 
   function SubmitTheForm(data) {
-
+    
   }
-
-
   useEffect(() => {
     if (errors.mail && errors.mail.message) {
       setEmailRed("red")
@@ -230,6 +240,7 @@ export default function Login() {
                         <Divider />
                       </HStack>
                     </GridItem>
+                    
 
 
                     <GridItem w="100%">
