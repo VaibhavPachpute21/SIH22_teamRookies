@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form';
 import { MdEmail, MdSchool, MdDateRange, MdFormatListNumbered } from 'react-icons/md'
 import { AiOutlineUser, AiOutlinePhone, AiOutlineLock } from 'react-icons/ai'
-import { IoBookOutline } from 'react-icons/io'
+import CreateUserHook from '../hooks/CreateUserHook'
 
 const initState = {
   fName: "",
@@ -27,7 +27,9 @@ const initState = {
 
 
 export default function Registration() {
-  const { createUser } = UserAuth()
+
+
+  const { createUser,user } = UserAuth()
   const { register, handleSubmit, formState: { errors } } = useForm({ mode: 'onChange' });
   const [inputState, setInputState] = useState(initState)
   const { fName, lName, phone, collage, enrollment, course, email, role, pass, cpassword, DOB, academicYear, address } = inputState;
@@ -39,13 +41,16 @@ export default function Registration() {
   }
 
   const registerUser = async (e) => {
-    console.log(e);
-    try {
-      await createUser(email, pass)
-      navigate('/')
+
+    
+  try {
+      await createUser("abhinav@gmail.com", "12357783")
+      const done = await CreateUserHook(user?.uid,e)
+      console.log(done)
     } catch (error) {
       SetError(e.message)
-    }
+      console.log(error.message)
+    } 
   }
 
 
@@ -284,7 +289,9 @@ export default function Registration() {
                 ) : (null)
                 }
                 <Box marginTop={5}><span><input type='checkbox' /> I declare that all the above mentioned information is correct</span></Box>
-                <Button marginTop={5} type='submit'>Register</Button>
+                <Button 
+                type="submit"
+                marginTop={5}>Register</Button>
               </FormControl>
             </form>
           </Box>

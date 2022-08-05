@@ -1,9 +1,12 @@
 import { useCollection } from "react-firebase-hooks/firestore";
 import { db } from "../../firebase-config";
 
-export default function CreateUserHook(email, password, data) {
+export default function CreateUserHook(uid, data) {
+    
     const [snapshot] = useCollection(
-        db.collection("users").doc(email).set({ email, password, data })
+        db.collection("users").doc(uid).set({userId: uid,data})
     )
+    
+
     return snapshot
 }

@@ -29,17 +29,17 @@ export default function Login() {
   } = useForm(
     { mode: 'onChange' }
   )
-  
- 
+
+
   const { user, logout, signIn } = UserAuth()
   const navigate = useNavigate()
 
-
+  console.log(user)
   const HandleLogin = async (e) => {
     e.preventDefault()
 
     try {
-      await signIn("testme@gmail.com", "1234562")
+      await signIn("abhinav@gmail.com", "12357783")
       navigate("/")
     } catch (error) {
       console.log(error.message)
@@ -79,10 +79,12 @@ export default function Login() {
     }
   }, [errors.password])
 
+
   const AddFakeUser = () => {
     const made = CreateUserHook("abhinav@gmail.com","241513",{firstName:"abhinav"})
     console.log(made)
   }
+
   return (
     <Box
       overflow={'none'}
@@ -215,6 +217,7 @@ export default function Login() {
 
                     <GridItem py={5}>
                       <Button
+                      onClick={HandleLogin}
                         w="100%"
                         h="5vh"
                         borderRadius={'sm'}
