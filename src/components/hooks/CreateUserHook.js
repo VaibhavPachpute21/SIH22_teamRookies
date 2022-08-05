@@ -3,8 +3,7 @@ import { db } from "../../firebase-config";
 
 export default function CreateUserHook(uid, data) {
     
-    console.log(uid)
-    console.log(data)
+    
 
     const [snapshot] = useCollection(
         db.collection("users").add({
