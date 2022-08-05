@@ -32,7 +32,7 @@ export default function Registration() {
   const { createUser,user } = UserAuth()
   const { register, handleSubmit, formState: { errors } } = useForm({ mode: 'onChange' });
   const [inputState, setInputState] = useState(initState)
-  const { fName, lName, phone, collage, enrollment, course, email, role, pass, cpassword, DOB, academicYear, address } = inputState;
+  const { fName, lName, phone, college, enrollment, course, email, role, pass, cpassword, DOB, academicYear, address } = inputState;
   const [error, SetError] = useState('')
   const navigate = useNavigate()
   const handleInputChnage = (e) => {
@@ -45,7 +45,7 @@ export default function Registration() {
     
   try {
       await createUser("abhinav@gmail.com", "12357783")
-      const done = await CreateUserHook(user?.uid,e)
+      const done = await CreateUserHook(user.uid,{ fName, lName, phone, college, enrollment, course, email, role, pass, cpassword, DOB, academicYear, address })
       console.log(done)
     } catch (error) {
       SetError(e.message)
@@ -148,7 +148,7 @@ export default function Registration() {
                     <FormLabel>Collage Name</FormLabel>
                     <InputGroup>
                       <InputLeftAddon bg="#5A4FCF" children={<MdSchool color={'white'} />} />
-                      <Input type={'text'} name="collage" value={collage} id="collage" onChange={handleInputChnage} placeholder='Collage Name' />
+                      <Input type={'text'} name="college" value={college} id="college" onChange={handleInputChnage} placeholder='Collage Name' />
                     </InputGroup>
                     {errors.collage && errors.collage.message ? (
                       <Box textAlign={'left'} fontSize={'12px'} py={1} maxH={'0px'} color={'red'}>
