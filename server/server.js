@@ -3,15 +3,13 @@ require('dotenv').config({path: "./config.env"})
 const express = require('express')
 const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
-
 const connectDB = require('./config/db')
-
 connectDB();
-
 mongoose.promise = global.Promise
+
+
 const app = express()
 const cors = require('cors')
-
 
 
 app.use(express.json())
@@ -24,6 +22,8 @@ app.use(cookieParser())
 app.use(cors())
 
 
+
+app.use("/api/user",require("./routes/user_routes"))
 
 
 const port = process.env.PORT || 3001;
