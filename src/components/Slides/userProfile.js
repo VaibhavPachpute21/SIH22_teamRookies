@@ -1,19 +1,7 @@
 import { Box, HStack, VStack, Flex, Avatar, Text, Button, FormLabel, Input, Divider, Link } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import {UserAuth} from '../../context/AuthContext'
-import GetUserHook from "../hooks/GetUserHook";
 const UserProfile = () => {
-
     const [VHeight, setVHeight] = useState("50vh")
-
-    const {user} = UserAuth()
-
-  
-
-    const NewUser = GetUserHook(user?.uid)
-    console.log(NewUser)
-
-
 
     return (
         <Box w="100%" h="100%">
@@ -210,7 +198,7 @@ const UserProfile = () => {
                             VHeight === "100vh" ? (
                                 <VStack w="100%" h="60vh">
                                     <HStack
-                                    
+
                                         py={5}
                                         alignItems={'center'} justifyContent={'center'} w="100%" h="8vh">
                                         <Box py={2} w="30%" h="100%">
@@ -301,16 +289,16 @@ const UserProfile = () => {
                                     <Box w="100%" h="5vh">
                                         <Flex w="95%" h="100%" flexDirection={'row'} alignItems={'flex-end'} justifyContent={'flex-end'}>
                                             <Button
-                                            onClick={()=>{setVHeight("50vh")}}
-                                            color={'white'}
-                                            bg="#5A4FCF"
-                                            h="60%" w="19%">
+                                                onClick={() => { setVHeight("50vh") }}
+                                                color={'white'}
+                                                bg="#5A4FCF"
+                                                h="60%" w="19%">
                                                 ^
                                             </Button>
                                         </Flex>
                                     </Box>
 
-                                    
+
                                 </VStack>
                             ) : (null)
                         }

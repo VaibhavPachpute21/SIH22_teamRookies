@@ -1,48 +1,16 @@
 import React, { useState } from 'react'
 import './../Login/Login.css'
-import { UserAuth } from '../../context/AuthContext'
 import { Box, Flex, Input, Icon, FormControl, SimpleGrid, GridItem, Heading, FormLabel, Textarea, Checkbox, Button, Image, Select, VStack, Text, InputGroup, InputLeftAddon } from '@chakra-ui/react';
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form';
 import { MdEmail, MdSchool, MdDateRange, MdFormatListNumbered } from 'react-icons/md'
 import { AiOutlineUser, AiOutlinePhone, AiOutlineLock } from 'react-icons/ai'
-import { db } from '../../firebase-config';
 
 
 export default function Registration() {
-
-
-  const { createUser, user } = UserAuth()
   const { register, handleSubmit, formState: { errors } } = useForm({ mode: 'onChange' });
-    const [error, SetError] = useState('')
+  const [error, SetError] = useState('')
   const navigate = useNavigate()
-
-
-  const registerUser = async (data) => {
-
-    try {
-      await createUser("abhinav@gmail.com", "12357783")
-
-      if (user) {
-        const ref = await db.collection("users").doc(user.uid)
-        ref.get().then(doc => {
-          if (!doc.exists) {
-            ref.set({
-              data
-            })
-          }
-        })
-        console.log(ref)
-      }
-
-
-
-    } catch (error) {
-      SetError(error.message)
-      console.log(error.message)
-    }
-  }
-
 
 
   return (
@@ -83,7 +51,7 @@ export default function Registration() {
           <Heading paddingTop={5} fontFamily={'monospace'} textAlign={'center'} size={'lg'}>Register Here
           </Heading>
           <Box h={'100%'} w={['100%', '80%', '70%']}>
-            <form onSubmit={handleSubmit(registerUser)}>
+            <form>
               <FormControl padding={[2, 3, 5]} align={'center'}>
                 <SimpleGrid
                   columns={2}

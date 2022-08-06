@@ -9,10 +9,8 @@ import {
   Link, HStack, Icon, Text, VStack, Divider, FormErrorMessage
 } from '@chakra-ui/react';
 import './Login.css'
-import GoogleButton from 'react-google-button'
 import { RiLockPasswordFill } from 'react-icons/ri'
 import { MdEmail } from 'react-icons/md'
-import { UserAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 
@@ -31,35 +29,8 @@ export default function Login() {
   )
 
 
-  const { user, logout, signIn } = UserAuth()
   const navigate = useNavigate()
 
-  console.log(user)
-  const HandleLogin = async (e) => {
-    e.preventDefault()
-
-    try {
-      await signIn("abhinav@gmail.com", "12357783")
-      navigate("/")
-    } catch (error) {
-      console.log(error.message)
-    }
-  }
-
-
-  const handleLogOut = async () => {
-    try {
-      await logout()
-      navigate("/")
-    } catch (error) {
-      console.log(error.message)
-    }
-  }
-
-
-  function SubmitTheForm(data) {
-    
-  }
   
   useEffect(() => {
     if (errors.mail && errors.mail.message) {
@@ -131,7 +102,6 @@ export default function Login() {
             </Box>
             <Box py={8} w="80%" h="70%">
               <form className='Login-Form'
-                onSubmit={handleSubmit(SubmitTheForm)}
               >
 
                 <FormControl w="80%">
@@ -216,7 +186,6 @@ export default function Login() {
 
                     <GridItem py={5}>
                       <Button
-                      onClick={HandleLogin}
                         w="100%"
                         h="5vh"
                         borderRadius={'sm'}
@@ -240,10 +209,6 @@ export default function Login() {
 
                     <GridItem w="100%">
                       <Flex w="100%" justifyContent={'center'}>
-                        <GoogleButton
-                          type="light"
-                          onClick={() => { AddFakeUser() }}
-                        />
                       </Flex>
 
                     </GridItem>
