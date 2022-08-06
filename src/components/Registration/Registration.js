@@ -30,7 +30,7 @@ const initState = {
 export default function Registration() {
 
 
-  const { createUser,user } = UserAuth()
+  const { createUser, user } = UserAuth()
   const { register, handleSubmit, formState: { errors } } = useForm({ mode: 'onChange' });
   const [inputState, setInputState] = useState(initState)
   const { fName, lName, phone, college, enrollment, course, email, role, pass, cpassword, DOB, academicYear, address } = inputState;
@@ -43,27 +43,27 @@ export default function Registration() {
 
   const registerUser = async (data) => {
 
-  try {
-    await createUser("abhinav@gmail.com", "12357783")
-      
-    if(user) {
-      const ref = await db.collection("users").doc(user.uid)
-      ref.get().then(doc=>{
-        if(!doc.exists){
-          ref.set({
-            data
-          })
-        }
-      })
-      console.log(ref)
-    }
-    
-    
+    try {
+      await createUser("abhinav@gmail.com", "12357783")
+
+      if (user) {
+        const ref = await db.collection("users").doc(user.uid)
+        ref.get().then(doc => {
+          if (!doc.exists) {
+            ref.set({
+              data
+            })
+          }
+        })
+        console.log(ref)
+      }
+
+
 
     } catch (error) {
       SetError(error.message)
       console.log(error.message)
-    } 
+    }
   }
 
 
@@ -119,7 +119,9 @@ export default function Registration() {
                     <FormLabel>First Name</FormLabel>
                     <InputGroup size={'md'}>
                       <InputLeftAddon bg="#5A4FCF" children={<AiOutlineUser color={'white'} />} />
-                      <Input type={'text'} name={"fName"} {...register('fName', { required: { value: true, message: "Name is required!", } })} id="fName" value={fName} onChange={handleInputChnage} placeholder='Name' />
+                      <Input type={'text'} name={"fName"} id="fName" placeholder='Name'
+                        //value={fName} onChange={handleInputChnage}
+                        {...register('fName', { required: { value: true, message: "Name is required!", } })} />
                     </InputGroup>
                     {errors.fName && errors.fName.message ? (
                       <Box textAlign={'left'} fontSize={'12px'} py={1} maxH={'0px'} color={'red'}>
@@ -133,7 +135,9 @@ export default function Registration() {
                     <FormLabel>Last Name</FormLabel>
                     <InputGroup size={'md'}>
                       <InputLeftAddon bg="#5A4FCF" children={<AiOutlineUser color={'white'} />} />
-                      <Input type={'text'} name={"lName"}  {...register('lName', { required: { value: true, message: "Last Name is required!", } })} id="lName" value={lName} onChange={handleInputChnage} placeholder='Name' />
+                      <Input type={'text'} name={"lName"} id="lName" placeholder='Name'
+                        //value={lName} onChange={handleInputChnage}
+                        {...register('lName', { required: { value: true, message: "Last Name is required!", } })} />
                     </InputGroup >
                     {errors.lName && errors.lName.message ? (
                       <Box textAlign={'left'} fontSize={'12px'} py={1} maxH={'0px'} color={'red'}>
@@ -147,7 +151,9 @@ export default function Registration() {
                     <FormLabel>Phone No.</FormLabel>
                     <InputGroup>
                       <InputLeftAddon bg="#5A4FCF" children={<AiOutlinePhone color={'white'} />} />
-                      <Input type={'tel'} name="phone" {...register('phone', { required: { value: true, message: "Phone number is required!", }, minLength: { value: 10, message: "Please Enter Valid number" } })} id="phone" value={phone} onChange={handleInputChnage} placeholder='Phone No.' />
+                      <Input type={'tel'} name="phone" id="phone" placeholder='Phone No.'
+                        //value={phone} onChange={handleInputChnage}
+                        {...register('phone', { required: { value: true, message: "Phone number is required!", }, minLength: { value: 10, message: "Please Enter Valid number" } })} />
                     </InputGroup>
                     {errors.phone && errors.phone.message ? (
                       <Box textAlign={'left'} fontSize={'12px'} py={1} maxH={'0px'} color={'red'}>
@@ -161,11 +167,13 @@ export default function Registration() {
                     <FormLabel>Collage Name</FormLabel>
                     <InputGroup>
                       <InputLeftAddon bg="#5A4FCF" children={<MdSchool color={'white'} />} />
-                      <Input type={'text'} name="college" value={college} id="college" onChange={handleInputChnage} placeholder='Collage Name' />
+                      <Input type={'text'} name="college" id="college" placeholder='Collage Name'
+                        //value={college} onChange={handleInputChnage}
+                        {...register('college', { required: { value: true, message: "Collage Name is required!", } })} />
                     </InputGroup>
-                    {errors.collage && errors.collage.message ? (
+                    {errors.college && errors.college.message ? (
                       <Box textAlign={'left'} fontSize={'12px'} py={1} maxH={'0px'} color={'red'}>
-                        {errors.collage.message}
+                        {errors.college.message}
                       </Box>
                     ) : (null)
                     }
@@ -175,7 +183,9 @@ export default function Registration() {
                     <FormLabel>Enrollment Number</FormLabel>
                     <InputGroup>
                       <InputLeftAddon bg="#5A4FCF" children={<MdSchool color={'white'} />} />
-                      <Input type={'number'} name="enrollment" {...register('enrollment', { required: { value: true, message: "Enrollment no. is required!", } })} value={enrollment} id="enrollment" onChange={handleInputChnage} placeholder='Enrollment Number' />
+                      <Input type={'number'} name="enrollment" id="enrollment" placeholder='Enrollment Number'
+                        //value={enrollment} onChange={handleInputChnage}
+                        {...register('enrollment', { required: { value: true, message: "Enrollment no. is required!", } })} />
                     </InputGroup>
                     {errors.enrollment && errors.enrollment.message ? (
                       <Box textAlign={'left'} fontSize={'12px'} py={1} maxH={'0px'} color={'red'}>
@@ -189,7 +199,9 @@ export default function Registration() {
                     <FormLabel>Course Name</FormLabel>
                     <InputGroup>
                       <InputLeftAddon bg="#5A4FCF" children={<MdSchool color={'white'} />} />
-                      <Input type={'text'} name="course" {...register('course', { required: { value: true, message: "Course Name is required!", } })} value={course} id="course" onChange={handleInputChnage} placeholder='Course Name' />
+                      <Input type={'text'} name="course" id="course" placeholder='Course Name'
+                        //value={course} onChange={handleInputChnage}
+                        {...register('course', { required: { value: true, message: "Course Name is required!", } })} />
                     </InputGroup>
                     {errors.course && errors.course.message ? (
                       <Box textAlign={'left'} fontSize={'12px'} py={1} maxH={'0px'} color={'red'}>
@@ -203,17 +215,12 @@ export default function Registration() {
                     <FormLabel>Email</FormLabel>
                     <InputGroup size={'md'}>
                       <InputLeftAddon bg="#5A4FCF" children={<MdEmail color={'white'} />} />
-                      <Input type={'email'} name="email" {...register("email",
-                        {
-                          required: {
-                            value: true,
-                            message: "Email is required!",
-                          },
-                          pattern: {
-                            value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-                            message: "Enter valid email"
-                          }
-                        })} value={email} id="email" onChange={handleInputChnage} placeholder='Email' />
+                      <Input type={'email'} name="email" id="email" placeholder='Email'
+                        //value={email} onChange={handleInputChnage}
+                        {...register("email", {
+                          required: { value: true, message: "Email is required!", },
+                          pattern: { value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, message: "Enter valid email" }
+                        })} />
                     </InputGroup>
                     {errors.email && errors.email.message ? (
                       <Box textAlign={'left'} fontSize={'12px'} py={1} maxH={'0px'} color={'red'}>
@@ -227,7 +234,9 @@ export default function Registration() {
                     <FormLabel>Role</FormLabel>
                     <InputGroup size={'md'}>
                       <InputLeftAddon bg="#5A4FCF" children={<AiOutlineUser color={'white'} />} />
-                      <Select type={'text'} name="role" {...register('role', { required: { value: true, message: "User role is required!", } })} value={role} id="role" onChange={handleInputChnage} placeholder='Select Role'>
+                      <Select type={'text'} name="role" id="role" placeholder='Select Role'
+                        //value={role} onChange={handleInputChnage}
+                        {...register('role', { required: { value: true, message: "User role is required!", } })}>
 
                         <option>Student</option>
                         <option>Teacher</option>
@@ -246,7 +255,9 @@ export default function Registration() {
                     <FormLabel>Password</FormLabel>
                     <InputGroup size={'md'}>
                       <InputLeftAddon bg="#5A4FCF" children={<AiOutlineLock color={'white'} />} />
-                      <Input type={'password'} name="pass" {...register('pass', { required: { value: true, message: "Choose is password", } })} value={pass} id="pass" onChange={handleInputChnage} placeholder='Password' />
+                      <Input type={'password'} name="pass" id="pass" placeholder='Password'
+                        //value={pass} onChange={handleInputChnage}
+                        {...register('pass', { required: { value: true, message: "Choose is password", } })} />
                     </InputGroup>
                     {errors.pass && errors.pass.message ? (
                       <Box textAlign={'left'} fontSize={'12px'} py={1} maxH={'0px'} color={'red'}>
@@ -268,7 +279,9 @@ export default function Registration() {
                     <FormLabel>Date of Birth</FormLabel>
                     <InputGroup size={'md'}>
                       <InputLeftAddon bg="#5A4FCF" children={<MdDateRange color={'white'} />} />
-                      <Input type={'date'} name="DOB" {...register('DOB', { required: { value: true, message: "Date of birth is required!", } })} value={DOB} id="DOB" onChange={handleInputChnage} placeholder='Date of Birth' />
+                      <Input type={'date'} name="DOB" id="DOB" placeholder='Date of Birth'
+                        //value={DOB} onChange={handleInputChnage}
+                        {...register('DOB', { required: { value: true, message: "Date of birth is required!", } })} />
                     </InputGroup>
                     {errors.DOB && errors.DOB.message ? (
                       <Box textAlign={'left'} fontSize={'12px'} py={1} maxH={'0px'} color={'red'}>
@@ -282,7 +295,9 @@ export default function Registration() {
                     <FormLabel>Academic Year</FormLabel>
                     <InputGroup size={'md'}>
                       <InputLeftAddon bg="#5A4FCF" children={<MdFormatListNumbered color={'white'} />} />
-                      <Input type="text" name="academicYear" {...register('academicYear', { required: { value: true, message: "Academic Year is required!", } })} value={academicYear} id="academicYear" onChange={handleInputChnage} placeholder='Academic Year' />
+                      <Input type="text" name="academicYear" id="academicYear" placeholder='Academic Year'
+                        //value={academicYear} onChange={handleInputChnage}
+                        {...register('academicYear', { required: { value: true, message: "Academic Year is required!", } })} />
                     </InputGroup>
                     {errors.academicYear && errors.academicYear.message ? (
                       <Box textAlign={'left'} fontSize={'12px'} py={1} maxH={'0px'} color={'red'}>
@@ -294,7 +309,9 @@ export default function Registration() {
 
                 </SimpleGrid>
                 <FormLabel marginTop={5}>Address</FormLabel>
-                <Textarea type="text" name="address" {...register('address', { required: { value: true, message: "Address is required!", } })} value={address} id="address" onChange={handleInputChnage} padding={5} placeholder={'Address'} rows={3} />
+                <Textarea type="text" name="address" id="address" padding={5} placeholder={'Address'} rows={3}
+                  //value={address} onChange={handleInputChnage}
+                  {...register('address', { required: { value: true, message: "Address is required!", } })} />
                 {errors.address && errors.address.message ? (
                   <Box textAlign={'left'} fontSize={'12px'} py={1} maxH={'0px'} color={'red'}>
                     {errors.address.message}
@@ -302,9 +319,9 @@ export default function Registration() {
                 ) : (null)
                 }
                 <Box marginTop={5}><span><input type='checkbox' /> I declare that all the above mentioned information is correct</span></Box>
-                <Button 
-                type="submit"
-                marginTop={5}>Register</Button>
+                <Button
+                  type="submit"
+                  marginTop={5}>Register</Button>
               </FormControl>
             </form>
           </Box>
