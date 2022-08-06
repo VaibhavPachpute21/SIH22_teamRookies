@@ -24,7 +24,7 @@ app.use(cors())
 
 
 app.use("/api/user",require("./routes/user_routes"))
-
+app.use("/api/grievance",require("./routes/grievance_routes"))
 
 const port = process.env.PORT || 3001;
 
