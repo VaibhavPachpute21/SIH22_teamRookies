@@ -1,11 +1,18 @@
 import { Box, HStack, VStack, Flex, Avatar, Text, Button, FormLabel, Input, Divider, Link } from "@chakra-ui/react";
-import { useState } from "react";
-
-
-
+import { useEffect, useState } from "react";
+import {UserAuth} from '../../context/AuthContext'
+import GetUserHook from "../hooks/GetUserHook";
 const UserProfile = () => {
 
     const [VHeight, setVHeight] = useState("50vh")
+
+    const {user} = UserAuth()
+
+  
+
+    const NewUser = GetUserHook(user?.uid)
+    console.log(NewUser)
+
 
 
     return (

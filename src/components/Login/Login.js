@@ -15,7 +15,7 @@ import { MdEmail } from 'react-icons/md'
 import { UserAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import CreateUserHook from '../hooks/CreateUserHook'
+
 
 export default function Login() {
 
@@ -81,8 +81,7 @@ export default function Login() {
 
 
   const AddFakeUser = () => {
-    const made = CreateUserHook("abhinav@gmail.com","241513",{firstName:"abhinav"})
-    console.log(made)
+
   }
 
   return (
