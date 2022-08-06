@@ -9,37 +9,14 @@ import { AiOutlineUser, AiOutlinePhone, AiOutlineLock } from 'react-icons/ai'
 import { db } from '../../firebase-config';
 
 
-const initState = {
-  fName: "",
-  lName: "",
-  phone: "",
-  collage: "",
-  enrollment: "",
-  course: "",
-  email: "",
-  role: "",
-  pass: "",
-  cpassword: "",
-  DOB: "",
-  academicYear: "",
-  address: ""
-
-}
-
-
 export default function Registration() {
 
 
   const { createUser, user } = UserAuth()
   const { register, handleSubmit, formState: { errors } } = useForm({ mode: 'onChange' });
-  const [inputState, setInputState] = useState(initState)
-  const { fName, lName, phone, college, enrollment, course, email, role, pass, cpassword, DOB, academicYear, address } = inputState;
-  const [error, SetError] = useState('')
+    const [error, SetError] = useState('')
   const navigate = useNavigate()
-  const handleInputChnage = (e) => {
-    const { name, value } = e.target;
-    setInputState({ ...inputState, [name]: value });
-  }
+
 
   const registerUser = async (data) => {
 
@@ -109,19 +86,17 @@ export default function Registration() {
             <form onSubmit={handleSubmit(registerUser)}>
               <FormControl padding={[2, 3, 5]} align={'center'}>
                 <SimpleGrid
-                  overflow={'hidden'}
                   columns={2}
                   spacing={3}
                   row={7}
                 // spacingX={['10', '10', '150']}
                 >
                   <GridItem>
-                    <FormLabel>First Name</FormLabel>
+                    <FormLabel>Full Name</FormLabel>
                     <InputGroup size={'md'}>
                       <InputLeftAddon bg="#5A4FCF" children={<AiOutlineUser color={'white'} />} />
                       <Input type={'text'} name={"fName"} id="fName" placeholder='Name'
-                        //value={fName} onChange={handleInputChnage}
-                        {...register('fName', { required: { value: true, message: "Name is required!", } })} />
+                        {...register('fName', { required: { value: true, message: "Name is required!", }, minLength:{value:5, message:"Min length is 5"} })} />
                     </InputGroup>
                     {errors.fName && errors.fName.message ? (
                       <Box textAlign={'left'} fontSize={'12px'} py={1} maxH={'0px'} color={'red'}>
@@ -132,27 +107,10 @@ export default function Registration() {
                   </GridItem>
 
                   <GridItem>
-                    <FormLabel>Last Name</FormLabel>
-                    <InputGroup size={'md'}>
-                      <InputLeftAddon bg="#5A4FCF" children={<AiOutlineUser color={'white'} />} />
-                      <Input type={'text'} name={"lName"} id="lName" placeholder='Name'
-                        //value={lName} onChange={handleInputChnage}
-                        {...register('lName', { required: { value: true, message: "Last Name is required!", } })} />
-                    </InputGroup >
-                    {errors.lName && errors.lName.message ? (
-                      <Box textAlign={'left'} fontSize={'12px'} py={1} maxH={'0px'} color={'red'}>
-                        {errors.lName.message}
-                      </Box>
-                    ) : (null)
-                    }
-                  </GridItem>
-
-                  <GridItem>
                     <FormLabel>Phone No.</FormLabel>
                     <InputGroup>
                       <InputLeftAddon bg="#5A4FCF" children={<AiOutlinePhone color={'white'} />} />
                       <Input type={'tel'} name="phone" id="phone" placeholder='Phone No.'
-                        //value={phone} onChange={handleInputChnage}
                         {...register('phone', { required: { value: true, message: "Phone number is required!", }, minLength: { value: 10, message: "Please Enter Valid number" } })} />
                     </InputGroup>
                     {errors.phone && errors.phone.message ? (
@@ -164,11 +122,43 @@ export default function Registration() {
                   </GridItem>
 
                   <GridItem>
+                    <FormLabel>Email</FormLabel>
+                    <InputGroup size={'md'}>
+                      <InputLeftAddon bg="#5A4FCF" children={<MdEmail color={'white'} />} />
+                      <Input type={'email'} name="email" id="email" placeholder='Email'
+                        {...register("email", {
+                          required: { value: true, message: "Email is required!", },
+                          pattern: { value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, message: "Enter valid email" }
+                        })} />
+                    </InputGroup>
+                    {errors.email && errors.email.message ? (
+                      <Box textAlign={'left'} fontSize={'12px'} py={1} maxH={'0px'} color={'red'}>
+                        {errors.email.message}
+                      </Box>
+                    ) : (null)
+                    }
+                  </GridItem>
+
+                  <GridItem>
+                    <FormLabel>State</FormLabel>
+                    <InputGroup size={'md'}>
+                      <InputLeftAddon bg="#5A4FCF" children={<AiOutlineUser color={'white'} />} />
+                      <Input type={'text'} name={"state"} id="state" placeholder='state'
+                        {...register('state', { required: { value: true, message: "State name is required!", } })} />
+                    </InputGroup >
+                    {errors.state && errors.state.message ? (
+                      <Box textAlign={'left'} fontSize={'12px'} py={1} maxH={'0px'} color={'red'}>
+                        {errors.state.message}
+                      </Box>
+                    ) : (null)
+                    }
+                  </GridItem>
+
+                  <GridItem>
                     <FormLabel>Collage Name</FormLabel>
                     <InputGroup>
                       <InputLeftAddon bg="#5A4FCF" children={<MdSchool color={'white'} />} />
                       <Input type={'text'} name="college" id="college" placeholder='Collage Name'
-                        //value={college} onChange={handleInputChnage}
                         {...register('college', { required: { value: true, message: "Collage Name is required!", } })} />
                     </InputGroup>
                     {errors.college && errors.college.message ? (
@@ -184,12 +174,26 @@ export default function Registration() {
                     <InputGroup>
                       <InputLeftAddon bg="#5A4FCF" children={<MdSchool color={'white'} />} />
                       <Input type={'number'} name="enrollment" id="enrollment" placeholder='Enrollment Number'
-                        //value={enrollment} onChange={handleInputChnage}
                         {...register('enrollment', { required: { value: true, message: "Enrollment no. is required!", } })} />
                     </InputGroup>
                     {errors.enrollment && errors.enrollment.message ? (
                       <Box textAlign={'left'} fontSize={'12px'} py={1} maxH={'0px'} color={'red'}>
                         {errors.enrollment.message}
+                      </Box>
+                    ) : (null)
+                    }
+                  </GridItem>
+                  
+                  <GridItem>
+                    <FormLabel>University Name</FormLabel>
+                    <InputGroup>
+                      <InputLeftAddon bg="#5A4FCF" children={<MdSchool color={'white'} />} />
+                      <Input type={'text'} name="university" id="university" placeholder='University Name'
+                        {...register('university', { required: { value: true, message: "Unversity name is required!", } })} />
+                    </InputGroup>
+                    {errors.university && errors.university.message ? (
+                      <Box textAlign={'left'} fontSize={'12px'} py={1} maxH={'0px'} color={'red'}>
+                        {errors.university.message}
                       </Box>
                     ) : (null)
                     }
@@ -200,7 +204,6 @@ export default function Registration() {
                     <InputGroup>
                       <InputLeftAddon bg="#5A4FCF" children={<MdSchool color={'white'} />} />
                       <Input type={'text'} name="course" id="course" placeholder='Course Name'
-                        //value={course} onChange={handleInputChnage}
                         {...register('course', { required: { value: true, message: "Course Name is required!", } })} />
                     </InputGroup>
                     {errors.course && errors.course.message ? (
@@ -212,30 +215,26 @@ export default function Registration() {
                   </GridItem>
 
                   <GridItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel>Academic Year</FormLabel>
                     <InputGroup size={'md'}>
-                      <InputLeftAddon bg="#5A4FCF" children={<MdEmail color={'white'} />} />
-                      <Input type={'email'} name="email" id="email" placeholder='Email'
-                        //value={email} onChange={handleInputChnage}
-                        {...register("email", {
-                          required: { value: true, message: "Email is required!", },
-                          pattern: { value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, message: "Enter valid email" }
-                        })} />
+                      <InputLeftAddon bg="#5A4FCF" children={<MdFormatListNumbered color={'white'} />} />
+                      <Input type="text" name="academicYear" id="academicYear" placeholder='Academic Year'
+                        {...register('academicYear', { required: { value: true, message: "Academic Year is required!", } })} />
                     </InputGroup>
-                    {errors.email && errors.email.message ? (
+                    {errors.academicYear && errors.academicYear.message ? (
                       <Box textAlign={'left'} fontSize={'12px'} py={1} maxH={'0px'} color={'red'}>
-                        {errors.email.message}
+                        {errors.academicYear.message}
                       </Box>
                     ) : (null)
                     }
                   </GridItem>
+                  
 
                   <GridItem>
                     <FormLabel>Role</FormLabel>
                     <InputGroup size={'md'}>
                       <InputLeftAddon bg="#5A4FCF" children={<AiOutlineUser color={'white'} />} />
                       <Select type={'text'} name="role" id="role" placeholder='Select Role'
-                        //value={role} onChange={handleInputChnage}
                         {...register('role', { required: { value: true, message: "User role is required!", } })}>
 
                         <option>Student</option>
@@ -252,35 +251,10 @@ export default function Registration() {
                   </GridItem>
 
                   <GridItem>
-                    <FormLabel>Password</FormLabel>
-                    <InputGroup size={'md'}>
-                      <InputLeftAddon bg="#5A4FCF" children={<AiOutlineLock color={'white'} />} />
-                      <Input type={'password'} name="pass" id="pass" placeholder='Password'
-                        //value={pass} onChange={handleInputChnage}
-                        {...register('pass', { required: { value: true, message: "Choose is password", } })} />
-                    </InputGroup>
-                    {errors.pass && errors.pass.message ? (
-                      <Box textAlign={'left'} fontSize={'12px'} py={1} maxH={'0px'} color={'red'}>
-                        {errors.pass.message}
-                      </Box>
-                    ) : (null)
-                    }
-                  </GridItem>
-
-                  <GridItem>
-                    <FormLabel>Confirm Password</FormLabel>
-                    <InputGroup size={'md'}>
-                      <InputLeftAddon bg="#5A4FCF" children={<AiOutlineLock color={'white'} />} />
-                      <Input type={'password'} value={cpassword} name="cpassword" onChange={handleInputChnage} focusBorderColor={pass == cpassword ? "lime" : 'red.400'} placeholder='Confirm Password' />
-                    </InputGroup>
-                  </GridItem>
-
-                  <GridItem>
                     <FormLabel>Date of Birth</FormLabel>
                     <InputGroup size={'md'}>
                       <InputLeftAddon bg="#5A4FCF" children={<MdDateRange color={'white'} />} />
                       <Input type={'date'} name="DOB" id="DOB" placeholder='Date of Birth'
-                        //value={DOB} onChange={handleInputChnage}
                         {...register('DOB', { required: { value: true, message: "Date of birth is required!", } })} />
                     </InputGroup>
                     {errors.DOB && errors.DOB.message ? (
@@ -292,16 +266,15 @@ export default function Registration() {
                   </GridItem>
 
                   <GridItem>
-                    <FormLabel>Academic Year</FormLabel>
+                    <FormLabel>Password</FormLabel>
                     <InputGroup size={'md'}>
-                      <InputLeftAddon bg="#5A4FCF" children={<MdFormatListNumbered color={'white'} />} />
-                      <Input type="text" name="academicYear" id="academicYear" placeholder='Academic Year'
-                        //value={academicYear} onChange={handleInputChnage}
-                        {...register('academicYear', { required: { value: true, message: "Academic Year is required!", } })} />
+                      <InputLeftAddon bg="#5A4FCF" children={<AiOutlineLock color={'white'} />} />
+                      <Input type={'password'} name="pass" id="pass" placeholder='Password'
+                        {...register('pass', { required: { value: true, message: "Choose is password", },minLength:{value:6,message:"Passowrd should contain at least 6 characters"} })} />
                     </InputGroup>
-                    {errors.academicYear && errors.academicYear.message ? (
+                    {errors.pass && errors.pass.message ? (
                       <Box textAlign={'left'} fontSize={'12px'} py={1} maxH={'0px'} color={'red'}>
-                        {errors.academicYear.message}
+                        {errors.pass.message}
                       </Box>
                     ) : (null)
                     }
