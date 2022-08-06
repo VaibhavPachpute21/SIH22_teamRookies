@@ -1,7 +1,7 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
-
+import { updateDoc, serverTimestamp } from "firebase/firestore";
 
 
 const firebaseApp = firebase.initializeApp({
@@ -18,8 +18,8 @@ const firebaseApp = firebase.initializeApp({
 
 const db = firebaseApp.firestore();
 const auth = firebase.auth();
-
-export { auth, db };
+const createTimestamp = serverTimestamp() 
+export { auth, db, createTimestamp };
 
 
 // // Import the functions you need from the SDKs you need

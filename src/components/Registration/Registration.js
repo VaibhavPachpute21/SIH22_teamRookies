@@ -6,7 +6,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form';
 import { MdEmail, MdSchool, MdDateRange, MdFormatListNumbered } from 'react-icons/md'
 import { AiOutlineUser, AiOutlinePhone, AiOutlineLock } from 'react-icons/ai'
-import CreateUserHook from '../hooks/CreateUserHook'
+import { db } from '../../firebase-config';
+
 
 const initState = {
   fName: "",
@@ -40,15 +41,27 @@ export default function Registration() {
     setInputState({ ...inputState, [name]: value });
   }
 
-  const registerUser = async (e) => {
+  const registerUser = async (data) => {
 
-    
   try {
-      await createUser("abhinav@gmail.com", "12357783")
-      const done = await CreateUserHook(user.uid,{ fName, lName, phone, college, enrollment, course, email, role, pass, cpassword, DOB, academicYear, address })
-      console.log(done)
+    await createUser("abhinav@gmail.com", "12357783")
+      
+    if(user) {
+      const ref = await db.collection("users").doc(user.uid)
+      ref.get().then(doc=>{
+        if(!doc.exists){
+          ref.set({
+            data
+          })
+        }
+      })
+      console.log(ref)
+    }
+    
+    
+
     } catch (error) {
-      SetError(e.message)
+      SetError(error.message)
       console.log(error.message)
     } 
   }
