@@ -59,6 +59,52 @@ exports.login = async (req, res, next) => {
     }
 }
 
+exports.userinfo = async (req,res,next) => {
+    const id = req.params.id
+    try {
+        const TheUser = await User.findById(id)
+        if(!TheUser){
+            res.status(200).json({
+                success:false,
+                message:"could not find user"
+            })
+        }
+        res.status(200).send({
+            success:true,
+            TheUser
+        })
+    } catch (error) {
+        res.status(400).send(error.message)
+    }
+}
+
+
+exports.update = async (req,res,next) => {
+    const id = req.params.id
+    const {email, password,role,fullname,committee,avatar, banner,phone_number, college_name,university,district,state} = req.body
+
+    try {
+        const updatedUser = await User.findOneAndUpdate({"_id":id},{
+            $set:{
+                email, password,role,fullname,committee,avatar, banner,phone_number, college_name,university,district,state
+            }
+        },{new:true})
+
+        if(!updatedUser){
+            res.status(200).send("Something went wrong")
+        }
+
+        res.status(200).json({
+            success:true,
+            updatedUser
+        })
+    } catch (error) {
+        res.status(400).send(error.message)
+    }
+
+}
+
+
 const sendToken = async (user, statusCode, res) => {
     const token = await user.getSignedToken()
 
