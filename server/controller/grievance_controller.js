@@ -1,11 +1,11 @@
 const {Grievance} = require('../models/grievance_model')
 
 exports.CreateGrievance = async (req,res,next) => {
-    const {grievant_id,reciever_id,grievance_info,imgs} = req.body
+    const {grievant_id,reciever_id,grievant_university,grievance_info,imgs} = req.body
 
     try {
         const newGrievance = await Grievance.create({
-            grievant_id: grievant_id,reciever_id: reciever_id,grievance_info: grievance_info,imgs: imgs
+            grievant_id: grievant_id,reciever_id: reciever_id,grievant_university:grievant_university,grievance_info: grievance_info,imgs: imgs
         })
         if(!newGrievance){
             res.status(200).json({

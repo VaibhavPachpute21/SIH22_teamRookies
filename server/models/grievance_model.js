@@ -14,6 +14,10 @@ const grievanceSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    grievant_university:{
+        type:String,
+        required:true
+    },
     imgs:[
      {
         img_url:{
@@ -37,5 +41,7 @@ const grievanceSchema = new mongoose.Schema({
 },{timestamps:true})
 
 const Grievance = mongoose.model("Grievance",grievanceSchema)
+
+
 
 module.exports = {Grievance}

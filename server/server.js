@@ -14,6 +14,7 @@ const cron = require('node-schedule')
 
 
 const {IncDayCount} = require('./cron-jobs/DayCountInc')
+const {ResetAndForward} = require("./cron-jobs/DayCountInc")
 
 
 app.use(express.json())
@@ -33,7 +34,8 @@ app.use("/api/grievance",require("./routes/grievance_routes"))
 // Cron jobs
 
  cron.scheduleJob("*/2 * * * * *",()=>{
-    IncDayCount()
+     /* IncDayCount(),
+    ResetAndForward()   */   
 })
  
 
