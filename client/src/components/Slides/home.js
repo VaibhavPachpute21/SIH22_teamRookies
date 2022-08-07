@@ -50,24 +50,27 @@ const DashboardHome = () => {
 
 
     return (
-        <VStack spacing={10} w="100%" h="100%">
-            <Box
+        <Flex spacing={10} w="100%" h="100%" 
+        flexDirection={["column","column","column","column"]}
+        >
+            <Flex flexDirection={["column"]}
                 paddingLeft={8}
-                w="100%" h="10%" >
+                w="100%" h={["100%","100%","10%","10%"]} >
                 <Heading fontFamily={'monospace'}>
                     Good Morning, Abhinav !
                 </Heading>
-            </Box>
-            <HStack
+            </Flex>
+            <Flex flexDirection={['column','column','row','row']}
                 paddingLeft={8}
-                spacing={10} w="100%" h="30%">
+                spacing={10} w="100%" h={["100%","100%","100%","30%"]}>
                 {
                     fakeData?.map((item, i) => (
-                        <VStack
-                            key={i} w="25%" h="100%"
+                        <Flex flexDirection={['column']}
+                            key={i} w={["100%","100%","100%","25%"]} h="100%"
                             boxShadow='xl'
+                            padding={[2,2,0,0]}
                             borderRadius={20}>
-                            <HStack w="100%" h="20%" alignItems={'center'} justifyContent={'center'}>
+                            <HStack w="100%" h={["30%","30%","20%","20%"]} alignItems={'center'} justifyContent={'center'}>
                                 <HStack w="100%" h="100%"
                                     alignItems={'flex-start'} justifyContent={'space-around'}>
                                     <Icon
@@ -86,10 +89,10 @@ const DashboardHome = () => {
                                 </HStack>
                             </HStack>
 
-                            <VStack w="100%" h="80%">
+                            <VStack w="100%" h={["100%","100%","100%","80%"]}>
                                 <Box
                                     p={5}
-                                    w="100%" h="50%">
+                                    w="100%" h={["100%","100%","100%","50%"]}>
                                     <Heading
                                         size={'xl'}
                                     >
@@ -99,7 +102,7 @@ const DashboardHome = () => {
 
                                 <Box
                                     p={0}
-                                    w="80%" h="50%">
+                                    w="80%" h={["100%","100%","100%","50%"]}>
                                     <Text
                                         fontSize={'md'}
                                         fontWeight={500}
@@ -108,19 +111,23 @@ const DashboardHome = () => {
                                     </Text>
                                 </Box>
                             </VStack>
-                        </VStack>
+                        </Flex>
                     ))
                 }
-            </HStack>
+            </Flex>
 
-            <HStack
+            <Flex flexDirection={['column','column','row','row']}
                 paddingLeft={8}
-                w="100%" h="60%">
-                <VStack w="20%" h="100%">
+                marginTop={5}
+                w="100%" h={["100%","100%","100%","100%"]}>
+
+                <Flex w={["100%","100%","100%","20%" ]} h="100%" marginTop={["65vh",5,5,5]}
+                flexDirection={['column','column','column','column']}
+                >
                     <Box
                         borderRadius={20}
                         boxShadow={'xl'}
-                        w="100%" h="40%">
+                        w="100%" h={["40%"]}>
                         <VStack w="100%" h="100%">
                             <Box w="100%" h="30%" px={10} py={10}>
                                 <Text w="100%" h="100%"
@@ -181,10 +188,10 @@ const DashboardHome = () => {
                         </VStack>
                     </Box>
                     
-                </VStack>
+                </Flex>
 
-                <HStack w="80%" h="100%" >
-                    <VStack w="60%">
+                <Flex w={["100%","100%","80%","80%"]} h="100%" flexDirection={['column','column','row','row']} >
+                    <VStack w={["100%","100%","60%","60%"]}>
                     <Text px={5} w="100%" h="100%"
                                     fontFamily={'monospace'}
                                     fontWeight={700} fontSize={'xl'}>
@@ -193,7 +200,7 @@ const DashboardHome = () => {
                     <ChartComponent/>
                     </VStack>
 
-                    <Box w="40%" h="100%">
+                    <Box w={["100%","100%","40%","40%"]} h="100%" paddingBottom={5}>
                         <VStack w="100%" h="85%">
                         <Text w="100%" h="100%"
                                     fontFamily={'monospace'}
@@ -205,18 +212,18 @@ const DashboardHome = () => {
                                     <Box key={i} w="100%"
                                     borderRadius={20}
                                     boxShadow={'md'}
-                                    h="25%">
+                                    h={["100%","100%","25%","25%"]}>
                                         <HStack w="100%" h="100%">
-                                            <Box px={6} py={8} w="20%" h="100%">
+                                            <Box px={[2,2,6,6]} py={[4,4,6,8]} w={["100%","100%","20%","20%"]} h="100%">
                                                <Avatar
                                                
                                                size={'sm'}/>
                                             </Box>
-                                            <VStack spacing={0} p={4} w="60%" h="100%">
+                                            <VStack spacing={0} p={[0,0,4,4]} w="60%" h="100%">
                                             <Box w="100%" h="50%">
                                                 <Text
                                                 fontWeight={600}
-                                                fontSize={'xl'}
+                                                fontSize={['md','xl','xl']}
                                                 >{item.username}</Text>
                                             </Box>
                                             <Box w="100%" h="30%">
@@ -225,6 +232,7 @@ const DashboardHome = () => {
                                             </VStack>
 
                                             <IconButton 
+                                            size={'sm'}
                                             background={'#5A4FCF'}
                                             color="white"
                                             icon={<BsChat/>}
@@ -237,9 +245,9 @@ const DashboardHome = () => {
                             }
                         </VStack>
                     </Box>
-                </HStack>
-            </HStack>
-        </VStack>
+                </Flex>
+            </Flex>
+        </Flex>
     );
 }
 
