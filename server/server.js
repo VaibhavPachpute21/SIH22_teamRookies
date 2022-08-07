@@ -10,6 +10,10 @@ mongoose.promise = global.Promise
 
 const app = express()
 const cors = require('cors')
+const cron = require('node-schedule')
+
+
+const {IncDayCount} = require('./cron-jobs/DayCountInc')
 
 
 app.use(express.json())
@@ -25,6 +29,16 @@ app.use(cors())
 
 app.use("/api/user",require("./routes/user_routes"))
 app.use("/api/grievance",require("./routes/grievance_routes"))
+
+// Cron jobs
+
+ cron.scheduleJob("*/2 * * * * *",()=>{
+    IncDayCount()
+})
+ 
+
+
+
 
 const port = process.env.PORT || 3001;
 
