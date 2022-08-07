@@ -45,6 +45,10 @@ const userSchema = new mongoose.Schema({
     university: {
         type: String,
     },
+    university_nodal_no: {
+        type:Number,
+        default:0
+    },
     district: {
         type: String,
     },
