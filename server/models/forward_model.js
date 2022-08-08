@@ -2,20 +2,17 @@ const mongoose = require('mongoose')
 
 const forwardSchema = new mongoose.Schema({
     previous_reciever:{
-        type:String,
-        required:true
+        type:String
     },
     current_reciever:{
-        type:String,
-        required:true
+        type:String
     },
     grievance_id:{
-        type:String,
-        required:true
+        type:String
+        
     },
     created_date:{
-        type:Date,
-        required:true
+        type:Date
     }
 },{
     timestamps:true

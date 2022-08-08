@@ -1,24 +1,17 @@
 const { User } = require('../models/user_model')
 
 exports.register = async (req, res, next) => {
-    const { email, password,role,fullname,committee,avatar, banner,phone_number, college_name,university,district,state } = req.body;
+    const { email, password, role, fullname, committee, avatar, banner, phone_number, college_name, university, district, state } = req.body;
 
     try {
-        const user = await User.create({
-            email,
-            password,
-            role,
-            fullname,
-            committee,
-            avatar,
-            banner,
-            phone_number,
-            college_name,
-            university,
-            district,
-            state
+        const newUser = await User.create({
+            email, password, role, fullname, committee, avatar, banner, phone_number, college_name, university, district, state
         })
-        sendToken(user, 201, res);
+        if (!newUser) {
+            res.status(200).json({ success: false, message: "Some error" })
+        }
+        sendToken(newUser, 201, res);
+
     } catch (error) {
         res.status(500).json({
             success: false,
@@ -59,18 +52,18 @@ exports.login = async (req, res, next) => {
     }
 }
 
-exports.userinfo = async (req,res,next) => {
+exports.userinfo = async (req, res, next) => {
     const id = req.params.id
     try {
         const TheUser = await User.findById(id)
-        if(!TheUser){
+        if (!TheUser) {
             res.status(200).json({
-                success:false,
-                message:"could not find user"
+                success: false,
+                message: "could not find user"
             })
         }
         res.status(200).send({
-            success:true,
+            success: true,
             TheUser
         })
     } catch (error) {
@@ -79,23 +72,23 @@ exports.userinfo = async (req,res,next) => {
 }
 
 
-exports.update = async (req,res,next) => {
+exports.update = async (req, res, next) => {
     const id = req.params.id
-    const {email, password,role,fullname,committee,avatar, banner,phone_number, college_name,university,district,state} = req.body
+    const { email, password, role, fullname, committee, avatar, banner, phone_number, college_name, university, district, state } = req.body
 
     try {
-        const updatedUser = await User.findOneAndUpdate({"_id":id},{
-            $set:{
-                email, password,role,fullname,committee,avatar, banner,phone_number, college_name,university,district,state
+        const updatedUser = await User.findOneAndUpdate({ "_id": id }, {
+            $set: {
+                email, password, role, fullname, committee, avatar, banner, phone_number, college_name, university, district, state
             }
-        },{new:true})
+        }, { new: true })
 
-        if(!updatedUser){
+        if (!updatedUser) {
             res.status(200).send("Something went wrong")
         }
 
         res.status(200).json({
-            success:true,
+            success: true,
             updatedUser
         })
     } catch (error) {

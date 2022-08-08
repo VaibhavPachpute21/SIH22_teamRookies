@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 
 
-const userSchema = new mongoose.Schema({
+const officerSchema = new mongoose.Schema({
     email: {
         type: String,
         unique: true,
@@ -39,14 +39,15 @@ const userSchema = new mongoose.Schema({
     phone_number: {
         type: String,
     },
-    college_name: {
-        type: String,
-    },
     university: {
         type: String,
     },
     district: {
         type: String,
+    },
+    university_nodal_no:{
+        type:Number,
+        default:0
     },
     state: {
         type: String,
@@ -56,7 +57,7 @@ const userSchema = new mongoose.Schema({
         timestamps: true
     })
 
-userSchema.pre("save", async function (next) {
+officerSchema.pre("save", async function (next) {
     var user = this;
     if (!user.isModified("password")) {
         next();
@@ -68,20 +69,20 @@ userSchema.pre("save", async function (next) {
 })
 
 
-userSchema.methods.getSignedToken = async function () {
+officerSchema.methods.getSignedToken = async function () {
     const token = jwt.sign({ id: this._id, isAdmin: this.isAdmin }, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRES
     })
     return token
 }
 
-userSchema.methods.comparePassword = async function (password) {
+officerSchema.methods.comparePassword = async function (password) {
     return await bcrypt.compare(password, this.password)
 }
 
 
-const User = mongoose.model('User', userSchema)
+const Officer = mongoose.model('Officer', officerSchema)
 
 module.exports = {
-    User
+    Officer
 }

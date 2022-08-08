@@ -31,11 +31,15 @@ app.use(cors())
 app.use("/api/user",require("./routes/user_routes"))
 app.use("/api/grievance",require("./routes/grievance_routes"))
 
+app.use("/api/officer",require("./routes/officer_routes"))
+
+
+
 // Cron jobs
 
  cron.scheduleJob("*/2 * * * * *",()=>{
-     /* IncDayCount(),
-    ResetAndForward()   */   
+    IncDayCount(),
+    ResetAndForward()    
 })
  
 

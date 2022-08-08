@@ -1,13 +1,15 @@
 const { Forward } = require('../models/forward_model')
-const {Grievance} = require('../models/grievance_model')
-const { User } = require('../models/user_model')
+const { Grievance } = require('../models/grievance_model')
+const { Officer } = require("../models/officer_model")
 
-exports.IncDayCount = async (req,res,next) => {
+
+
+exports.IncDayCount = async (req, res, next) => {
     try {
-        const Lt15 = await Grievance.updateMany({day_counter:{$lt:15}},
-            {$inc:{day_counter:1}})
-        
-        if(!Lt15){
+        const Lt15 = await Grievance.updateMany({ day_counter: { $lt: 15 } },
+            { $inc: { day_counter: 1 } })
+
+        if (!Lt15) {
             console.log("error")
         }
 
@@ -16,31 +18,47 @@ exports.IncDayCount = async (req,res,next) => {
     }
 }
 
-exports.ResetAndForward = async (req,res,next) => {
+exports.ResetAndForward = async (req, res, next) => {
     try {
-        const Gt15 = await Grievance.updateMany({day_counter:{$gte:15}},
-            {$set:{day_counter:0}})
+        const Gt15 = await Grievance.find({ day_counter: { $gte: 15 } })
 
-        if(!Gt15){
+        const someData = Gt15
+        someData?.forEach(async (doc) => {
+            const currentOfficer = await Officer.findById(doc.reciever_id)
+            if (currentOfficer) {
+                const nextOfficer = await Officer.find({ "university_nodal_no": currentOfficer.university_nodal_no + 1 })
+
+                try {
+                    await Grievance.findOneAndUpdate({ reciever_id: currentOfficer._id }, { $set: { reciever_id: nextOfficer[0]._id } })
+
+                    await Forward.create({
+                        previous_reciever:currentOfficer._id,
+                        current_reciever:nextOfficer[0]._id,
+                        grievance_id:doc._id,
+                    })
+                } catch (error) {
+                    console.log(error.message)
+                }
+
+
+            }
+
+
+
+        })
+
+
+        if (!Gt15) {
             console.log("error")
         }
 
-         const theDocs = await Grievance.find({day_counter:{$gte:15}})
-        theDocs.forEach(async (doc)=>{
-            const sameUni = await User.findOne({"university":doc.grievant_university,"_id":{$ne:doc.grievant_id}})
 
-            if(!sameUni){
-                console.log("not found")
-            }
-            else{
-                console.log(sameUni)
-                const setNewReciever = await Grievance.findByIdAndUpdate(doc._id,{$set:{reciever_id:sameUni._id}})            
-                if(setNewReciever){
-                    console.log("Hey")
-                }
-            }
+        Gt15.forEach(async (doc) => {
+            await Grievance.findByIdAndUpdate(doc._id, { $set: { day_counter: 0 } })
         })
-         
+
+
+
     } catch (error) {
         res.status(400).send(error.message)
     }
