@@ -56,11 +56,15 @@ const DashboardHistory = () => {
 
     return (
         <Box w="100%" h="100%">
-            <HStack w="100%" h="100%">
+            <Flex w="100%" h="100%"
+            flexDirection={['column','row','row']} alignItems={'center'}
+            alignContent={'space-between'}
+            >
 
                 {
                     classSwitch === 'init-drawer' || classSwitch === "close-drawer" ? (
-                        <Box h="100%" w="5%"
+                        <Box h={["10%","10%","100%","100%"]} w={["100%","100%","5%","5%"]}
+                        margin={2}
                             className={classSwitch}
                             bg="#5A4FCF"
                             borderRadius={'2xl'}
@@ -82,7 +86,7 @@ const DashboardHistory = () => {
                     ) : (
                         <Box
                             className={"final-drawer"}
-                            w="15%" h="100%" bg="#5A4FCF" borderRadius={'2xl'}>
+                            w={["100%","100%","15%","15%"]} h="100%" bg="#5A4FCF" borderRadius={'2xl'}>
 
                             <VStack w="100%" h="100%">
                                 <Box w="100%" h="5%">
@@ -135,7 +139,7 @@ const DashboardHistory = () => {
 
                 }
 
-                <Box
+                <Box padding={[2,2,2,2]}
                     overflow={'scroll'}
                     w={classSwitch === 'init-drawer' ||
                         classSwitch === 'close-drawer'
@@ -146,46 +150,45 @@ const DashboardHistory = () => {
                 >
                     <Flex w="100%" h="100%" alignItems={'center'} justifyContent={'center'}>
                         <VStack
-                            w="90%"
-                            maxH={"80vh"} spacing={10}>
+                            paddingTop={5}
+                            w={["100%","100%","90%","90%"]}
+                            maxH={"80vh"} spacing={[1,2,5,10]}>
                             {
                                 fakeGrievances?.map((item, i) => (
                                     <Box
-                                        bg="white"
+                                        bg="white" padding={5}
                                         key={i}
-                                        w="100%" minH="20vh" borderRadius={10} boxShadow={'lg'}>
-                                        <HStack w="100%" h="100%">
-                                            <Box w="25%" h="100%">
-                                                <Flex
-
-                                                    w="100%" h="20vh" alignItems={'center'} justifyContent={'center'}>
+                                        w="100%" minH={["max-content","20vh","20vh"]} borderRadius={[2,3,5,10]} boxShadow={'lg'}>
+                                        <Flex w="100%" h="100%" flexDirection={['column','column','row','row']} >
+                                            <Box w={["100%","25%","25%"]} h="100%">
+                                                <Flex w="100%" h={["100%","20vh","20vh"]} alignItems={'center'} justifyContent={'center'}>
                                                     <Avatar
                                                         src='https://bit.ly/dan-abramov'
-                                                        size={'xl'}
+                                                        size={['xl','md','xl','xl']}
                                                     />
                                                 </Flex>
                                             </Box>
-                                            <Box w="20%" h="20vh">
-                                                <VStack
-                                                    spacing={6}
 
+                                            <Box w={["100%","20%","30%"]} h={["100%","100%","20vh","20vh"]}>
+                                                <Flex flexDirection={['column','column','row','row']}
+                                                    spacing={[1,2,6]}
                                                     alignItems={'flex-start'}
                                                     py={3}
 
                                                     w="100%" h="100%">
                                                     <Heading
-                                                        size="md"
-                                                        fontWeight={500}
-                                                    >
+                                                        size={["sm","md","md"]}
+                                                        fontWeight={500}>
+                                                        {item.user_role}
+                                                    </Heading>
 
-                                                        {item.user_role}</Heading>
-
-                                                    <VStack
-                                                        px={5}
+                                                    <Flex flexDirection={['row','row','column','column']}
+                                                        px={[0,0,5,5]}
                                                         spacing={5}
                                                         w="100%" h="40%">
                                                         <Box w="100%">
                                                             <Text w="100%"
+                                                            size={["sm","md","md"]}
                                                                 color={'gray.600'}
                                                                 fontWeight={500}>
                                                                 Assigned committee:
@@ -199,25 +202,24 @@ const DashboardHistory = () => {
                                                                 Status:
                                                             </Text>
                                                         </Box>
-                                                    </VStack>
-                                                </VStack>
+                                                    </Flex>
+                                                </Flex>
                                             </Box>
 
-                                            <Box w="25%" h="20vh" >
-                                                <VStack
-                                                    spacing={9}
-                                                    alignItems={'center'}
-                                                    justifyContent={'center'}
-                                                    py={3}
+                                            <Box w={["100%","20%","20%","25%"]} h={["100%","100%","20vh","20vh"]} marginTop={5} >
+                                                <Flex flexDirection={['column','column','row','row']}
+                                                    spacing={[1,1,9]}
+                                                    alignItems={'start'}
+                                                    justifyContent={'space-between'}
+                                                    py={[1,1,3]}
                                                     w="100%" h="100%">
 
-                                                    <VStack
+                                                    <Flex flexDirection={['row','row','column','column']}
                                                         px={5}
                                                         spacing={5}
                                                         w="100%" h="40%">
                                                         <Box w="100%">
                                                             <Text w="100%"
-
                                                                 fontWeight={500}>
                                                                 {item.user_committee}
                                                             </Text>
@@ -241,17 +243,18 @@ const DashboardHistory = () => {
                                                             </Text>
                                                         </Box>
 
-                                                    </VStack>
-                                                </VStack>
+                                                    </Flex>
+                                                </Flex>
                                             </Box>
 
-                                            <Box w="30%" h="20vh">
-                                                <VStack spacing={0} w="100%" h="100%">
+                                            <Box w={["100%","100%","30%"]} h={["100%","100%","20vh","20vh"]}>
+                                                <Flex flexDirection={['column']}
+                                                spacing={0} w="100%" h="100%">
                                                     <Box
                                                         w="100%" h="5vh">
                                                         <Flex
                                                             py={2}
-                                                            w="95%" h="100%" alignItems={'flex-end'} justifyContent={'flex-end'}>
+                                                            w="100%" h="100%" alignItems={'flex-end'} justifyContent={'flex-end'}>
                                                             <Text>
                                                                 {item.post_date}
                                                             </Text>
@@ -263,7 +266,7 @@ const DashboardHistory = () => {
                                                             <Box
                                                                 h="100%"
                                                                 w="50%">
-                                                                <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
+                                                                <Flex w="100%" h="100%" alignItems={'center'} justifyContent={'center'}>
                                                                     <IconButton
                                                                         bg="#D9CEFF"
                                                                         color={'black'}
@@ -273,7 +276,7 @@ const DashboardHistory = () => {
                                                             <Box
                                                                 h="100%"
                                                                 w="50%">
-                                                                <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
+                                                                <Flex w="100%" h="100%" alignItems={'center'} justifyContent={'center'}>
                                                                     <IconButton
                                                                         bg="#D9CEFF"
                                                                         color={'black'}
@@ -283,9 +286,9 @@ const DashboardHistory = () => {
                                                         </Flex>
                                                     </Box>
 
-                                                </VStack>
+                                                </Flex>
                                             </Box>
-                                        </HStack>
+                                        </Flex>
                                     </Box>
                                 ))
                             }
@@ -294,7 +297,7 @@ const DashboardHistory = () => {
 
 
                 </Box>
-            </HStack>
+            </Flex>
         </Box>
     );
 }

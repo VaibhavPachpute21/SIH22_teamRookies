@@ -10,30 +10,25 @@ const UserProfile = () => {
 
     return (
         <Box w="100%" h="100%">
-            <VStack w="100%" h="100%" alignItems={'flex-start'}>
-                <Box
-                    borderRadius={'2xl'}
+            <Flex w="100%" h="100%" alignItems={'flex-start'} flexDirection={['column']} >
+                <Box borderRadius={'2xl'}
                     w="100%" h="20%" bg="blue.200">
-                    1
                 </Box>
-                <HStack w="100%" h="10%">
-                    <Box w="13%" h="100%">
+                <Flex w="100%" h="10%" flexDirection={['column','row','row']}>
+                    <Box w={["100%","13%","13%"]} h="100%">
                         <Avatar
                             border={'3px solid white'}
                             src="https://avatars.githubusercontent.com/u/77983400?v=4"
                             marginLeft={'5'}
                             marginTop={'-10'}
-                            position={'absolute'}
-                            size={'2xl'} />
+                            position={['relative','absolute','absolute']}
+                            size={['lg','2xl','2xl']} />
 
                     </Box>
-                    <Box
-                        px={4}
-                        w="60%" h="100%">
-                        <HStack w="100%" h="100%" alignItems={'flex-start'}>
+                    <Box px={1} w={["100%","100%","60%","60%"]} h="100%">
+                        <Box w="100%" h="100%" alignItems={'flex-start'}>
                             <Box
-
-                                w="100%" h="50%">
+                                w="100%" h={["100%","50%","50%"]}>
                                 <Text fontWeight={600} fontSize={'2xl'}>
                                     Profile page
                                 </Text>
@@ -41,10 +36,10 @@ const UserProfile = () => {
                                     Update your photo and personal details
                                 </Text>
                             </Box>
-                        </HStack>
+                        </Box>
                     </Box>
 
-                    <Box w="30%" h="100%">
+                    <Box w={["100%","30%","30%"]} h="100%" paddingTop={['10vh',1,1]}>
                         <HStack w="100%" h="100%" spacing={10} alignItems={'center'} justifyContent={'center'}>
 
                             <Button w="30%" size={'sm'}>
@@ -54,18 +49,12 @@ const UserProfile = () => {
                             <Button color={'white'} bg="#5A4FCF" w="30%" size={'sm'}>
                                 Save
                             </Button>
-
-
-                            <Box w="50%" h="100%">
-
-                            </Box>
                         </HStack>
                     </Box>
-                </HStack>
+                </Flex>
 
-                <VStack
-
-                    w="100%" h="70%">
+                <VStack paddingTop={['20vh',1,1]}
+                    w="100%" h={"70%"}>
                     <VStack
                         spacing={3}
                         overflow={'scroll'}
@@ -83,7 +72,7 @@ const UserProfile = () => {
                                 w="60%" h="100%">
                                 <Flex w="100%" h="100%" flexDirection={'row'} justifyContent={'flex-end'}>
                                     <Input
-                                        w="30%"
+                                        w={["100%","100%","30%","30%"]}
                                         type="email"
                                         value={"abhinav@gmail.com"} />
                                 </Flex>
@@ -105,14 +94,13 @@ const UserProfile = () => {
                                 w="60%" h="100%">
                                 <Flex w="100%" h="100%" flexDirection={'row'} justifyContent={'flex-end'}>
                                     <Input
-                                        w="30%"
+                                        w={["100%","100%","30%","30%"]}
                                         type="password"
                                         value={"241355"} />
                                 </Flex>
 
                             </Box>
                         </HStack>
-
 
                         <HStack
                             py={5}
@@ -124,19 +112,16 @@ const UserProfile = () => {
                             </Box>
 
                             <Box
-
                                 w="60%" h="100%">
                                 <Flex w="100%" h="100%" flexDirection={'row'} justifyContent={'flex-end'}>
                                     <Input
-                                        w="30%"
+                                        w={["100%","100%","30%","30%"]}
                                         type="text"
                                         value={"3/7/2002"} />
                                 </Flex>
 
                             </Box>
                         </HStack>
-
-
 
                         <HStack
                             py={5}
@@ -152,11 +137,10 @@ const UserProfile = () => {
                                 w="60%" h="100%">
                                 <Flex w="100%" h="100%" flexDirection={'row'} justifyContent={'flex-end'}>
                                     <Input
-                                        w="30%"
+                                         w={["100%","100%","30%","30%"]}
                                         type="text"
                                         value={"Student"} />
                                 </Flex>
-
                             </Box>
                         </HStack>
 
@@ -174,7 +158,7 @@ const UserProfile = () => {
                                 w="60%" h="100%">
                                 <Flex w="100%" h="100%" flexDirection={'row'} justifyContent={'flex-end'}>
                                     <Input
-                                        w="30%"
+                                         w={["100%","100%","30%","30%"]}
                                         type="number"
                                         value={"30482419"} />
                                 </Flex>
@@ -213,11 +197,10 @@ const UserProfile = () => {
                                         </Box>
 
                                         <Box
-
                                             w="60%" h="100%">
                                             <Flex w="100%" h="100%" flexDirection={'row'} justifyContent={'flex-end'}>
                                                 <Input
-                                                    w="30%"
+                                                     w={["100%","100%","30%","30%"]}
                                                     type="text"
                                                     value={"Ucoe"} />
                                             </Flex>
@@ -235,15 +218,13 @@ const UserProfile = () => {
                                         </Box>
 
                                         <Box
-
                                             w="60%" h="100%">
                                             <Flex w="100%" h="100%" flexDirection={'row'} justifyContent={'flex-end'}>
                                                 <Input
-                                                    w="30%"
+                                                     w={["100%","100%","30%","30%"]}
                                                     type="text"
                                                     value={"MU"} />
                                             </Flex>
-
                                         </Box>
                                     </HStack>
 
@@ -261,7 +242,7 @@ const UserProfile = () => {
                                             w="60%" h="100%">
                                             <Flex w="100%" h="100%" flexDirection={'row'} justifyContent={'flex-end'}>
                                                 <Input
-                                                    w="30%"
+                                                     w={["100%","100%","30%","30%"]}
                                                     type="text"
                                                     value={"Maharashtra"} />
                                             </Flex>
@@ -283,11 +264,10 @@ const UserProfile = () => {
                                             w="60%" h="100%">
                                             <Flex w="100%" h="100%" flexDirection={'row'} justifyContent={'flex-end'}>
                                                 <Input
-                                                    w="30%"
+                                                    w={["100%","100%","30%","30%"]}
                                                     type="text"
                                                     value={"Palghar"} />
                                             </Flex>
-
                                         </Box>
                                     </HStack>
 
@@ -313,10 +293,10 @@ const UserProfile = () => {
                     </VStack>
 
                     <Divider w="95%" />
-                    <HStack
+                    <Flex flexDirection={["column","row","row"]}
                         py={5}
-                        alignItems={'center'} justifyContent={'center'} w="100%" h="15%" >
-                        <Box py={2} w="30%" h="100%">
+                        alignItems={'center'} justifyContent={'center'} w="100%" h={["100%","100%","15%","15%"]} >
+                        <Box py={2} w={["100%","30%","30%"]} h="50%">
                             <FormLabel>
                                 Your photo
                             </FormLabel>
@@ -327,17 +307,16 @@ const UserProfile = () => {
 
                         <Box
                             w="60%" h="100%">
-                            <HStack
-
-                                justifyContent={'flex-end'}
+                            <Flex flexDirection={["row","row","row","row"]}
+                                justifyContent={['center','flex-end','flex-end']}
                                 w="100%" h="100%">
-                                <Box w="20%">
+                                <Box w={["100%","20%","20%"]} margin={2}>
                                     <Avatar
                                         src="https://avatars.githubusercontent.com/u/77983400?v=4"
                                         size={'lg'} />
                                 </Box>
 
-                                <HStack spacing={5} w="30%">
+                                <HStack spacing={5} w={["90%","30%","30%"]}>
                                     <Button
                                         size={'sm'}>
                                         Delete
@@ -350,11 +329,11 @@ const UserProfile = () => {
                                         Update
                                     </Button>
                                 </HStack>
-                            </HStack>
+                            </Flex>
                         </Box>
-                    </HStack>
+                    </Flex>
                 </VStack>
-            </VStack>
+            </Flex>
         </Box>
     );
 }
