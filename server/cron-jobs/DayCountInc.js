@@ -6,7 +6,7 @@ const { Officer } = require("../models/officer_model")
 
 exports.IncDayCount = async (req, res, next) => {
     try {
-        const Lt15 = await Grievance.updateMany({ day_counter: { $lt: 15 } },
+        const Lt15 = await Grievance.updateMany({ satisfied:false ,day_counter: { $lt: 15 } },
             { $inc: { day_counter: 1 } })
 
         if (!Lt15) {
@@ -37,7 +37,7 @@ exports.ResetAndForward = async (req, res, next) => {
                         grievance_id:doc._id,
                     })
                 } catch (error) {
-                    console.log(error.message)
+                    
                 }
 
 
@@ -46,7 +46,6 @@ exports.ResetAndForward = async (req, res, next) => {
 
 
         })
-
 
         if (!Gt15) {
             console.log("error")
