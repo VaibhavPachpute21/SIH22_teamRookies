@@ -54,7 +54,7 @@ const UserProfile = () => {
                 </Flex>
 
                 <VStack paddingTop={['20vh',1,1]}
-                    w="100%" h={"70%"}>
+                    w="100%" h={["95vh","70%","70%"]}>
                     <VStack
                         spacing={3}
                         overflow={'scroll'}

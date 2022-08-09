@@ -1,11 +1,12 @@
 import { Avatar, Box, Flex, HStack, VStack, Image, Heading, Text, Spacer, IconButton, Divider } from '@chakra-ui/react'
 import { TiExportOutline } from 'react-icons/ti'
+import TrackingMap from '../tracking_map/TrackingMap';
 
 const Grievance = () => {
 
     return (
         <Box w="100vw"
-            h="100%" bg={'pink.100'} >
+            h="100%">
             <Box h="5%" w="95%">
                 <Flex w="100%" h="100%">
                     <Box
@@ -20,8 +21,8 @@ const Grievance = () => {
                     </Box>
                 </Flex>
             </Box>
-            <Flex w="100%" h="95%" flexDir={'column'} alignItems={'center'} justifyContent={'center'} paddingBottom={5} >
-                <Box w="80%" h="100%"   bg={'whitesmoke'} borderRadius={15}>
+            <Flex w="100%" h="max-content" flexDir={'column'} alignItems={'center'} justifyContent={'center'} paddingBottom={5} >
+                <Box w="60%" h="100%"   bg={'white'} borderRadius={15} boxShadow={'dark-lg'} >
                     <VStack w="100%" h="100%">
                         <HStack
                             spacing={5}
@@ -128,6 +129,10 @@ const Grievance = () => {
 
                 </Box>
             </Flex>
+
+            <Box border={'1px solid black'} minH={"50vh"} >
+                <TrackingMap></TrackingMap>
+            </Box>
         </Box>
     );
 }
