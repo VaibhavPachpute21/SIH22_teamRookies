@@ -93,6 +93,7 @@ export default function Home() {
                         src="./image/s3.jpg" />
                 </div>
             </Carousel>
+
             <HStack w="100%" h="90vh">
                 <Box
                     w="70%" h="100%">
@@ -144,6 +145,12 @@ export default function Home() {
                 </Box>
             </HStack>
 
+
+
+
+            <Flex w={'30%'} height={'60vh'} bg={'red.200'} alignSelf={"end"} position={'absolute'} marginTop={'-65vh'} right={10}>
+
+            </Flex>
 
         </Box>
 
