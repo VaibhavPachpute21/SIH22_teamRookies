@@ -16,6 +16,7 @@ export default function Home() {
 
         <Box w="100%" h="90vh">
             <Carousel
+                onClickItem={()=>{}}
                 autoPlay={true}
                 infiniteLoop={true}
                 showArrows={true}
@@ -42,6 +43,10 @@ export default function Home() {
                         src="./image/s3.jpg" />
                 </div>
             </Carousel>
+
+            <Flex w={'30%'} height={'60vh'} bg={'red.200'} alignSelf={"end"} position={'absolute'} marginTop={'-65vh'} right={10}>
+
+            </Flex>
         </Box>
 
     );
