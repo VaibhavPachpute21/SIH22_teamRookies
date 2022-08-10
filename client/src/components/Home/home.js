@@ -12,9 +12,30 @@ export default function Home() {
 
     const [SlideIndex, setSlideIndex] = useState(0)
 
-    const HandleClick = (index) => {
-        console.log(index)
-    }
+
+    const cards = [
+        {
+            font:"font1",
+            title:"title1",
+            desc:"text"
+        },
+        {
+            font:"font1",
+            title:"title1",
+            desc:"text"
+        },
+        {
+            font:"font1",
+            title:"title1",
+            desc:"text"
+        },
+        {
+            font:"font1",
+            title:"title1",
+            desc:"text"
+        }
+    ]
+
 
     return (
 
@@ -94,49 +115,36 @@ export default function Home() {
                 </div>
             </Carousel>
 
-            <HStack w="100%" h="90vh">
+            <HStack w="100%" h="90vh" >
                 <Box
                     w="70%" h="100%">
                     <VStack spacing={5} py={9} w="100%" h="100%">
-                        <Box
+                        {
+                           cards?.map((item,i)=>(
+                            <VStack
                             borderTop={'4px solid #5A4FCF'}
                             borderRadius={'2xl'}
                             boxShadow={'xl'}
+                            alignItems={'center'}
+                            justifyContent={'center'}
                             bg="white"
                             w="90%" 
                             h="50%">
-                            Hey
-                        </Box>
+                                <Box w="100%" h="30%">
+                                    <HStack w="100%" h="100%" alignItems={'center'} justifyContent={'center'}>
+                                        <Box w="20%" h="100%">
+                                            Font
+                                        </Box>
 
-                        <Box
-                            borderTop={'4px solid #5A4FCF'}
-                            borderRadius={'2xl'}
-                            boxShadow={'xl'}
-                            bg="white"
-                            w="90%" 
-                            h="50%">
-                            Hey
-                        </Box>
-
-                        <Box
-                            borderTop={'4px solid #5A4FCF'}
-                            borderRadius={'2xl'}
-                            boxShadow={'xl'}
-                            bg="white"
-                            w="90%" 
-                            h="50%">
-                            Hey
-                        </Box>
-
-                        <Box
-                            borderTop={'4px solid #5A4FCF'}
-                            borderRadius={'2xl'}
-                            boxShadow={'xl'}
-                            bg="white"
-                            w="90%" 
-                            h="50%">
-                            Hey
-                        </Box>
+                                        <Box w="80%" h="100%">
+                                            Title
+                                        </Box>
+                                    </HStack>
+                                </Box>
+                                <Box w="100%" h="50%">Text</Box>
+                        </VStack>
+                          )) 
+                        }
                     </VStack>
                 </Box>
 

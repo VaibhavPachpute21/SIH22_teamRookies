@@ -1,7 +1,7 @@
-import { Box, VStack, HStack, IconButton, Flex, Text, Avatar, Icon, FormLabel, Input, Checkbox, Link } from '@chakra-ui/react'
+import { Box, VStack, HStack, IconButton, Flex, Text, Avatar, Icon, FormLabel, Input, Checkbox, Link, Button } from '@chakra-ui/react'
 import { useState } from 'react';
 import Chart from "react-apexcharts";
-
+import {useNavigate} from 'react-router-dom' 
 import { GrFormAttachment } from 'react-icons/gr'
 const DashboardTracker = () => {
 
@@ -127,7 +127,7 @@ const DashboardTracker = () => {
         }
 
     }
-    console.log(filterTabs)
+    const nav = useNavigate()
 
 
     return (
@@ -434,7 +434,7 @@ const DashboardTracker = () => {
                                                 </Text>
                                             </Box>
 
-                                            <Box w="100%" h="68">
+                                            <Box w="100%" h="68%">
                                                 <Text
                                                     noOfLines={14}
                                                     fontFamily={'monospace'}
@@ -444,6 +444,16 @@ const DashboardTracker = () => {
                                                 </Text>
                                             </Box>
 
+                                            <Box w="100%" h="5%">
+                                                <Button 
+                                                onClick={()=>{nav('')}}
+                                                bg="#5A4FCF"
+                                                color="white"
+                                                size="sm">
+                                                    Track your grievance
+                                                </Button>
+                                            </Box>
+                                            
                                         </VStack>
                                     </Box>
                                 </HStack>

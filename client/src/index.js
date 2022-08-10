@@ -13,7 +13,7 @@ import List from "./components/List/List";
 import Temp from "./components/Temp/temp";
 import Grievance from "./components/Grievance/GrievancePdf"
 import AddNewGrievance from "./components/Grievance/AddNewGrievance";
-
+import GrievanceStatus from "./components/GrievanceStatus";
 import { StepsStyleConfig } from 'chakra-ui-steps';
 
 const CustomSteps = {
@@ -65,6 +65,7 @@ const App = () => {
             <Route path="/Contact" element={<Contact />} />
             <Route path="/Grievance/:id" element={<Grievance />} />
             <Route path="/AddNewGrievance" element={<AddNewGrievance/>}/>
+            <Route path="/TrackGrievance/:id" element={<GrievanceStatus/>}/>
           </Routes>
         </Router>
       </Layout>
