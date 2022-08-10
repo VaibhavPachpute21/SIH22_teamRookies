@@ -11,7 +11,8 @@ import Contact from "./components/Contact/Contact";
 import Solved from "./components/Solved/Solved";
 import List from "./components/List/List";
 import Temp from "./components/Temp/temp";
-import Grievance from "./components/Grievance/index"
+import Grievance from "./components/Grievance/GrievancePdf"
+import AddNewGrievance from "./components/Grievance/AddNewGrievance";
 
 import { StepsStyleConfig } from 'chakra-ui-steps';
 
@@ -63,6 +64,7 @@ const App = () => {
             <Route path="temp" element={<Temp/>}/>
             <Route path="/Contact" element={<Contact />} />
             <Route path="/Grievance/:id" element={<Grievance />} />
+            <Route path="/AddNewGrievance" element={<AddNewGrievance/>}/>
           </Routes>
         </Router>
       </Layout>
