@@ -14,7 +14,12 @@ import Temp from "./components/Temp/temp";
 import Grievance from "./components/Grievance/GrievancePdf"
 import AddNewGrievance from "./components/Grievance/AddNewGrievance";
 import GrievanceStatus from "./components/GrievanceStatus";
-import { StepsStyleConfig } from 'chakra-ui-steps';
+import { StepsStyleConfig } from 'chakra-ui-steps'
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux'
+import promiseMiddleware from 'redux-promise'
+import reducers from './reducers/index'
+const createStoreWithMiddleware = applyMiddleware(promiseMiddleware)(createStore)
 
 const CustomSteps = {
   ...StepsStyleConfig,
@@ -25,14 +30,14 @@ const CustomSteps = {
         ...StepsStyleConfig.baseStyle(props).icon,
         strokeWidth: '1px',
       },
-      label:{
+      label: {
         ...StepsStyleConfig.baseStyle(props).label,
-        color:"white",
+        color: "white",
       },
-      stepIconContainer:{
+      stepIconContainer: {
         ...StepsStyleConfig.baseStyle(props).stepIconContainer,
-        background:"#5A4FCF",
-        
+        background: "#5A4FCF",
+
       }
     };
   },
@@ -49,23 +54,23 @@ const theme = extendTheme({
 
 
 const App = () => {
- 
+
   return (
     <div>
       <Layout>
         <Router>
-        <Routes>
+          <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/Login" element={<Login />}></Route>
             <Route path="/Registration" element={<Registration />}></Route>
             <Route path="/Dashboard" element={<Dashboard />} />
             <Route path="/List" element={<List />} />
             <Route path="/Solved" element={<Solved />} />
-            <Route path="temp" element={<Temp/>}/>
+            <Route path="temp" element={<Temp />} />
             <Route path="/Contact" element={<Contact />} />
             <Route path="/Grievance/:id" element={<Grievance />} />
-            <Route path="/AddNewGrievance" element={<AddNewGrievance/>}/>
-            <Route path="/TrackGrievance/:id" element={<GrievanceStatus/>}/>
+            <Route path="/AddNewGrievance" element={<AddNewGrievance />} />
+            <Route path="/TrackGrievance/:id" element={<GrievanceStatus />} />
           </Routes>
         </Router>
       </Layout>
@@ -76,7 +81,9 @@ const App = () => {
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  <ChakraProvider theme={theme} >
-    <App/>
+  <ChakraProvider theme={theme}>
+    <Provider store={createStoreWithMiddleware(reducers)}>
+      <App />
+    </Provider>
   </ChakraProvider>
 )

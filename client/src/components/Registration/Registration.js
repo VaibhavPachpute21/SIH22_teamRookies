@@ -5,31 +5,32 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form';
 import { MdEmail, MdSchool, MdDateRange, MdFormatListNumbered } from 'react-icons/md'
 import { AiOutlineUser, AiOutlinePhone, AiOutlineLock } from 'react-icons/ai'
+import * as actions from '../../actions/user_actions'
+import {connect} from 'react-redux'
 
-
-export default function Registration() {
+function Registration() {
   const { register, handleSubmit, formState: { errors } } = useForm({ mode: 'onChange' });
-  const [error, SetError] = useState('')
+  
   const navigate = useNavigate()
 
 
   const HandleSubmit = (data) => {
     let obj = {
       email: data.email,
-    password: data.pass,
-    role: data.role,
-    fullname: data.fName,
-    committee: "CSGRC",
-    avatar: "link",
-    banner: "link",
-    phone_number: data.phone,
-    college_name: data.college,
-    university: data.university,
-    district: "Palghar",
-    state: data.state,
-    dob: data.DOB,
-    course: data.course,
-    enrollment: data.enrollment
+      password: data.pass,
+      role: data.role,
+      fullname: data.fName,
+      committee: "CSGRC",
+      avatar: "link",
+      banner: "link",
+      phone_number: data.phone,
+      college_name: data.college,
+      university: data.university,
+      district: "Palghar",
+      state: data.state,
+      dob: data.DOB,
+      course: data.course,
+      enrollment: data.enrollment
     }
   }
 
@@ -85,7 +86,7 @@ export default function Registration() {
                     <InputGroup size={'md'}>
                       <InputLeftAddon bg="#5A4FCF" children={<AiOutlineUser color={'white'} />} />
                       <Input type={'text'} name={"fName"} id="fName" placeholder='Name'
-                        {...register('fName', { required: { value: true, message: "Name is required!", }, minLength:{value:5, message:"Min length is 5"} })} />
+                        {...register('fName', { required: { value: true, message: "Name is required!", }, minLength: { value: 5, message: "Min length is 5" } })} />
                     </InputGroup>
                     {errors.fName && errors.fName.message ? (
                       <Box textAlign={'left'} fontSize={'12px'} py={1} maxH={'0px'} color={'red'}>
@@ -172,7 +173,7 @@ export default function Registration() {
                     ) : (null)
                     }
                   </GridItem>
-                  
+
                   <GridItem>
                     <FormLabel>University Name</FormLabel>
                     <InputGroup>
@@ -217,7 +218,7 @@ export default function Registration() {
                     ) : (null)
                     }
                   </GridItem>
-                  
+
 
                   <GridItem>
                     <FormLabel>Role</FormLabel>
@@ -259,7 +260,7 @@ export default function Registration() {
                     <InputGroup size={'md'}>
                       <InputLeftAddon bg="#5A4FCF" children={<AiOutlineLock color={'white'} />} />
                       <Input type={'password'} name="pass" id="pass" placeholder='Password'
-                        {...register('pass', { required: { value: true, message: "Choose is password", },minLength:{value:6,message:"Passowrd should contain at least 6 characters"} })} />
+                        {...register('pass', { required: { value: true, message: "Choose is password", }, minLength: { value: 6, message: "Passowrd should contain at least 6 characters" } })} />
                     </InputGroup>
                     {errors.pass && errors.pass.message ? (
                       <Box textAlign={'left'} fontSize={'12px'} py={1} maxH={'0px'} color={'red'}>
@@ -294,5 +295,10 @@ export default function Registration() {
   )
 }
 
+const mapStateToProps = (state) => {
+  return{
+    data:state.userData
+  }
+}
 
-
+export default connect(mapStateToProps,Registration)(Registration)
