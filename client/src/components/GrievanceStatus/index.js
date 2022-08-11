@@ -1,4 +1,4 @@
-import { Avatar, Box, Flex, HStack, Tag, Text, VStack, Link, IconButton } from "@chakra-ui/react";
+import { Avatar, Box, Flex, HStack, Tag, Text, VStack, Link, IconButton, Divider } from "@chakra-ui/react";
 import { useState } from "react";
 import { FiThumbsUp } from 'react-icons/fi'
 import { FiThumbsDown } from 'react-icons/fi'
@@ -9,7 +9,8 @@ const GrievanceStatus = () => {
     const start = (
         <Box w="100%" h="20vh">
             <HStack w="100%" h="100%" alignItems={'flex-start'} justifyContent={'center'}>
-                <Box w="5%" h="100%">
+                <VStack w="5%" h="100%">
+                <Box w="100%" h="10%">
                     <Tag
                         borderRadius={20}
                         size={'lg'}
@@ -17,6 +18,12 @@ const GrievanceStatus = () => {
 
                     </Tag>
                 </Box>
+
+                <Divider 
+                w="40%"
+                h="100%"
+                orientation="vertical"/>
+                </VStack>
                 <Box
                     border={'1px'}
                     borderColor={'gray.100'}
@@ -92,7 +99,8 @@ const GrievanceStatus = () => {
     const forward = (
         <Box w="100%" h="20vh">
             <HStack w="100%" h="100%" alignItems={'flex-start'} justifyContent={'center'}>
-                <Box w="5%" h="100%">
+            <VStack w="5%" h="100%">
+                <Box w="100%" h="10%">
                     <Tag
                         borderRadius={20}
                         size={'lg'}
@@ -100,6 +108,13 @@ const GrievanceStatus = () => {
 
                     </Tag>
                 </Box>
+
+                <Divider 
+                w="40%"
+                h="100%"
+                orientation="vertical"/>
+                </VStack>
+                
                 <Box
                     border={'1px'}
                     borderColor={'gray.100'}
@@ -175,13 +190,21 @@ const GrievanceStatus = () => {
     const end = (
         <Box w="100%" h="max-content">
             <HStack w="100%" h="100%" alignItems={'flex-start'} justifyContent={'center'}>
-                <Box w="5%" h="100%">
+            <VStack w="5%" h="100%">
+                <Box w="100%" h="10%">
                     <Tag
                         borderRadius={20}
                         size={'lg'}
-                        colorScheme={'green'}>
+                        colorScheme={'purple'}>
+
                     </Tag>
                 </Box>
+
+                <Divider 
+                w="40%"
+                h="100%"
+                orientation="vertical"/>
+                </VStack>
                 <Box
                     border={'1px'}
                     borderColor={'gray.100'}

@@ -13,6 +13,27 @@ export default function Registration() {
   const navigate = useNavigate()
 
 
+  const HandleSubmit = (data) => {
+    let obj = {
+      email: data.email,
+    password: data.pass,
+    role: data.role,
+    fullname: data.fName,
+    committee: "CSGRC",
+    avatar: "link",
+    banner: "link",
+    phone_number: data.phone,
+    college_name: data.college,
+    university: data.university,
+    district: "Palghar",
+    state: data.state,
+    dob: data.DOB,
+    course: data.course,
+    enrollment: data.enrollment
+    }
+  }
+
+
   return (
     <Box className='Login-Background' minH={'max-content'} maxWidth={"100vw"} overflow={'hidden'} align="center">
       <Flex height="100%" align={'center'} width={"100%"} flexDirection={'row'}>
@@ -51,7 +72,7 @@ export default function Registration() {
           <Heading paddingTop={5} fontFamily={'monospace'} textAlign={'center'} size={'lg'}>Register Here
           </Heading>
           <Box h={'100%'} w={['100%', '80%', '70%']}>
-            <form>
+            <form onSubmit={handleSubmit(HandleSubmit)}>
               <FormControl padding={[2, 3, 5]} align={'center'}>
                 <SimpleGrid
                   columns={2}
