@@ -1,6 +1,7 @@
-import { Avatar, Box, Flex, HStack, Tag, Text, VStack, Link } from "@chakra-ui/react";
-
-
+import { Avatar, Box, Flex, HStack, Tag, Text, VStack, Link, IconButton } from "@chakra-ui/react";
+import { useState } from "react";
+import { FiThumbsUp } from 'react-icons/fi'
+import { FiThumbsDown } from 'react-icons/fi'
 const GrievanceStatus = () => {
 
 
@@ -8,7 +9,7 @@ const GrievanceStatus = () => {
     const start = (
         <Box w="100%" h="20vh">
             <HStack w="100%" h="100%" alignItems={'flex-start'} justifyContent={'center'}>
-                <Box w="10%" h="100%">
+                <Box w="5%" h="100%">
                     <Tag
                         borderRadius={20}
                         size={'lg'}
@@ -19,7 +20,7 @@ const GrievanceStatus = () => {
                 <Box
                     border={'1px'}
                     borderColor={'gray.100'}
-                    w="70%" h="100%">
+                    w="95%" h="100%">
                     <HStack w="100%" h="60%">
                         <VStack
                             py={1}
@@ -80,17 +81,7 @@ const GrievanceStatus = () => {
                                 </Text>
 
                             </Flex>
-                            <Box w="100%" h="90%">
-                                <HStack
-                                    px={10}
-                                    w="100%" h="100%" alignItems={'flex-end'} justifyContent={'flex-start'}>
 
-                                    <Link color={'red'}>
-                                        No replies
-                                    </Link>
-
-                                </HStack>
-                            </Box>
                         </Box>
                     </HStack>
                 </Box>
@@ -101,7 +92,7 @@ const GrievanceStatus = () => {
     const forward = (
         <Box w="100%" h="20vh">
             <HStack w="100%" h="100%" alignItems={'flex-start'} justifyContent={'center'}>
-                <Box w="10%" h="100%">
+                <Box w="5%" h="100%">
                     <Tag
                         borderRadius={20}
                         size={'lg'}
@@ -112,7 +103,7 @@ const GrievanceStatus = () => {
                 <Box
                     border={'1px'}
                     borderColor={'gray.100'}
-                    w="70%" h="100%">
+                    w="95%" h="100%">
                     <HStack w="100%" h="60%">
                         <VStack
                             py={1}
@@ -174,17 +165,6 @@ const GrievanceStatus = () => {
 
                             </Flex>
 
-                            <Box w="100%" h="90%">
-                                <HStack
-                                    px={10}
-                                    w="100%" h="100%" alignItems={'flex-end'} justifyContent={'flex-start'}>
-
-                                    <Link color={'red'}>
-                                        No replies
-                                    </Link>
-
-                                </HStack>
-                            </Box>
                         </Box>
                     </HStack>
                 </Box>
@@ -193,9 +173,9 @@ const GrievanceStatus = () => {
     )
 
     const end = (
-        <Box w="100%" h="20vh">
+        <Box w="100%" h="max-content">
             <HStack w="100%" h="100%" alignItems={'flex-start'} justifyContent={'center'}>
-                <Box w="10%" h="100%">
+                <Box w="5%" h="100%">
                     <Tag
                         borderRadius={20}
                         size={'lg'}
@@ -205,7 +185,7 @@ const GrievanceStatus = () => {
                 <Box
                     border={'1px'}
                     borderColor={'gray.100'}
-                    w="70%" h="100%">
+                    w="95%" h="100%">
                     <HStack w="100%" h="60%">
                         <VStack
                             py={1}
@@ -217,6 +197,7 @@ const GrievanceStatus = () => {
                                     System
                                 </Text>
                             </Box>
+
 
                             <Box>
                                 Grievance was forwarded to a new nodal officer with _id:-82-3582-0
@@ -248,6 +229,38 @@ const GrievanceStatus = () => {
                                             </VStack>
                                         </Box>
                                     </HStack>
+                                    <VStack
+                                        py={2}
+                                        w="100%" h="max-content">
+                                        <VStack
+                                            alignItems={'flex-start'}
+                                            w="100%" h="100%">
+                                            <Text fontWeight={'600'}>
+                                                Officer
+                                            </Text>
+
+                                            <VStack
+                                                alignItems={'flex-end'}
+                                                justifyContent={'space-between'}
+                                                px={3}
+                                                py={2}
+                                                border={'1px'}
+                                                borderColor={'gray.100'}
+                                                w="100%" h="100%">
+                                                <Text>
+                                                    Donec vehicula leo ac risus interdum iaculis. Phasellus ut imperdiet erat. Mauris porttitor, tortor ut congue tincidunt, magna neque aliquam velit, eu sagittis magna leo in nulla. Phasellus bibendum tincidunt rutrum. Vestibulum posuere ac nisl vel imperdiet. Vestibulum tincidunt dui in nulla pulvinar, id vulputate nibh accumsan. Quisque nisi risus, mattis in sem eget, dictum interdum justo. Sed tempor lorem sed lacinia semper. Ut suscipit arcu id ullamcorper condimentum. Proin elementum, turpis cursus tincidunt faucibus, dui metus luctus dolor, nec malesuada leo nisl sit amet est.
+                                                </Text>
+
+                                                <Text>
+                                                    2:42 pm
+                                                </Text>
+
+
+                                            </VStack>
+
+                                        </VStack>
+
+                                    </VStack>
                                 </VStack>
                             </Box>
                         </VStack>
@@ -267,30 +280,44 @@ const GrievanceStatus = () => {
 
                             </Flex>
 
-                            <Box w="100%" h="90%">
-                                <HStack
-                                    px={10}
-                                    w="100%" h="100%" alignItems={'flex-end'} justifyContent={'flex-start'}>
-                                    <Link color={'green'}>
-                                        View replies <Tag colorScheme={'green'}>
-                                            +1
-                                        </Tag>
-                                    </Link>
-                                </HStack>
-                            </Box>
+
                         </Box>
                     </HStack>
                 </Box>
+
             </HStack>
+
         </Box>
     )
 
 
     return (
-        <Box w="100%" minH={'90vh'}>
-            {start}
-            {forward}
-            {end}
+        <Box w="100%" maxH={'90vh'} overflowY={'scroll'} overflowX={'hidden'}>
+            <Flex w="100%" h="100%" alignItems={'center'} justifyContent={'center'}>
+                <VStack py={5} w="85%" h="100%" alignItems={'center'} spacing={7}>
+                    {start}
+                    {forward}
+                    {end}
+                </VStack>
+            </Flex>
+
+            <Flex w="100%" h="15vh"
+                flexDirection={'column'}
+                alignItems={'center'} justifyContent={'center'}>
+
+                <Text fontWeight={600}>
+                    Satisfied with reply/s ?
+                </Text>
+
+                <HStack py={2}>
+                    <IconButton 
+                    colorScheme={'red'}
+                    icon={<FiThumbsDown />} />
+                    <IconButton
+                    colorScheme={'green'}
+                        icon={<FiThumbsUp />} />
+                </HStack>
+            </Flex>
         </Box>
     );
 }
