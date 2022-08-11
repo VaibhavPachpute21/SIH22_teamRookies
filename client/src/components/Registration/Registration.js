@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,getElementById} from 'react'
 import './../Login/Login.css'
 import { Box, Flex, Input, Icon, FormControl, SimpleGrid, GridItem, Heading, FormLabel, Textarea, Checkbox, Button, Image, Select, VStack, Text, InputGroup, InputLeftAddon } from '@chakra-ui/react';
 import { Link, useNavigate } from 'react-router-dom'
@@ -21,24 +21,24 @@ function Registration() {
       role: data.role,
       fullname: data.fName,
       committee: "CSGRC",
-      avatar: "link",
-      banner: "link",
       phone_number: data.phone,
       college_name: data.college,
       university: data.university,
-      district: "Palghar",
+      district: data.District,
       state: data.state,
+      gender:data.Gender,
       dob: data.DOB,
       course: data.course,
       enrollment: data.enrollment
     }
+    console.log(obj);
   }
 
 
   return (
     <Box className='Login-Background' minH={'max-content'} maxWidth={"100vw"} overflow={'hidden'} align="center">
       <Flex height="100%" align={'center'} width={"100%"} flexDirection={'row'}>
-        <Box w="40%" h="100%"
+        <Box w={["0%","40%","40%"]} h="100%" display={['none','block','block']}
         // bg="#5A4FCF"
         ><Flex
           flexDirection={'column'}
@@ -97,6 +97,26 @@ function Registration() {
                   </GridItem>
 
                   <GridItem>
+                    <FormLabel>Gender</FormLabel>
+                    <InputGroup size={'md'}>
+                      <InputLeftAddon bg="#5A4FCF" children={<AiOutlineUser color={'white'} />} />
+                      <Select type={'text'} name="Gender" id="Gender" placeholder='Select Gender'
+                        {...register('Gender', { required: { value: true, message: "Please choose Gender", } })}>
+
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Not to Say</option>
+                      </Select>
+                    </InputGroup>
+                    {errors.Gender && errors.Gender.message ? (
+                      <Box textAlign={'left'} fontSize={'12px'} py={1} maxH={'0px'} color={'red'}>
+                        {errors.Gender.message}
+                      </Box>
+                    ) : (null)
+                    }
+                  </GridItem>
+
+                  <GridItem>
                     <FormLabel>Phone No.</FormLabel>
                     <InputGroup>
                       <InputLeftAddon bg="#5A4FCF" children={<AiOutlinePhone color={'white'} />} />
@@ -139,6 +159,21 @@ function Registration() {
                     {errors.state && errors.state.message ? (
                       <Box textAlign={'left'} fontSize={'12px'} py={1} maxH={'0px'} color={'red'}>
                         {errors.state.message}
+                      </Box>
+                    ) : (null)
+                    }
+                  </GridItem>
+
+                  <GridItem>
+                    <FormLabel>District</FormLabel>
+                    <InputGroup size={'md'}>
+                      <InputLeftAddon bg="#5A4FCF" children={<AiOutlineUser color={'white'} />} />
+                      <Input type={'text'} name={"District"} id="District" placeholder='District'
+                        {...register('District', { required: { value: true, message: "District name is required!", } })} />
+                    </InputGroup >
+                    {errors.District && errors.District.message ? (
+                      <Box textAlign={'left'} fontSize={'12px'} py={1} maxH={'0px'} color={'red'}>
+                        {errors.District.message}
                       </Box>
                     ) : (null)
                     }
