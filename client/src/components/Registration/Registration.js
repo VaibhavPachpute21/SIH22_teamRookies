@@ -1,6 +1,8 @@
-import React, { useState,getElementById} from 'react'
+import React, { useState,getElementById, useEffect} from 'react'
 import './../Login/Login.css'
-import { Box, Flex, Input, Icon, FormControl, SimpleGrid, GridItem, Heading, FormLabel, Textarea, Checkbox, Button, Image, Select, VStack, Text, InputGroup, InputLeftAddon } from '@chakra-ui/react';
+import { Box, Flex, Input, Icon, FormControl, SimpleGrid, GridItem, Heading,
+  useToast,
+  FormLabel, Textarea, Checkbox, Button, Image, Select, VStack, Text, InputGroup, InputLeftAddon } from '@chakra-ui/react';
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form';
 import { MdEmail, MdSchool, MdDateRange, MdFormatListNumbered } from 'react-icons/md'
@@ -8,17 +10,18 @@ import { AiOutlineUser, AiOutlinePhone, AiOutlineLock } from 'react-icons/ai'
 import * as actions from '../../actions/user_actions'
 import {connect} from 'react-redux'
 
-function Registration() {
+function Registration(props) {
   const { register, handleSubmit, formState: { errors } } = useForm({ mode: 'onChange' });
-  
   const navigate = useNavigate()
 
+  const toast = useToast()
 
-  const HandleSubmit = (data) => {
+
+  const HandleSubmit = async (data) => {
     let obj = {
       email: data.email,
       password: data.pass,
-      role: data.role,
+      role: 1,
       fullname: data.fName,
       committee: "CSGRC",
       phone_number: data.phone,
@@ -31,8 +34,48 @@ function Registration() {
       course: data.course,
       enrollment: data.enrollment
     }
-    console.log(obj);
+    
+    try {
+      await props.RegisterUser(obj)      
+    } catch (error) {
+      console.log(error.message)
+    }
+
+
   }
+
+  useEffect(()=>{
+    if(props.data){
+      let alias = props.data
+      if(alias.userData){
+        let success = alias.userData?.success
+        if(success){
+          toast({
+            position: 'top',
+            render: () => (
+              <Box color='white' p={3} bg='green.500'>
+                Registration complete
+              </Box>
+            ),
+          })
+        }
+        else{
+          toast({
+            position: 'top',
+            render: () => (
+              <Box color='white' p={3} bg='red.500'>
+                Some error occured
+              </Box>
+            ),
+          })
+        }
+
+      }
+      
+    }
+  },[props.data])
+
+  console.log(props)
 
 
   return (
@@ -332,8 +375,8 @@ function Registration() {
 
 const mapStateToProps = (state) => {
   return{
-    data:state.userData
+    data:state.users
   }
 }
 
-export default connect(mapStateToProps,Registration)(Registration)
+export default connect(mapStateToProps,actions)(Registration)

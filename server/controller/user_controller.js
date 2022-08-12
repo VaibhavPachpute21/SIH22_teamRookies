@@ -4,13 +4,20 @@ exports.register = async (req, res, next) => {
     const { email, password, role, fullname, committee, avatar, banner, phone_number, college_name, university, district, state } = req.body;
 
     try {
-        const newUser = await User.create({
+        const user = await User.create({
             email, password, role, fullname, committee, avatar, banner, phone_number, college_name, university, district, state
         })
-        if (!newUser) {
+        if (!user) {
             res.status(200).json({ success: false, message: "Some error" })
+            return;
         }
-        sendToken(newUser, 201, res);
+        const token = await user.getSignedToken()
+
+        res.status(201).json({
+            success: true,
+            token
+        })
+        
 
     } catch (error) {
         res.status(500).json({
@@ -45,7 +52,12 @@ exports.login = async (req, res, next) => {
         }
 
 
-        sendToken(user, 201, res);
+        const token = await user.getSignedToken()
+
+        res.status(201).json({
+            success: true,
+            token
+        })
 
     } catch (error) {
         res.status(400).json({ success: false, message: error.message })
@@ -98,11 +110,3 @@ exports.update = async (req, res, next) => {
 }
 
 
-const sendToken = async (user, statusCode, res) => {
-    const token = await user.getSignedToken()
-
-    res.status(statusCode).json({
-        success: true,
-        token
-    })
-}

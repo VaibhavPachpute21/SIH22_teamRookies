@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
             /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
             "Please provide a valid email"
         ],
-        required:true
+        required: true
     },
     password: {
         type: String,
@@ -21,57 +21,49 @@ const userSchema = new mongoose.Schema({
     },
     role: {
         type: Number,
-        required:true
+        required: true
     },
     fullname: {
         type: String,
         maxlength: 20,
-        required:true
+        required: true
     },
     committee: {
         type: String,
-        required:true
+        required: true
     },
     avatar: {
         type: String,
         default: "Link",
-        required:true
+        required: true
     },
     banner: {
         type: String,
         default: "Link"
     },
     phone_number: {
-        type: String,
-        required:true
+        type: String
     },
     college_name: {
-        type: String,
-        required:true
+        type: String
     },
     university: {
-        type: String,
-        required:true
+        type: String
     },
     district: {
-        type: String,
-        required:true
+        type: String
     },
     state: {
-        type: String,
-        required:true
+        type: String
     },
-    dob:{
-        type:String,
-        required:true
+    dob: {
+        type: String
     },
-    course:{
-        type:String,
-        required:true
+    course: {
+        type: String
     },
-    enrollment:{
-        type:Number,
-        required:true
+    enrollment: {
+        type: Number
     }
 },
     {
