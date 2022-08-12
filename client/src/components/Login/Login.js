@@ -13,7 +13,7 @@ import { RiLockPasswordFill } from 'react-icons/ri'
 import { MdEmail } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import * as actions from '../../actions/user_actions'
 
 
@@ -36,7 +36,7 @@ function Login(props) {
 
   const navigate = useNavigate()
 
-  
+
   useEffect(() => {
     if (errors.mail && errors.mail.message) {
       setEmailRed("red")
@@ -58,17 +58,17 @@ function Login(props) {
 
   const HandleLoginSubmit = async (data) => {
     let obj = {
-      email:data.mail,
-      password:data.password
+      email: data.mail,
+      password: data.password
     }
- 
+
     try {
-      await props.LoginUser(obj) 
+      await props.LoginUser(obj)
     } catch (error) {
       SetError(error.message)
     }
 
-    
+
   }
 
   useEffect(() => {
@@ -86,10 +86,9 @@ function Login(props) {
               </Box>
             ),
           })
-          
+
         }
         else {
-          
           toast({
             position: 'top',
             render: () => (
@@ -105,8 +104,8 @@ function Login(props) {
     }
   }, [props.data])
 
-  useEffect(()=>{
-    if(error.length>0){
+  useEffect(() => {
+    if (error.length > 0) {
       toast({
         position: 'top',
         render: () => (
@@ -116,8 +115,8 @@ function Login(props) {
         ),
       })
     }
-  },[error,error.length,error.message])
- 
+  }, [error, error.length, error.message])
+
 
   return (
     <Box
@@ -229,7 +228,7 @@ function Login(props) {
                           id="password"
                           type="password"
                           placeholder="password"
-                          {...register('password', { required: "Password is required", minLength:'' })}
+                          {...register('password', { required: "Password is required", minLength: '' })}
                         />
                       </InputGroup>
                       {
@@ -267,7 +266,7 @@ function Login(props) {
                         <Divider />
                       </HStack>
                     </GridItem>
-                    
+
 
 
                     <GridItem w="100%">
@@ -319,9 +318,9 @@ function Login(props) {
 }
 
 const mapStateToProps = (state) => {
-  return{
-    data:state.users
+  return {
+    data: state.users
   }
 }
- 
-export default connect(mapStateToProps,actions)(Login)
+
+export default connect(mapStateToProps, actions)(Login)

@@ -22,3 +22,23 @@ export async function LoginUser(data){
     }
 
 }
+
+
+export async function UserInfo(id){
+    const request = await axios.get(`http://localhost:3001/api/user/get-user/${id}`)
+    .then(response => response.data)
+    return{
+        type:"user_info",
+        payload:request
+    }
+}
+
+
+export async function UpdateUser(id,data){
+    const request = await axios.post(`http://localhost:3001/api/user/update/${id}`,data)
+    .then(response => response.data)
+    return{
+        type:"user_update",
+        payload:request
+    }
+}

@@ -446,7 +446,7 @@ const DashboardTracker = () => {
 
                                             <Box w="100%" h="5%">
                                                 <Button 
-                                                onClick={()=>{nav('')}}
+                                                onClick={()=>{nav('/TrackGrievance/4904285425')}}
                                                 bg="#5A4FCF"
                                                 color="white"
                                                 size="sm">

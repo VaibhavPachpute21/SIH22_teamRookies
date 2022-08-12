@@ -14,7 +14,7 @@ import { connect } from 'react-redux'
 
 function Registration(props) {
   const { register, handleSubmit, formState: { errors } } = useForm({ mode: 'onChange' });
-  const navigate = useNavigate()
+  
 
   const toast = useToast()
 
@@ -42,8 +42,6 @@ function Registration(props) {
     } catch (error) {
       console.log(error.message)
     }
-
-
   }
   
 
