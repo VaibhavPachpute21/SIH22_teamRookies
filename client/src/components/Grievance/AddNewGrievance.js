@@ -1,21 +1,37 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { Box, Button, Flex, Input, Text, Select, FormControl,useToast, Textarea } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form';
 import {connect} from 'react-redux';
-import * as actions from '../../actions/user_actions'
+import * as actions from '../../actions/grievant_actions'
+import { useNavigate } from 'react-router-dom';
 
  function AddNewGrievance(props) {
     const { register, handleSubmit, formState: { errors } } = useForm({ mode: 'onChange' });
 
     const [Files,SetFiles] = useState([])
     const toast = useToast()
+    const [error,SetError] = useState('')
+    const navigate = useNavigate()
 
-
-
-    const HandleSubmit = (data) => {
+    const HandleSubmit = async (data) => {
+        console.log(data)
         let obj = {
-            
+            grievant_id:"62f5fe762ed9a94f37734e91",
+            grievance_nature:data.nature,
+            principal_name:data.pName,
+            grievance_title:data.title,
+            grievance_description:data.discription,
+            grievant_university:"mu",
+            imgs:Files,
+
         }
+
+        try {
+            await props.AddGrievance(obj)
+        } catch (error) {
+            SetError(error.message)
+        } 
+
     }
 
     const HandleFileSubmit = (e) => {
@@ -37,8 +53,41 @@ import * as actions from '../../actions/user_actions'
         }
     }
 
+    
+  useEffect(() => {
+    if (props.data) {
+      let alias = props.data
+      if (alias.grievanceData) {
+        let success = alias.grievanceData?.success
+        if (success) {
+          toast({
+            position: 'top',
+            render: () => (
+              <Box color='white' p={3} bg='green.500'>
+                Grievance submitted
+              </Box>
+            ),
+          })
+          navigate('/TrackGrievance/34-20')
+        }
+        else {
+          toast({
+            position: 'top',
+            render: () => (
+              <Box color='white' p={3} bg='red.500'>
+                {error}
+              </Box>
+            ),
+          })
+        }
+
+      }
+
+    }
+  }, [props.data])
 
 
+    
 
     return (
         <Flex w='100vw' h='100%' bg='grey.200' alignItems={'center'} justifyContent={'center'} padding={2}
@@ -179,7 +228,7 @@ import * as actions from '../../actions/user_actions'
 
 const mapStateToProps = (state) => {
     return {
-        data:state.users
+        data:state.grievance
     }
 }
 
