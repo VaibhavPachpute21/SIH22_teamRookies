@@ -22,6 +22,12 @@ const forwardSchema = new mongoose.Schema({
     ],
     created_date:{
         type:Date
+    },
+    officer_avatar:{
+        type:String
+    },
+    officer_university:{
+        type:String
     }
 },{
     timestamps:true

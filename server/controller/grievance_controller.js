@@ -26,6 +26,8 @@ exports.CreateGrievance = async (req, res, next) => {
             previous_reciever: "None",
             current_reciever: firstOfficerReciever._id,
             grievance_id: newGrievance._id,
+            officer_avatar:firstOfficerReciever.avatar,
+            officer_university:firstOfficerReciever.university
         })
 
         res.status(200).json({

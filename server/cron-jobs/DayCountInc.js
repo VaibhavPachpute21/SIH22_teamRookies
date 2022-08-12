@@ -6,7 +6,7 @@ const { Officer } = require("../models/officer_model")
 
 exports.IncDayCount = async (req, res, next) => {
     try {
-        const Lt15 = await Grievance.updateMany({ satisfied:false ,day_counter: { $lt: 15 } },
+        const Lt15 = await Grievance.updateMany({ satisfied: false, day_counter: { $lt: 15 } },
             { $inc: { day_counter: 1 } })
 
         if (!Lt15) {
@@ -32,9 +32,11 @@ exports.ResetAndForward = async (req, res, next) => {
                     await Grievance.findOneAndUpdate({ reciever_id: currentOfficer._id }, { $set: { reciever_id: nextOfficer[0]._id } })
 
                     await Forward.create({
-                        previous_reciever:currentOfficer._id,
-                        current_reciever:nextOfficer[0]._id,
-                        grievance_id:doc._id,
+                        previous_reciever: currentOfficer._id,
+                        current_reciever: nextOfficer[0]._id,
+                        grievance_id: doc._id,
+                        officer_avatar: nextOfficer[0].avatar,
+                        officer_university: nextOfficer[0].university
                     })
                 } catch (error) {
                     /// Some error handling
