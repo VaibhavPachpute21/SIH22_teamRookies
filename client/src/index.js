@@ -10,15 +10,17 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import Contact from "./components/Contact/Contact";
 import Solved from "./components/Solved/Solved";
 import List from "./components/List/List";
-import Temp from "./components/Temp/temp";
 import Grievance from "./components/Grievance/GrievancePdf"
 import AddNewGrievance from "./components/Grievance/AddNewGrievance";
 import GrievanceStatus from "./components/GrievanceStatus";
+import AddInstituteGrievance from "./components/InstitutePages/addInstituteGrievance"
+import InstituteProfile from "./components/InstitutePages/instituteProfile"
 import { StepsStyleConfig } from 'chakra-ui-steps'
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux'
 import promiseMiddleware from 'redux-promise'
 import reducers from './reducers/index'
+import Test from "./components/Test";
 const createStoreWithMiddleware = applyMiddleware(promiseMiddleware)(createStore)
 
 const CustomSteps = {
@@ -66,11 +68,13 @@ const App = () => {
             <Route path="/Dashboard" element={<Dashboard />} />
             <Route path="/List" element={<List />} />
             <Route path="/Solved" element={<Solved />} />
-            <Route path="temp" element={<Temp />} />
+            <Route path="/test" element={<Test />} />
             <Route path="/Contact" element={<Contact />} />
             <Route path="/Grievance/:id" element={<Grievance />} />
             <Route path="/AddNewGrievance" element={<AddNewGrievance />} />
             <Route path="/TrackGrievance/:id" element={<GrievanceStatus />} />
+            <Route path="/AddInstituteGrievance" element={<AddInstituteGrievance/>}/>
+            <Route path="/InstituteProfile" element={<InstituteProfile/>}/>
           </Routes>
         </Router>
       </Layout>

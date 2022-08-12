@@ -6,7 +6,7 @@ import {
   FormControl,
   GridItem, Input, Flex, FormLabel, Button,
   InputLeftAddon, InputGroup, useToast,
-  Link, HStack, Icon, Text, VStack, Divider, FormErrorMessage
+  Link, HStack, Icon, Text, VStack, Divider, FormErrorMessage, Select
 } from '@chakra-ui/react';
 import './Login.css'
 import { RiLockPasswordFill } from 'react-icons/ri'
@@ -14,6 +14,7 @@ import { MdEmail } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { connect } from 'react-redux'
+import { AiOutlineUser } from 'react-icons/ai';
 import * as actions from '../../actions/user_actions'
 
 
@@ -246,6 +247,28 @@ function Login(props) {
                       }
                     </GridItem>
 
+                    <GridItem w={"30%"}>
+                    <FormLabel>Role</FormLabel>
+                    <InputGroup size={'md'}>
+                      <InputLeftAddon bg="#5A4FCF" children={<AiOutlineUser color={'white'} />} />
+                      <Select variant={'flushed'} type={'text'} name="role" id="role" placeholder='Select Role' px="2"
+                        {...register('role', { required: { value: true, message: "User role is required!", } })}>
+
+                        <option>Student/Teacher</option>
+                        <option>UGC Admin</option>
+                        <option>University</option>
+                        <option>Nodal Officer</option>
+                        <option>Other</option>
+                      </Select>
+                    </InputGroup>
+                    {errors.role && errors.role.message ? (
+                      <Box textAlign={'left'} fontSize={'12px'} py={1} maxH={'0px'} color={'red'}>
+                        {errors.role.message}
+                      </Box>
+                    ) : (null)
+                    }
+                  </GridItem>
+
                     <GridItem py={5}>
                       <Button
                         w="100%"
@@ -256,18 +279,6 @@ function Login(props) {
                         Login
                       </Button>
                     </GridItem>
-
-                    <GridItem>
-                      <HStack>
-                        <Divider />
-                        <Text fontWeight={600} opacity={.6} w="4%">
-                          or
-                        </Text>
-                        <Divider />
-                      </HStack>
-                    </GridItem>
-
-
 
                     <GridItem w="100%">
                       <Flex w="100%" justifyContent={'center'}>
