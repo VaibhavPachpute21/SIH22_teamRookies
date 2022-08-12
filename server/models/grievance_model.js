@@ -28,7 +28,6 @@ const grievanceSchema = new mongoose.Schema({
     },
     grievant_university: {
         type: String,
-
     },
     imgs: {
         type: Array

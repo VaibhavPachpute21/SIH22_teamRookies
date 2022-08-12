@@ -4,17 +4,22 @@ import { FiThumbsUp } from 'react-icons/fi'
 import { FiThumbsDown } from 'react-icons/fi'
 import * as actions from '../../actions/grievant_actions'
 import { connect } from 'react-redux'
+import { useLocation } from "react-router-dom";
+
 
 const GrievanceStatus = (props) => {
 
     const [error, Seterror] = useState('')
+    const {pathname} = useLocation()
+    
+
 
     const [forwards, setForwards] = useState([])
 
     useEffect(() => {
         const GetAllForwards = async () => {
             try {
-                await props.GetForwards('62f674d344e7538753634249')
+                await props.GetForwards(pathname?.split("/")[2])
             } catch (error) {
                 Seterror(error.message)
             }

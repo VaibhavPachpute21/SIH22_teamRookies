@@ -26,7 +26,7 @@ exports.ResetAndForward = async (req, res, next) => {
         someData?.forEach(async (doc) => {
             const currentOfficer = await Officer.findById(doc.reciever_id)
             if (currentOfficer) {
-                const nextOfficer = await Officer.find({ "university_nodal_no": currentOfficer.university_nodal_no + 1 })
+                const nextOfficer = await Officer.find({ "university_nodal_no": currentOfficer.university_nodal_no + 1 ,"university":currentOfficer.university})
 
                 try {
                     await Grievance.findOneAndUpdate({ reciever_id: currentOfficer._id }, { $set: { reciever_id: nextOfficer[0]._id } })

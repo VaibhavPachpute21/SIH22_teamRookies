@@ -2,7 +2,7 @@ const { Grievance } = require('../models/grievance_model')
 const { Officer } = require("../models/officer_model")
 const { Forward } = require("../models/forward_model")
 exports.CreateGrievance = async (req, res, next) => {
-    const { grievant_id, reciever_id, grievant_university, grievance_info, imgs } = req.body
+    const { grievant_id, reciever_id, grievant_university,grievance_nature,principal_name,grievance_title,grievance_description,imgs } = req.body
 
     try {
         const firstOfficerReciever = await Officer.findOne({ "university": grievant_university }).sort('university_nodal_no')
@@ -11,7 +11,9 @@ exports.CreateGrievance = async (req, res, next) => {
         }
 
         const newGrievance = await Grievance.create({
-            grievant_id: grievant_id, reciever_id: firstOfficerReciever._id, grievant_university: grievant_university, grievance_info: grievance_info, imgs: imgs
+            grievant_id: grievant_id, reciever_id: firstOfficerReciever._id,
+            grievant_university: grievant_university, imgs: imgs,
+            grievance_nature:grievance_nature,principal_name:principal_name,grievance_title:grievance_title,grievance_description:grievance_description
         })
 
 
@@ -36,6 +38,29 @@ exports.CreateGrievance = async (req, res, next) => {
         })
     } catch (error) {
         res.status(200).send(error.message)
+    }
+}
+
+exports.GetAllGrievances = async (req,res,next) => {
+    const grievant_id = req.params.id
+    
+    try {
+        const allGrievances = await Grievance.find({"grievant_id":grievant_id})
+        if(!allGrievances){
+            res.status(400).json({
+                success:false,
+                message:"No grievances yet"
+            })
+        }
+        res.status(200).json({
+            success:true,
+            allGrievances
+        })
+    } catch (error) {
+        res.status(400).json({
+            success:false,
+            message:error.message
+        })
     }
 }
 
@@ -86,4 +111,5 @@ exports.DeleteGrievance = async (req, res, next) => {
         res.status(400).send(error.message)
     }
 }
+
 

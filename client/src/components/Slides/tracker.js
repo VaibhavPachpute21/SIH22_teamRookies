@@ -1,11 +1,18 @@
 import { Box, VStack, HStack, IconButton, Flex, Text, Avatar, Icon, FormLabel, Input, Checkbox, Link, Button } from '@chakra-ui/react'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Chart from "react-apexcharts";
-import {useNavigate} from 'react-router-dom' 
+import { useNavigate } from 'react-router-dom'
 import { GrFormAttachment } from 'react-icons/gr'
-const DashboardTracker = () => {
+import { connect } from 'react-redux'
+import * as actions from '../../actions/grievant_actions'
+
+
+
+const DashboardTracker = (props) => {
 
     const [filterTabs, setfilterTabs] = useState([])
+    const [error, SetError] = useState('')
+    const [Grievances, SetGrievances] = useState([])
 
     const chart = {
         options: {
@@ -110,6 +117,34 @@ const DashboardTracker = () => {
         "Other",
     ]
 
+    const nav = useNavigate()
+
+    useEffect(() => {
+        const GetAllGrievances = async () => {
+            try {
+                await props.GetAllGrievances('62f1ff9f9aa66c7b91065566')
+            } catch (error) {
+                SetError(error.message)
+            }
+        }
+        GetAllGrievances()
+    }, [])
+
+
+    useEffect(() => {
+        if (props.data) {
+            let d = props.data
+            if (d.grievanceData) {
+                let f = d.grievanceData
+                if (f) {
+                    SetGrievances(f.allGrievances)
+                }
+            }
+        }
+    }, [props.data])
+
+    console.log(props.data)
+
 
     const setTabsArray = (a, b) => {
         let cloneArray = [...filterTabs]
@@ -127,7 +162,7 @@ const DashboardTracker = () => {
         }
 
     }
-    const nav = useNavigate()
+
 
 
     return (
@@ -141,17 +176,17 @@ const DashboardTracker = () => {
                         w="100%" h="90%">
                         {
                             filterTabs?.map((item, i) => (
-                                <Box 
-                                key={i}
-                                w="20%" h="100%" borderRadius={'2xl'}>
+                                <Box
+                                    key={i}
+                                    w="20%" h="100%" borderRadius={'2xl'}>
                                     <Flex w="100%" h="100%" alignItems={'center'} justifyContent={'center'}>
                                         <Text
-                                        px={3}
-                                        color={'white'}
-                                        fontWeight={600}
-                                        borderRadius={'2xl'}
-                                        bg="#5A4FCF"
-                                        noOfLines={1}>
+                                            px={3}
+                                            color={'white'}
+                                            fontWeight={600}
+                                            borderRadius={'2xl'}
+                                            bg="#5A4FCF"
+                                            noOfLines={1}>
                                             {item}
                                         </Text>
                                     </Flex>
@@ -302,11 +337,12 @@ const DashboardTracker = () => {
                     h="100%" >
                     <VStack
                         maxH={'80vh'}
+                        overflowY={'hidden'}
                         overflow={'scroll'}
                         w="100%">
                         {
-                            FakeGrievances?.map((item, i) => (
-                                <HStack w="100%" minH={"70vh"}>
+                            Grievances?.map((item, i) => (
+                                <HStack key={i} w="100%" minH={"75vh"}>
                                     <Box
                                         w="25%" h="70vh">
                                         <VStack
@@ -315,8 +351,10 @@ const DashboardTracker = () => {
                                             <Box w="100%" h="10%">
                                                 <HStack w="100%" h="100%">
 
-                                                    <Text fontWeight={600} fontSize={'lg'}>
-                                                        _ddkffj094j3fk
+                                                    <Text
+                                                        w="80%"
+                                                        fontWeight={600} fontSize={'sm'}>
+                                                        {item._id}
                                                     </Text>
                                                 </HStack>
                                             </Box>
@@ -334,9 +372,9 @@ const DashboardTracker = () => {
                                                         <Text
                                                             w="90%"
                                                             fontWeight={600}
-                                                            fontSize={'md'}
+                                                            fontSize={'sm'}
                                                         >
-                                                            {item.grievance_reciever}
+                                                            {item.reciever_id}
                                                         </Text>
                                                     </Box>
                                                 </VStack>
@@ -355,7 +393,11 @@ const DashboardTracker = () => {
                                                             fontWeight={600}
                                                             fontSize={'md'}
                                                         >
-                                                            {item.grievance_status}
+                                                            {
+                                                                item.satisfied ? (
+                                                                    "Solved"
+                                                                ) : ("Pending")
+                                                            }
                                                         </Text>
                                                     </Box>
                                                 </VStack>
@@ -387,7 +429,9 @@ const DashboardTracker = () => {
                                                         <Text
                                                             opacity={.8}
                                                             fontWeight={700} color={'#5A4FCF'}>
-                                                            3 Attachments
+                                                            {
+                                                                item.imgs?.length
+                                                            } Attachments
                                                         </Text>
                                                     </Box>
 
@@ -409,9 +453,9 @@ const DashboardTracker = () => {
                                                             Submission Date
                                                         </Text>
                                                     </Box>
-                                                    <Box w="20%">
-                                                        <Text>
-                                                            {item.grievance_date}
+                                                    <Box w="40%">
+                                                        <Text w="100%">
+                                                            {item.createdAt?.split('T')[0]}
                                                         </Text>
                                                     </Box>
                                                 </HStack>
@@ -440,20 +484,20 @@ const DashboardTracker = () => {
                                                     fontFamily={'monospace'}
                                                     fontSize={'md'}
                                                     fontWeight={500}>
-                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer efficitur aliquam dolor, id rhoncus erat fringilla vel. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam velit turpis, efficitur quis sem at, dictum gravida metus. Phasellus quam ligula, dignissim a fringilla vitae, cursus id arcu. Nulla a suscipit magna, in viverra nunc. Nam facilisis ligula sed nunc faucibus, sed rhoncus ante accumsan. Vestibulum tristique blandit ex, vitae sodales metus dictum at. Quisque ante tellus, tincidunt quis hendrerit vel, vulputate ullamcorper quam. Praesent eleifend nisi ac massa maximus, quis consequat justo scelerisque. Mauris at elit vel quam scelerisque tempor vitae ut velit. Sed sollicitudin lectus sed sapien scelerisque accumsan. Duis eu enim id neque efficitur facilisis nec sit amet mauris. Nam laoreet augue vel accumsan interdum. Praesent vel fermentum turpis. Nunc ultricies turpis lorem.
+                                                    {item.grievance_description}
                                                 </Text>
                                             </Box>
 
                                             <Box w="100%" h="5%">
-                                                <Button 
-                                                onClick={()=>{nav('/TrackGrievance/4904285425')}}
-                                                bg="#5A4FCF"
-                                                color="white"
-                                                size="sm">
+                                                <Button
+                                                    onClick={() => { nav(`/TrackGrievance/${item._id}`, { state:{url:item._id} }) }}
+                                                    bg="#5A4FCF"
+                                                    color="white"
+                                                    size="sm">
                                                     Track your grievance
                                                 </Button>
                                             </Box>
-                                            
+
                                         </VStack>
                                     </Box>
                                 </HStack>
@@ -466,4 +510,10 @@ const DashboardTracker = () => {
     );
 }
 
-export default DashboardTracker;
+const mapStateToProps = (state) => {
+    return {
+        data: state.grievance
+    }
+}
+
+export default connect(mapStateToProps, actions)(DashboardTracker);

@@ -6,6 +6,9 @@ export default function grievance_reducer(state={},action){
         case "get_forwards":
             return {...state,grievanceData:action.payload}
         
+        case "get_grievances":
+            return {...state,grievanceData:action.payload}
+        
         default:
             return state
     }

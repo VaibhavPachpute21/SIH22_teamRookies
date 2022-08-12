@@ -20,3 +20,13 @@ export async function GetForwards(id){
         payload:request
     }
 }
+
+export async function GetAllGrievances(id){
+    const request = await axios.get(`http://localhost:3001/api/grievance/get-grievances/${id}`)
+    .then(response => response.data)
+
+    return {
+        type:"get_grievances",
+        payload:request
+    }
+}
