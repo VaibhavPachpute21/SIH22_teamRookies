@@ -33,13 +33,15 @@ app.use("/api/grievance",require("./routes/grievance_routes"))
 
 app.use("/api/officer",require("./routes/officer_routes"))
 
+app.use("/api/forwards",require("./routes/forward_route"))
+
 
 
 // Cron jobs
 
  cron.scheduleJob("*/2 * * * * *",()=>{
-  /*   IncDayCount(),
-    ResetAndForward()  */   
+   /*  IncDayCount(),
+    ResetAndForward()   */  
 })
  
 

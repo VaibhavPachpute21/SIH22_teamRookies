@@ -9,8 +9,17 @@ const forwardSchema = new mongoose.Schema({
     },
     grievance_id:{
         type:String
-        
     },
+    replies:[
+        {
+            message:{
+                type:String
+            },
+            DateTime:{
+                type:String
+            }
+        }
+    ],
     created_date:{
         type:Date
     }
