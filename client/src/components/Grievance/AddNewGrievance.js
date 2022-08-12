@@ -1,13 +1,43 @@
-import React from 'react'
-import { Box, Button, Flex, Input, Text, Select, FormControl, Textarea } from '@chakra-ui/react'
+import React, { useState } from 'react'
+import { Box, Button, Flex, Input, Text, Select, FormControl,useToast, Textarea } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form';
+import {connect} from 'react-redux';
+import * as actions from '../../actions/user_actions'
 
-export default function AddNewGrievance() {
+ function AddNewGrievance(props) {
     const { register, handleSubmit, formState: { errors } } = useForm({ mode: 'onChange' });
 
+    const [Files,SetFiles] = useState([])
+    const toast = useToast()
+
+
+
     const HandleSubmit = (data) => {
-        console.log(data);
+        let obj = {
+            
+        }
     }
+
+    const HandleFileSubmit = (e) => {
+        let file = e.target.files[0]
+        if(Files.length < 2){
+            let cloneArr = [...Files]
+            cloneArr.push(file)
+            SetFiles(cloneArr)
+        }
+        else{
+            toast({
+                position: 'top',
+                render: () => (
+                  <Box color='white' p={3} bg='red.500'>
+                    Max upload exceeded
+                  </Box>
+                ),
+              })
+        }
+    }
+
+
 
 
     return (
@@ -130,7 +160,9 @@ export default function AddNewGrievance() {
 
                         <Box w={'100%'} bg='white' py={3} px={[2, 2, 10, 10]} >
                             <Text fontSize={'18px'} pb={2} paddingLeft={0}>Please upload image related to grievance if any:</Text>
-                            <input type={'file'}></input>
+                            <Input type={'file'} 
+                            onChange={(e)=>{HandleFileSubmit(e)}}
+                            accept={'image/png, image/jpeg'}/>
                         </Box>
 
                         <Box alignItems={'center'} textAlign='center' w={'100%'} bg='white' py={[2, 2, 10, 10]}>
@@ -144,3 +176,12 @@ export default function AddNewGrievance() {
         </Flex>
     )
 }
+
+const mapStateToProps = (state) => {
+    return {
+        data:state.users
+    }
+}
+
+
+export default connect(mapStateToProps,actions)(AddNewGrievance)

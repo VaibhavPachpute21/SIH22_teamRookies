@@ -10,7 +10,19 @@ const grievanceSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    grievance_info:{
+    grievance_nature:{
+        type:String,
+        required:true
+    },
+    principal_name:{
+        type:String,
+        required:true,
+    },
+    grievance_title:{
+        type:String,
+        required:true
+    },
+    grievance_description:{
         type:String,
         required:true
     },

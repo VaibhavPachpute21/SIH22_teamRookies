@@ -37,7 +37,7 @@ exports.ResetAndForward = async (req, res, next) => {
                         grievance_id:doc._id,
                     })
                 } catch (error) {
-                    
+                    /// Some error handling
                 }
 
 
