@@ -1,14 +1,16 @@
-import React, { useState,getElementById, useEffect} from 'react'
+import React, { useState, getElementById, useEffect } from 'react'
 import './../Login/Login.css'
-import { Box, Flex, Input, Icon, FormControl, SimpleGrid, GridItem, Heading,
+import {
+  Box, Flex, Input, Icon, FormControl, SimpleGrid, GridItem, Heading,
   useToast,
-  FormLabel, Textarea, Checkbox, Button, Image, Select, VStack, Text, InputGroup, InputLeftAddon } from '@chakra-ui/react';
+  FormLabel, Textarea, Checkbox, Button, Image, Select, VStack, Text, InputGroup, InputLeftAddon
+} from '@chakra-ui/react';
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form';
 import { MdEmail, MdSchool, MdDateRange, MdFormatListNumbered } from 'react-icons/md'
 import { AiOutlineUser, AiOutlinePhone, AiOutlineLock } from 'react-icons/ai'
 import * as actions from '../../actions/user_actions'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 
 function Registration(props) {
   const { register, handleSubmit, formState: { errors } } = useForm({ mode: 'onChange' });
@@ -29,27 +31,28 @@ function Registration(props) {
       university: data.university,
       district: data.District,
       state: data.state,
-      gender:data.Gender,
+      gender: data.Gender,
       dob: data.DOB,
       course: data.course,
       enrollment: data.enrollment
     }
-    
+
     try {
-      await props.RegisterUser(obj)      
+      await props.RegisterUser(obj)
     } catch (error) {
       console.log(error.message)
     }
 
 
   }
+  
 
-  useEffect(()=>{
-    if(props.data){
+  useEffect(() => {
+    if (props.data) {
       let alias = props.data
-      if(alias.userData){
+      if (alias.userData) {
         let success = alias.userData?.success
-        if(success){
+        if (success) {
           toast({
             position: 'top',
             render: () => (
@@ -58,8 +61,9 @@ function Registration(props) {
               </Box>
             ),
           })
+          
         }
-        else{
+        else {
           toast({
             position: 'top',
             render: () => (
@@ -71,17 +75,16 @@ function Registration(props) {
         }
 
       }
-      
-    }
-  },[props.data])
 
-  console.log(props)
+    }
+  }, [props.data])
+
 
 
   return (
     <Box className='Login-Background' minH={'max-content'} maxWidth={"100vw"} overflow={'hidden'} align="center">
       <Flex height="100%" align={'center'} width={"100%"} flexDirection={'row'}>
-        <Box w={["0%","40%","40%"]} h="100%" display={['none','block','block']}
+        <Box w={["0%", "40%", "40%"]} h="100%" display={['none', 'block', 'block']}
         // bg="#5A4FCF"
         ><Flex
           flexDirection={'column'}
@@ -374,9 +377,9 @@ function Registration(props) {
 }
 
 const mapStateToProps = (state) => {
-  return{
-    data:state.users
+  return {
+    data: state.users
   }
 }
 
-export default connect(mapStateToProps,actions)(Registration)
+export default connect(mapStateToProps, actions)(Registration)

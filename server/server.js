@@ -38,8 +38,8 @@ app.use("/api/officer",require("./routes/officer_routes"))
 // Cron jobs
 
  cron.scheduleJob("*/2 * * * * *",()=>{
-    IncDayCount(),
-    ResetAndForward()    
+  /*   IncDayCount(),
+    ResetAndForward()  */   
 })
  
 

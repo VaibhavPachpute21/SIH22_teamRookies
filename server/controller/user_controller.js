@@ -47,7 +47,7 @@ exports.login = async (req, res, next) => {
 
         const matched = await user.comparePassword(password)
         if (!matched) {
-            res.status(404).json({ success: false, message: "Incorrect username or password" })
+            res.status(200).json({ success: false, message: "Incorrect username or password" })
             return;
         }
 

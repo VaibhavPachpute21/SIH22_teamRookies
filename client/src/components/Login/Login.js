@@ -5,7 +5,7 @@ import {
   SimpleGrid,
   FormControl,
   GridItem, Input, Flex, FormLabel, Button,
-  InputLeftAddon, InputGroup,
+  InputLeftAddon, InputGroup, useToast,
   Link, HStack, Icon, Text, VStack, Divider, FormErrorMessage
 } from '@chakra-ui/react';
 import './Login.css'
@@ -13,13 +13,18 @@ import { RiLockPasswordFill } from 'react-icons/ri'
 import { MdEmail } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
+import {connect} from 'react-redux'
+import * as actions from '../../actions/user_actions'
 
 
-export default function Login() {
+function Login(props) {
 
   const [emailRed, setEmailRed] = useState("black")
   const [passwordRed, setPasswordRed] = useState("black")
-  
+  const [error, SetError] = useState('')
+
+  const toast = useToast()
+
   const {
     handleSubmit,
     register,
@@ -51,9 +56,68 @@ export default function Login() {
   }, [errors.password])
 
 
-  const AddFakeUser = () => {
+  const HandleLoginSubmit = async (data) => {
+    let obj = {
+      email:data.mail,
+      password:data.password
+    }
+ 
+    try {
+      await props.LoginUser(obj) 
+    } catch (error) {
+      SetError(error.message)
+    }
 
+    
   }
+
+  useEffect(() => {
+    if (props.data) {
+      let alias = props.data
+      if (alias.userData) {
+        let success = alias.userData?.success
+        let errr = alias.userData?.message
+        if (success) {
+          toast({
+            position: 'top',
+            render: () => (
+              <Box color='white' p={3} bg='green.500'>
+                Login complete
+              </Box>
+            ),
+          })
+          
+        }
+        else {
+          
+          toast({
+            position: 'top',
+            render: () => (
+              <Box color='white' p={3} bg='red.500'>
+                {errr}
+              </Box>
+            ),
+          })
+        }
+
+      }
+
+    }
+  }, [props.data])
+
+  useEffect(()=>{
+    if(error.length>0){
+      toast({
+        position: 'top',
+        render: () => (
+          <Box color='white' p={3} bg='red.500'>
+            {error.message}
+          </Box>
+        ),
+      })
+    }
+  },[error,error.length,error.message])
+ 
 
   return (
     <Box
@@ -101,8 +165,7 @@ export default function Login() {
               </VStack>
             </Box>
             <Box py={8} w="80%" h="70%">
-              <form className='Login-Form'
-              >
+              <form className='Login-Form' onSubmit={handleSubmit(HandleLoginSubmit)}>
 
                 <FormControl w="80%">
                   <SimpleGrid spacing={10} columns={'1'} rows={5}>
@@ -254,3 +317,11 @@ export default function Login() {
     </Box>
   )
 }
+
+const mapStateToProps = (state) => {
+  return{
+    data:state.users
+  }
+}
+ 
+export default connect(mapStateToProps,actions)(Login)
