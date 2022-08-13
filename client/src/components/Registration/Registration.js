@@ -360,7 +360,10 @@ function Registration(props) {
                   </Box>
                 ) : (null)
                 }
-                <Box marginTop={5}><span><input type='checkbox' /> I declare that all the above mentioned information is correct</span></Box>
+                {/* <Box marginTop={5}>
+                  <span><input type='checkbox' /> I declare that all the above mentioned information is correct</span>
+                </Box>
+                 */}
                 <Button
                   type="submit"
                   marginTop={5}>Register</Button>

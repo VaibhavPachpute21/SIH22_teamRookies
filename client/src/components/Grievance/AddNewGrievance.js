@@ -1,28 +1,28 @@
-import React, { useState,useEffect } from 'react'
-import { Box, Button, Flex, Input, Text, Select, FormControl,useToast, Textarea } from '@chakra-ui/react'
+import React, { useState, useEffect } from 'react'
+import { Box, Button, Flex, Input, Text, Select, FormControl, useToast, Textarea } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import * as actions from '../../actions/grievant_actions'
 import { useNavigate } from 'react-router-dom';
 
- function AddNewGrievance(props) {
+function AddNewGrievance(props) {
     const { register, handleSubmit, formState: { errors } } = useForm({ mode: 'onChange' });
 
-    const [Files,SetFiles] = useState([])
+    const [Files, SetFiles] = useState([])
     const toast = useToast()
-    const [error,SetError] = useState('')
+    const [error, SetError] = useState('')
     const navigate = useNavigate()
 
     const HandleSubmit = async (data) => {
         console.log(data)
         let obj = {
-            grievant_id:"62f1ff9f9aa66c7b91065566",
-            grievance_nature:data.nature,
-            principal_name:data.pName,
-            grievance_title:data.title,
-            grievance_description:data.discription,
-            grievant_university:"ch",
-            imgs:Files,
+            grievant_id: "62f1ff9f9aa66c7b91065566",
+            grievance_nature: data.nature,
+            principal_name: data.pName,
+            grievance_title: data.title,
+            grievance_description: data.discription,
+            grievant_university: "ch",
+            imgs: Files,
 
         }
 
@@ -30,70 +30,70 @@ import { useNavigate } from 'react-router-dom';
             await props.AddGrievance(obj)
         } catch (error) {
             SetError(error.message)
-        } 
+        }
 
     }
 
     const HandleFileSubmit = (e) => {
         let file = e.target.files[0]
-        if(Files.length < 2){
+        if (Files.length < 2) {
             let cloneArr = [...Files]
             cloneArr.push(file)
             SetFiles(cloneArr)
         }
-        else{
+        else {
             toast({
                 position: 'top',
                 render: () => (
-                  <Box color='white' p={3} bg='red.500'>
-                    Max upload exceeded
-                  </Box>
+                    <Box color='white' p={3} bg='red.500'>
+                        Max upload exceeded
+                    </Box>
                 ),
-              })
+            })
         }
     }
 
-    
-  useEffect(() => {
-    if (props.data) {
-      let alias = props.data
-      if (alias.grievanceData) {
-        let success = alias.grievanceData?.success
-        if (success) {
-          toast({
-            position: 'top',
-            render: () => (
-              <Box color='white' p={3} bg='green.500'>
-                Grievance submitted
-              </Box>
-            ),
-          })
-          navigate('/TrackGrievance/34-20')
+
+    useEffect(() => {
+        if (props.data) {
+            let alias = props.data
+            if (alias.grievanceData) {
+                let success = alias.grievanceData?.success
+                if (success) {
+                    toast({
+                        position: 'top',
+                        render: () => (
+                            <Box color='white' p={3} bg='green.500'>
+                                Grievance submitted
+                            </Box>
+                        ),
+                    })
+                    navigate('/TrackGrievance/34-20')
+                }
+                else {
+                    toast({
+                        position: 'top',
+                        render: () => (
+                            <Box color='white' p={3} bg='red.500'>
+                                {error}
+                            </Box>
+                        ),
+                    })
+                }
+
+            }
+
         }
-        else {
-          toast({
-            position: 'top',
-            render: () => (
-              <Box color='white' p={3} bg='red.500'>
-                {error}
-              </Box>
-            ),
-          })
-        }
-
-      }
-
-    }
-  }, [props.data])
+    }, [props.data])
 
 
-    
+
 
     return (
-        <Flex w='100vw' h='100%' bg='grey.200' alignItems={'center'} justifyContent={'center'} padding={2}
-            overflowX={'none'}
+        <Flex  h='max-content' justifyContent={'center'} padding={2} marginBottom={5}
         >
-            <Flex flexDirection={'column'} w={['100%', '90%', '80%', '80%']} boxShadow={'dark-lg'}>
+            <Flex flexDirection={'column'} height='max-content' w={['100%', '90%', '80%', '80%']} boxShadow={'dark-lg'}
+            >
                 <form onSubmit={handleSubmit(HandleSubmit)}>
                     <FormControl>
                         <Box w={'100%'} bg='white' paddingTop={5}>
@@ -209,9 +209,9 @@ import { useNavigate } from 'react-router-dom';
 
                         <Box w={'100%'} bg='white' py={3} px={[2, 2, 10, 10]} >
                             <Text fontSize={'18px'} pb={2} paddingLeft={0}>Please upload image related to grievance if any:</Text>
-                            <Input type={'file'} 
-                            onChange={(e)=>{HandleFileSubmit(e)}}
-                            accept={'image/png, image/jpeg'}/>
+                            <Input type={'file'}
+                                onChange={(e) => { HandleFileSubmit(e) }}
+                                accept={'image/png, image/jpeg'} />
                         </Box>
 
                         <Box alignItems={'center'} textAlign='center' w={'100%'} bg='white' py={[2, 2, 10, 10]}>
@@ -228,9 +228,9 @@ import { useNavigate } from 'react-router-dom';
 
 const mapStateToProps = (state) => {
     return {
-        data:state.grievance
+        data: state.grievance
     }
 }
 
 
-export default connect(mapStateToProps,actions)(AddNewGrievance)
+export default connect(mapStateToProps, actions)(AddNewGrievance)

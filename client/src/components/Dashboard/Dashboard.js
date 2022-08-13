@@ -7,6 +7,7 @@ import { IoMdAddCircleOutline } from 'react-icons/io'
 import { FiSettings } from 'react-icons/fi'
 import { AiOutlineUser } from 'react-icons/ai'
 
+import AddNewGrievance from '../Grievance/AddNewGrievance'
 import DashboardAdd from '../Slides/add'
 import DashboardHistory from '../Slides/history'
 import DashboardHome from '../Slides/home'
@@ -106,7 +107,7 @@ export default function Dashboard() {
 
         <Divider w="50%" />
 
-        <Box w="100%" h="10%">
+        {/* <Box w="100%" h="10%">
           <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
             <IconButton
               onClick={() => { setShutter(4) }}
@@ -118,7 +119,7 @@ export default function Dashboard() {
               fontSize={'2xl'}
               icon={<FiSettings />} />
           </Flex>
-        </Box>
+        </Box> */}
 
         <Box w="100%" h="50%">
           <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'flex-end'}>
@@ -158,14 +159,14 @@ export default function Dashboard() {
         }
         {
           shutter === 3 ? (
-            <DashboardAdd/>
+            <AddNewGrievance/>
           ):(null)
         }
-        {
+        {/* {
           shutter === 4 ? (
             <DashboardSettings/>
           ):(null)
-        }
+        } */}
         {
           shutter === 5 ? (
             <UserProfile/>

@@ -64,7 +64,10 @@ function Login(props) {
     }
 
     try {
-      await props.LoginUser(obj)
+     let req = await props.LoginUser(obj)
+     if(req.payload.success != false){
+      navigate("/Dashboard")
+     }
     } catch (error) {
       SetError(error.message)
     }
@@ -120,40 +123,35 @@ function Login(props) {
 
 
   return (
-    <Box
-      overflow={'none'}
-      w={"100vw"} h={"100vh"}>
+    <Box overflow={'none'}
+      w={"100vw"} h={"90vh"}>
       <HStack w="100%" h="100%" >
         <Box w="60%" h="100%"
         >
           <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
-            <Box w="80%" h="10%">
+            <Box w="80%">
               <Flex w="100%" h="100%">
-                <HStack justifyContent={'center'} w="62%">
+                <HStack justifyContent={'start'} w="62%">
                   <Text
-                    fontSize={'md'}
-                    fontFamily={'monospace'}>
+                    fontSize={'md'}>
                     Don't have an account?
                   </Text>
-                  <Link
-                    href='/Registration'
-                    fontWeight={600}
-                    color={"#5A4FCF"}>
+                  <Link href='/Registration' fontWeight={600} color={"#5A4FCF"}>
                     Sign up
                   </Link>
                 </HStack>
               </Flex>
             </Box>
-            <Box w="80%" h="20%">
-              <VStack w="100%" h="100%" justifyContent={'center'}>
-                <Box w="80%">
+            <Box w="80%" h="10%">
+              <VStack w="100%" h="100%" justifyContent={'flex-start'}>
+                <Box w="100%">
                   <Heading
                     fontSize={'5xl'}
-                    fontWeight={700} fontFamily={'monospace'}>
-                    Howdy User!
+                    fontWeight={700}  >
+                    Log in to your account
                   </Heading>
                 </Box>
-                <Box w="80%">
+                {/* <Box w="80%">
                   <Text
                     fontSize={'sm'}
                     fontWeight={600} opacity={.6}>
@@ -161,14 +159,14 @@ function Login(props) {
                     Kidding, we got everything covered from sending, tracking and managing your grievances.
                     All you need to do is say.
                   </Text>
-                </Box>
+                </Box> */}
               </VStack>
             </Box>
-            <Box py={8} w="80%" h="70%">
+            <Box py={2} w="80%" h="max-content" border={'1px solid black'} borderRadius={10} shadow={'dark-lg'} >
               <form className='Login-Form' onSubmit={handleSubmit(HandleLoginSubmit)}>
 
                 <FormControl w="80%">
-                  <SimpleGrid spacing={10} columns={'1'} rows={5}>
+                  <SimpleGrid spacing={10} columns={'1'} rows={4}>
                     <GridItem>
                       <FormLabel>
                         Email
@@ -203,11 +201,7 @@ function Login(props) {
                       {
                         errors.mail && errors.mail.message ? (
                           <Box
-                            position={'fixed'}
-                            fontSize={'12px'}
-                            py={1}
-                            maxH={'0px'}
-                            color={'red'}>
+                            position={'fixed'} fontSize={'12px'} py={1} maxH={'0px'} color={'red'}>
                             {errors.mail.message}
                           </Box>
                         ) : (null)
@@ -279,12 +273,6 @@ function Login(props) {
                         Login
                       </Button>
                     </GridItem>
-
-                    <GridItem w="100%">
-                      <Flex w="100%" justifyContent={'center'}>
-                      </Flex>
-
-                    </GridItem>
                   </SimpleGrid>
                 </FormControl>
               </form>
@@ -295,7 +283,8 @@ function Login(props) {
 
         <Box w="40%" h="100%"
           bg="#5A4FCF"
-        ><Flex
+        >
+          <Flex
           flexDirection={'column'}
           w="100%" h="100%">
             <Box w="100%" h="70%">
@@ -303,7 +292,7 @@ function Login(props) {
                 <Box>
                   <Heading
                     fontSize={'5xl'}
-                    color={'white'} fontFamily={'monospace'}>
+                    color={'white'}  >
                     Lorem Ispum
                   </Heading>
                 </Box>
