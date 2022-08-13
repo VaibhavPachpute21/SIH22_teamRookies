@@ -16,12 +16,12 @@ import { useNavigate } from 'react-router-dom';
     const HandleSubmit = async (data) => {
         console.log(data)
         let obj = {
-            grievant_id:"62f5fe762ed9a94f37734e91",
+            grievant_id:"62f1ff9f9aa66c7b91065566",
             grievance_nature:data.nature,
             principal_name:data.pName,
             grievance_title:data.title,
             grievance_description:data.discription,
-            grievant_university:"mu",
+            grievant_university:"ch",
             imgs:Files,
 
         }
