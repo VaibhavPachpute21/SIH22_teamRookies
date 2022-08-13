@@ -70,7 +70,7 @@ officerSchema.pre("save", async function (next) {
 
 
 officerSchema.methods.getSignedToken = async function () {
-    const token = jwt.sign({ id: this._id, isAdmin: this.isAdmin }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRES
     })
     return token

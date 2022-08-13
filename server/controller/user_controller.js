@@ -85,7 +85,7 @@ exports.userinfo = async (req, res, next) => {
 
 
 exports.update = async (req, res, next) => {
-    const id = req.params.id
+    const id = req.user._id
     const { email, password, role, fullname, committee, avatar, banner, phone_number, college_name, university, district, state } = req.body
 
     try {

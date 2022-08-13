@@ -16,7 +16,7 @@ import { useForm } from 'react-hook-form'
 import { connect } from 'react-redux'
 import { AiOutlineUser } from 'react-icons/ai';
 import * as actions from '../../actions/user_actions'
-
+import cookie from 'js-cookie'
 
 function Login(props) {
 
@@ -75,11 +75,19 @@ function Login(props) {
 
   }
 
+  useEffect(()=>{
+    if(cookie.get('token')){
+      navigate('/')
+    }
+  },[])
+
+
   useEffect(() => {
     if (props.data) {
       let alias = props.data
       if (alias.userData) {
         let success = alias.userData?.success
+        let token = alias.userData?.token
         let errr = alias.userData?.message
         if (success) {
           toast({
@@ -90,7 +98,7 @@ function Login(props) {
               </Box>
             ),
           })
-
+          cookie.set("token",token)
         }
         else {
           toast({

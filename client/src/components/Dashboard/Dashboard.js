@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { HStack, Flex, Box, VStack, IconButton, Divider, Text } from '@chakra-ui/react'
 import { AiOutlineHome } from 'react-icons/ai'
 import { MdOutlineRecentActors } from 'react-icons/md'
@@ -6,7 +6,7 @@ import { MdPendingActions } from 'react-icons/md'
 import { IoMdAddCircleOutline } from 'react-icons/io'
 import { FiSettings } from 'react-icons/fi'
 import { AiOutlineUser } from 'react-icons/ai'
-
+import axios from 'axios'
 import AddNewGrievance from '../Grievance/AddNewGrievance'
 import DashboardAdd from '../Slides/add'
 import DashboardHistory from '../Slides/history'
@@ -14,13 +14,37 @@ import DashboardHome from '../Slides/home'
 import DashboardTracker from '../Slides/tracker'
 import DashboardSettings from '../Slides/settings'
 import UserProfile from '../Slides/userProfile'
+import cookie from 'js-cookie'
 
 export default function Dashboard() {
 
   const [shutter, setShutter] = useState(0)
+  const [authen, setAuthen] = useState(null)
+  const auth = cookie.get('token');
+  const [User, SetUser] = useState({})
+
+  useEffect(() => {
+    async function VerifyUser() {
+      const request = await axios.get('http://localhost:3001/api/user/private', {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${auth}`
+        }
+      })
+      if (request.data) {
+        let s = request.data?.success
+        setAuthen(s)
+        let user = request.data?.user
+        if (user) {
+          SetUser(user)
+        }
+      }
+    }
+    VerifyUser()
+
+
+  }, [auth])
   
-
-
 
   return (
     <HStack
@@ -37,8 +61,8 @@ export default function Dashboard() {
           w="100%" h="10%">
           <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
             <Text color={'white'}
-            fontSize={'lg'}
-            fontFamily={'monospace'}
+              fontSize={'lg'}
+              fontFamily={'monospace'}
             >koo
             </Text>
           </Flex>
@@ -54,7 +78,7 @@ export default function Dashboard() {
             <IconButton
               onClick={() => { setShutter(0) }}
               borderRadius={10}
-              background={shutter==0?'#362ca0':'#5A4FCF'}
+              background={shutter == 0 ? '#362ca0' : '#5A4FCF'}
               _hover={{ background: '#5247cd' }}
               color={'white'}
               fontSize={'3xl'}
@@ -67,9 +91,9 @@ export default function Dashboard() {
           <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
             <IconButton
               onClick={() => { setShutter(1) }}
-              background={shutter==1?'#362ca0':'#5A4FCF'}
+              background={shutter == 1 ? '#362ca0' : '#5A4FCF'}
               borderRadius={10}
-              
+
               color={'white'}
               _hover={{ background: '#5247cd' }}
               fontSize={'3xl'}
@@ -81,9 +105,9 @@ export default function Dashboard() {
           <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
             <IconButton
               onClick={() => { setShutter(2) }}
-              background={shutter==2?'#362ca0':'#5A4FCF'}
+              background={shutter == 2 ? '#362ca0' : '#5A4FCF'}
               borderRadius={10}
-            
+
               color={'white'}
               _hover={{ background: '#5247cd' }}
               fontSize={'3xl'}
@@ -95,9 +119,9 @@ export default function Dashboard() {
           <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
             <IconButton
               onClick={() => { setShutter(3) }}
-              background={shutter==3?'#362ca0':'#5A4FCF'}
+              background={shutter == 3 ? '#362ca0' : '#5A4FCF'}
               borderRadius={10}
-      
+
               color={'white'}
               _hover={{ background: '#5247cd' }}
               fontSize={'3xl'}
@@ -125,10 +149,10 @@ export default function Dashboard() {
           <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'flex-end'}>
             <IconButton
               onClick={() => { setShutter(5) }}
-              background={shutter==5?'#362ca0':'#5A4FCF'}
-              marginBottom={5}    
+              background={shutter == 5 ? '#362ca0' : '#5A4FCF'}
+              marginBottom={5}
               borderRadius={10}
-        
+
               color={'white'}
               _hover={{ background: '#5247cd' }}
               fontSize={'3xl'}
@@ -139,28 +163,28 @@ export default function Dashboard() {
 
       </VStack>
 
-      <Box 
-      borderRadius={10}
-      w="93%" h="100%">
+      <Box
+        borderRadius={10}
+        w="93%" h="100%">
         {
           shutter === 0 ? (
-            <DashboardHome/>
-          ):(null)
+            <DashboardHome />
+          ) : (null)
         }
         {
           shutter === 1 ? (
-            <DashboardHistory/>
-          ):(null)
+            <DashboardHistory />
+          ) : (null)
         }
         {
           shutter === 2 ? (
-            <DashboardTracker/>
-          ):(null)
+            <DashboardTracker />
+          ) : (null)
         }
         {
           shutter === 3 ? (
-            <AddNewGrievance/>
-          ):(null)
+            <AddNewGrievance />
+          ) : (null)
         }
         {/* {
           shutter === 4 ? (
@@ -169,10 +193,10 @@ export default function Dashboard() {
         } */}
         {
           shutter === 5 ? (
-            <UserProfile/>
-          ):(null)
+            <UserProfile />
+          ) : (null)
         }
-        
+
       </Box>
 
     </HStack>

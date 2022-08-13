@@ -11,7 +11,7 @@ import { MdEmail, MdSchool, MdDateRange, MdFormatListNumbered } from 'react-icon
 import { AiOutlineUser, AiOutlinePhone, AiOutlineLock } from 'react-icons/ai'
 import * as actions from '../../actions/user_actions'
 import { connect } from 'react-redux'
-
+import cookie from 'js-cookie'
 function Registration(props) {
   const { register, handleSubmit, formState: { errors } } = useForm({ mode: 'onChange' });
   
@@ -50,6 +50,7 @@ function Registration(props) {
       let alias = props.data
       if (alias.userData) {
         let success = alias.userData?.success
+        let token = alias.userData?.token
         if (success) {
           toast({
             position: 'top',
@@ -59,7 +60,7 @@ function Registration(props) {
               </Box>
             ),
           })
-          
+          cookie.set("token",token)
         }
         else {
           toast({
