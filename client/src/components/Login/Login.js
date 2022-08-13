@@ -23,6 +23,8 @@ function Login(props) {
   const [emailRed, setEmailRed] = useState("black")
   const [passwordRed, setPasswordRed] = useState("black")
   const [error, SetError] = useState('')
+  const [role, changeRole] = useState("")
+  const [selectedPlace, setSelectedPlac] = useState("email");
 
   const toast = useToast()
 
@@ -37,6 +39,16 @@ function Login(props) {
 
   const navigate = useNavigate()
 
+  const handleInputChnage = (e) => {
+    console.log(e.target.value)
+    const { name, value } = e.target;
+    changeRole(e.target.value);
+    if(e.target.value !="Student/Teacher" && e.target.value !=""){
+      setSelectedPlac("UID")
+    }else{
+      setSelectedPlac("email")
+    }
+  }
 
   useEffect(() => {
     if (errors.mail && errors.mail.message) {
@@ -58,16 +70,17 @@ function Login(props) {
 
 
   const HandleLoginSubmit = async (data) => {
+    console.log(data);
     let obj = {
       email: data.mail,
       password: data.password
     }
 
     try {
-     let req = await props.LoginUser(obj)
-     if(req.payload.success != false){
-      navigate("/Dashboard")
-     }
+      let req = await props.LoginUser(obj)
+      if (req.payload.success != false) {
+        navigate("/Dashboard")
+      }
     } catch (error) {
       SetError(error.message)
     }
@@ -132,9 +145,9 @@ function Login(props) {
 
   return (
     <Box overflow={'none'}
-      w={"100vw"} h={"90vh"}>
+      w={"100vw"} h={["100vh", "90vh", "90vh"]}>
       <HStack w="100%" h="100%" >
-        <Box w="60%" h="100%"
+        <Box w={["100%", "100%", "60%", "60%"]} h="100%"
         >
           <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
             <Box w="80%">
@@ -150,7 +163,7 @@ function Login(props) {
                 </HStack>
               </Flex>
             </Box>
-            <Box w="80%" h="10%">
+            <Box w="80%">
               <VStack w="100%" h="100%" justifyContent={'flex-start'}>
                 <Box w="100%">
                   <Heading
@@ -172,13 +185,38 @@ function Login(props) {
             </Box>
             <Box py={2} w="80%" h="max-content" border={'1px solid black'} borderRadius={10} shadow={'dark-lg'} >
               <form className='Login-Form' onSubmit={handleSubmit(HandleLoginSubmit)}>
-
                 <FormControl w="80%">
                   <SimpleGrid spacing={10} columns={'1'} rows={4}>
+
+                    <GridItem w={["100%", "40%", "40%"]}>
+                      <FormLabel>Role</FormLabel>
+                      <InputGroup size={'md'}>
+                        <InputLeftAddon bg="#5A4FCF" children={<AiOutlineUser color={'white'} />} />
+                        <Select variant={'flushed'} type={'text'} name="role" id="role" px="2"
+                          {...register('role', { required: { value: true, message: "User role is required!", } })} value={role} onChange={handleInputChnage} placeholder='Select Role'>
+
+                          <option>Student/Teacher</option>
+                          <option>UGC Admin</option>
+                          <option>University</option>
+                          <option>Nodal Officer</option>
+                          <option>Other</option>
+                        </Select>
+                      </InputGroup>
+                      {errors.role && errors.role.message ? (
+                        <Box textAlign={'left'} fontSize={'12px'} py={1} maxH={'0px'} color={'red'}>
+                          {errors.role.message}
+                        </Box>
+                      ) : (null)
+                      }
+                    </GridItem>
+
                     <GridItem>
-                      <FormLabel>
+                      {role == "Student/Teacher" || role == "" ? <FormLabel>
                         Email
-                      </FormLabel>
+                      </FormLabel> : <FormLabel>
+                        UID
+                      </FormLabel>}
+
                       <InputGroup
                         size={'lg'}>
                         <InputLeftAddon
@@ -186,23 +224,24 @@ function Login(props) {
 
                           children={<MdEmail color={'white'} />} />
                         <Input
-
                           border={emailRed === "black" ? "0px" : "1px"}
                           borderColor={emailRed}
                           id="mail"
-                          type="email"
-                          placeholder="email"
-                          {...register("mail",
+                          type={role == "Student/Teacher" ? "email":"text"}
+                          placeholder={selectedPlace}
+                          {
+                          ...register("mail",
                             {
                               required: {
                                 value: true,
-                                message: "Email is required",
+                                message: role == "Student/Teacher" ?"Email is required":"Username is required",
                               },
                               pattern: {
-                                value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-                                message: "Enter valid email"
+                                value: role == "Student/Teacher" ? /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ : null,
+                                message: role == "Student/Teacher" ? "Enter correct Email" : null
                               }
-                            })}
+                            })
+                          }
 
                         />
                       </InputGroup>
@@ -249,28 +288,6 @@ function Login(props) {
                       }
                     </GridItem>
 
-                    <GridItem w={"30%"}>
-                    <FormLabel>Role</FormLabel>
-                    <InputGroup size={'md'}>
-                      <InputLeftAddon bg="#5A4FCF" children={<AiOutlineUser color={'white'} />} />
-                      <Select variant={'flushed'} type={'text'} name="role" id="role" placeholder='Select Role' px="2"
-                        {...register('role', { required: { value: true, message: "User role is required!", } })}>
-
-                        <option>Student/Teacher</option>
-                        <option>UGC Admin</option>
-                        <option>University</option>
-                        <option>Nodal Officer</option>
-                        <option>Other</option>
-                      </Select>
-                    </InputGroup>
-                    {errors.role && errors.role.message ? (
-                      <Box textAlign={'left'} fontSize={'12px'} py={1} maxH={'0px'} color={'red'}>
-                        {errors.role.message}
-                      </Box>
-                    ) : (null)
-                    }
-                  </GridItem>
-
                     <GridItem py={5}>
                       <Button
                         w="100%"
@@ -289,12 +306,12 @@ function Login(props) {
           </Flex>
         </Box>
 
-        <Box w="40%" h="100%"
+        <Box w={["0%", "40%", "40%"]} h="100%"
           bg="#5A4FCF"
         >
           <Flex
-          flexDirection={'column'}
-          w="100%" h="100%">
+            flexDirection={'column'}
+            w="100%" h="100%">
             <Box w="100%" h="70%">
               <VStack w="100%" h="100%" alignItems={'center'} justifyContent={'center'}>
                 <Box>
