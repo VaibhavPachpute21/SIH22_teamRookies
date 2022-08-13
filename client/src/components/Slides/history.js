@@ -1,305 +1,163 @@
-import { Box, VStack, HStack, Flex, Text, Checkbox, IconButton, Avatar, Heading, Tag } from '@chakra-ui/react'
-import { useState } from 'react';
-import { GiHamburgerMenu } from 'react-icons/gi'
+import { Box, VStack, HStack, Flex, Text, Checkbox, IconButton, Avatar, Heading, Tag, Select, Button } from '@chakra-ui/react'
+import { useState, useEffect } from 'react';
+import cookie from 'js-cookie'
 import './styles/drawer.css'
-import { BiLinkExternal } from 'react-icons/bi'
-import { BsChat } from 'react-icons/bs'
+import * as actions from '../../actions/user_actions'
+import axios from 'axios';
+import { connect } from 'react-redux';
 
 
-const DashboardHistory = () => {
+const DashboardHistory = (props) => {
 
     const Filters = [
         "All", "Institute", "Student", "Employee", "Solved", "Unsolved"
     ]
 
-    const [classSwitch, setClassSwitch] = useState('init-drawer')
+    const [Error,SetError] = useState('')
 
+    const [authen, setAuthen] = useState(null)
+    const auth = cookie.get('token');
+    const [User, SetUser] = useState({})
 
-    const fakeGrievances = [
-        {
-            user_role: "Student",
-            user_committee: "CSRGC",
-            grievance_status: "SOLVED",
-            post_date: "22/7/2022"
-        }, {
-            user_role: "Institute",
-            user_committee: "ISRGC",
-            grievance_status: "UNSOLVED",
-            post_date: "21/7/2021"
-        },
-        {
-            user_role: "Employee",
-            user_committee: "DSRGC",
-            grievance_status: "SOLVED",
-            post_date: "5/2/2022"
-        },
-        {
-            user_role: "Hod",
-            user_committee: "DSRGC",
-            grievance_status: "SOLVED",
-            post_date: "22/7/2022"
-        },
-        {
-            user_role: "Principal",
-            user_committee: "CSRGC",
-            grievance_status: "UNSOLVED",
-            post_date: "3/7/2002"
-        },
-        {
-            user_role: "Principal",
-            user_committee: "CSRGC",
-            grievance_status: "UNSOLVED",
-            post_date: "3/7/2002"
+    const [forwards,setForwards] = useState([])
+    const [currentGrievances,setcurrentGrievances] = useState([])
+
+    useEffect(() => {
+        async function VerifyUser() {
+            const request = await axios.get('http://localhost:3001/api/user/private', {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${auth}`
+                }
+            })
+            if (request.data) {
+                let s = request.data?.success
+                setAuthen(s)
+                let user = request.data?.user
+                if (user) {
+                    SetUser(user)
+                }
+            }
         }
-    ]
+        VerifyUser()
 
+
+    }, [auth])
+    
+
+    useEffect(()=>{
+        const fetchMyGrievances = async () => {
+            try {
+                await props.GetMyGrievances(User?._id)
+            } catch (error) {
+                SetError(error.message)
+            }
+        }
+        fetchMyGrievances()
+    },[User._id,props.GetMyGrievances])
+
+    useEffect(()=>{
+        if(props.data){
+            let alias = props.data
+           
+            if(alias.userData){
+                let d = alias.userData
+                setForwards(d?.forwards)
+            }
+            else if(alias.userData){
+                let d = alias.userData
+                setcurrentGrievances(d?.myGrievances)
+            }
+        }
+    },[props.data])
+
+    
 
     return (
         <Box w="100%" h="100%">
-            <Flex w="100%" h="100%"
-            flexDirection={['column','row','row']} alignItems={'center'}
-            alignContent={'space-between'}
-            >
+            <VStack w="100%" h="100%">
+                <Box w="100%" h="10%">
+                    <Flex w="100%" h="100%" alignItems={'flex-end'} justifyContent={'flex-end'}>
+                        <Select w="20%">
+                            <option>All</option>
+                            <option>Solved</option>
+                            <option>Unsolved</option>
+                            <option>Latest</option>
+                        </Select>
+                    </Flex>
+                </Box>
 
-                {
-                    classSwitch === 'init-drawer' || classSwitch === "close-drawer" ? (
-                        <Box h={["10%","10%","100%","100%"]} w={["100%","100%","5%","5%"]}
-                        margin={2}
-                            className={classSwitch}
-                            bg="#5A4FCF"
-                            borderRadius={'2xl'}
-                        >
-                            <Flex w="100%" h="100%" alignItems={'flex-start'}
-                                py={2}
-                                px={2}>
-                                <IconButton
-                                    onClick={() => setClassSwitch("final-drawer")}
-                                    color={"white"}
-                                    background={"transparent"}
-                                    icon={<GiHamburgerMenu />}
-                                    _active={{ background: 'white' }}
-                                    _hover={{ background: 'none' }}
-                                />
-                            </Flex>
-                        </Box>
-
-                    ) : (
-                        <Box
-                            className={"final-drawer"}
-                            w={["100%","100%","15%","15%"]} h="100%" bg="#5A4FCF" borderRadius={'2xl'}>
-
-                            <VStack w="100%" h="100%">
-                                <Box w="100%" h="5%">
-                                    <Flex w="100%" h="100%" alignItems={"flex-start"} justifyContent={"center"}>
-                                        <HStack w="100%" h="100%">
-
-                                            <IconButton
-                                                w="10%"
-                                                onClick={() => { setClassSwitch("close-drawer") }}
-                                                color={"white"}
-                                                background={"transparent"}
-                                                icon={<GiHamburgerMenu />}
-                                                _active={{ background: 'white' }}
-                                                _hover={{ background: 'none' }}
-                                            />
-                                            <Text px={0} py={4} fontSize={'xl'}
-                                                color={'white'}
-                                                fontWeight={600}>
-                                                Categories
-                                            </Text>
-                                        </HStack>
-                                    </Flex>
-                                </Box>
-
-                                <VStack
-                                    py={10}
-                                    w="70%" h="95%" >
-                                    {
-                                        Filters?.map((item, i) => (
-                                            <HStack w="100%" key={i}>
-                                                <Checkbox
-                                                    background={'white'}
-                                                    _active={{ background: 'white' }}
-                                                />
-                                                <Text px={3} py={4} fontSize={'md'}
-                                                    color={'white'}
-                                                    fontWeight={600}>
-                                                    {item}
+                <Box w="100%" h="90%">
+                    <Text
+                    fontWeight={600}
+                    fontSize={'xl'}
+                    py={3}>
+                        {
+                            forwards && forwards.length > 0 ? ("Some grievances you've missed"):("Current grievances")
+                        }
+                    </Text>
+                    <VStack w="100%" minH={'70vh'} overflow={'scroll'} spacing={5}>
+                        {
+                            forwards && forwards.length > 0 ? (
+                                forwards?.map((item,i)=>(
+                                    <VStack
+                                    spacing={8}
+                                    boxShadow={'md'}
+                                    
+                                    borderTop={'3px solid #5A4FCF'}
+                                    key={i} w="100%" h="15vh">
+                                        <HStack
+                                        marginTop={2}
+                                        alignItems={'flex-start'}
+                                        justifyContent={'space-between'}
+                                        w="100%" h="20%">
+                                            <HStack w="40%" h="100%">
+                                                <Text fontWeight={600}>
+                                                    Grievance id
+                                                </Text>
+                                                <Text>
+                                                    {item?.grievance_id}
                                                 </Text>
                                             </HStack>
-                                        ))
-                                    }
-                                </VStack>
-                            </VStack>
 
+                                            <HStack w="15%" h="100%" alignItems={'center'}>
+                                            <Button
+                                            
+                                            color={'white'}
+                                            bg="#5A4FCF"
+                                            h="100%">
+                                                Check status
+                                            </Button>
+                                                </HStack>
+                                        </HStack>
 
+                                        <HStack w="100%" h="5%">
+                                        <HStack w="40%" h="100%">
+                                                <Text fontWeight={600}>
+                                                    Forwarded to you on
+                                                </Text>
+                                                <Text>
+                                                    {item?.updatedAt.split('T')[0]}
+                                                </Text>
+                                            </HStack>
+                                        </HStack>
 
-                        </Box>)
-
-
-                }
-
-                <Box padding={[2,2,2,2]}
-                    overflow={'scroll'}
-                    w={classSwitch === 'init-drawer' ||
-                        classSwitch === 'close-drawer'
-                        ? "95%" : "85%"}
-                    h="100%"
-                    bg="#D9CEFF"
-                    borderRadius={'2xl'}
-                >
-                    <Flex w="100%" h="100%" alignItems={'center'} justifyContent={'center'}>
-                        <VStack
-                            paddingTop={5}
-                            w={["100%","100%","90%","90%"]}
-                            maxH={"80vh"} spacing={[1,2,5,10]}>
-                            {
-                                fakeGrievances?.map((item, i) => (
-                                    <Box
-                                        bg="white" padding={5}
-                                        key={i}
-                                        w="100%" minH={["max-content","20vh","20vh"]} borderRadius={[2,3,5,10]} boxShadow={'lg'}>
-                                        <Flex w="100%" h="100%" flexDirection={['column','column','row','row']} >
-                                            <Box w={["100%","25%","25%"]} h="100%">
-                                                <Flex w="100%" h={["100%","20vh","20vh"]} alignItems={'center'} justifyContent={'center'}>
-                                                    <Avatar
-                                                        src='https://bit.ly/dan-abramov'
-                                                        size={['xl','md','xl','xl']}
-                                                    />
-                                                </Flex>
-                                            </Box>
-
-                                            <Box w={["100%","20%","30%"]} h={["100%","100%","20vh","20vh"]}>
-                                                <Flex flexDirection={['column','column','row','row']}
-                                                    spacing={[1,2,6]}
-                                                    alignItems={'flex-start'}
-                                                    py={3}
-
-                                                    w="100%" h="100%">
-                                                    <Heading
-                                                        size={["sm","md","md"]}
-                                                        fontWeight={500}>
-                                                        {item.user_role}
-                                                    </Heading>
-
-                                                    <Flex flexDirection={['row','row','column','column']}
-                                                        px={[0,0,5,5]}
-                                                        spacing={5}
-                                                        w="100%" h="40%">
-                                                        <Box w="100%">
-                                                            <Text w="100%"
-                                                            size={["sm","md","md"]}
-                                                                color={'gray.600'}
-                                                                fontWeight={500}>
-                                                                Assigned committee:
-                                                            </Text>
-                                                        </Box>
-
-                                                        <Box w="100%">
-                                                            <Text w="100%"
-                                                                color={'gray.600'}
-                                                                fontWeight={500}>
-                                                                Status:
-                                                            </Text>
-                                                        </Box>
-                                                    </Flex>
-                                                </Flex>
-                                            </Box>
-
-                                            <Box w={["100%","20%","20%","25%"]} h={["100%","100%","20vh","20vh"]} marginTop={5} >
-                                                <Flex flexDirection={['column','column','row','row']}
-                                                    spacing={[1,1,9]}
-                                                    alignItems={'start'}
-                                                    justifyContent={'space-between'}
-                                                    py={[1,1,3]}
-                                                    w="100%" h="100%">
-
-                                                    <Flex flexDirection={['row','row','column','column']}
-                                                        px={5}
-                                                        spacing={5}
-                                                        w="100%" h="40%">
-                                                        <Box w="100%">
-                                                            <Text w="100%"
-                                                                fontWeight={500}>
-                                                                {item.user_committee}
-                                                            </Text>
-                                                        </Box>
-
-                                                        <Box w="100%">
-                                                            <Text w="100%"
-                                                                color={'gray.600'}
-                                                                fontWeight={500}>
-                                                                {
-                                                                    item.grievance_status === "SOLVED" ? (
-                                                                        <Tag
-                                                                            borderRadius={'20'}
-                                                                            background={'whatsapp.400'}>{" "}</Tag>
-                                                                    ) : (<Tag
-                                                                        borderRadius={'20'}
-                                                                        background={'red.400'}>{" "}</Tag>)
-                                                                }
-                                                                {" "}
-                                                                {item.grievance_status}
-                                                            </Text>
-                                                        </Box>
-
-                                                    </Flex>
-                                                </Flex>
-                                            </Box>
-
-                                            <Box w={["100%","100%","30%"]} h={["100%","100%","20vh","20vh"]}>
-                                                <Flex flexDirection={['column']}
-                                                spacing={0} w="100%" h="100%">
-                                                    <Box
-                                                        w="100%" h="5vh">
-                                                        <Flex
-                                                            py={2}
-                                                            w="100%" h="100%" alignItems={'flex-end'} justifyContent={'flex-end'}>
-                                                            <Text>
-                                                                {item.post_date}
-                                                            </Text>
-                                                        </Flex>
-                                                    </Box>
-
-                                                    <Box w="100%" h="15vh">
-                                                        <Flex w="100%" h="100%" alignItems={'center'} justifyContent={'flex-end'}>
-                                                            <Box
-                                                                h="100%"
-                                                                w="50%">
-                                                                <Flex w="100%" h="100%" alignItems={'center'} justifyContent={'center'}>
-                                                                    <IconButton
-                                                                        bg="#D9CEFF"
-                                                                        color={'black'}
-                                                                        icon={<BiLinkExternal />} />
-                                                                </Flex>
-                                                            </Box>
-                                                            <Box
-                                                                h="100%"
-                                                                w="50%">
-                                                                <Flex w="100%" h="100%" alignItems={'center'} justifyContent={'center'}>
-                                                                    <IconButton
-                                                                        bg="#D9CEFF"
-                                                                        color={'black'}
-                                                                        icon={<BsChat />} />
-                                                                </Flex>
-                                                            </Box>
-                                                        </Flex>
-                                                    </Box>
-
-                                                </Flex>
-                                            </Box>
-                                        </Flex>
-                                    </Box>
+                                    </VStack>
                                 ))
-                            }
-                        </VStack>
-                    </Flex>
-
-
+                            ):(null)
+                        }
+                    </VStack>
                 </Box>
-            </Flex>
+            </VStack>
         </Box>
     );
 }
 
-export default DashboardHistory;
+const mapStateToProps = (state) => {
+    return{
+        data:state.users
+    }
+}
+
+
+export default connect(mapStateToProps,actions)(DashboardHistory);

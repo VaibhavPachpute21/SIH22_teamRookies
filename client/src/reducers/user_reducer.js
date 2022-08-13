@@ -12,6 +12,9 @@ export default function user_reducer(state={},action){
         case "user_auth":
             return {...state,userData:action.payload}
 
+        case "my_grievances":
+            return {...state,userData:action.payload}
+
         default:
             return state
     }

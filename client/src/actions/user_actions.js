@@ -43,3 +43,11 @@ export async function UpdateUser(id,data){
     }
 }
 
+export async function GetMyGrievances(id){
+    const request = await axios.get(`http://localhost:3001/api/officer/mygrievances/${id}`)
+    .then(response=>response.data)
+    return{
+        type:"my_grievances",
+        payload:request
+    }
+}

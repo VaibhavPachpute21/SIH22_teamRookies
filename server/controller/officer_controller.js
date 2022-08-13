@@ -1,4 +1,6 @@
 const { Officer } = require('../models/officer_model')
+const {Grievance} = require('../models/grievance_model')
+const {Forward} = require('../models/forward_model') 
 
 exports.register = async (req, res, next) => {
     const { email, password,role,fullname,committee,avatar, banner,phone_number, college_name,university,district, state,university_nodal_no } = req.body;
@@ -117,6 +119,44 @@ exports.update = async (req, res, next) => {
     }
 
 }
+
+exports.AllMyGrievances = async (req,res,next) => {
+    const id = req.params.id
+
+    try {
+        const myGrievances = await Grievance.find({"reciever_id":id})
+        const forwards = await Forward.find({"previous_reciever":id})
+        if(!myGrievances){
+            res.status(200).json({
+                success:false,
+                message:"You have no grievances, yet"
+            })
+
+           
+
+        }
+         
+        if(!forwards){
+            res.status(200).json({
+                success:false,
+                message:"You have no forward history too, yet"
+            })
+        }
+       
+        res.status(200).json({
+            success:true,
+            myGrievances,
+            forwards
+        })
+
+    } catch (error) {
+        res.status(400).json({
+            success:false,
+            message:error.message
+        })
+    }
+}   
+
 
 
 const sendToken = async (user, statusCode, res) => {

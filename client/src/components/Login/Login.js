@@ -16,6 +16,7 @@ import { useForm } from 'react-hook-form'
 import { connect } from 'react-redux'
 import { AiOutlineUser } from 'react-icons/ai';
 import * as actions from '../../actions/user_actions'
+import axios from 'axios';
 import cookie from 'js-cookie'
 
 function Login(props) {
@@ -25,6 +26,7 @@ function Login(props) {
   const [error, SetError] = useState('')
   const [role, changeRole] = useState("")
   const [selectedPlace, setSelectedPlac] = useState("email");
+
 
   const toast = useToast()
 
@@ -43,9 +45,9 @@ function Login(props) {
     console.log(e.target.value)
     const { name, value } = e.target;
     changeRole(e.target.value);
-    if(e.target.value !="Student/Teacher" && e.target.value !=""){
+    if (e.target.value != "Student/Teacher" && e.target.value != "") {
       setSelectedPlac("UID")
-    }else{
+    } else {
       setSelectedPlac("email")
     }
   }
@@ -70,29 +72,76 @@ function Login(props) {
 
 
   const HandleLoginSubmit = async (data) => {
-    console.log(data);
+  
     let obj = {
       email: data.mail,
       password: data.password
     }
 
-    try {
-      let req = await props.LoginUser(obj)
-      if (req.payload.success != false) {
-        navigate("/Dashboard")
+    if (role === "Student/Teacher") {
+      try {
+        let req = await props.LoginUser(obj)
+        if (req.payload.success != false) {
+          navigate("/Dashboard")
+        }
+      } catch (error) {
+        SetError(error.message)
       }
-    } catch (error) {
-      SetError(error.message)
     }
+
+    if (role === "Nodal Officer") {
+      
+      try {
+        const request = await axios.post('http://localhost:3001/api/officer/login',obj)
+        .then(response => response.data)
+
+        if(request){
+          let errr = request?.message
+            let token = request?.token
+          if (request.success) {
+            
+            toast({
+              position: 'top',
+              render: () => (
+                <Box color='white' p={3} bg='green.500'>
+                  Login complete
+                </Box>
+              ),
+            })
+            cookie.set("token", token)
+          }
+          else {
+            toast({
+              position: 'top',
+              render: () => (
+                <Box color='white' p={3} bg='red.500'>
+                  {errr}
+                </Box>
+              ),
+            })
+          }
+        }
+        
+       
+        /* if (request.payload.success != false) {
+          navigate("/Dashboard")
+        } */
+      } catch (error) {
+        SetError(error.message)
+      }
+    }
+
+
 
 
   }
 
-  useEffect(()=>{
-    if(cookie.get('token')){
+
+  useEffect(() => {
+    if (cookie.get('token')) {
       navigate('/')
     }
-  },[])
+  }, [])
 
 
   useEffect(() => {
@@ -111,7 +160,7 @@ function Login(props) {
               </Box>
             ),
           })
-          cookie.set("token",token)
+          cookie.set("token", token)
         }
         else {
           toast({
@@ -128,6 +177,12 @@ function Login(props) {
 
     }
   }, [props.data])
+  
+
+   
+  
+
+
 
   useEffect(() => {
     if (error.length > 0) {
@@ -192,7 +247,9 @@ function Login(props) {
                       <FormLabel>Role</FormLabel>
                       <InputGroup size={'md'}>
                         <InputLeftAddon bg="#5A4FCF" children={<AiOutlineUser color={'white'} />} />
-                        <Select variant={'flushed'} type={'text'} name="role" id="role" px="2"
+                        <Select variant={'flushed'}
+                          defaultValue="student"
+                          type={'text'} name="role" id="role" px="2"
                           {...register('role', { required: { value: true, message: "User role is required!", } })} value={role} onChange={handleInputChnage} placeholder='Select Role'>
 
                           <option>Student/Teacher</option>
@@ -227,14 +284,14 @@ function Login(props) {
                           border={emailRed === "black" ? "0px" : "1px"}
                           borderColor={emailRed}
                           id="mail"
-                          type={role == "Student/Teacher" ? "email":"text"}
+                          type={role == "Student/Teacher" ? "email" : "text"}
                           placeholder={selectedPlace}
                           {
                           ...register("mail",
                             {
                               required: {
                                 value: true,
-                                message: role == "Student/Teacher" ?"Email is required":"Username is required",
+                                message: role == "Student/Teacher" ? "Email is required" : "Username is required",
                               },
                               pattern: {
                                 value: role == "Student/Teacher" ? /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ : null,
@@ -344,7 +401,8 @@ function Login(props) {
 
 const mapStateToProps = (state) => {
   return {
-    data: state.users
+    data: state.users,
+    offdata:state.officer
   }
 }
 
