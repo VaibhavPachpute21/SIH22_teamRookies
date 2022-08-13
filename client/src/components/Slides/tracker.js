@@ -341,6 +341,7 @@ const DashboardTracker = (props) => {
                         overflow={'scroll'}
                         w="100%">
                         {
+                        Grievances && Grievances.length > 0 ? (
                             Grievances?.map((item, i) => (
                                 <HStack key={i} w="100%" minH={"75vh"}>
                                     <Box
@@ -502,6 +503,11 @@ const DashboardTracker = (props) => {
                                     </Box>
                                 </HStack>
                             ))
+                        ):(<Box>
+                            No Grievances found
+                        </Box>)
+
+                            
                         }
                     </VStack>
                 </Box>

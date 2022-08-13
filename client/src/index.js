@@ -15,7 +15,6 @@ import AddNewGrievance from "./components/Grievance/AddNewGrievance";
 import GrievanceStatus from "./components/GrievanceStatus";
 import AddInstituteGrievance from "./components/InstitutePages/addInstituteGrievance"
 import InstituteProfile from "./components/InstitutePages/instituteProfile"
-import { StepsStyleConfig } from 'chakra-ui-steps'
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux'
 import promiseMiddleware from 'redux-promise'
@@ -23,34 +22,8 @@ import reducers from './reducers/index'
 import Test from "./components/Test";
 const createStoreWithMiddleware = applyMiddleware(promiseMiddleware)(createStore)
 
-const CustomSteps = {
-  ...StepsStyleConfig,
-  baseStyle: props => {
-    return {
-      ...StepsStyleConfig.baseStyle(props),
-      icon: {
-        ...StepsStyleConfig.baseStyle(props).icon,
-        strokeWidth: '1px',
-      },
-      label: {
-        ...StepsStyleConfig.baseStyle(props).label,
-        color: "white",
-      },
-      stepIconContainer: {
-        ...StepsStyleConfig.baseStyle(props).stepIconContainer,
-        background: "#5A4FCF",
-
-      }
-    };
-  },
-};
 
 
-const theme = extendTheme({
-  components: {
-    Steps: CustomSteps,
-  },
-});
 
 
 
@@ -85,7 +58,7 @@ const App = () => {
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  <ChakraProvider theme={theme}>
+  <ChakraProvider>
     <Provider store={createStoreWithMiddleware(reducers)}>
       <App />
     </Provider>
