@@ -55,6 +55,11 @@ export default function Dashboard() {
     setShutter(number)
   }
 
+  const GoToViewGrievance = (number) => {
+    console.log(number)
+    setShutter(number)
+  }
+
 
   return (
     <HStack
@@ -180,6 +185,7 @@ export default function Dashboard() {
           shutter === 0 ? (
             User.role ==0? <UserHome 
             runner={GoToAddGrievance}
+            runner1={GoToViewGrievance}
             userData={User}/>: <AdminHome />
           ) : (null)
         }
@@ -195,7 +201,7 @@ export default function Dashboard() {
         }
         {
           shutter === 3 ? (
-            User.role==0?<AddNewGrievance />:<AddInstituteGrievance/>
+            User.role==0?<AddNewGrievance User={User?User:null} />:<AddInstituteGrievance/>
           ) : (null)
         }
         {/* {
