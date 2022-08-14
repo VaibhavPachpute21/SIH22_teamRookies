@@ -10,7 +10,8 @@ import axios from 'axios'
 import AddNewGrievance from '../Grievance/AddNewGrievance'
 import DashboardAdd from '../Slides/add'
 import DashboardHistory from '../Slides/history'
-import DashboardHome from '../Slides/home'
+import AdminHome from '../Slides/admin_home'
+import UserHome from '../Slides/user_home'
 import DashboardTracker from '../Slides/tracker'
 import DashboardSettings from '../Slides/settings'
 import UserProfile from '../Slides/userProfile'
@@ -170,7 +171,7 @@ export default function Dashboard() {
         w="93%" h="100%">
         {
           shutter === 0 ? (
-            <DashboardHome />
+            User.role ==0? <UserHome />: <AdminHome />
           ) : (null)
         }
         {

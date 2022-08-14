@@ -12,6 +12,8 @@ import { AiOutlineUser, AiOutlinePhone, AiOutlineLock } from 'react-icons/ai'
 import * as actions from '../../actions/user_actions'
 import { connect } from 'react-redux'
 import cookie from 'js-cookie'
+
+
 function Registration(props) {
   const { register, handleSubmit, formState: { errors } } = useForm({ mode: 'onChange' });
   
@@ -23,7 +25,7 @@ function Registration(props) {
     let obj = {
       email: data.email,
       password: data.pass,
-      role: 1,
+      role: 0,
       fullname: data.fName,
       committee: "CSGRC",
       phone_number: data.phone,
@@ -34,7 +36,8 @@ function Registration(props) {
       gender: data.Gender,
       dob: data.DOB,
       course: data.course,
-      enrollment: data.enrollment
+      enrollment: data.enrollment,
+      address:data.address
     }
 
     try {

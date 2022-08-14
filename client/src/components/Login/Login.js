@@ -223,7 +223,7 @@ function Login(props) {
                 <Box w="100%">
                   <Heading
                     fontSize={'5xl'}
-                    fontWeight={700}  >
+                    fontWeight={700} py={2}  >
                     Log in to your account
                   </Heading>
                 </Box>

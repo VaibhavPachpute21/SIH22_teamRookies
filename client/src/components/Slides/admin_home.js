@@ -4,7 +4,7 @@ import { MdPendingActions, MdOutlineMoreVert } from 'react-icons/md'
 import ChartComponent from '../Chart/index'
 import {BsChat} from 'react-icons/bs'
 
-const DashboardHome = () => {
+const AdminHome = () => {
 
     
 
@@ -57,7 +57,7 @@ const DashboardHome = () => {
                 paddingLeft={8}
                 w="100%" h={["100%","100%","10%","10%"]} >
                 <Heading fontFamily={'monospace'}>
-                    Good Morning, Abhinav !
+                    Good Morning, Admin !
                 </Heading>
             </Flex>
             <Flex flexDirection={['column','column','row','row']}
@@ -251,4 +251,4 @@ const DashboardHome = () => {
     );
 }
 
-export default DashboardHome;
+export default AdminHome;
