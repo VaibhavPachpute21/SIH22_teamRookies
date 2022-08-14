@@ -13,39 +13,21 @@ const DashboardHistory = (props) => {
         "All", "Institute", "Student", "Employee", "Solved", "Unsolved"
     ]
 
-    const [Error,SetError] = useState('')
+    const [Error, SetError] = useState('')
 
     const [authen, setAuthen] = useState(null)
     const auth = cookie.get('token');
     const [User, SetUser] = useState({})
 
-    const [forwards,setForwards] = useState([])
-    const [currentGrievances,setcurrentGrievances] = useState([])
-
-    useEffect(() => {
-        async function VerifyUser() {
-            const request = await axios.get('http://localhost:3001/api/user/private', {
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${auth}`
-                }
-            })
-            if (request.data) {
-                let s = request.data?.success
-                setAuthen(s)
-                let user = request.data?.user
-                if (user) {
-                    SetUser(user)
-                }
-            }
-        }
-        VerifyUser()
-
-
-    }, [auth])
-    
+    const [forwards, setForwards] = useState([])
+    const [currentGrievances, setcurrentGrievances] = useState([])
 
     useEffect(()=>{
+        SetUser(props.User)
+    },[props.User])
+
+
+    useEffect(() => {
         const fetchMyGrievances = async () => {
             try {
                 await props.GetMyGrievances(User?._id)
@@ -54,22 +36,24 @@ const DashboardHistory = (props) => {
             }
         }
         fetchMyGrievances()
-    },[User._id,props.GetMyGrievances])
+    }, [User._id, props.GetMyGrievances])
 
-    useEffect(()=>{
-        if(props.data){
+    useEffect(() => {
+        if (props.data) {
             let alias = props.data
-           
-            if(alias.userData){
+
+            if (alias.userData) {
                 let d = alias.userData
-                setForwards(d?.forwards)
-            }
-            else if(alias.userData){
-                let d = alias.userData
-                setcurrentGrievances(d?.myGrievances)
+                if (d.forwards) {
+                    setForwards(d.forwards)
+                }
+                if (d.myGrievances) {
+                    setcurrentGrievances(d.myGrievances)
+                }
             }
         }
-    },[props.data])
+    }, [props.data])
+
 
     
 
@@ -89,28 +73,28 @@ const DashboardHistory = (props) => {
 
                 <Box w="100%" h="90%">
                     <Text
-                    fontWeight={600}
-                    fontSize={'xl'}
-                    py={3}>
+                        fontWeight={600}
+                        fontSize={'xl'}
+                        py={3}>
                         {
-                            forwards && forwards.length > 0 ? ("Some grievances you've missed"):("Current grievances")
+                            forwards && forwards.length > 0 ? ("Some grievances you've missed") : ("Current grievances")
                         }
                     </Text>
                     <VStack w="100%" minH={'70vh'} overflow={'scroll'} spacing={5}>
                         {
                             forwards && forwards.length > 0 ? (
-                                forwards?.map((item,i)=>(
+                                forwards?.map((item, i) => (
                                     <VStack
-                                    spacing={8}
-                                    boxShadow={'md'}
-                                    
-                                    borderTop={'3px solid #5A4FCF'}
-                                    key={i} w="100%" h="15vh">
+                                        spacing={8}
+                                        boxShadow={'md'}
+
+                                        borderTop={'3px solid #5A4FCF'}
+                                        key={i} w="100%" h="15vh">
                                         <HStack
-                                        marginTop={2}
-                                        alignItems={'flex-start'}
-                                        justifyContent={'space-between'}
-                                        w="100%" h="20%">
+                                            marginTop={2}
+                                            alignItems={'flex-start'}
+                                            justifyContent={'space-between'}
+                                            w="100%" h="20%">
                                             <HStack w="40%" h="100%">
                                                 <Text fontWeight={600}>
                                                     Grievance id
@@ -121,18 +105,18 @@ const DashboardHistory = (props) => {
                                             </HStack>
 
                                             <HStack w="15%" h="100%" alignItems={'center'}>
-                                            <Button
-                                            
-                                            color={'white'}
-                                            bg="#5A4FCF"
-                                            h="100%">
-                                                Check status
-                                            </Button>
-                                                </HStack>
+                                                <Button
+
+                                                    color={'white'}
+                                                    bg="#5A4FCF"
+                                                    h="100%">
+                                                    Check status
+                                                </Button>
+                                            </HStack>
                                         </HStack>
 
                                         <HStack w="100%" h="5%">
-                                        <HStack w="40%" h="100%">
+                                            <HStack w="40%" h="100%">
                                                 <Text fontWeight={600}>
                                                     Forwarded to you on
                                                 </Text>
@@ -144,7 +128,82 @@ const DashboardHistory = (props) => {
 
                                     </VStack>
                                 ))
-                            ):(null)
+                            ) : (null)
+                        }
+
+                        {
+                            currentGrievances?.map((item, i) => (
+
+                                <VStack
+                                    spacing={8}
+                                    boxShadow={'md'}
+
+                                    borderTop={'3px solid #5A4FCF'}
+                                    key={i} w="100%" h="max-content">
+                                    <HStack
+                                        marginTop={2}
+                                        alignItems={'flex-start'}
+                                        justifyContent={'space-between'}
+                                        w="100%" h="20%">
+                                        <HStack w="40%" h="100%">
+                                            <Text fontWeight={600}>
+                                                Grievance id
+                                            </Text>
+                                            <Text>
+                                                {item?.reciever_id}
+                                            </Text>
+                                        </HStack>
+
+                                        <HStack w="15%" h="100%" alignItems={'center'}>
+                                            <Button
+
+                                                color={'white'}
+                                                bg="#5A4FCF"
+                                                h="100%">
+                                                Check status
+                                            </Button>
+                                        </HStack>
+                                    </HStack>
+
+                                    <HStack w="100%" h="5%">
+                                        <HStack w="40%" h="100%">
+                                            <Text fontWeight={600}>
+                                                Forwarded to you on
+                                            </Text>
+                                            <Text>
+                                                {item?.updatedAt.split('T')[0]}
+                                            </Text>
+
+
+
+                                        </HStack>
+                                    </HStack>
+
+                                    <HStack w="100%" h="5%">
+                                        <HStack w="40%" h="100%">
+                                            <Text fontWeight={600}>
+                                                {15 - (item?.day_counter)}
+                                            </Text>
+                                            <Text>
+                                                days to forward
+                                            </Text>
+                                        </HStack>
+                                    </HStack>
+                                    
+                                    <VStack
+                                    py={2}
+                                    alignItems={'flex-start'}
+                                    w="100%" h="max-content">
+                                        <Text fontWeight={600}>
+                                            {item?.grievance_title}
+                                        </Text>
+
+                                        <Text w="100%" h="max-content">
+                                            {item?.grievance_description}
+                                        </Text>
+                                    </VStack>
+                                </VStack>
+                            ))
                         }
                     </VStack>
                 </Box>
@@ -154,10 +213,10 @@ const DashboardHistory = (props) => {
 }
 
 const mapStateToProps = (state) => {
-    return{
-        data:state.users
+    return {
+        data: state.users
     }
 }
 
 
-export default connect(mapStateToProps,actions)(DashboardHistory);
+export default connect(mapStateToProps, actions)(DashboardHistory);

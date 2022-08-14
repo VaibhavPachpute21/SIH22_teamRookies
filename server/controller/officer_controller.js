@@ -125,7 +125,7 @@ exports.AllMyGrievances = async (req,res,next) => {
 
     try {
         const myGrievances = await Grievance.find({"reciever_id":id})
-        const forwards = await Forward.find({"previous_reciever":id})
+        const forwards = await Forward.find({"previous_reciever":id,"current_reciever":id})
         if(!myGrievances){
             res.status(200).json({
                 success:false,

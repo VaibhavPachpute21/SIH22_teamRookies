@@ -38,6 +38,7 @@ const GrievanceStatus = (props) => {
 
 
     const end = function (username, reciever_id, university, replies, i) {
+        
         return (
             <Box key={i} w="100%" h="max-content">
                 <HStack w="100%" h="100%" alignItems={'flex-start'} justifyContent={'center'}>

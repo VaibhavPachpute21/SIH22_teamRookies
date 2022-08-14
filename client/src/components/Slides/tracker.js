@@ -5,14 +5,22 @@ import { useNavigate } from 'react-router-dom'
 import { GrFormAttachment } from 'react-icons/gr'
 import { connect } from 'react-redux'
 import * as actions from '../../actions/grievant_actions'
-
-
+import axios from 'axios';
+import cookie from 'js-cookie'
 
 const DashboardTracker = (props) => {
 
     const [filterTabs, setfilterTabs] = useState([])
     const [error, SetError] = useState('')
     const [Grievances, SetGrievances] = useState([])
+
+
+
+    const [authen, setAuthen] = useState(null)
+    const auth = cookie.get('token');
+    const [User,setUser] = useState({})
+
+    
 
     const chart = {
         options: {
@@ -119,23 +127,31 @@ const DashboardTracker = (props) => {
 
     const nav = useNavigate()
 
-    useEffect(() => {
+
+    useEffect(()=>{
+        if(props.User){
+            setUser(props.User)
+        }
+},[props.User])
+
+   useEffect(() => {
         const GetAllGrievances = async () => {
             try {
-                await props.GetAllGrievances('62f88ca84ec3adf64f0769b0')
+                await props.GetAllGrievances(User._id)
             } catch (error) {
                 SetError(error.message)
             }
         }
         GetAllGrievances()
-    }, [])
-
+    }, [User._id,props.grievance])
+ 
 
     useEffect(() => {
         if (props.data) {
             let d = props.data
             if (d.grievanceData) {
-                let f = d.grievanceData
+                let f = d?.grievanceData
+                console.log(f)
                 if (f) {
                     SetGrievances(f.allGrievances)
                 }
@@ -143,7 +159,7 @@ const DashboardTracker = (props) => {
         }
     }, [props.data])
 
-    console.log(props.data)
+   
 
 
     const setTabsArray = (a, b) => {

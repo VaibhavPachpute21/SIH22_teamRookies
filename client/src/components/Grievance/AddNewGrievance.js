@@ -4,9 +4,40 @@ import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/grievant_actions'
 import { useNavigate } from 'react-router-dom';
-
+import cookie from 'js-cookie'
+import axios from 'axios';
 function AddNewGrievance(props) {
     const { register, handleSubmit, formState: { errors } } = useForm({ mode: 'onChange' });
+
+
+    const [authen, setAuthen] = useState(null)
+    const auth = cookie.get('token');
+    const [User, SetUser] = useState({})
+  
+    console.log(User);
+  
+    useEffect(() => {
+      async function VerifyUser() {
+        const request = await axios.get('http://localhost:3001/api/user/private', {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${auth}`
+          }
+        })
+        if (request.data) {
+          let s = request.data?.success
+          setAuthen(s)
+          let user = request.data?.user
+          if (user) {
+            SetUser(user)
+          }
+        }
+      }
+      VerifyUser()
+  
+  
+    }, [auth])
+    
 
     const [Files, SetFiles] = useState([])
     const toast = useToast()
@@ -14,9 +45,9 @@ function AddNewGrievance(props) {
     const navigate = useNavigate()
 
     const HandleSubmit = async (data) => {
-        console.log(data)
+        
         let obj = {
-            grievant_id: "62f88ca84ec3adf64f0769b0",
+            grievant_id: User._id,
             grievance_nature: data.nature,
             principal_name: data.pName,
             grievance_title: data.title,
@@ -25,10 +56,41 @@ function AddNewGrievance(props) {
             imgs: Files,
 
         }
-        console.log(obj)
+    
 
         try {
             await props.AddGrievance(obj)
+
+            if (props.data) {
+                let alias = props.data
+                if (alias.grievanceData) {
+                    let success = alias.grievanceData?.success
+                    
+                    if (success) {
+                        toast({
+                            position: 'top',
+                            render: () => (
+                                <Box color='white' p={3} bg='green.500'>
+                                    Grievance submitted
+                                </Box>
+                            ),
+                        })
+                        // navigate('/TrackGrievance/34-20')
+                    }
+                    else {
+                        toast({
+                            position: 'top',
+                            render: () => (
+                                <Box color='white' p={3} bg='red.500'>
+                                    {error}
+                                </Box>
+                            ),
+                        })
+                    }
+    
+                }
+    
+            }
         } catch (error) {
             SetError(error.message)
         }
@@ -55,37 +117,6 @@ function AddNewGrievance(props) {
     }
 
 
-    useEffect(() => {
-        if (props.data) {
-            let alias = props.data
-            if (alias.grievanceData) {
-                let success = alias.grievanceData?.success
-                if (success) {
-                    toast({
-                        position: 'top',
-                        render: () => (
-                            <Box color='white' p={3} bg='green.500'>
-                                Grievance submitted
-                            </Box>
-                        ),
-                    })
-                    // navigate('/TrackGrievance/34-20')
-                }
-                else {
-                    toast({
-                        position: 'top',
-                        render: () => (
-                            <Box color='white' p={3} bg='red.500'>
-                                {error}
-                            </Box>
-                        ),
-                    })
-                }
-
-            }
-
-        }
-    }, [props.data])
 
 
 

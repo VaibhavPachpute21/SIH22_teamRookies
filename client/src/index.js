@@ -49,7 +49,10 @@ const App = () => {
         
             <Route path="/Contact" element={<Contact />} />
             <Route path="/Grievance/:id" element={<Grievance />} />
-            <Route path="/AddNewGrievance" element={<AddNewGrievance />} />
+            <Route path="/AddNewGrievance" element={
+            <PrivateRoute>
+              <AddNewGrievance />
+            </PrivateRoute>} />
             <Route path="/TrackGrievance/:id" element={<GrievanceStatus />} />
             <Route path="/AddInstituteGrievance" element={<AddInstituteGrievance />} />
             <Route path="/InstituteProfile" element={<InstituteProfile />} />
