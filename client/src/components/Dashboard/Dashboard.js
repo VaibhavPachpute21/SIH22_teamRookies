@@ -5,7 +5,7 @@ import { MdOutlineRecentActors } from 'react-icons/md'
 import { MdPendingActions } from 'react-icons/md'
 import { IoMdAddCircleOutline } from 'react-icons/io'
 import { FiSettings } from 'react-icons/fi'
-import { AiOutlineUser } from 'react-icons/ai'
+import { AiOutlineUser,AiOutlineLogout } from 'react-icons/ai'
 import axios from 'axios'
 import AddNewGrievance from '../Grievance/AddNewGrievance'
 import DashboardAdd from '../Slides/add'
@@ -15,6 +15,8 @@ import UserHome from '../Slides/user_home'
 import DashboardTracker from '../Slides/tracker'
 import DashboardSettings from '../Slides/settings'
 import UserProfile from '../Slides/userProfile'
+import AddInstituteGrievance from '../InstitutePages/addInstituteGrievance'
+import InstituteProfile from '../InstitutePages/instituteProfile'
 import cookie from 'js-cookie'
 
 export default function Dashboard() {
@@ -25,7 +27,7 @@ export default function Dashboard() {
   const [User, SetUser] = useState({})
 
  
-
+  console.log(User)
   useEffect(() => {
     async function VerifyUser() {
       const request = await axios.get('http://localhost:3001/api/user/private', {
@@ -134,23 +136,9 @@ export default function Dashboard() {
 
         <Divider w="50%" />
 
-        {/* <Box w="100%" h="10%">
+        <Box w="100%" h="10%">
           <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
-            <IconButton
-              onClick={() => { setShutter(4) }}
-              background={shutter==4?'#362ca0':'#5A4FCF'}
-              borderRadius={10}
-         
-              color={'white'}
-              _hover={{ background: '#5247cd' }}
-              fontSize={'2xl'}
-              icon={<FiSettings />} />
-          </Flex>
-        </Box> */}
-
-        <Box w="100%" h="50%">
-          <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'flex-end'}>
-            <IconButton
+          <IconButton
               onClick={() => { setShutter(5) }}
               background={shutter == 5 ? '#362ca0' : '#5A4FCF'}
               marginBottom={5}
@@ -162,6 +150,20 @@ export default function Dashboard() {
               icon={<AiOutlineUser />} />
           </Flex>
         </Box>
+        <Box w="100%" h="50%">
+          <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'flex-end'}>
+          <IconButton
+              background={'#5A4FCF'}
+              borderRadius={10}
+         
+              color={'white'}
+              _hover={{ background: '#5247cd' }}
+              fontSize={'2xl'}
+              icon={<AiOutlineLogout />} />
+            
+          </Flex>
+        </Box>
+        
 
 
       </VStack>
@@ -171,7 +173,7 @@ export default function Dashboard() {
         w="93%" h="100%">
         {
           shutter === 0 ? (
-            User.role ==0? <UserHome />: <AdminHome />
+            User.role ==0? <UserHome userData={User}/>: <AdminHome />
           ) : (null)
         }
         {
@@ -186,7 +188,7 @@ export default function Dashboard() {
         }
         {
           shutter === 3 ? (
-            <AddNewGrievance />
+            User.role==0?<AddNewGrievance />:<AddInstituteGrievance/>
           ) : (null)
         }
         {/* {
@@ -196,7 +198,7 @@ export default function Dashboard() {
         } */}
         {
           shutter === 5 ? (
-            <UserProfile />
+            User.role==0?<UserProfile />:<InstituteProfile/>
           ) : (null)
         }
 

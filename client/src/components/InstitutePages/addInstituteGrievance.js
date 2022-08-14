@@ -11,7 +11,7 @@ export default function AddInstituteGrievance() {
 
 
     return (
-        <Flex w='100vw' h='100%' bg='grey.200' alignItems={'center'} justifyContent={'center'} padding={2}
+        <Flex h='max-content' justifyContent={'center'} padding={2}
             overflowX={'none'}
         >
             <Flex flexDirection={'column'} w={['100%', '90%', '80%', '80%']} boxShadow={'dark-lg'}>
