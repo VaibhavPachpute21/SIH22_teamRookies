@@ -30,7 +30,7 @@ const DashboardHistory = (props) => {
     useEffect(() => {
         const fetchMyGrievances = async () => {
             try {
-                await props.GetMyGrievances(User?._id)
+                await props.GetMyGrievances(User._id)
             } catch (error) {
                 SetError(error.message)
             }
@@ -41,7 +41,7 @@ const DashboardHistory = (props) => {
     useEffect(() => {
         if (props.data) {
             let alias = props.data
-
+            console.log(alias)
             if (alias.userData) {
                 let d = alias.userData
                 if (d.forwards) {
@@ -53,6 +53,8 @@ const DashboardHistory = (props) => {
             }
         }
     }, [props.data])
+
+
 
 
     

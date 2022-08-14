@@ -6,6 +6,10 @@ import { BsChat } from 'react-icons/bs'
 
 const UserHome = (props) => {
 
+    const Go = (n) => {
+        props.runner(n)
+    }
+
     return (
         <Flex spacing={10} w="100%" h="100%"
             flexDirection={["column", "column", "column", "column"]}>
@@ -30,7 +34,7 @@ const UserHome = (props) => {
                         </HStack>
                     </Box>
                     <Box alignSelf={'start'} py={3}>
-                        <Button bg={'#5A4FCF'} color='white' >Add Grievance </Button>
+                        <Button bg={'#5A4FCF'} color='white' onClick={()=>Go(3)}>Add Grievance </Button>
                     </Box>
                 </Box>
                 <Box borderTop={'4px solid #5A4FCF'} padding={5}

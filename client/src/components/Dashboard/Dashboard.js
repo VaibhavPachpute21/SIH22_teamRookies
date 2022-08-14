@@ -50,7 +50,12 @@ export default function Dashboard() {
 
   }, [auth])
   
-  
+  const GoToAddGrievance = (number) => {
+    console.log(number)
+    setShutter(number)
+  }
+
+
   return (
     <HStack
       w={'100vw'}
@@ -173,17 +178,19 @@ export default function Dashboard() {
         w="93%" h="100%">
         {
           shutter === 0 ? (
-            User.role ==0? <UserHome userData={User}/>: <AdminHome />
+            User.role ==0? <UserHome 
+            runner={GoToAddGrievance}
+            userData={User}/>: <AdminHome />
           ) : (null)
         }
         {
           shutter === 1 ? (
-            <DashboardHistory />
+            <DashboardHistory User={User?User:null}/>
           ) : (null)
         }
         {
           shutter === 2 ? (
-            <DashboardTracker />
+            <DashboardTracker User={User?User:null}/>
           ) : (null)
         }
         {
@@ -198,7 +205,10 @@ export default function Dashboard() {
         } */}
         {
           shutter === 5 ? (
-            User.role==0?<UserProfile />:<InstituteProfile/>
+            User.role==0?<UserProfile 
+            
+            
+            />:<InstituteProfile/>
           ) : (null)
         }
 

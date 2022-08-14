@@ -6,6 +6,9 @@ const grievanceSchema = new mongoose.Schema({
         type: String,
 
     },
+    grievant_name:{
+        type:String
+    },
     reciever_id: {
         type: String,
 

@@ -1,7 +1,7 @@
 const { Forward } = require('../models/forward_model')
 const { Grievance } = require('../models/grievance_model')
 const { Officer } = require("../models/officer_model")
-
+const {SendMessage} = require("../messaging/sendMessage")
 
 
 exports.IncDayCount = async (req, res, next) => {
@@ -38,6 +38,8 @@ exports.ResetAndForward = async (req, res, next) => {
                         officer_avatar: nextOfficer[0].avatar,
                         officer_university: nextOfficer[0].university
                     })
+
+                    SendMessage(doc.grievant_name,doc.grievance_title,nextOfficer[0]?.fullname)
                 } catch (error) {
                     /// Some error handling
                 }
