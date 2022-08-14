@@ -18,29 +18,40 @@ export default function AddInstituteGrievance() {
                 <form onSubmit={handleSubmit(HandleSubmit)}>
                     <FormControl>
                         <Box w={'100%'} bg='white' paddingTop={5}>
-                            <Text textAlign={'center'} fontSize={'3xl'}>Grievant's Information</Text>
+                            <Text textAlign={'center'} fontSize={'3xl'}>Institute's Information</Text>
                         </Box>
                         <Flex w={'100%'} h='100%' bg='white' py={[5, 5, 5, 5]} px={[2, 2, 10, 10]} gap={[2, 2, 5, 5]} flexDirection={['column', 'column', 'row', 'row']} >
-                            <Box w={['90%', '90%', '25%', '25%']}>
-                                <Text fontSize={'18px'} paddingLeft={2}>Name:</Text>
-                                <Input variant={'filled'} value='Vaibhav Pachpute' readOnly={true} />
+                            <Box w={['90%', '90%', '50%', '50%']}>
+                                <Text fontSize={'18px'} paddingLeft={2}>Institute Name:</Text>
+                                <Input variant={'filled'} value='Universal College of Engineering,Kaman Dist. Palghar' readOnly={true} />
                             </Box>
                             <Box w={['90%', '90%', '25%', '25%']}>
-                                <Text fontSize={'18px'} paddingLeft={2}>Phone:</Text>
-                                <Input variant={'filled'} value='1234567890' readOnly={true} />
+                                <Text fontSize={'18px'} paddingLeft={2}>Institute Code:</Text>
+                                <Input variant={'filled'} value='3460' readOnly={true} />
+                            </Box>
+                        </Flex>
+
+                        <Flex w={'100%'} h='100%' bg='white' py={[5, 5, 5, 5]} px={[2, 2, 10, 10]} gap={[2, 2, 5, 5]} flexDirection={['column', 'column', 'row', 'row']} >
+                            <Box w={['90%', '90%', '25%', '25%']}>
+                                <Text fontSize={'18px'} paddingLeft={2}>Institute Region:</Text>
+                                <Input variant={'filled'} value='Mumbai' readOnly={true} />
                             </Box>
                             <Box w={['90%', '90%', '25%', '25%']}>
-                                <Text fontSize={'18px'} paddingLeft={2}>Mail:</Text>
-                                <Input variant={'filled'} value='vaibhva@mail.com' readOnly={true} />
+                                <Text fontSize={'18px'} paddingLeft={2}>District :</Text>
+                                <Input variant={'filled'} value='Palghar' readOnly={true} />
                             </Box>
                             <Box w={['90%', '90%', '25%', '25%']}>
-                                <Text fontSize={'18px'} paddingLeft={2}>DOB:</Text>
-                                <Input variant={'filled'} value='07-02-2002' readOnly={true} />
+                                <Text fontSize={'18px'} paddingLeft={2}>Taluka :</Text>
+                                <Input variant={'filled'} value='Vasai' readOnly={true} />
+                            </Box>
+                            <Box w={['90%', '90%', '25%', '25%']}>
+                                <Text fontSize={'18px'} paddingLeft={2}>Pincode:</Text>
+                                <Input variant={'filled'} value='401208' readOnly={true} />
                             </Box>
                         </Flex>
                         <Flex w={'100%'} h='100%' bg='white' py={[5, 5, 5, 5]} px={[2, 2, 10, 10]} gap={[2, 2, 5, 5]} flexDirection={['column', 'column', 'row', 'row']} >
                             <Box w={['90%', '90%', '25%', '25%']}>
-                                <Text fontSize={'18px'} paddingLeft={2}>Collage:</Text>
+                                <Text fontSize={'18px'} paddingLeft={2}>Collage Representative:</Text>
                                 <Input variant={'filled'} value='Universal Collage of Enginnering,Kaman' readOnly={true} />
                             </Box>
                             <Box w={['90%', '90%', '25%', '25%']}>

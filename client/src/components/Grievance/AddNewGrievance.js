@@ -16,15 +16,16 @@ function AddNewGrievance(props) {
     const HandleSubmit = async (data) => {
         console.log(data)
         let obj = {
-            grievant_id: "62f1ff9f9aa66c7b91065566",
+            grievant_id: "62f88ca84ec3adf64f0769b0",
             grievance_nature: data.nature,
             principal_name: data.pName,
             grievance_title: data.title,
             grievance_description: data.discription,
-            grievant_university: "ch",
+            grievant_university: "mu",
             imgs: Files,
 
         }
+        console.log(obj)
 
         try {
             await props.AddGrievance(obj)
@@ -68,7 +69,7 @@ function AddNewGrievance(props) {
                             </Box>
                         ),
                     })
-                    navigate('/TrackGrievance/34-20')
+                    // navigate('/TrackGrievance/34-20')
                 }
                 else {
                     toast({

@@ -23,6 +23,8 @@ export default function Dashboard() {
   const auth = cookie.get('token');
   const [User, SetUser] = useState({})
 
+  console.log(User);
+
   useEffect(() => {
     async function VerifyUser() {
       const request = await axios.get('http://localhost:3001/api/user/private', {
