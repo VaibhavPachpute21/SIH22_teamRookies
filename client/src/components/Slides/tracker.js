@@ -18,33 +18,7 @@ const DashboardTracker = (props) => {
 
     const [authen, setAuthen] = useState(null)
     const auth = cookie.get('token');
-    const [User, SetUser] = useState({})
-
-    const [forwards, setForwards] = useState([])
-    const [currentGrievances, setcurrentGrievances] = useState([])
-
-    useEffect(() => {
-        async function VerifyUser() {
-            const request = await axios.get('http://localhost:3001/api/user/private', {
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${auth}`
-                }
-            })
-            if (request.data) {
-                let s = request.data?.success
-                setAuthen(s)
-                let user = request.data?.user
-                if (user) {
-                    SetUser(user)
-                }
-            }
-        }
-        VerifyUser()
-
-
-    }, [auth])
-    
+    const [User,setUser] = useState({})
 
     
 
@@ -153,7 +127,14 @@ const DashboardTracker = (props) => {
 
     const nav = useNavigate()
 
-    useEffect(() => {
+
+    useEffect(()=>{
+        if(props.User){
+            setUser(props.User)
+        }
+},[props.User])
+
+   useEffect(() => {
         const GetAllGrievances = async () => {
             try {
                 await props.GetAllGrievances(User._id)
@@ -162,8 +143,8 @@ const DashboardTracker = (props) => {
             }
         }
         GetAllGrievances()
-    }, [User._id])
-
+    }, [User._id,props.grievance])
+ 
 
     useEffect(() => {
         if (props.data) {

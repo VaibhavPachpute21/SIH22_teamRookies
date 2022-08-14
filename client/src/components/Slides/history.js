@@ -22,27 +22,9 @@ const DashboardHistory = (props) => {
     const [forwards, setForwards] = useState([])
     const [currentGrievances, setcurrentGrievances] = useState([])
 
-    useEffect(() => {
-        async function VerifyUser() {
-            const request = await axios.get('http://localhost:3001/api/user/private', {
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${auth}`
-                }
-            })
-            if (request.data) {
-                let s = request.data?.success
-                setAuthen(s)
-                let user = request.data?.user
-                if (user) {
-                    SetUser(user)
-                }
-            }
-        }
-        VerifyUser()
-
-
-    }, [auth])
+    useEffect(()=>{
+        SetUser(props.User)
+    },[props.User])
 
 
     useEffect(() => {

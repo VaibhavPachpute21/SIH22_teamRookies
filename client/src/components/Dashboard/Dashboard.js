@@ -23,7 +23,7 @@ export default function Dashboard() {
   const auth = cookie.get('token');
   const [User, SetUser] = useState({})
 
-
+ 
 
   useEffect(() => {
     async function VerifyUser() {
