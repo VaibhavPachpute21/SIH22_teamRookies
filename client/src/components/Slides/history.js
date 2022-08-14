@@ -73,7 +73,7 @@ const DashboardHistory = (props) => {
     }, [props.data])
 
 
-    console.log(currentGrievances)
+    
 
     return (
         <Box w="100%" h="100%">

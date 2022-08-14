@@ -5,14 +5,48 @@ import { useNavigate } from 'react-router-dom'
 import { GrFormAttachment } from 'react-icons/gr'
 import { connect } from 'react-redux'
 import * as actions from '../../actions/grievant_actions'
-
-
+import axios from 'axios';
+import cookie from 'js-cookie'
 
 const DashboardTracker = (props) => {
 
     const [filterTabs, setfilterTabs] = useState([])
     const [error, SetError] = useState('')
     const [Grievances, SetGrievances] = useState([])
+
+
+
+    const [authen, setAuthen] = useState(null)
+    const auth = cookie.get('token');
+    const [User, SetUser] = useState({})
+
+    const [forwards, setForwards] = useState([])
+    const [currentGrievances, setcurrentGrievances] = useState([])
+
+    useEffect(() => {
+        async function VerifyUser() {
+            const request = await axios.get('http://localhost:3001/api/user/private', {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${auth}`
+                }
+            })
+            if (request.data) {
+                let s = request.data?.success
+                setAuthen(s)
+                let user = request.data?.user
+                if (user) {
+                    SetUser(user)
+                }
+            }
+        }
+        VerifyUser()
+
+
+    }, [auth])
+    
+
+    
 
     const chart = {
         options: {
@@ -122,20 +156,21 @@ const DashboardTracker = (props) => {
     useEffect(() => {
         const GetAllGrievances = async () => {
             try {
-                await props.GetAllGrievances('62f88ca84ec3adf64f0769b0')
+                await props.GetAllGrievances(User._id)
             } catch (error) {
                 SetError(error.message)
             }
         }
         GetAllGrievances()
-    }, [])
+    }, [User._id])
 
 
     useEffect(() => {
         if (props.data) {
             let d = props.data
             if (d.grievanceData) {
-                let f = d.grievanceData
+                let f = d?.grievanceData
+                console.log(f)
                 if (f) {
                     SetGrievances(f.allGrievances)
                 }
@@ -143,7 +178,7 @@ const DashboardTracker = (props) => {
         }
     }, [props.data])
 
-    console.log(props.data)
+   
 
 
     const setTabsArray = (a, b) => {
