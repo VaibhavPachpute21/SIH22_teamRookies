@@ -102,7 +102,7 @@ const DashboardHistory = (props) => {
                                                     Grievance id
                                                 </Text>
                                                 <Text>
-                                                    {item?.grievance_id}
+                                                    {item?._id}
                                                 </Text>
                                             </HStack>
 
@@ -152,7 +152,7 @@ const DashboardHistory = (props) => {
                                                 Grievance id
                                             </Text>
                                             <Text>
-                                                {item?.reciever_id}
+                                                {item?._id}
                                             </Text>
                                         </HStack>
 
