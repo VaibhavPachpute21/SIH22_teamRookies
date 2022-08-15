@@ -9,7 +9,7 @@ export default function InstituteProfile() {
 
   return (
     <Flex h={'100%'} w={"100%"} alignContent={'center'} justifyContent={'center'} padding={2}>
-      <Flex w={"90%"} flexDirection={"column"} bg="white" padding={10} boxShadow={'dark-lg'}>
+      <Flex w={"90%"} flexDirection={"column"} bg="white" padding={10}>
         <Flex w={"100%"} flexDirection='column'>
           <Box w="100%">
 

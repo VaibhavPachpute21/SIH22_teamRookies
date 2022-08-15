@@ -131,7 +131,7 @@ export default function Dashboard() {
         </Box>
 
         <Box w="100%" h="10%">
-          <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
+          {User.role !=1 ? <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
             <IconButton
               onClick={() => { setShutter(3) }}
               background={shutter == 3 ? '#362ca0' : '#5A4FCF'}
@@ -141,7 +141,7 @@ export default function Dashboard() {
               _hover={{ background: '#5247cd' }}
               fontSize={'3xl'}
               icon={<IoMdAddCircleOutline />} />
-          </Flex>
+          </Flex>:null}
         </Box>
 
         <Divider w="50%" />
@@ -183,7 +183,7 @@ export default function Dashboard() {
         w="93%" h="100%">
         {
           shutter === 0 ? (
-            User.role ==0? <UserHome 
+            User.role ==0 || User.role==2 ? <UserHome 
             runner={GoToAddGrievance}
             runner1={GoToViewGrievance}
             userData={User}/>: <AdminHome />
@@ -211,7 +211,7 @@ export default function Dashboard() {
         } */}
         {
           shutter === 5 ? (
-            User.role==0?<UserProfile 
+            User.role==0 || User.role==1 ?<UserProfile 
             
             
             />:<InstituteProfile/>
