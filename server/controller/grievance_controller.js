@@ -104,6 +104,7 @@ exports.SatisfiedWithReply = async (req,res,next) => {
     
     try {
         const updatedGrievance = await Grievance.findOneAndUpdate({"_id":grievance_id},{$set:{"satisfied":true}})
+
         if(!updatedGrievance){
             res.status(200).json({
                 success:false,

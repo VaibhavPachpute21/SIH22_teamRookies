@@ -40,8 +40,8 @@ app.use("/api/forwards",require("./routes/forward_route"))
 // Cron jobs
 
  cron.scheduleJob("*/2 * * * * *",()=>{
- /*    IncDayCount(),
-    ResetAndForward()   */
+  /*   IncDayCount(),
+    ResetAndForward()    */
 })
  
 

@@ -51,6 +51,10 @@ const officerSchema = new mongoose.Schema({
     },
     state: {
         type: String,
+    },
+    solve_count:{
+        type:Number,
+        default:0
     }
 },
     {

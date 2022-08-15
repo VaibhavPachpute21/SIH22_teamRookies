@@ -39,7 +39,7 @@ exports.ResetAndForward = async (req, res, next) => {
                         officer_university: nextOfficer[0].university
                     })
 
-                    SendMessage(doc.grievant_name,doc.grievance_title,nextOfficer[0]?.fullname)
+                  /*   SendMessage(doc.grievant_name,doc.grievance_title,nextOfficer[0]?.fullname) */
                 } catch (error) {
                     /// Some error handling
                 }
