@@ -5,7 +5,7 @@ import { MdOutlineRecentActors } from 'react-icons/md'
 import { MdPendingActions } from 'react-icons/md'
 import { IoMdAddCircleOutline } from 'react-icons/io'
 import { FiSettings } from 'react-icons/fi'
-import { AiOutlineUser,AiOutlineLogout } from 'react-icons/ai'
+import { AiOutlineUser, AiOutlineLogout } from 'react-icons/ai'
 import axios from 'axios'
 import AddNewGrievance from '../Grievance/AddNewGrievance'
 import DashboardAdd from '../Slides/add'
@@ -18,6 +18,7 @@ import UserProfile from '../Slides/userProfile'
 import AddInstituteGrievance from '../InstitutePages/addInstituteGrievance'
 import InstituteProfile from '../InstitutePages/instituteProfile'
 import AdminDashboardHistory from '../Slides/admin_history'
+import RegisterNewCollage from '../Slides/RegisterNewCollage'
 import cookie from 'js-cookie'
 
 export default function Dashboard() {
@@ -27,7 +28,7 @@ export default function Dashboard() {
   const auth = cookie.get('token');
   const [User, SetUser] = useState({})
 
- 
+
   console.log(User)
   useEffect(() => {
     async function VerifyUser() {
@@ -50,7 +51,7 @@ export default function Dashboard() {
 
 
   }, [auth])
-  
+
   const GoToAddGrievance = (number) => {
     console.log(number)
     setShutter(number)
@@ -132,7 +133,7 @@ export default function Dashboard() {
         </Box>
 
         <Box w="100%" h="10%">
-          {User.role !=1 ? <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
+          <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
             <IconButton
               onClick={() => { setShutter(3) }}
               background={shutter == 3 ? '#362ca0' : '#5A4FCF'}
@@ -142,14 +143,14 @@ export default function Dashboard() {
               _hover={{ background: '#5247cd' }}
               fontSize={'3xl'}
               icon={<IoMdAddCircleOutline />} />
-          </Flex>:null}
+          </Flex>
         </Box>
 
         <Divider w="50%" />
 
         <Box w="100%" h="10%">
           <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
-          <IconButton
+            <IconButton
               onClick={() => { setShutter(5) }}
               background={shutter == 5 ? '#362ca0' : '#5A4FCF'}
               marginBottom={5}
@@ -163,18 +164,18 @@ export default function Dashboard() {
         </Box>
         <Box w="100%" h="50%">
           <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'flex-end'}>
-          <IconButton
+            <IconButton
               background={'#5A4FCF'}
               borderRadius={10}
-         
+
               color={'white'}
               _hover={{ background: '#5247cd' }}
               fontSize={'2xl'}
               icon={<AiOutlineLogout />} />
-            
+
           </Flex>
         </Box>
-        
+
 
 
       </VStack>
@@ -184,26 +185,26 @@ export default function Dashboard() {
         w="93%" h="100%">
         {
           shutter === 0 ? (
-            User.role ==0 || User.role==2 ? <UserHome 
-            runner={GoToAddGrievance}
-            runner1={GoToViewGrievance}
-            userData={User}/>: <AdminHome />
+            User.role == 0 || User.role == 2 ? <UserHome
+              runner={GoToAddGrievance}
+              runner1={GoToViewGrievance}
+              userData={User} /> : <AdminHome />
           ) : (null)
         }
         {
           shutter === 1 ? (
-            User.role == 0 ? 
-            <DashboardHistory User={User?User:null}/>:<AdminDashboardHistory User={User?User:null}/>
+            User.role == 0 ?
+              <DashboardHistory User={User ? User : null} /> : <AdminDashboardHistory User={User ? User : null} />
           ) : (null)
         }
         {
           shutter === 2 ? (
-            <DashboardTracker User={User?User:null}/>
+            <DashboardTracker User={User ? User : null} />
           ) : (null)
         }
         {
           shutter === 3 ? (
-            User.role==0?<AddNewGrievance User={User?User:null} />:<AddInstituteGrievance/>
+            User.role == 1 ? <RegisterNewCollage /> : User.role == 0 ? <AddNewGrievance User={User ? User : null} /> : <AddInstituteGrievance />
           ) : (null)
         }
         {/* {
@@ -213,10 +214,10 @@ export default function Dashboard() {
         } */}
         {
           shutter === 5 ? (
-            User.role==0 || User.role==1 ?<UserProfile 
-            
-            
-            />:<InstituteProfile/>
+            User.role == 0 || User.role == 1 ? <UserProfile
+
+
+            /> : <InstituteProfile />
           ) : (null)
         }
 
