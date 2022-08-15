@@ -13,31 +13,31 @@ function AddNewGrievance(props) {
     const [authen, setAuthen] = useState(null)
     const auth = cookie.get('token');
     const [User, SetUser] = useState({})
-  
+
     console.log(User);
-  
+
     useEffect(() => {
-      async function VerifyUser() {
-        const request = await axios.get('http://localhost:3001/api/user/private', {
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${auth}`
-          }
-        })
-        if (request.data) {
-          let s = request.data?.success
-          setAuthen(s)
-          let user = request.data?.user
-          if (user) {
-            SetUser(user)
-          }
+        async function VerifyUser() {
+            const request = await axios.get('http://localhost:3001/api/user/private', {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${auth}`
+                }
+            })
+            if (request.data) {
+                let s = request.data?.success
+                setAuthen(s)
+                let user = request.data?.user
+                if (user) {
+                    SetUser(user)
+                }
+            }
         }
-      }
-      VerifyUser()
-  
-  
+        VerifyUser()
+
+
     }, [auth])
-    
+
 
     const [Files, SetFiles] = useState([])
     const toast = useToast()
@@ -45,7 +45,7 @@ function AddNewGrievance(props) {
     const navigate = useNavigate()
 
     const HandleSubmit = async (data) => {
-        
+
         let obj = {
             grievant_id: User._id,
             grievance_nature: data.nature,
@@ -56,7 +56,7 @@ function AddNewGrievance(props) {
             imgs: Files,
 
         }
-    
+        console.log(obj)
 
         try {
             await props.AddGrievance(obj)
@@ -65,7 +65,7 @@ function AddNewGrievance(props) {
                 let alias = props.data
                 if (alias.grievanceData) {
                     let success = alias.grievanceData?.success
-                    
+
                     if (success) {
                         toast({
                             position: 'top',
@@ -87,9 +87,9 @@ function AddNewGrievance(props) {
                             ),
                         })
                     }
-    
+
                 }
-    
+
             }
         } catch (error) {
             SetError(error.message)
@@ -117,12 +117,8 @@ function AddNewGrievance(props) {
     }
 
 
-
-
-
-
     return (
-        <Flex  h='max-content' justifyContent={'center'} padding={2} marginBottom={5}
+        <Flex h='max-content' justifyContent={'center'} padding={2} marginBottom={5}
         >
             <Flex flexDirection={'column'} height='max-content' w={['100%', '90%', '80%', '80%']} boxShadow={'dark-lg'}
             >
@@ -134,37 +130,37 @@ function AddNewGrievance(props) {
                         <Flex w={'100%'} h='100%' bg='white' py={[5, 5, 5, 5]} px={[2, 2, 10, 10]} gap={[2, 2, 5, 5]} flexDirection={['column', 'column', 'row', 'row']} >
                             <Box w={['90%', '90%', '25%', '25%']}>
                                 <Text fontSize={'18px'} paddingLeft={2}>Name:</Text>
-                                <Input variant={'filled'} value='Vaibhav Pachpute' readOnly={true} />
+                                <Input variant={'filled'} value={props.User.fullname} readOnly={true} />
                             </Box>
                             <Box w={['90%', '90%', '25%', '25%']}>
                                 <Text fontSize={'18px'} paddingLeft={2}>Phone:</Text>
-                                <Input variant={'filled'} value='1234567890' readOnly={true} />
+                                <Input variant={'filled'} value={props.User.phone_number} readOnly={true} />
                             </Box>
                             <Box w={['90%', '90%', '25%', '25%']}>
                                 <Text fontSize={'18px'} paddingLeft={2}>Mail:</Text>
-                                <Input variant={'filled'} value='vaibhva@mail.com' readOnly={true} />
+                                <Input variant={'filled'} value={props.User.email} readOnly={true} />
                             </Box>
                             <Box w={['90%', '90%', '25%', '25%']}>
                                 <Text fontSize={'18px'} paddingLeft={2}>DOB:</Text>
-                                <Input variant={'filled'} value='07-02-2002' readOnly={true} />
+                                <Input variant={'filled'} value={props.User.dob} readOnly={true} />
                             </Box>
                         </Flex>
                         <Flex w={'100%'} h='100%' bg='white' py={[5, 5, 5, 5]} px={[2, 2, 10, 10]} gap={[2, 2, 5, 5]} flexDirection={['column', 'column', 'row', 'row']} >
                             <Box w={['90%', '90%', '25%', '25%']}>
                                 <Text fontSize={'18px'} paddingLeft={2}>Collage:</Text>
-                                <Input variant={'filled'} value='Universal Collage of Enginnering,Kaman' readOnly={true} />
+                                <Input variant={'filled'} value={props.User.college_name} readOnly={true} />
                             </Box>
                             <Box w={['90%', '90%', '25%', '25%']}>
                                 <Text fontSize={'18px'} paddingLeft={2}>Enrollment no:</Text>
-                                <Input variant={'filled'} value='07022002' readOnly={true} />
+                                <Input variant={'filled'} value={props.User.enrollment} readOnly={true} />
                             </Box>
                             <Box w={['90%', '90%', '25%', '25%']}>
                                 <Text fontSize={'18px'} paddingLeft={2}>University:</Text>
-                                <Input variant={'filled'} value='Mumbai University' readOnly={true} />
+                                <Input variant={'filled'} value={props.User.university} readOnly={true} />
                             </Box>
                             <Box w={['90%', '90%', '25%', '25%']}>
                                 <Text fontSize={'18px'} paddingLeft={2}>State:</Text>
-                                <Input variant={'filled'} value='Maharashtra' readOnly={true} />
+                                <Input variant={'filled'} value={props.User.state} readOnly={true} />
                             </Box>
                         </Flex>
 
