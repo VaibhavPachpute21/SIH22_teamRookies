@@ -21,6 +21,8 @@ import promiseMiddleware from 'redux-promise'
 import reducers from './reducers/index'
 import Test from "./components/Test";
 import PrivateRoute from './components/private/private_route'
+import FeedBackForm from './components/feedbackform/index'
+
 const createStoreWithMiddleware = applyMiddleware(promiseMiddleware)(createStore)
 
 
@@ -56,6 +58,7 @@ const App = () => {
             <Route path="/TrackGrievance/:id" element={<GrievanceStatus />} />
             <Route path="/AddInstituteGrievance" element={<AddInstituteGrievance />} />
             <Route path="/InstituteProfile" element={<InstituteProfile />} />
+            <Route path="/feedback/:id" element={<FeedBackForm/>}/>
           </Routes>
         </Router>
       </Layout>

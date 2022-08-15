@@ -9,6 +9,9 @@ export default function grievance_reducer(state={},action){
         case "get_grievances":
             return {...state,grievanceData:action.payload}
         
+        case "satisfied_grievance":
+            return {...state,grievanceData:action.payload}
+
         default:
             return state
     }

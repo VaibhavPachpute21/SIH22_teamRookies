@@ -15,7 +15,6 @@ const DashboardHistory = (props) => {
 
     const [Error, SetError] = useState('')
 
-    const [authen, setAuthen] = useState(null)
     const auth = cookie.get('token');
     const [User, SetUser] = useState({})
 

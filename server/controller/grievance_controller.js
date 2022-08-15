@@ -99,6 +99,28 @@ exports.EditGrievance = async (req, res, next) => {
 
 }
 
+exports.SatisfiedWithReply = async (req,res,next) => {
+    const grievance_id = req.params.id
+    
+    try {
+        const updatedGrievance = await Grievance.findOneAndUpdate({"_id":grievance_id},{$set:{"satisfied":true}})
+        if(!updatedGrievance){
+            res.status(200).json({
+                success:false,
+                message:"Could not update grievance"
+            })
+        }
+        res.status(200).json({
+            success:true,
+            updatedGrievance
+        })
+    } catch (error) {
+        res.status(200).send(error)
+    }
+
+}
+
+
 exports.DeleteGrievance = async (req, res, next) => {
     const id = req.params.id
 

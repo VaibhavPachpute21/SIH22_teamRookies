@@ -152,7 +152,6 @@ exports.AllMyGrievances = async (req,res,next) => {
             })
         }
         if(role==0){
-            console.log("hello")
             const myGrievances = await Grievance.find({"grievant_id":id})
             const forwards = await Forward.find({"current_reciever":id})
             if(!myGrievances){

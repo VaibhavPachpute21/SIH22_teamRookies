@@ -10,9 +10,9 @@ import { useLocation } from "react-router-dom";
 const GrievanceStatus = (props) => {
 
     const [error, Seterror] = useState('')
-    const {pathname} = useLocation()
-    
-
+    const { pathname } = useLocation()
+    const [satisfiedConfirm, setSatisfiedConfirm] = useState(false)
+    const [satisfiedId, setsatisfiedId] = useState('')
 
     const [forwards, setForwards] = useState([])
 
@@ -36,9 +36,33 @@ const GrievanceStatus = (props) => {
     }, [props.data])
 
 
+    const SetSatisfied = () => {
+        var ans = window.confirm("Are you sure you're satisfied with the reply?")
+        if (ans) {
+            setSatisfiedConfirm(true)
+        }
+        else
+            setSatisfiedConfirm(false)
+    }
+
+    useEffect(() => {
+        if (satisfiedConfirm == true) {
+
+            try {
+                props.SatisfiedWithReply(pathname?.split("/")[2])
+            } catch (error) {
+                Seterror(error.message)
+            }
+
+
+        }
+    }, [satisfiedConfirm, props.SatisfiedWithReply])
+
+
+    console.log(props)
 
     const end = function (username, reciever_id, university, replies, i) {
-        
+
         return (
             <Box key={i} w="100%" h="max-content">
                 <HStack w="100%" h="100%" alignItems={'flex-start'} justifyContent={'center'}>
@@ -120,27 +144,37 @@ const GrievanceStatus = (props) => {
                                                             replies?.map((item, i) => {
                                                                 return (
                                                                     <VStack
-                                                            alignItems={'flex-start'}
-                                                            justifyContent={'space-between'}
-                                                            px={3}
-                                                            py={2}
-                                                            border={'1px'}
-                                                            borderColor={'gray.100'}
-                                                            w="100%" h="100%">
-                                                            <Text>
-                                                                {item.message}
-                                                            </Text>
+                                                                        alignItems={'flex-start'}
+                                                                        justifyContent={'space-between'}
+                                                                        px={3}
+                                                                        py={2}
+                                                                        border={'1px'}
+                                                                        borderColor={'gray.100'}
+                                                                        w="100%" h="100%">
+                                                                        <Text>
+                                                                            {item.message}
+                                                                        </Text>
 
-                                                            <Text>
-                                                                {item.DateTime}
-                                                            </Text>
+                                                                        <Text>
+                                                                            {item.DateTime}
+                                                                        </Text>
+                                                                        <HStack py={2}>
+                                                                            <IconButton
+                                                                                size={'sm'}
+                                                                                colorScheme={'red'}
+                                                                                icon={<FiThumbsDown />} />
+                                                                            <IconButton
+                                                                                size={'sm'}
+                                                                                onClick={() => { SetSatisfied(); setsatisfiedId(item._id) }}
+                                                                                colorScheme={'green'}
+                                                                                icon={<FiThumbsUp />} />
+                                                                        </HStack>
 
-
-                                                        </VStack>
+                                                                    </VStack>
                                                                 )
                                                             })
                                                         }
-                                                        
+
 
                                                     </VStack>
 
@@ -167,8 +201,8 @@ const GrievanceStatus = (props) => {
 
                                 </Flex>
 
-
                             </Box>
+
                         </HStack>
                     </Box>
 
@@ -197,14 +231,7 @@ const GrievanceStatus = (props) => {
                     Satisfied with reply/s ?
                 </Text>
 
-                <HStack py={2}>
-                    <IconButton
-                        colorScheme={'red'}
-                        icon={<FiThumbsDown />} />
-                    <IconButton
-                        colorScheme={'green'}
-                        icon={<FiThumbsUp />} />
-                </HStack>
+
             </Flex>
         </Box>
     );
