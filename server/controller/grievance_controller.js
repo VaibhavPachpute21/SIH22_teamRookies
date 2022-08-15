@@ -2,7 +2,7 @@ const { Grievance } = require('../models/grievance_model')
 const { Officer } = require("../models/officer_model")
 const { Forward } = require("../models/forward_model")
 const {FirstSendMessage} = require('../messaging/sendMessage')
-
+const {SendEmail} = require('../sendEmails/index')
 exports.CreateGrievance = async (req, res, next) => {
     const { grievant_id, reciever_id, grievant_university, grievance_nature, grievant_name, principal_name, grievance_title, grievance_description, imgs } = req.body
 
@@ -36,7 +36,8 @@ exports.CreateGrievance = async (req, res, next) => {
             officer_university: firstOfficerReciever.university
         })
 
-        FirstSendMessage(grievant_name,firstOfficerReciever.fullname)
+      /*   await FirstSendMessage(grievant_name,firstOfficerReciever.fullname) */
+      /*   await SendEmail(firstOfficerReciever.fullname,grievant_name,grievance_nature) */
 
         res.status(200).json({
             success: true,

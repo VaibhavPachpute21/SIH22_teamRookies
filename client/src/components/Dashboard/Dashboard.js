@@ -17,6 +17,7 @@ import DashboardSettings from '../Slides/settings'
 import UserProfile from '../Slides/userProfile'
 import AddInstituteGrievance from '../InstitutePages/addInstituteGrievance'
 import InstituteProfile from '../InstitutePages/instituteProfile'
+import AdminDashboardHistory from '../Slides/admin_history'
 import cookie from 'js-cookie'
 
 export default function Dashboard() {
@@ -185,7 +186,8 @@ export default function Dashboard() {
         }
         {
           shutter === 1 ? (
-            <DashboardHistory User={User?User:null}/>
+            User.role == 0 ? 
+            <DashboardHistory User={User?User:null}/>:<AdminDashboardHistory User={User?User:null}/>
           ) : (null)
         }
         {

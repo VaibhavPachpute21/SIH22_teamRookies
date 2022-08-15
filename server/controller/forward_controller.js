@@ -4,14 +4,14 @@ const { Forward } = require("../models/forward_model")
 
 exports.CreateReply = async (req,res,next) => {
     const {
-        message
+        message,datetime
     } = req.body
-    const grievance_id = req.params.id
-    const reciever_id = '62f118195cb40cd0012cd752'
+    const grievance_id = req.params.gid
+    const reciever_id = req.params.rid
 
     const obj = {
         message:message,
-        DateTime:"093-04"
+        DateTime:datetime
     }
 
     try {

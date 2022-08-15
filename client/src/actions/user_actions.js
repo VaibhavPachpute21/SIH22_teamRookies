@@ -43,11 +43,20 @@ export async function UpdateUser(id,data){
     }
 }
 
-export async function GetMyGrievances(id){
-    const request = await axios.get(`http://localhost:3001/api/officer/mygrievances/${id}`)
+export async function GetMyGrievances(id,role){
+    const request = await axios.get(`http://localhost:3001/api/officer/mygrievances/${id}/${role}`)
     .then(response=>response.data)
     return{
         type:"my_grievances",
+        payload:request
+    }
+}
+
+export async function SendReply(data,gid,rid){
+    const request = await axios.post(`http://localhost:3001/api/forwards/send-reply/${gid}/${rid}`,data)
+    .then(response=>response.data)
+    return{
+        type:"user_send_reply",
         payload:request
     }
 }

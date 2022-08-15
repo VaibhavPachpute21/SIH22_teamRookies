@@ -16,7 +16,6 @@ exports.FirstSendMessage = async (grievant_name, reciever_name) => {
 }
 
 exports.SendMessage = async (grievant_name, grievance_title, reciever_name) => {
-
     client.messages.create({
         from: "+1 314 912 3216",
         to: "+918799817029",

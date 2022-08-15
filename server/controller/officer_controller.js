@@ -122,32 +122,65 @@ exports.update = async (req, res, next) => {
 
 exports.AllMyGrievances = async (req,res,next) => {
     const id = req.params.id
-
+    const role = req.params.role
+    
     try {
-        const myGrievances = await Grievance.find({"grievant_id":id})
-        const forwards = await Forward.find({"previous_reciever":id,"current_reciever":id})
-        if(!myGrievances){
-            res.status(200).json({
-                success:false,
-                message:"You have no grievances, yet"
-            })
-
+        if(role==1){
+            const myGrievances = await Grievance.find({"reciever_id":id})
+            const forwards = await Forward.find({"current_reciever":id})
+            if(!myGrievances){
+                res.status(200).json({
+                    success:false,
+                    message:"You have no grievances, yet"
+                })
+    
+               
+    
+            }
+             
+            if(!forwards){
+                res.status(200).json({
+                    success:false,
+                    message:"You have no forward history too, yet"
+                })
+            }
            
-
-        }
-         
-        if(!forwards){
             res.status(200).json({
-                success:false,
-                message:"You have no forward history too, yet"
+                success:true,
+                myGrievances,
+                forwards
             })
         }
+        if(role==0){
+            console.log("hello")
+            const myGrievances = await Grievance.find({"grievant_id":id})
+            const forwards = await Forward.find({"current_reciever":id})
+            if(!myGrievances){
+                res.status(200).json({
+                    success:false,
+                    message:"You have no grievances, yet"
+                })
+    
+               
+    
+            }
+             
+            if(!forwards){
+                res.status(200).json({
+                    success:false,
+                    message:"You have no forward history too, yet"
+                })
+            }
+           
+            res.status(200).json({
+                success:true,
+                myGrievances,
+                forwards
+            })
+        }
+        
+        
        
-        res.status(200).json({
-            success:true,
-            myGrievances,
-            forwards
-        })
 
     } catch (error) {
         res.status(400).json({

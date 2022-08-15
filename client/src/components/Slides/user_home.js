@@ -17,7 +17,7 @@ const UserHome = (props) => {
                 paddingLeft={8}
                 w="100%" h={["100%", "100%", "max-content", "max-content"]} >
                 <Heading fontFamily={'monospace'}>
-                    Welcome, {props.userData.fullname} !
+                    Welcome, {props.userData.fullname}!
                 </Heading>
             </Flex>
             <Divider minH={1} bg={'#5A4FCF'} mt={2} />
