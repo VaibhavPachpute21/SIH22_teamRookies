@@ -71,7 +71,7 @@ const UserProfile = (props) => {
 
 
     return (
-        <Box w="100%" h="100%">
+        <Box w="100%" h="100%" overflowX={'hidden'} > 
             <Flex w="100%" h="100%" alignItems={'flex-start'} flexDirection={['column']} >
                 <Box borderRadius={'2xl'}
                     w="100%" h="20%" bg="blue.200">
