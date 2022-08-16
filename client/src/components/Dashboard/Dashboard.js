@@ -19,6 +19,7 @@ import AddInstituteGrievance from '../InstitutePages/addInstituteGrievance'
 import InstituteProfile from '../InstitutePages/instituteProfile'
 import AdminDashboardHistory from '../Slides/admin_history'
 import RegisterNewCollage from '../Slides/RegisterNewCollage'
+import AddNodalOfficer from '../Slides/AddNodalOfficer'
 import cookie from 'js-cookie'
 
 export default function Dashboard() {
@@ -199,7 +200,7 @@ export default function Dashboard() {
         }
         {
           shutter === 2 ? (
-            <DashboardTracker User={User ? User : null} />
+            User.role == 1 ? <AddNodalOfficer/>: <DashboardTracker User={User ? User : null} />
           ) : (null)
         }
         {

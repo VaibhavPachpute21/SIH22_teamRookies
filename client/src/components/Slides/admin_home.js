@@ -50,7 +50,7 @@ const AdminHome = () => {
 
 
     return (
-        <Flex spacing={10} w="100%" h="100%" 
+        <Flex spacing={10} w="100%" h="100%" overflowX={'hidden'}
         flexDirection={["column","column","column","column"]}
         >
             <Flex flexDirection={["column"]}
