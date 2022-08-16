@@ -2,8 +2,7 @@ const mongoose = require('mongoose')
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 
-
-const officerSchema = new mongoose.Schema({
+const uniAdminSchema = new mongoose.Schema({
     email: {
         type: String,
         unique: true,
@@ -20,7 +19,7 @@ const officerSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        enum:["1A","1B"]
+        default: "1"
     },
     fullname: {
         type: String,
@@ -43,26 +42,18 @@ const officerSchema = new mongoose.Schema({
     university: {
         type: String,
     },
-    district: {
+    college_name: {
         type: String,
     },
-    university_nodal_no:{
-        type:Number,
-        default:0
+    district: {
+        type: String,
     },
     state: {
         type: String,
     },
-    solve_count:{
-        type:Number,
-        default:0
-    }
-},
-    {
-        timestamps: true
-    })
+}, { timestamps: true })
 
-officerSchema.pre("save", async function (next) {
+uniAdminSchema.pre("save", async function (next) {
     var user = this;
     if (!user.isModified("password")) {
         next();
@@ -74,20 +65,20 @@ officerSchema.pre("save", async function (next) {
 })
 
 
-officerSchema.methods.getSignedToken = async function () {
+uniAdminSchema.methods.getSignedToken = async function () {
     const token = jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRES
     })
     return token
 }
 
-officerSchema.methods.comparePassword = async function (password) {
+uniAdminSchema.methods.comparePassword = async function (password) {
     return await bcrypt.compare(password, this.password)
 }
 
 
-const Officer = mongoose.model('Officer', officerSchema)
+const UniAdmin = mongoose.model('UniAdmin', uniAdminSchema)
 
 module.exports = {
-    Officer
+    UniAdmin
 }

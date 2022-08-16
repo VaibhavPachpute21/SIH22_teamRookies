@@ -3,7 +3,7 @@ const {Grievance} = require('../models/grievance_model')
 const {Forward} = require('../models/forward_model') 
 
 exports.register = async (req, res, next) => {
-    const { email, password,role,fullname,committee,avatar, banner,phone_number, college_name,university,district, state,university_nodal_no } = req.body;
+    const { email, password,role,fullname,committee,avatar, banner,phone_number, college_name,university,district, state } = req.body;
 
     try {
 

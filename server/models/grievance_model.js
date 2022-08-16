@@ -47,6 +47,10 @@ const grievanceSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    assigned_in_role:{
+        type:String,
+        enum:['1A','1B']
+    }
 
 }, { timestamps: true })
 

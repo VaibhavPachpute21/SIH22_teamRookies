@@ -34,14 +34,16 @@ app.use("/api/grievance",require("./routes/grievance_routes"))
 app.use("/api/officer",require("./routes/officer_routes"))
 
 app.use("/api/forwards",require("./routes/forward_route"))
+app.use("/api/superadmin",require("./routes/superadmin_routes"))
 
+app.use("/api/uniadmin",require("./routes/uni_admin_routes"))
 
 
 // Cron jobs
 
  cron.scheduleJob("*/2 * * * * *",()=>{
-    // IncDayCount(),
-    // ResetAndForward()   
+     IncDayCount(),
+     ResetAndForward()   
 })
  
 
