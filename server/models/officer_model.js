@@ -20,6 +20,7 @@ const officerSchema = new mongoose.Schema({
     },
     role: {
         type: Number,
+        enum:["1A","1B"]
     },
     fullname: {
         type: String,

@@ -6,6 +6,9 @@ import * as actions from '../../actions/grievant_actions'
 import { useNavigate } from 'react-router-dom';
 import cookie from 'js-cookie'
 import axios from 'axios';
+import ControlledEditor from '../Slides/editor'
+
+
 function AddNewGrievance(props) {
     const { register, handleSubmit, formState: { errors } } = useForm({ mode: 'onChange' });
 
@@ -118,9 +121,9 @@ function AddNewGrievance(props) {
 
 
     return (
-        <Flex h='max-content' justifyContent={'center'} padding={2} marginBottom={5}
+        <Flex h='100%' overflowX={'hidden'} justifyContent={'center'} padding={10}
         >
-            <Flex flexDirection={'column'} height='max-content' w={['100%', '90%', '80%', '80%']} boxShadow={'dark-lg'}
+            <Flex flexDirection={'column'} height='max-content' w={['100%', '90%', '80%', '80%']} border={'1px solid black'} shadow={'dark-lg'}
             >
                 <form onSubmit={handleSubmit(HandleSubmit)}>
                     <FormControl>
@@ -223,10 +226,11 @@ function AddNewGrievance(props) {
 
                         <Box w={'100%'} bg='white' px={[2, 2, 10, 10]} >
                             <Text fontSize={'18px'} pb={2} paddingLeft={0}>Discription of Grievance:</Text>
-                            <Textarea variant={'flushed'} id="discription" name="discription"
+                            {/* <Textarea variant={'flushed'} id="discription" name="discription"
                                 placeholder='Add discription of your Grievance...' wrap='true'
                                 cols={95} rows={5} style={{ border: '1px solid grey', padding: '5px', borderRadius: '5px' }}
-                                {...register('discription', { required: { value: true, message: "Discription is required!", } })} />
+                                {...register('discription', { required: { value: true, message: "Discription is required!", } })} /> */}
+                            <ControlledEditor/>
                             {errors.discription && errors.discription.message ? (
                                 <Box textAlign={'left'} fontSize={'12px'} py={1} maxH={'0px'} color={'red'}>
                                     {errors.discription.message}
