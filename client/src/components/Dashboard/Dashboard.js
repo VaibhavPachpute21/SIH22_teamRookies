@@ -63,7 +63,7 @@ export default function Dashboard() {
     setShutter(number)
   }
 
-  console.log(User)
+
   return (
     <HStack
       w={'100vw'}
@@ -186,15 +186,15 @@ export default function Dashboard() {
         w="93%" h="100%">
         {
           shutter === 0 ? (
-            User.role == 0 || User.role == 2 ? <UserHome
+            User.role === "0P" || User.role === "0I" ? <UserHome
               runner={GoToAddGrievance}
               runner1={GoToViewGrievance}
-              userData={User} /> : <AdminHome />
+              userData={User} /> : <AdminHome userData={User} />
           ) : (null)
         }
         {
           shutter === 1 ? (
-            User.role == 0 ?
+            User.role == "0P" || User.role === "0I" ?
               <DashboardHistory User={User ? User : null} /> : <AdminDashboardHistory User={User ? User : null} />
           ) : (null)
         }
@@ -205,7 +205,7 @@ export default function Dashboard() {
         }
         {
           shutter === 3 ? (
-            User.role == "1" ? <RegisterNewCollage /> : User.role == 0 ? <AddNewGrievance User={User ? User : null} /> : <AddInstituteGrievance />
+            User.role == "1" ? <RegisterNewCollage /> : User.role == "0P" || User.role=="1B" ? <AddNewGrievance User={User ? User : null} /> :User.role == "0I" ? <AddInstituteGrievance />:<>nothing Here</>
           ) : (null)
         }
         {/* {
@@ -215,10 +215,7 @@ export default function Dashboard() {
         } */}
         {
           shutter === 5 ? (
-            User.role == 0 || User.role == "1" ? <UserProfile
-
-
-            /> : <InstituteProfile />
+            User.role == 0 || User.role != "0I" ? <UserProfile/> : <InstituteProfile />
           ) : (null)
         }
 
