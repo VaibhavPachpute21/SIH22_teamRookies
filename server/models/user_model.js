@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
         select: false
     },
     role: {
-        type: Number,
+        type: String,
         required: true
     },
     fullname: {

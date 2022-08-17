@@ -4,7 +4,7 @@ import { MdPendingActions, MdOutlineMoreVert } from 'react-icons/md'
 import ChartComponent from '../Chart/index'
 import {BsChat} from 'react-icons/bs'
 
-const AdminHome = () => {
+const AdminHome = (props) => {
 
     
 
@@ -57,7 +57,7 @@ const AdminHome = () => {
                 paddingLeft={8}
                 w="100%" h={["100%","100%","10%","10%"]} >
                 <Heading fontFamily={'monospace'}>
-                    Good Morning, Admin !
+                    Good Morning,{props.userData.fullname}!
                 </Heading>
             </Flex>
             <Flex flexDirection={['column','column','row','row']}
