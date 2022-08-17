@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Button, Flex, FormLabel, Heading, Input, Textarea, FormControl, SimpleGrid, GridItem,Select } from '@chakra-ui/react'
+import { Box, Button, Flex, FormLabel, Heading, Input, Textarea, FormControl, SimpleGrid, GridItem, Select } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 
 export default function AddNodalOfficer() {
@@ -35,10 +35,8 @@ export default function AddNodalOfficer() {
 
                                     <Select type={'text'} name="Gender" id="Gender" placeholder='Select Gender'
                                         {...register('Gender', { required: { value: true, message: "Please choose Gender", } })}>
-
                                         <option>Male</option>
                                         <option>Female</option>
-                                        <option>Not to Say</option>
                                     </Select>
                                     {errors.Gender && errors.Gender.message ? (
                                         <Box textAlign={'left'} fontSize={'12px'} py={1} maxH={'0px'} color={'red'}>
@@ -104,7 +102,7 @@ export default function AddNodalOfficer() {
                                     }
                                 </GridItem>
 
-                                <GridItem>
+                                {/* <GridItem>
                                     <FormLabel>Collage Name</FormLabel>
                                     <Input type={'text'} name="college" id="college" placeholder='Collage Name'
                                         {...register('college', { required: { value: true, message: "Collage Name is required!", } })} />
@@ -115,9 +113,9 @@ export default function AddNodalOfficer() {
                                         </Box>
                                     ) : (null)
                                     }
-                                </GridItem>
+                                </GridItem> */}
 
-                                <GridItem>
+                                {/* <GridItem>
                                     <FormLabel>Enrollment Number</FormLabel>
                                     <Input type={'number'} name="enrollment" id="enrollment" placeholder='Enrollment Number'
                                         {...register('enrollment', { required: { value: true, message: "Enrollment no. is required!", } })} />
@@ -128,11 +126,10 @@ export default function AddNodalOfficer() {
                                         </Box>
                                     ) : (null)
                                     }
-                                </GridItem>
+                                </GridItem> */}
 
                                 <GridItem>
                                     <FormLabel>University Name</FormLabel>
-
                                     <Input type={'text'} name="university" id="university" placeholder='University Name'
                                         {...register('university', { required: { value: true, message: "Unversity name is required!", } })} />
 
@@ -145,20 +142,20 @@ export default function AddNodalOfficer() {
                                 </GridItem>
 
                                 <GridItem>
-                                    <FormLabel>Course Name</FormLabel>
+                                    <FormLabel>commitee Name</FormLabel>
 
-                                    <Input type={'text'} name="course" id="course" placeholder='Course Name'
-                                        {...register('course', { required: { value: true, message: "Course Name is required!", } })} />
+                                    <Input type={'text'} name="commitee" id="comity" placeholder='commitee Name'
+                                        {...register('commitee', { required: { value: true, message: "commitee Name is required!", } })} />
 
-                                    {errors.course && errors.course.message ? (
+                                    {errors.commitee && errors.commitee.message ? (
                                         <Box textAlign={'left'} fontSize={'12px'} py={1} maxH={'0px'} color={'red'}>
-                                            {errors.course.message}
+                                            {errors.commitee.message}
                                         </Box>
                                     ) : (null)
                                     }
                                 </GridItem>
 
-                                <GridItem>
+                                {/* <GridItem>
                                     <FormLabel>Academic Year</FormLabel>
                                     <Input type="text" name="academicYear" id="academicYear" placeholder='Academic Year'
                                         {...register('academicYear', { required: { value: true, message: "Academic Year is required!", } })} />
@@ -169,7 +166,7 @@ export default function AddNodalOfficer() {
                                         </Box>
                                     ) : (null)
                                     }
-                                </GridItem>
+                                </GridItem> */}
 
 
                                 <GridItem>
@@ -177,9 +174,8 @@ export default function AddNodalOfficer() {
                                     <Select type={'text'} name="role" id="role" placeholder='Select Role'
                                         {...register('role', { required: { value: true, message: "User role is required!", } })}>
 
-                                        <option>Student</option>
-                                        <option>Teacher</option>
-                                        <option>Other</option>
+                                        <option>1A</option>
+                                        <option>1B</option>
                                     </Select>
 
                                     {errors.role && errors.role.message ? (
@@ -190,7 +186,7 @@ export default function AddNodalOfficer() {
                                     }
                                 </GridItem>
 
-                                <GridItem>
+                                {/* <GridItem>
                                     <FormLabel>Date of Birth</FormLabel>
                                     <Input type={'date'} name="DOB" id="DOB" placeholder='Date of Birth'
                                         {...register('DOB', { required: { value: true, message: "Date of birth is required!", } })} />
@@ -201,11 +197,10 @@ export default function AddNodalOfficer() {
                                         </Box>
                                     ) : (null)
                                     }
-                                </GridItem>
+                                </GridItem> */}
 
                                 <GridItem>
                                     <FormLabel>Password</FormLabel>
-
                                     <Input type={'password'} name="pass" id="pass" placeholder='Password'
                                         {...register('pass', { required: { value: true, message: "Choose is password", }, minLength: { value: 6, message: "Passowrd should contain at least 6 characters" } })} />
 
@@ -218,7 +213,7 @@ export default function AddNodalOfficer() {
                                 </GridItem>
 
                             </SimpleGrid>
-                            <FormLabel marginTop={5}>Address</FormLabel>
+                            {/* <FormLabel marginTop={5}>Address</FormLabel>
                             <Textarea type="text" name="address" id="address" padding={5} placeholder={'Address'} rows={3}
                                 //value={address} onChange={handleInputChnage}
                                 {...register('address', { required: { value: true, message: "Address is required!", } })} />
@@ -227,7 +222,7 @@ export default function AddNodalOfficer() {
                                     {errors.address.message}
                                 </Box>
                             ) : (null)
-                            }
+                            } */}
 
                             <Button
                                 type="submit"
