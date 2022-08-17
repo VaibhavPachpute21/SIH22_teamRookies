@@ -1,5 +1,5 @@
 const { Officer } = require('../models/officer_model')
-
+const {UniAdmin} = require("../models/uni_admin_model")
 exports.Assign1Aor1B = async (req, res, next) => {
     const { email, password, role, fullname, committee, avatar, banner, phone_number, college_name, university, district, state } = req.body;
 
@@ -63,6 +63,41 @@ exports.Assign1Aor1B = async (req, res, next) => {
         })
     }
 }
+
+exports.login = async (req, res, next) => {
+    const { email, password } = req.body
+    try {
+        if (!email || !password) {
+            await res.status(400).json({
+                success: true,
+                message: "Please provide all credentials"
+            })
+        }
+        const officer = await UniAdmin.findOne({ email }).select("+password")
+        if (!officer) {
+            res.status(401).send({ success: false, message: "Invalid credentials" })
+            return;
+        }
+
+        const matched = await officer.comparePassword(password)
+        if (!matched) {
+            res.status(200).json({ success: false, message: "Incorrect username or password" })
+            return;
+        }
+
+
+        const token = await officer.getSignedToken()
+
+        res.status(201).json({
+            success: true,
+            token
+        })
+
+    } catch (error) {
+        res.status(400).json({ success: false, message: error.message })
+    }
+}
+
 
 
 const sendToken = async (user, statusCode, res) => {

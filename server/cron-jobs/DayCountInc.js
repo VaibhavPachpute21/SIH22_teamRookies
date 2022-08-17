@@ -35,20 +35,20 @@ exports.ResetAndForward = async (req, res, next) => {
                     const updateToAssigned = await Grievance.findByIdAndUpdate(doc._id,{$set:{assigned_in_role:"1B"}},{new:true})
 
                     const BOfficer = await Officer.findOne({role:updateToAssigned.assigned_in_role}).sort('-university_nodal_no')
-                    
+
                     await Grievance.findOneAndUpdate({ reciever_id: currentOfficer._id }, { $set: { reciever_id: BOfficer._id } })
                 }
                 else {
                     try {
                         await Grievance.findOneAndUpdate({ reciever_id: currentOfficer._id }, { $set: { reciever_id: nextOfficer[0]._id } })
 
-                   /*      await Forward.create({
+                         await Forward.create({
                             previous_reciever: currentOfficer._id,
                             current_reciever: nextOfficer[0]._id,
                             grievance_id: doc._id,
                             officer_avatar: nextOfficer[0].avatar,
                             officer_university: nextOfficer[0].university
-                        }) */
+                        }) 
 
                         //  SendMessage(doc.grievant_name,doc.grievance_title,nextOfficer[0]?.fullname) 
                     } catch (error) {

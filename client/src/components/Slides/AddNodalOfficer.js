@@ -1,15 +1,79 @@
-import React from 'react'
-import { Box, Button, Flex, FormLabel, Heading, Input, Textarea, FormControl, SimpleGrid, GridItem, Select } from '@chakra-ui/react'
+import React, { useState, useEffect } from 'react'
+import { Box, Button, Flex, FormLabel, Heading, Input,
+    useToast,
+    Textarea, FormControl, SimpleGrid, GridItem, Select } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
+import * as actions from '../../actions/uni_admin'
+import {connect} from 'react-redux'
 
-export default function AddNodalOfficer() {
+function AddNodalOfficer(props) {
     const { register, handleSubmit, formState: { errors } } = useForm({ mode: 'onChange' });
+    const [Error,SetError] = useState('')
+
+    const toast = useToast()
+
+    const HandleSubmit = async (data) => {
+        let obj = {
+            email:data.email,
+            password:data.pass,
+            role:data.role,
+            fullname:data.fName,
+            committee:data.committee,
+            phone_number:data.phone,
+            university:data.university,
+            district:data.District,
+            state:data.state
+        }
+      
+        try {
+            await props.CreateOfficer(obj)
+        } catch (error) {
+            SetError(error.message)
+        } 
+    }
+
+    useEffect(() => {
+        if (props.data) {
+          let alias = props.data
+          console.log(alias)
+          if (alias.uniadminData) {
+            let success = alias.uniadminData?.success
+            if (success) {
+              toast({
+                position: 'top',
+                render: () => (
+                  <Box color='white' p={3} bg='green.500'>
+                    Registration complete
+                  </Box>
+                ),
+              })
+              
+            }
+            else {
+              toast({
+                position: 'top',
+                render: () => (
+                  <Box color='white' p={3} bg='red.500'>
+                    {Error}
+                  </Box>
+                ),
+              })
+            }
+    
+          }
+    
+        }
+      }, [props.data])
+
+    
+
+
     return (
         <Flex w='100%' h={'100%'} justifyContent={'center'} padding={5} overflowX={'hidden'}>
             <Flex w={'90%'} h={'max-content'} border={'1px solid black'} flexDirection={'column'} overflowX={'hidden'} >
                 <Flex w={'100%'} justifyContent={'center'}><Heading>Add New Nodal Officer</Heading></Flex>
                 <Box h={'100%'} w='100%'>
-                    <form>
+                    <form onSubmit={handleSubmit(HandleSubmit)}>
                         <FormControl padding={[2, 3, 5]} align={'center'}>
                             <SimpleGrid
                                 columns={2}
@@ -235,3 +299,11 @@ export default function AddNodalOfficer() {
         </Flex>
     )
 }
+
+const mapStateToProps = (state) => {
+    return{
+        data:state.uniadmin
+    }
+}
+
+export default connect(mapStateToProps,actions)(AddNodalOfficer)
