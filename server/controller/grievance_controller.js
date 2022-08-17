@@ -35,7 +35,8 @@ exports.CreateGrievance = async (req, res, next) => {
             current_reciever: firstOfficerReciever._id,
             grievance_id: newGrievance._id,
             officer_avatar: firstOfficerReciever.avatar,
-            officer_university: firstOfficerReciever.university
+            officer_university: firstOfficerReciever.university,
+            assigned_to_role:"1A"
         })
 
          /* await FirstSendMessage(grievant_name,firstOfficerReciever.fullname) */

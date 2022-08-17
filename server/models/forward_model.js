@@ -28,6 +28,9 @@ const forwardSchema = new mongoose.Schema({
     },
     officer_university:{
         type:String
+    },
+    assigned_to_role:{
+        type:String
     }
 },{
     timestamps:true

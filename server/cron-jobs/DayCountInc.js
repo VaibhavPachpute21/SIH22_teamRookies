@@ -48,6 +48,15 @@ exports.ResetAndForward = async (req, res, next) => {
                             const firstBOfficer = await Officer.find({ "role": doc2.assigned_in_role, "university": doc2.grievant_university }).sort('university_nodal_no')
 
                             await Grievance.findByIdAndUpdate(doc2._id, { $set: { reciever_id: firstBOfficer[0]._id } })
+                        
+                            await Forward.create({
+                                previous_reciever: "Change",
+                                current_reciever: firstBOfficer[0]._id,
+                                grievance_id: doc2._id,
+                                officer_avatar: firstBOfficer[0].avatar,
+                                officer_university: firstBOfficer[0].university,
+                                assigned_to_role:"1B"
+                            })
                         } else {
                             
                             const currentOff = await Officer.find({ role: doc2.assigned_in_role, _id: doc2.reciever_id })
@@ -58,6 +67,16 @@ exports.ResetAndForward = async (req, res, next) => {
                             const theNextOfficer = await Officer.find({ "university_nodal_no": nextNodalNo + 1, "university": doc2.grievant_university, "role": doc2.assigned_in_role })
                             if (theNextOfficer.length > 0) {
                                 await Grievance.findByIdAndUpdate(doc2._id, { $set: { reciever_id: theNextOfficer[0]?._id } })
+
+                                await Forward.create({
+                                    previous_reciever: currentOff[0]._id,
+                                    current_reciever: theNextOfficer[0]._id,
+                                    grievance_id: doc2._id,
+                                    officer_avatar: theNextOfficer[0].avatar,
+                                    officer_university: theNextOfficer[0].university,
+                                    assigned_to_role:"1B"
+                                })
+                        
                             }
                             
                         }
