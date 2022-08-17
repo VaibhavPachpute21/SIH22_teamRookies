@@ -2,6 +2,8 @@
 const jwt = require('jsonwebtoken')
 const {User} = require('../models/user_model')
 const {Officer} = require("../models/officer_model")
+const {UniAdmin} = require("../models/uni_admin_model")
+
 exports.protect = async (req,res,next) =>{
     let token;
     if(req.headers.authorization && req.headers.authorization.startsWith("Bearer")){
@@ -16,17 +18,26 @@ exports.protect = async (req,res,next) =>{
         const user = await User.findById(decoded.id);
 
         const officer = await Officer.findById(decoded.id)
-      
-        if(!user){
-            req.user = officer;
-            req.type = "officer"
-            next();
-        }
-        if(!officer){
+        
+        const uni = await UniAdmin.findById(decoded.id)
+    
+
+        if(user){
             req.user = user;
             req.type = "user"
             next();
         }
+        if(officer){
+            req.user = officer;
+            req.type = "officer"
+            next();
+        }
+        if(uni){
+            req.user = uni
+            req.type = "uniadmin"
+            next();
+        }
+        
        
     } catch (error) {
         return res.status(401).send("Not Authorized")

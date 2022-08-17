@@ -63,7 +63,7 @@ export default function Dashboard() {
     setShutter(number)
   }
 
-
+  console.log(User)
   return (
     <HStack
       w={'100vw'}
@@ -200,12 +200,12 @@ export default function Dashboard() {
         }
         {
           shutter === 2 ? (
-            User.role == 1 ? <AddNodalOfficer/>: <DashboardTracker User={User ? User : null} />
+            User.role == "1" ? <AddNodalOfficer/>: <DashboardTracker User={User ? User : null} />
           ) : (null)
         }
         {
           shutter === 3 ? (
-            User.role == 1 ? <RegisterNewCollage /> : User.role == 0 ? <AddNewGrievance User={User ? User : null} /> : <AddInstituteGrievance />
+            User.role == "1" ? <RegisterNewCollage /> : User.role == 0 ? <AddNewGrievance User={User ? User : null} /> : <AddInstituteGrievance />
           ) : (null)
         }
         {/* {
@@ -215,7 +215,7 @@ export default function Dashboard() {
         } */}
         {
           shutter === 5 ? (
-            User.role == 0 || User.role == 1 ? <UserProfile
+            User.role == 0 || User.role == "1" ? <UserProfile
 
 
             /> : <InstituteProfile />

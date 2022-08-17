@@ -42,8 +42,8 @@ app.use("/api/uniadmin",require("./routes/uni_admin_routes"))
 // Cron jobs
 
  cron.scheduleJob("*/2 * * * * *",()=>{
-     IncDayCount(),
-     ResetAndForward()   
+ /*     IncDayCount(),
+     ResetAndForward()    */
 })
  
 
