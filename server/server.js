@@ -38,6 +38,10 @@ app.use("/api/superadmin",require("./routes/superadmin_routes"))
 
 app.use("/api/uniadmin",require("./routes/uni_admin_routes"))
 
+app.use("/api/institute",require("./routes/institute_routes"))
+
+
+
 
 // Cron jobs
 

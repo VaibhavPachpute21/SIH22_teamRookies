@@ -5,11 +5,39 @@ import { useForm } from 'react-hook-form'
 export default function RegisterNewCollage() {
     const { register, handleSubmit, formState: { errors } } = useForm({ mode: 'onChange' });
 
+    const HandleSubmit = async (data) => {
+        let obj = {
+            institute_name:data.iName,
+            institute_code:data.iCode,
+            institute_region:data.iRegion,
+            institute_district:data.iDistrict,
+            institute_state:data.iState,
+            institute_address:data.iAddress,
+            institute_pincode:data.iPin,
+            institute_std_code:data.iSTD,
+            institute_year_of_start:data.iYear,
+            institute_web_address:data.iWeb,
+            institute_email:data.iMail,
+            institute_university:data.iUniversity,
+            name_of_director:data.iDirector,
+            director_email:data.iDMail,
+            director_phone_number:data.iDphone,
+            user_name:data.uName,
+            user_phone:data.uPhone,
+            user_email:"abhinav@gmail.com",
+            password:data.uPassword
+        }
+        try {
+            
+        } catch (error) {
+            
+        }
+    }
 
     return (
         <Flex w='100%' h={'100%'} justifyContent={'center'} padding={5} overflowX={'hidden'}>
             <Flex w={'90%'} h={'max-content'} border={'1px solid black'} flexDirection={'column'} overflowX={'hidden'} >
-                <form>
+                <form onSubmit={handleSubmit(HandleSubmit)}>
                     <FormControl>
                         <Flex w={'100%'} justifyContent={'center'}><Heading>Add New Institute</Heading></Flex>
 
@@ -297,7 +325,9 @@ export default function RegisterNewCollage() {
 
                         </Flex>
 
-                        <Flex w={'100%'} justifyContent={'center'} p={2}><Button bg={'#5A4FCF'} color={'white'}>Add Institute and User</Button></Flex>
+                        <Flex w={'100%'} justifyContent={'center'} p={2}><Button bg={'#5A4FCF'}
+                        type="submit"
+                        color={'white'}>Add Institute and User</Button></Flex>
                     </FormControl>
                 </form>
             </Flex>
