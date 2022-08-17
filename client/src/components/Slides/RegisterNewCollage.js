@@ -1,9 +1,15 @@
-import React from 'react'
-import { Box, Button, Flex, FormLabel, Heading, Input, Textarea, FormControl } from '@chakra-ui/react'
+import React, { useEffect, useState } from 'react'
+import { Box, Button, Flex, FormLabel, Heading, Input, Textarea, FormControl, useToast } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
+import {connect} from 'react-redux'
+import * as actions from '../../actions/institute_actions'
+import cookie from 'js-cookie'
 
-export default function RegisterNewCollage() {
+function RegisterNewCollage(props) {
     const { register, handleSubmit, formState: { errors } } = useForm({ mode: 'onChange' });
+
+    const [Error, SetError] = useState('')
+    const toast = useToast()
 
     const HandleSubmit = async (data) => {
         let obj = {
@@ -28,11 +34,45 @@ export default function RegisterNewCollage() {
             password:data.uPassword
         }
         try {
-            
+            await props.CreateInstitute(obj)
         } catch (error) {
-            
+            SetError(error.message)
         }
     }
+
+     useEffect(()=>{
+        console.log(props.data)
+        if (props.data) {
+            let alias = props.data
+            if (alias.inData) {
+               
+              let success = alias.inData?.success
+              if (success) {
+                toast({
+                  position: 'top',
+                  render: () => (
+                    <Box color='white' p={3} bg='green.500'>
+                      Registration complete
+                    </Box>
+                  ),
+                })
+                
+              }
+              else {
+                toast({
+                  position: 'top',
+                  render: () => (
+                    <Box color='white' p={3} bg='red.500'>
+                      Some error occured
+                    </Box>
+                  ),
+                })
+              }
+      
+            }
+      
+          }
+    },[props.data]) 
 
     return (
         <Flex w='100%' h={'100%'} justifyContent={'center'} padding={5} overflowX={'hidden'}>
@@ -334,3 +374,11 @@ export default function RegisterNewCollage() {
         </Flex>
     )
 }
+
+const mapStateToProps = (state) => {
+    return {
+        data:state.institute
+    }
+}
+
+export default connect(mapStateToProps,actions)(RegisterNewCollage)
