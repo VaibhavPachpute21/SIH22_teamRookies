@@ -1,32 +1,32 @@
 const { Officer } = require('../models/officer_model')
-const {Grievance} = require('../models/grievance_model')
-const {Forward} = require('../models/forward_model') 
+const { Grievance } = require('../models/grievance_model')
+const { Forward } = require('../models/forward_model')
 
 exports.register = async (req, res, next) => {
-    const { email, password,role,fullname,committee,avatar, banner,phone_number, college_name,university,district, state } = req.body;
+    const { email, password, role, fullname, committee, avatar, banner, phone_number, college_name, university, district, state } = req.body;
 
     try {
 
-        const findUserWithUniAndMax = await Officer.findOne({"university":university}).sort('-university_nodal_no') 
-        if(findUserWithUniAndMax){
+        const findUserWithUniAndMax = await Officer.findOne({ "university": university }).sort('-university_nodal_no')
+        if (findUserWithUniAndMax) {
             let max = findUserWithUniAndMax.university_nodal_no
 
             const newUser = await Officer.create({
-                email,password,role,fullname,committee,avatar,banner,phone_number,college_name,university,district,state
+                email, password, role, fullname, committee, avatar, banner, phone_number, college_name, university, district, state
             })
-            
-            if(newUser){
-            await Officer.findByIdAndUpdate(newUser._id,{$set:{university_nodal_no:max+1}})
+
+            if (newUser) {
+                await Officer.findByIdAndUpdate(newUser._id, { $set: { university_nodal_no: max + 1 } })
             }
-            else{
+            else {
                 console.log("error")
             }
 
             sendToken(newUser, 201, res);
         }
-        else{
+        else {
             const newUser = await Officer.create({
-                email,password,role,fullname,committee,avatar,banner,phone_number,college_name,university,district,state
+                email, password, role, fullname, committee, avatar, banner, phone_number, college_name, university, district, state
             })
             sendToken(newUser, 201, res);
         }
@@ -120,74 +120,72 @@ exports.update = async (req, res, next) => {
 
 }
 
-exports.AllMyGrievances = async (req,res,next) => {
+exports.AllMyGrievances = async (req, res, next) => {
     const id = req.params.id
     const role = req.params.role
-    
+
     try {
-        if(role==1){
-            const myGrievances = await Grievance.find({"reciever_id":id})
-            const forwards = await Forward.find({"current_reciever":id})
-            if(!myGrievances){
+        if (role == "1A" || role == "1B") {
+            const myGrievances = await Grievance.find({ "reciever_id": id })
+            const forwards = await Forward.find({ "current_reciever": id })
+            if (!myGrievances) {
                 res.status(200).json({
-                    success:false,
-                    message:"You have no grievances, yet"
+                    success: false,
+                    message: "You have no grievances, yet"
                 })
-    
-               
-    
+
             }
-             
-            if(!forwards){
+
+            if (!forwards) {
                 res.status(200).json({
-                    success:false,
-                    message:"You have no forward history too, yet"
+                    success: false,
+                    message: "You have no forward history too, yet"
                 })
             }
-           
+
             res.status(200).json({
-                success:true,
+                success: true,
                 myGrievances,
                 forwards
             })
         }
-        if(role==0){
-            const myGrievances = await Grievance.find({"grievant_id":id})
-            const forwards = await Forward.find({"current_reciever":id})
-            if(!myGrievances){
+        if (role == "0P") {
+            const myGrievances = await Grievance.find({ "grievant_id": id })
+            const forwards = await Forward.find({ "current_reciever": id })
+            if (!myGrievances) {
                 res.status(200).json({
-                    success:false,
-                    message:"You have no grievances, yet"
+                    success: false,
+                    message: "You have no grievances, yet"
                 })
-    
-               
-    
+
+
+
             }
-             
-            if(!forwards){
+
+            if (!forwards) {
                 res.status(200).json({
-                    success:false,
-                    message:"You have no forward history too, yet"
+                    success: false,
+                    message: "You have no forward history too, yet"
                 })
             }
-           
+
             res.status(200).json({
-                success:true,
+                success: true,
                 myGrievances,
                 forwards
             })
         }
-        
-        
-       
+
+
+
 
     } catch (error) {
         res.status(400).json({
-            success:false,
-            message:error.message
+            success: false,
+            message: error.message
         })
     }
-}   
+}
 
 
 

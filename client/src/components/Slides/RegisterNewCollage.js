@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Box, Button, Flex, FormLabel, Heading, Input, Textarea, FormControl, useToast } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import * as actions from '../../actions/institute_actions'
 import cookie from 'js-cookie'
 
@@ -13,66 +13,65 @@ function RegisterNewCollage(props) {
 
     const HandleSubmit = async (data) => {
         let obj = {
-            institute_name:data.iName,
-            institute_code:data.iCode,
-            institute_region:data.iRegion,
-            institute_district:data.iDistrict,
-            institute_state:data.iState,
-            institute_address:data.iAddress,
-            institute_pincode:data.iPin,
-            institute_std_code:data.iSTD,
-            institute_year_of_start:data.iYear,
-            institute_web_address:data.iWeb,
-            institute_email:data.iMail,
-            institute_university:data.iUniversity,
-            name_of_director:data.iDirector,
-            director_email:data.iDMail,
-            director_phone_number:data.iDphone,
-            user_name:data.uName,
-            user_phone:data.uPhone,
-            user_email:"abhinav@gmail.com",
-            password:data.uPassword
+            institute_name: data.iName,
+            institute_code: data.iCode,
+            institute_region: data.iRegion,
+            institute_district: data.iDistrict,
+            institute_state: data.iState,
+            institute_address: data.iAddress,
+            institute_pincode: data.iPin,
+            institute_std_code: data.iSTD,
+            institute_year_of_start: data.iYear,
+            institute_web_address: data.iWeb,
+            institute_email: data.iMail,
+            institute_university: data.iUniversity,
+            name_of_director: data.iDirector,
+            director_email: data.iDMail,
+            director_phone_number: data.iDphone,
+            user_name: data.uName,
+            user_phone: data.uPhone,
+            user_email: "abhinav@gmail.com",
+            password: data.uPassword
         }
         try {
             await props.CreateInstitute(obj)
+
+            if (props.data) {
+                let alias = props.data
+                if (alias.inData) {
+
+                    let success = alias.inData?.success
+                    if (success == true) {
+                        toast({
+                            position: 'top',
+                            render: () => (
+                                <Box color='white' p={3} bg='green.500'>
+                                    Registration complete
+                                </Box>
+                            ),
+                        })
+
+                    }
+                    else {
+                        toast({
+                            position: 'top',
+                            render: () => (
+                                <Box color='white' p={3} bg='red.500'>
+                                    Some error occured
+                                </Box>
+                            ),
+                        })
+                    }
+
+                }
+
+            }
+
         } catch (error) {
             SetError(error.message)
         }
     }
 
-     useEffect(()=>{
-        console.log(props.data)
-        if (props.data) {
-            let alias = props.data
-            if (alias.inData) {
-               
-              let success = alias.inData?.success
-              if (success) {
-                toast({
-                  position: 'top',
-                  render: () => (
-                    <Box color='white' p={3} bg='green.500'>
-                      Registration complete
-                    </Box>
-                  ),
-                })
-                
-              }
-              else {
-                toast({
-                  position: 'top',
-                  render: () => (
-                    <Box color='white' p={3} bg='red.500'>
-                      Some error occured
-                    </Box>
-                  ),
-                })
-              }
-      
-            }
-      
-          }
-    },[props.data]) 
 
     return (
         <Flex w='100%' h={'100%'} justifyContent={'center'} padding={5} overflowX={'hidden'}>
@@ -366,8 +365,8 @@ function RegisterNewCollage(props) {
                         </Flex>
 
                         <Flex w={'100%'} justifyContent={'center'} p={2}><Button bg={'#5A4FCF'}
-                        type="submit"
-                        color={'white'}>Add Institute and User</Button></Flex>
+                            type="submit"
+                            color={'white'}>Add Institute and User</Button></Flex>
                     </FormControl>
                 </form>
             </Flex>
@@ -377,8 +376,8 @@ function RegisterNewCollage(props) {
 
 const mapStateToProps = (state) => {
     return {
-        data:state.institute
+        data: state.institute
     }
 }
 
-export default connect(mapStateToProps,actions)(RegisterNewCollage)
+export default connect(mapStateToProps, actions)(RegisterNewCollage)

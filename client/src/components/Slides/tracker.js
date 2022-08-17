@@ -14,7 +14,7 @@ const DashboardTracker = (props) => {
     const [error, SetError] = useState('')
     const [Grievances, SetGrievances] = useState([])
 
-
+    
 
     const [authen, setAuthen] = useState(null)
     const auth = cookie.get('token');
@@ -145,7 +145,7 @@ const DashboardTracker = (props) => {
         GetAllGrievances()
     }, [User._id,props.grievance])
  
-
+    console.log(User._id)
     useEffect(() => {
         if (props.data) {
             let d = props.data
