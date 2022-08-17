@@ -20,6 +20,7 @@ import InstituteProfile from '../InstitutePages/instituteProfile'
 import AdminDashboardHistory from '../Slides/admin_history'
 import RegisterNewCollage from '../Slides/RegisterNewCollage'
 import AddNodalOfficer from '../Slides/AddNodalOfficer'
+import NodalOfficersList from '../Slides/NodalOfficersList'
 import cookie from 'js-cookie'
 
 export default function Dashboard() {
@@ -195,12 +196,12 @@ export default function Dashboard() {
         {
           shutter === 1 ? (
             User.role == "0P" || User.role === "0I" ?
-              <DashboardHistory User={User ? User : null} /> : <AdminDashboardHistory User={User ? User : null} />
+              <DashboardHistory User={User ? User : null} /> : User.role === "1"?<NodalOfficersList/>: <AdminDashboardHistory User={User ? User : null} />
           ) : (null)
         }
         {
           shutter === 2 ? (
-            User.role == "1" ? <AddNodalOfficer/>: <DashboardTracker User={User ? User : null} />
+            User.role == "1" ? <AddNodalOfficer/>:User.role != "1A"? <DashboardTracker User={User ? User : null} />:<>nothing here</>
           ) : (null)
         }
         {

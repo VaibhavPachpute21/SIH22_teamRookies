@@ -293,10 +293,12 @@ function Login(props) {
                           {...register('role', { required: { value: true, message: "User role is required!", } })} value={role} onChange={handleInputChnage} placeholder='Select Role'>
 
                           <option>Student/Teacher</option>
-                          <option>UGC Admin</option>
+                          <option>Institute</option>
                           <option>University</option>
                           <option>Nodal Officer</option>
-                          <option>Other</option>
+                          <option>Regional Officer</option>
+                          <option>Chief Vigilance Officer</option>
+                          <option>UGC Admin</option>
                         </Select>
                       </InputGroup>
                       {errors.role && errors.role.message ? (
