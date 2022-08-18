@@ -171,7 +171,47 @@ function Login(props) {
       }
     }
 
+if(role === "UGC Admin"){
+      try {
+        const request = await axios.post('http://localhost:3001/api/superadmin/login',obj)
+        .then(response => response.data)
 
+        if(request){
+          let errr = request?.message
+            let token = request?.token
+          if (request.success) {
+            
+            toast({
+              position: 'top',
+              render: () => (
+                <Box color='white' p={3} bg='green.500'>
+                  Login complete
+                </Box>
+              ),
+            })
+            cookie.set("token", token)
+          }
+          else {
+            toast({
+              position: 'top',
+              render: () => (
+                <Box color='white' p={3} bg='red.500'>
+                  {errr}
+                </Box>
+              ),
+            })
+          }
+        }
+        
+       
+        /* if (request.payload.success != false) {
+          navigate("/Dashboard")
+        } */
+      } catch (error) {
+        SetError(error.message)
+      }
+    }
+    
 
 
   }
