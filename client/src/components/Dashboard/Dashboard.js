@@ -22,6 +22,7 @@ import RegisterNewCollage from '../Slides/RegisterNewCollage'
 import AddNodalOfficer from '../Slides/AddNodalOfficer'
 import NodalOfficersList from '../Slides/NodalOfficersList'
 import OfficersRankingPage from '../Slides/OfficersRankingPage'
+import SolvedGrievance from '../Slides/SolvedGrievance'
 import cookie from 'js-cookie'
 
 export default function Dashboard() {
@@ -197,17 +198,17 @@ export default function Dashboard() {
         {
           shutter === 1 ? (
             User.role == "0P" || User.role === "0I" ?
-              <DashboardHistory User={User ? User : null} /> : User.role === "1" ?<NodalOfficersList/>:User.role ==="3"?<OfficersRankingPage/>: <AdminDashboardHistory User={User ? User : null} />
+              <DashboardHistory User={User ? User : null} /> : User.role === "1" ? <NodalOfficersList /> : User.role === "3" ? <OfficersRankingPage /> : <AdminDashboardHistory User={User ? User : null} />
           ) : (null)
         }
         {
           shutter === 2 ? (
-            User.role == "1" ? <AddNodalOfficer/>:User.role != "1A"? <DashboardTracker User={User ? User : null} />:User.role==="3"? <DashboardHistory User={User ? User : null} />: <>nothing here</>
+            User.role == "3" ? <SolvedGrievance /> : User.role == "1" ? <AddNodalOfficer /> : User.role != "1A" ? <DashboardTracker User={User ? User : null} /> : <>nothing here</>
           ) : (null)
         }
         {
           shutter === 3 ? (
-            User.role == "1" ? <RegisterNewCollage /> : User.role == "0P" || User.role=="1B" ? <AddNewGrievance User={User ? User : null} /> :User.role==="3"?<AddNodalOfficer/>: User.role == "0I" ? <AddInstituteGrievance />:<>nothing Here</>
+            User.role == "1" ? <RegisterNewCollage /> : User.role == "0P" || User.role == "1B" ? <AddNewGrievance User={User ? User : null} /> : User.role === "3" ? <AddNodalOfficer /> : User.role == "0I" ? <AddInstituteGrievance /> : <>nothing Here</>
           ) : (null)
         }
         {/* {
@@ -217,7 +218,7 @@ export default function Dashboard() {
         } */}
         {
           shutter === 5 ? (
-            User.role == 0 || User.role != "0I" ? <UserProfile/> : <InstituteProfile />
+            User.role == 0 || User.role != "0I" ? <UserProfile /> : <InstituteProfile />
           ) : (null)
         }
 
