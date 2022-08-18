@@ -13,9 +13,9 @@ const GrievanceStatus = (props) => {
     const { pathname } = useLocation()
     const [satisfiedConfirm, setSatisfiedConfirm] = useState(false)
     const [satisfiedId, setsatisfiedId] = useState('')
-
+    const [currentR, setCurrentR] = useState('')
     const [forwards, setForwards] = useState([])
-
+    const [forwardId, setForwardIs] = useState('')
     useEffect(() => {
         const GetAllForwards = async () => {
             try {
@@ -36,9 +36,13 @@ const GrievanceStatus = (props) => {
     }, [props.data])
 
 
-    const SetSatisfied = () => {
+    const SetSatisfied = (reciever_id, id) => {
+
+        setCurrentR(reciever_id)
+        setForwardIs(id)
         var ans = window.confirm("Are you sure you're satisfied with the reply?")
         if (ans) {
+
             setSatisfiedConfirm(true)
         }
         else
@@ -49,7 +53,7 @@ const GrievanceStatus = (props) => {
         if (satisfiedConfirm == true) {
 
             try {
-                props.SatisfiedWithReply(pathname?.split("/")[2])
+                props.SatisfiedWithReply(pathname?.split("/")[2], currentR, forwardId)
             } catch (error) {
                 Seterror(error.message)
             }
@@ -59,9 +63,7 @@ const GrievanceStatus = (props) => {
     }, [satisfiedConfirm, props.SatisfiedWithReply])
 
 
-    console.log(props)
-
-    const end = function (username, reciever_id, university, replies, i) {
+    const end = function (username, reciever_id, university, replies, i, id, satisfied, updatedAt) {
 
         return (
             <Box key={i} w="100%" h="max-content">
@@ -131,6 +133,7 @@ const GrievanceStatus = (props) => {
                                         {
                                             replies && replies.length ? (
                                                 <VStack
+
                                                     py={2}
                                                     w="100%" h="max-content">
                                                     <VStack
@@ -144,6 +147,7 @@ const GrievanceStatus = (props) => {
                                                             replies?.map((item, i) => {
                                                                 return (
                                                                     <VStack
+                                                                        key={i}
                                                                         alignItems={'flex-start'}
                                                                         justifyContent={'space-between'}
                                                                         px={3}
@@ -160,12 +164,14 @@ const GrievanceStatus = (props) => {
                                                                         </Text>
                                                                         <HStack py={2}>
                                                                             <IconButton
+                                                                            disabled={satisfied?true:false}
                                                                                 size={'sm'}
                                                                                 colorScheme={'red'}
                                                                                 icon={<FiThumbsDown />} />
                                                                             <IconButton
+                                                                            disabled={satisfied?true:false}
                                                                                 size={'sm'}
-                                                                                onClick={() => { SetSatisfied(); setsatisfiedId(item._id) }}
+                                                                                onClick={() => { SetSatisfied(reciever_id, id); setsatisfiedId(item._id) }}
                                                                                 colorScheme={'green'}
                                                                                 icon={<FiThumbsUp />} />
                                                                         </HStack>
@@ -207,6 +213,17 @@ const GrievanceStatus = (props) => {
                     </Box>
 
                 </HStack>
+                <Flex 
+                py={5}
+                w="100%" alignItems={'center'} justifyContent={'center'}>
+                    <Text fontWeight={600}>
+                        {
+                            satisfied ? (
+                                `Grievance closed on ${updatedAt?.split('T')[0]}`
+                            ) : ("")
+                        }
+                    </Text>
+                </Flex>
 
             </Box>
         )
@@ -218,21 +235,11 @@ const GrievanceStatus = (props) => {
             <Flex w="100%" h="100%" alignItems={'center'} justifyContent={'center'}>
                 <VStack py={5} w="85%" h="100%" alignItems={'center'} spacing={7}>
                     {forwards?.map((item, i) => (
-                        end("Nodal Officer", item.current_reciever, item.officer_university, item.replies, i)
+                        end("Nodal Officer", item.current_reciever, item.officer_university, item.replies, i, item._id, item.satisfied, item.updatedAt)
                     ))}
                 </VStack>
             </Flex>
 
-            <Flex w="100%" h="15vh"
-                flexDirection={'column'}
-                alignItems={'center'} justifyContent={'center'}>
-
-                <Text fontWeight={600}>
-                    Satisfied with reply/s ?
-                </Text>
-
-
-            </Flex>
         </Box>
     );
 }

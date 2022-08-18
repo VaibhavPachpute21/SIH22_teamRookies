@@ -9,7 +9,7 @@ router.route("/edit-grievance/:id").post(EditGrievance)
 
 router.route("/get-grievances/:id").get(GetAllGrievances)
 
-router.route("/update-satisfied/:id").post(SatisfiedWithReply)
+router.route("/update-satisfied/:id/:rid/:fid").post(SatisfiedWithReply)
 
 router.route("/delete-grievance/:id").post(DeleteGrievance)
 

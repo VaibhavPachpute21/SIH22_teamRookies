@@ -8,7 +8,7 @@ exports.CreateReply = async (req,res,next) => {
     } = req.body
     const grievance_id = req.params.gid
     const reciever_id = req.params.rid
-
+    
     const obj = {
         message:message,
         DateTime:datetime

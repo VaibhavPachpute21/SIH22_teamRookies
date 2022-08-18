@@ -31,6 +31,10 @@ const forwardSchema = new mongoose.Schema({
     },
     assigned_to_role:{
         type:String
+    },
+    satisfied:{
+        type:Boolean,
+        default:false
     }
 },{
     timestamps:true

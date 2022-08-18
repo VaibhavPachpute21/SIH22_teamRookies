@@ -144,8 +144,7 @@ const DashboardTracker = (props) => {
         }
         GetAllGrievances()
     }, [User._id,props.grievance])
- 
-    console.log(User._id)
+
     useEffect(() => {
         if (props.data) {
             let d = props.data

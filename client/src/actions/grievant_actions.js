@@ -31,8 +31,9 @@ export async function GetAllGrievances(id){
     }
 }
 
-export async function SatisfiedWithReply(id){
-    const request = await axios.post(`http://localhost:3001/api/grievance/update-satisfied/${id}`,{})
+export async function SatisfiedWithReply(id,rid,fid){
+    console.log(rid)
+    const request = await axios.post(`http://localhost:3001/api/grievance/update-satisfied/${id}/${rid}/${fid}`,{})
     .then(response=>response.data)
     return {
         type:"satisfied_grievance",
