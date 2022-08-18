@@ -54,7 +54,7 @@ function AddNewGrievance(props) {
             grievance_nature: data.nature,
             principal_name: data.pName,
             grievance_title: data.title,
-            grievance_description: data.discription,
+            grievance_description: "some description",
             grievant_university: "mu",
             imgs: Files,
 

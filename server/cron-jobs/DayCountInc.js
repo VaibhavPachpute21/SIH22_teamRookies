@@ -47,14 +47,14 @@ exports.ResetAndForward = async (req, res, next) => {
                         if (TheOfficer.length == 0) {
                             const firstBOfficer = await Officer.find({ "role": doc2.assigned_in_role, "university": doc2.grievant_university }).sort('university_nodal_no')
 
-                            await Grievance.findByIdAndUpdate(doc2._id, { $set: { reciever_id: firstBOfficer[0]._id } })
+                            await Grievance.findByIdAndUpdate(doc2?._id, { $set: { reciever_id: firstBOfficer[0]?._id } })
                         
                             await Forward.create({
                                 previous_reciever: "Change",
-                                current_reciever: firstBOfficer[0]._id,
+                                current_reciever: firstBOfficer[0]?._id,
                                 grievance_id: doc2._id,
-                                officer_avatar: firstBOfficer[0].avatar,
-                                officer_university: firstBOfficer[0].university,
+                                officer_avatar: firstBOfficer[0]?.avatar,
+                                officer_university: firstBOfficer[0]?.university,
                                 assigned_to_role:"1B"
                             })
                         } else {
