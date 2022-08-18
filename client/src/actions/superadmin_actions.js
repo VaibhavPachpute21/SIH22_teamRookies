@@ -9,3 +9,14 @@ export async function GetTopThrees(){
         payload:request
     }
 }
+
+
+export async function GetSolvedGrievances(){
+    const request = await axios.get('http://localhost:3001/api/superadmin/get-solved-grievances')
+    .then(response => response.data)
+
+    return{
+        type:"solved_grievances",
+        payload:request
+    }
+}
