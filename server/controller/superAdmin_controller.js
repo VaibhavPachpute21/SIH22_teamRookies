@@ -1,6 +1,8 @@
 const { UniAdmin } = require('../models/uni_admin_model')
 const { SuperAdmin } = require('../models/superadmin_model')
 const { Officer } = require('../models/officer_model')
+const {Grievance} = require('../models/grievance_model')
+
 
 exports.createSuperAdmin = async (req, res, next) => {
     const { email, fullname, gender, dob, role, password, phone_number } = req.body;
@@ -77,6 +79,29 @@ exports.GetTopThrees = async (req, res, next) => {
         res.status(200).json({
             success: true,
             topThreeOfficers
+        })
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            message: error.message
+        })
+    }
+}
+
+exports.GetSolvedGrievances = async (req,res,next) => {
+    try {
+        const solvedGrievances = await Grievance.find({"satisfied":true})
+        if(!solvedGrievances){
+            res.status(200).json({
+                success:false,
+                message:"Could not get solved grievances"
+            })
+        }
+        
+
+        res.status(200).json({
+            success:true,
+            solvedGrievances
         })
     } catch (error) {
         res.status(400).json({
