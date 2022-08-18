@@ -1,3 +1,4 @@
+const { Grievance } = require('../models/grievance_model')
 const { RegionalOfficer } = require('../models/regional_officers_model')
 
 exports.CreateRegionalOfficer = async (req, res, next) => {
@@ -79,5 +80,29 @@ exports.login = async (req, res, next) => {
 
     } catch (error) {
         res.status(400).json({ success: false, message: error.message })
+    }
+}
+
+exports.GetRegionRelatedGrievances = async (req,res,next) => {
+
+    let region = "south"
+
+    try {
+        const grievances = await Grievance.find({"assigned_in_role":"2","region":region})
+        if(!grievances){
+            res.status(200).json({
+                success:false,
+                message:"No grievances to your region"
+            })
+        }
+        res.status(200).json({
+            success:true,
+            grievances
+        })
+    } catch (error) {
+        res.status(400).json({
+            success:false,
+            message:error.message
+        })
     }
 }

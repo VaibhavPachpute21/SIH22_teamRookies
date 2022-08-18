@@ -7,7 +7,7 @@ const { SendMessage } = require("../messaging/sendMessage")
 
 exports.IncDayCount = async (req, res, next) => {
     try {
-        const Lt15 = await Grievance.updateMany({ satisfied: false, day_counter: { $lt: 15 } },
+        const Lt15 = await Grievance.updateMany({ satisfied: false, assigned_in_role:{$ne:"2"},  day_counter: { $lt: 15 } },
             { $inc: { day_counter: 1 } })
 
         if (!Lt15) {
@@ -77,6 +77,10 @@ exports.ResetAndForward = async (req, res, next) => {
                                     assigned_to_role:"1B"
                                 })
                         
+                            }
+                            else{
+                                await Grievance.findByIdAndUpdate(doc2._id, { $set: { assigned_in_role: "2" } }, { new: true })
+
                             }
                             
                         }

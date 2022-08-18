@@ -50,6 +50,10 @@ const grievanceSchema = new mongoose.Schema({
     assigned_in_role:{
         type:String,
         enum:['1A','1B']
+    },
+    region:{
+        type:String,
+        enum:["east","west","north","south"]
     }
 
 }, { timestamps: true })
