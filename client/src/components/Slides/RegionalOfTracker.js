@@ -49,12 +49,13 @@ function RegionalOfTracker(props) {
                 message: message
             }
 
-            const request = await axios.post(`http://localhost:3001/api/forwards/send-reply/${gid}/${User._id}`, obj)
-                .then(response => response.data)
-
-            if (request) {
-                let d = request.success
-                if (d) {
+            await props.SendReply(obj,gid,User._id)
+            let request = props.data
+            
+            if (request.regionData) {
+                let f = request?.regionData.success 
+                
+                if (f) {
                     toast({
                         position: 'top',
                         render: () => (
@@ -160,7 +161,16 @@ function RegionalOfTracker(props) {
 
                                             <Flex w={'100%'} justifyContent={'center'} >
                                                 <Box alignSelf={'center'}>
-                                                    <Button onClick={onOpen} bg={'#5A4FCF'} color='white' >Send Reply</Button>
+                                                    {
+                                                        item?.satisfied ? (
+                                                            <Button 
+                                                            hover={{}}
+                                                            bg={'darkgreen'} color='white' >Solved</Button>
+                                                        ):(
+                                                            <Button onClick={onOpen} bg={'#5A4FCF'} color='white' >Send Reply</Button>
+                                                        )
+                                                    }
+                                                   
 
                                                     <Modal isOpen={isOpen} onClose={onClose}>
                                                         <ModalOverlay />

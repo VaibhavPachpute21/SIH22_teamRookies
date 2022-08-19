@@ -9,3 +9,12 @@ export async function GetRegionGrievances(region){
     }
 
 }
+
+export async function SendReply(data,gid,rid){
+    const request = await axios.post(`http://localhost:3001/api/forwards/send-reply/${gid}/${rid}`,data)
+    .then(response=>response.data)
+    return{
+        type:"regional_send_reply",
+        payload:request
+    }
+}
