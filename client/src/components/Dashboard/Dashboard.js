@@ -217,13 +217,9 @@ export default function Dashboard() {
         }
         {
           shutter === 3 ? (
-<<<<<<< HEAD
-            User.role == "1" ? <RegisterNewCollage /> : User.role == "0P" || User.role == "1B" ? <AddNewGrievance User={User ? User : null} /> : User.role === "3" ? <AddNewUniAdmin /> : User.role == "0I" ? <AddInstituteGrievance User={User?User:null} /> : <>nothing Here</>
-=======
             User.role == "1" ? <RegisterNewCollage /> :
               User.role == "0P" || User.role == "1B" ? <AddNewGrievance User={User ? User : null} /> :
-                User.role === "3" ? <AddNewUniAdmin /> : User.role == "0I" ? <AddInstituteGrievance userData={User} /> : <>nothing Here</>
->>>>>>> b36ff9a0773b5db561f765faeb8a229702711eaf
+                User.role === "3" ? <AddNewUniAdmin /> : User.role == "0I" ? <AddInstituteGrievance User={User?User:null} /> : <>nothing Here</>
           ) : (null)
         }
         {/* {
