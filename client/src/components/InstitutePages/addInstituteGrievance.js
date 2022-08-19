@@ -2,7 +2,7 @@ import React from 'react'
 import { Box, Button, Flex, Input, Text, Select, FormControl, Textarea } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form';
 
-export default function AddInstituteGrievance() {
+export default function AddInstituteGrievance(props) {
     const { register, handleSubmit, formState: { errors } } = useForm({ mode: 'onChange' });
 
     const HandleSubmit = (data) => {
@@ -11,10 +11,10 @@ export default function AddInstituteGrievance() {
 
 
     return (
-        <Flex h='max-content' justifyContent={'center'} padding={2}
-            overflowX={'none'}
+        <Flex h='100%' overflowX={'hidden'} justifyContent={'center'} padding={10}
         >
-            <Flex flexDirection={'column'} w={['100%', '90%', '80%', '80%']} boxShadow={'dark-lg'}>
+            <Flex flexDirection={'column'} height='max-content' w={['100%', '90%', '80%', '80%']} border={'1px solid black'}
+            >
                 <form onSubmit={handleSubmit(HandleSubmit)}>
                     <FormControl>
                         <Box w={'100%'} bg='white' paddingTop={5}>
@@ -23,49 +23,53 @@ export default function AddInstituteGrievance() {
                         <Flex w={'100%'} h='100%' bg='white' py={[5, 5, 5, 5]} px={[2, 2, 10, 10]} gap={[2, 2, 5, 5]} flexDirection={['column', 'column', 'row', 'row']} >
                             <Box w={['90%', '90%', '50%', '50%']}>
                                 <Text fontSize={'18px'} paddingLeft={2}>Institute Name:</Text>
-                                <Input variant={'filled'} value='Universal College of Engineering,Kaman Dist. Palghar' readOnly={true} />
+                                <Input variant={'filled'} value={props.userData.institute_name} readOnly={true} />
                             </Box>
                             <Box w={['90%', '90%', '25%', '25%']}>
                                 <Text fontSize={'18px'} paddingLeft={2}>Institute Code:</Text>
-                                <Input variant={'filled'} value='3460' readOnly={true} />
+                                <Input variant={'filled'} value={props.userData.institute_code} readOnly={true} />
+                            </Box>
+                            <Box w={['90%', '90%', '25%', '25%']}>
+                                <Text fontSize={'18px'} paddingLeft={2}>Year of Establishment:</Text>
+                                <Input variant={'filled'} value={props.userData.institute_year_of_start} readOnly={true} />
                             </Box>
                         </Flex>
 
                         <Flex w={'100%'} h='100%' bg='white' py={[5, 5, 5, 5]} px={[2, 2, 10, 10]} gap={[2, 2, 5, 5]} flexDirection={['column', 'column', 'row', 'row']} >
                             <Box w={['90%', '90%', '25%', '25%']}>
                                 <Text fontSize={'18px'} paddingLeft={2}>Institute Region:</Text>
-                                <Input variant={'filled'} value='Mumbai' readOnly={true} />
+                                <Input variant={'filled'} value={props.userData.institute_region} readOnly={true} />
                             </Box>
                             <Box w={['90%', '90%', '25%', '25%']}>
                                 <Text fontSize={'18px'} paddingLeft={2}>District :</Text>
-                                <Input variant={'filled'} value='Palghar' readOnly={true} />
+                                <Input variant={'filled'} value={props.userData.institute_district} readOnly={true} />
                             </Box>
                             <Box w={['90%', '90%', '25%', '25%']}>
-                                <Text fontSize={'18px'} paddingLeft={2}>Taluka :</Text>
-                                <Input variant={'filled'} value='Vasai' readOnly={true} />
+                                <Text fontSize={'18px'} paddingLeft={2}>State :</Text>
+                                <Input variant={'filled'} value={props.userData.institute_state} readOnly={true} />
                             </Box>
                             <Box w={['90%', '90%', '25%', '25%']}>
                                 <Text fontSize={'18px'} paddingLeft={2}>Pincode:</Text>
-                                <Input variant={'filled'} value='401208' readOnly={true} />
+                                <Input variant={'filled'} value={props.userData.institute_pincode} readOnly={true} />
                             </Box>
                         </Flex>
                         <Flex w={'100%'} h='100%' bg='white' py={[5, 5, 5, 5]} px={[2, 2, 10, 10]} gap={[2, 2, 5, 5]} flexDirection={['column', 'column', 'row', 'row']} >
                             <Box w={['90%', '90%', '25%', '25%']}>
                                 <Text fontSize={'18px'} paddingLeft={2}>Collage Representative:</Text>
-                                <Input variant={'filled'} value='Universal Collage of Enginnering,Kaman' readOnly={true} />
+                                <Input variant={'filled'} value={props.userData.user_name} readOnly={true} />
                             </Box>
                             <Box w={['90%', '90%', '25%', '25%']}>
-                                <Text fontSize={'18px'} paddingLeft={2}>Enrollment no:</Text>
-                                <Input variant={'filled'} value='07022002' readOnly={true} />
+                                <Text fontSize={'18px'} paddingLeft={2}>Director of Institute:</Text>
+                                <Input variant={'filled'} value={props.userData.name_of_director} readOnly={true} />
                             </Box>
                             <Box w={['90%', '90%', '25%', '25%']}>
                                 <Text fontSize={'18px'} paddingLeft={2}>University:</Text>
-                                <Input variant={'filled'} value='Mumbai University' readOnly={true} />
+                                <Input variant={'filled'} value={props.userData.institute_university} readOnly={true} />
                             </Box>
-                            <Box w={['90%', '90%', '25%', '25%']}>
+                            {/* <Box w={['90%', '90%', '25%', '25%']}>
                                 <Text fontSize={'18px'} paddingLeft={2}>State:</Text>
                                 <Input variant={'filled'} value='Maharashtra' readOnly={true} />
-                            </Box>
+                            </Box> */}
                         </Flex>
 
                         <Box w={'100%'} bg='white' py={[5]} px={10}>
