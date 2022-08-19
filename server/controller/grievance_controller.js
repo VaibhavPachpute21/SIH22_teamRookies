@@ -4,7 +4,9 @@ const { Forward } = require("../models/forward_model")
 const {FirstSendMessage} = require('../messaging/sendMessage')
 const {SendEmail} = require('../sendEmails/index')
 exports.CreateGrievance = async (req, res, next) => {
-    const { grievant_id, reciever_id, grievant_university,grievant_institute, grievance_nature, grievant_name, principal_name, grievance_title, grievance_description, imgs } = req.body
+    const { grievant_id, reciever_id, grievant_university,grievant_institute, 
+        region,
+        grievance_nature, grievant_name, principal_name, grievance_title, grievance_description, imgs } = req.body
 
     try {
         const firstOfficerReciever = await Officer.findOne({ "university": grievant_university,"role":"1A" }).sort('university_nodal_no')
@@ -19,6 +21,7 @@ exports.CreateGrievance = async (req, res, next) => {
             grievant_name:grievant_name,
             grievance_title: grievance_title, grievance_description: grievance_description,
             assigned_in_role:"1A",
+            region:region,
             grievant_institute:grievant_institute
             
         })

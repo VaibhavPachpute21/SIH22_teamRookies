@@ -32,7 +32,7 @@ function OfficersRankingPage(props) {
         officers.map((item)=>{
             Emails.push(item.grievant_id)
         })
-        console.log(Emails)
+        
     }
 
     return (

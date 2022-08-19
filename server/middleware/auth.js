@@ -5,6 +5,7 @@ const {Officer} = require("../models/officer_model")
 const {UniAdmin} = require("../models/uni_admin_model")
 const { SuperAdmin } = require('../models/superadmin_model')
 const { Institute } = require('../models/institute_model')
+const { RegionalOfficer } = require('../models/regional_officers_model')
 
 exports.protect = async (req,res,next) =>{
     let token;
@@ -26,6 +27,8 @@ exports.protect = async (req,res,next) =>{
         const supa = await SuperAdmin.findById(decoded.id)
 
         const insitute = await Institute.findById(decoded.id)
+
+        const regional = await RegionalOfficer.findById(decoded.id)
 
         if(user){
             req.user = user;
@@ -52,6 +55,12 @@ exports.protect = async (req,res,next) =>{
             req.type = "institute"
             next();
         }
+        if(regional){
+            req.user = regional
+            req.type = "regional"
+            next();
+        }
+       
        
     } catch (error) {
         return res.status(401).send("Not Authorized")

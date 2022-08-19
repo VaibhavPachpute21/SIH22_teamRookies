@@ -6,7 +6,7 @@ const {CreateRegionalOfficer,login,GetRegionRelatedGrievances} = require('../con
 
 router.route('/create_regional_officer').post(CreateRegionalOfficer)
 
-router.route('/get_all_region_grievances').get(GetRegionRelatedGrievances)
+router.route('/get_all_region_grievances/:region').get(GetRegionRelatedGrievances)
 
 router.route('/login').post(login)
 

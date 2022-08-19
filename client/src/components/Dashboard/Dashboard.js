@@ -68,7 +68,7 @@ export default function Dashboard() {
     setShutter(number)
   }
 
-
+  console.log(User)
   return (
     <HStack
       w={'100vw'}
@@ -203,7 +203,7 @@ export default function Dashboard() {
               <DashboardHistory User={User ? User : null} /> :
               User.role === "1" ? <NodalOfficersList /> :
                 User.role === "3" ? <OfficersRankingPage /> :
-                  User.role == "2" ? <RegionalOfTracker /> :
+                  User.role == "2" ? <RegionalOfTracker User={User?User:null} /> :
                     <AdminDashboardHistory User={User ? User : null} />
           ) : (null)
         }

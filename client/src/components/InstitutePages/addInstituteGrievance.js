@@ -22,7 +22,7 @@ function AddInstituteGrievance(props) {
             grievance_description: "some description",
             grievant_university: "mu",
             imgs: Files,
-
+            grievant_institute:User.institute_name
         }
         try {
             const newGrievance = await axios.post('http://localhost:3001/api/grievance/make-grievance',obj)

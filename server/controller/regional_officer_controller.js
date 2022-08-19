@@ -7,7 +7,7 @@ exports.CreateRegionalOfficer = async (req, res, next) => {
     } = req.body
 
     try {
-        const findUserWithUniAndMax = await RegionalOfficer.findOne({ "university": university,"region":region }).sort('-university_nodal_no')
+        const findUserWithUniAndMax = await RegionalOfficer.findOne({ "university": university, "region": region }).sort('-university_nodal_no')
         if (findUserWithUniAndMax) {
             let max = findUserWithUniAndMax.university_nodal_no
 
@@ -83,26 +83,23 @@ exports.login = async (req, res, next) => {
     }
 }
 
-exports.GetRegionRelatedGrievances = async (req,res,next) => {
+exports.GetRegionRelatedGrievances = async (req, res, next) => {
 
-    let region = "south"
+    const region = req.params.region
 
     try {
-        const grievances = await Grievance.find({"assigned_in_role":"2","region":region})
-        if(!grievances){
+        const grievances = await Grievance.find({ assigned_in_role: "2", "region": region })
+        if (grievances.length > 0) {
             res.status(200).json({
-                success:false,
-                message:"No grievances to your region"
+                success: true,
+                grievances
             })
         }
-        res.status(200).json({
-            success:true,
-            grievances
-        })
+
     } catch (error) {
         res.status(400).json({
-            success:false,
-            message:error.message
+            success: false,
+            message: error.message
         })
     }
 }
