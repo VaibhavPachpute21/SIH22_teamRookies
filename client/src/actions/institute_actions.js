@@ -8,3 +8,12 @@ export async function CreateInstitute(data) {
         payload:request
     }
 }
+
+export async function GetInstituteData(institutename){
+    const request = await axios.get(`http://localhost:3001/api/institute/get-institute-data/${institutename}`)
+    .then(response=>response.data)
+    return{
+        type:"get_institute",
+        payload:request
+    }
+}

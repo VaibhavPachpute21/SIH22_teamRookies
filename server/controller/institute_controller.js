@@ -97,3 +97,24 @@ exports.login = async (req, res, next) => {
         res.status(400).json({ success: false, message: error.message })
     }
 }
+
+
+exports.GetInstituteData = async (req,res,next) => {
+    const institute_name = req.params.institutename
+
+    try {
+        const institute = await Institute.find({"institute_name":institute_name})
+        if(!institute){
+            res.status(200).json({
+                success: false,
+                message:"Could not get institutes"
+            })
+        }
+        res.status(200).json({
+            success:true,
+            institute
+        })
+    } catch (error) {
+        res.status(400).json({ success: false, message: error.message })
+    }
+}

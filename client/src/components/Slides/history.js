@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import cookie from 'js-cookie'
 import './styles/drawer.css'
 import * as actions from '../../actions/user_actions'
-import axios from 'axios';
+import {useNavigate} from 'react-router-dom'
 import { connect } from 'react-redux';
 
 
@@ -20,27 +20,30 @@ const DashboardHistory = (props) => {
 
     const [forwards, setForwards] = useState([])
     const [currentGrievances, setcurrentGrievances] = useState([])
+    const [instituteGrievances, setinstituteGrievances] = useState([])
 
-    useEffect(()=>{
+    useEffect(() => {
         SetUser(props.User)
-    },[props.User])
+    }, [props.User])
+
+    const navigate = useNavigate()
 
 
     useEffect(() => {
         const fetchMyGrievances = async () => {
             try {
-                if(User.institute_name && User.role === "0I"){
-                    await props.GetMyGrievances(User._id,User.role,User.institute_name)
+                if (User.institute_name && User.role === "0I") {
+                    await props.GetMyGrievances(User._id, User.role, User.institute_name)
                 }
-                else{
-                    await props.GetMyGrievances(User._id,User.role,"nan")
+                else {
+                    await props.GetMyGrievances(User._id, User.role, "nan")
                 }
             } catch (error) {
                 SetError(error.message)
             }
         }
         fetchMyGrievances()
-    }, [User._id, User.role,props.GetMyGrievances])
+    }, [User._id, User.role, props.GetMyGrievances])
 
     useEffect(() => {
         if (props.data) {
@@ -54,6 +57,9 @@ const DashboardHistory = (props) => {
                 if (d.myGrievances) {
                     setcurrentGrievances(d.myGrievances)
                 }
+                if (d.grievances) {
+                    setinstituteGrievances(d.grievances)
+                }
             }
         }
     }, [props.data])
@@ -61,7 +67,7 @@ const DashboardHistory = (props) => {
 
 
 
-    
+
 
     return (
         <Box w="100%" h="100%">
@@ -83,8 +89,12 @@ const DashboardHistory = (props) => {
                         fontSize={'xl'}
                         py={3}>
                         {
-                            forwards && forwards.length > 0 ? ("Some grievances you've missed") : ("Current grievances")
+                            forwards && forwards.length > 0 ? ("Some grievances you've missed") : (null)
                         }
+                        {
+                            instituteGrievances && instituteGrievances.length > 0 ? ("Grievances related to your institute") : ("No grievances")
+                        }
+
                     </Text>
                     <VStack w="100%" minH={'70vh'} spacing={5}>
                         {
@@ -171,7 +181,7 @@ const DashboardHistory = (props) => {
                                         </HStack>
                                     </HStack>
 
-                                    
+
 
                                     <HStack w="100%" h="5%">
                                         <HStack w="40%" h="100%">
@@ -183,11 +193,74 @@ const DashboardHistory = (props) => {
                                             </Text>
                                         </HStack>
                                     </HStack>
-                                    
+
                                     <VStack
-                                    py={2}
-                                    alignItems={'flex-start'}
-                                    w="100%" h="max-content">
+                                        py={2}
+                                        alignItems={'flex-start'}
+                                        w="100%" h="max-content">
+                                        <Text fontWeight={600}>
+                                            {item?.grievance_title}
+                                        </Text>
+
+                                        <Text w="100%" h="max-content">
+                                            {item?.grievance_description}
+                                        </Text>
+                                    </VStack>
+                                </VStack>
+                            ))
+                        }
+
+                        {
+                            instituteGrievances?.map((item, i) => (
+
+                                <VStack
+                                    spacing={8}
+                                    boxShadow={'md'}
+
+                                    borderTop={'3px solid #5A4FCF'}
+                                    key={i} w="100%" h="max-content">
+                                    <HStack
+                                        marginTop={2}
+                                        alignItems={'flex-start'}
+                                        justifyContent={'space-between'}
+                                        w="100%" h="20%">
+                                        <HStack w="40%" h="100%">
+                                            <Text fontWeight={600}>
+                                                Grievance id
+                                            </Text>
+                                            <Text>
+                                                {item?._id}
+                                            </Text>
+                                        </HStack>
+
+                                        <HStack w="15%" h="100%" alignItems={'center'}>
+                                            <Button
+                                                onClick={()=>navigate(`/TrackGrievance/${item?._id}`)}
+                                                color={'white'}
+                                                bg="#5A4FCF"
+                                                h="100%">
+                                                Check status
+                                            </Button>
+                                        </HStack>
+                                    </HStack>
+
+
+
+                                    <HStack w="100%" h="5%">
+                                        <HStack w="40%" h="100%">
+                                            <Text fontWeight={600}>
+                                                {15 - (item?.day_counter)}
+                                            </Text>
+                                            <Text>
+                                                days to forward
+                                            </Text>
+                                        </HStack>
+                                    </HStack>
+
+                                    <VStack
+                                        py={2}
+                                        alignItems={'flex-start'}
+                                        w="100%" h="max-content">
                                         <Text fontWeight={600}>
                                             {item?.grievance_title}
                                         </Text>

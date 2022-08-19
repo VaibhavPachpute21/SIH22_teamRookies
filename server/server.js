@@ -48,7 +48,7 @@ app.use("/api/regional",require("./routes/regional_officer_routes"))
 
  cron.scheduleJob("*/2 * * * * *",()=>{
    /*  IncDayCount(),
-    ResetAndForward()    */   
+    ResetAndForward()  */     
 })
  
 

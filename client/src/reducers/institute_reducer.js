@@ -3,6 +3,8 @@ export default function institute_reducer(state={},action){
         case "create_institute":
             return {...state,inData:action.payload}
 
+        case "get_institute":
+            return {...state,inData:action.payload}
         default:
             return state
     }

@@ -209,7 +209,7 @@ export default function Dashboard() {
         }
         {
           shutter === 3 ? (
-            User.role == "1" ? <RegisterNewCollage /> : User.role == "0P" || User.role == "1B" ? <AddNewGrievance User={User ? User : null} /> : User.role === "3" ? <AddNewUniAdmin /> : User.role == "0I" ? <AddInstituteGrievance /> : <>nothing Here</>
+            User.role == "1" ? <RegisterNewCollage /> : User.role == "0P" || User.role == "1B" ? <AddNewGrievance User={User ? User : null} /> : User.role === "3" ? <AddNewUniAdmin /> : User.role == "0I" ? <AddInstituteGrievance User={User?User:null} /> : <>nothing Here</>
           ) : (null)
         }
         {/* {

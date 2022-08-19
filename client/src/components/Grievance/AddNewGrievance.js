@@ -17,7 +17,7 @@ function AddNewGrievance(props) {
     const auth = cookie.get('token');
     const [User, SetUser] = useState({})
 
-    console.log(User);
+
 
     useEffect(() => {
         async function VerifyUser() {
@@ -60,7 +60,7 @@ function AddNewGrievance(props) {
             imgs: Files,
 
         }
-        console.log(obj)
+     
 
         try {
             await props.AddGrievance(obj)
