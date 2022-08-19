@@ -15,7 +15,7 @@ const UserProfile = (props) => {
     useEffect(() => {
         const GetUserInfo = async () => {
             try {
-                await props.UserInfo('62f5fe762ed9a94f37734e91')
+                await props.UserInfo(`${props.userData._id}`)
             } catch (error) {
                 console.log(error.message)
             }
@@ -35,7 +35,7 @@ const UserProfile = (props) => {
 
     const UpdateCallback = async () => {
         try {
-            props.UpdateUser('62f5fe762ed9a94f37734e91', User)
+            props.UpdateUser(`${props.userData._id}`, User)
 
             if (props.data) {
                 let alias = props.data

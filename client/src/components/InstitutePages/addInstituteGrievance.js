@@ -5,7 +5,11 @@ import * as actions from '../../actions/institute_actions'
 import { connect } from 'react-redux'
 import axios from 'axios';
 
+<<<<<<< HEAD
 function AddInstituteGrievance(props) {
+=======
+export default function AddInstituteGrievance(props) {
+>>>>>>> b36ff9a0773b5db561f765faeb8a229702711eaf
     const { register, handleSubmit, formState: { errors } } = useForm({ mode: 'onChange' });
     const [Error, SetError] = useState('')
     const [User, SetUser] = useState({})
@@ -93,9 +97,9 @@ function AddInstituteGrievance(props) {
 
 
     return (
-        <Flex h='max-content' justifyContent={'center'} padding={2}
-            overflowX={'none'}
+        <Flex h='100%' overflowX={'hidden'} justifyContent={'center'} padding={10}
         >
+<<<<<<< HEAD
             {
                 User ? (
                     
@@ -104,6 +108,81 @@ function AddInstituteGrievance(props) {
                                 <FormControl>
                                     <Box w={'100%'} bg='white' paddingTop={5}>
                                         <Text textAlign={'center'} fontSize={'3xl'}>Institute's Information</Text>
+=======
+            <Flex flexDirection={'column'} height='max-content' w={['100%', '90%', '80%', '80%']} border={'1px solid black'}
+            >
+                <form onSubmit={handleSubmit(HandleSubmit)}>
+                    <FormControl>
+                        <Box w={'100%'} bg='white' paddingTop={5}>
+                            <Text textAlign={'center'} fontSize={'3xl'}>Institute's Information</Text>
+                        </Box>
+                        <Flex w={'100%'} h='100%' bg='white' py={[5, 5, 5, 5]} px={[2, 2, 10, 10]} gap={[2, 2, 5, 5]} flexDirection={['column', 'column', 'row', 'row']} >
+                            <Box w={['90%', '90%', '50%', '50%']}>
+                                <Text fontSize={'18px'} paddingLeft={2}>Institute Name:</Text>
+                                <Input variant={'filled'} value={props.userData.institute_name} readOnly={true} />
+                            </Box>
+                            <Box w={['90%', '90%', '25%', '25%']}>
+                                <Text fontSize={'18px'} paddingLeft={2}>Institute Code:</Text>
+                                <Input variant={'filled'} value={props.userData.institute_code} readOnly={true} />
+                            </Box>
+                            <Box w={['90%', '90%', '25%', '25%']}>
+                                <Text fontSize={'18px'} paddingLeft={2}>Year of Establishment:</Text>
+                                <Input variant={'filled'} value={props.userData.institute_year_of_start} readOnly={true} />
+                            </Box>
+                        </Flex>
+
+                        <Flex w={'100%'} h='100%' bg='white' py={[5, 5, 5, 5]} px={[2, 2, 10, 10]} gap={[2, 2, 5, 5]} flexDirection={['column', 'column', 'row', 'row']} >
+                            <Box w={['90%', '90%', '25%', '25%']}>
+                                <Text fontSize={'18px'} paddingLeft={2}>Institute Region:</Text>
+                                <Input variant={'filled'} value={props.userData.institute_region} readOnly={true} />
+                            </Box>
+                            <Box w={['90%', '90%', '25%', '25%']}>
+                                <Text fontSize={'18px'} paddingLeft={2}>District :</Text>
+                                <Input variant={'filled'} value={props.userData.institute_district} readOnly={true} />
+                            </Box>
+                            <Box w={['90%', '90%', '25%', '25%']}>
+                                <Text fontSize={'18px'} paddingLeft={2}>State :</Text>
+                                <Input variant={'filled'} value={props.userData.institute_state} readOnly={true} />
+                            </Box>
+                            <Box w={['90%', '90%', '25%', '25%']}>
+                                <Text fontSize={'18px'} paddingLeft={2}>Pincode:</Text>
+                                <Input variant={'filled'} value={props.userData.institute_pincode} readOnly={true} />
+                            </Box>
+                        </Flex>
+                        <Flex w={'100%'} h='100%' bg='white' py={[5, 5, 5, 5]} px={[2, 2, 10, 10]} gap={[2, 2, 5, 5]} flexDirection={['column', 'column', 'row', 'row']} >
+                            <Box w={['90%', '90%', '25%', '25%']}>
+                                <Text fontSize={'18px'} paddingLeft={2}>Collage Representative:</Text>
+                                <Input variant={'filled'} value={props.userData.user_name} readOnly={true} />
+                            </Box>
+                            <Box w={['90%', '90%', '25%', '25%']}>
+                                <Text fontSize={'18px'} paddingLeft={2}>Director of Institute:</Text>
+                                <Input variant={'filled'} value={props.userData.name_of_director} readOnly={true} />
+                            </Box>
+                            <Box w={['90%', '90%', '25%', '25%']}>
+                                <Text fontSize={'18px'} paddingLeft={2}>University:</Text>
+                                <Input variant={'filled'} value={props.userData.institute_university} readOnly={true} />
+                            </Box>
+                            {/* <Box w={['90%', '90%', '25%', '25%']}>
+                                <Text fontSize={'18px'} paddingLeft={2}>State:</Text>
+                                <Input variant={'filled'} value='Maharashtra' readOnly={true} />
+                            </Box> */}
+                        </Flex>
+
+                        <Box w={'100%'} bg='white' py={[5]} px={10}>
+                            <Text textAlign={'center'} fontSize={'3xl'}>Enter Details To submit Grievance</Text>
+                        </Box>
+
+                        <Flex w={'100%'} h='100%' bg='white' py={[5, 5, 5, 5]} px={[2, 2, 10, 10]} gap={[2, 2, 5, 5]} flexDirection={['column', 'column', 'row', 'row']} >
+                            <Box w={['90%', '90%', '50%', '50%']}>
+                                <Text fontSize={'18px'} paddingLeft={0}>Principal Name:</Text>
+                                <Input variant={'flushed'} placeholder='Principal Name' name="pName" id="pName"
+                                    {...register('pName', { required: { value: true, message: "Please enter principals name", } })}
+
+                                />
+                                {errors.pName && errors.pName.message ? (
+                                    <Box textAlign={'left'} fontSize={'12px'} py={1} maxH={'0px'} color={'red'}>
+                                        {errors.pName.message}
+>>>>>>> b36ff9a0773b5db561f765faeb8a229702711eaf
                                     </Box>
                                     <Flex w={'100%'} h='100%' bg='white' py={[5, 5, 5, 5]} px={[2, 2, 10, 10]} gap={[2, 2, 5, 5]} flexDirection={['column', 'column', 'row', 'row']} >
                                         <Box w={['90%', '90%', '50%', '50%']}>
