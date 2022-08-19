@@ -4,7 +4,7 @@ import { FiThumbsUp } from 'react-icons/fi'
 import { FiThumbsDown } from 'react-icons/fi'
 import * as actions from '../../actions/grievant_actions'
 import { connect } from 'react-redux'
-import { useLocation } from "react-router-dom";
+import { useLocation,useNavigate } from "react-router-dom";
 
 
 const GrievanceStatus = (props) => {
@@ -17,6 +17,7 @@ const GrievanceStatus = (props) => {
     const [forwards, setForwards] = useState([])
     const [forwardId, setForwardIs] = useState('')
     
+    const navigate = useNavigate()
     useEffect(() => {
         const GetAllForwards = async () => {
             try {
@@ -55,14 +56,15 @@ const GrievanceStatus = (props) => {
 
             try {
                 props.SatisfiedWithReply(pathname?.split("/")[2], currentR, forwardId)
+                navigate('/feedback/=92=359=')
             } catch (error) {
                 Seterror(error.message)
             }
 
-
         }
     }, [satisfiedConfirm, props.SatisfiedWithReply])
-
+    
+   
     
     const end = function (username, reciever_id, university, replies, i, id, satisfied, updatedAt) {
 
@@ -211,20 +213,21 @@ const GrievanceStatus = (props) => {
                             </Box>
 
                         </HStack>
-                    </Box>
-
-                </HStack>
-                <Flex 
+                        <Flex 
                 py={5}
-                w="100%" alignItems={'center'} justifyContent={'center'}>
+                 alignItems={'center'} justifyContent={'center'}>
                     <Text fontWeight={600}>
                         {
-                            satisfied ? (
+                            satisfied && i == forwards.length-1 ? (
                                 `Grievance closed on ${updatedAt?.split('T')[0]}`
                             ) : ("")
                         }
                     </Text>
                 </Flex>
+                    </Box>
+                   
+                </HStack>
+               
 
             </Box>
         )

@@ -2,12 +2,13 @@ const { Forward } = require('../models/forward_model')
 const { Grievance } = require('../models/grievance_model')
 const { Officer } = require("../models/officer_model")
 const { SendMessage } = require("../messaging/sendMessage")
+const { RegionalOfficer } = require('../models/regional_officers_model')
 
 
 
 exports.IncDayCount = async (req, res, next) => {
     try {
-        const Lt15 = await Grievance.updateMany({ satisfied: false, assigned_in_role: { $ne: "2" }, day_counter: { $lt: 15 } },
+        const Lt15 = await Grievance.updateMany({ satisfied: false, assigned_in_role: { $ne: "2" },assigned_in_role: { $ne: "X" }, day_counter: { $lt: 15 } },
             { $inc: { day_counter: 1 } })
 
         if (!Lt15) {
@@ -18,6 +19,38 @@ exports.IncDayCount = async (req, res, next) => {
         res.status(400).send(error.message)
     }
 }
+
+exports.FindAssignedToTwo = async (req,res,next) => {
+    try {
+        const role2 = await Grievance.find({"assigned_in_role":"2"})
+
+        role2?.forEach(async (doc)=>{
+            if(role2.length > 0){
+
+                const regionalOfficer = await RegionalOfficer.aggregate([
+                    {$match:{"region":doc.region}},
+                    {$sample:{size:1}}
+                ])
+                if(regionalOfficer.length > 0){
+                    await Forward.create({
+                        previous_reciever: "Change",
+                        current_reciever: regionalOfficer[0]?._id,
+                        grievance_id: doc._id,
+                        officer_avatar: regionalOfficer[0]?.avatar,
+                        officer_university: regionalOfficer[0]?.university,
+                        assigned_to_role: "2"
+                    })
+                    await Grievance.findByIdAndUpdate(doc._id, { $set: { assigned_in_role: "X" } }, { new: true })
+                }
+                
+            }
+        })
+
+    } catch (error) {
+        res.status(400).send(error.message)
+    }
+}
+
 
 exports.ResetAndForward = async (req, res, next) => {
     try {
@@ -81,15 +114,6 @@ exports.ResetAndForward = async (req, res, next) => {
                             else {
                                 await Grievance.findByIdAndUpdate(doc2._id, { $set: { assigned_in_role: "2" } }, { new: true })
 
-                                const firstROfficer = await RegionalOff
-                                await Forward.create({
-                                    previous_reciever: currentOff[0]._id,
-                                    current_reciever: theNextOfficer[0]._id,
-                                    grievance_id: doc2._id,
-                                    officer_avatar: theNextOfficer[0].avatar,
-                                    officer_university: theNextOfficer[0].university,
-                                    assigned_to_role: "1B"
-                                })
                             }
 
                         }

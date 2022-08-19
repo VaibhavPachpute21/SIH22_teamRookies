@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import {
-    Box, Flex, Textarea, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, Text, Button, Modal, ModalOverlay, ModalContent,
+    Box, useToast, Flex, Textarea, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, Text, Button, Modal, ModalOverlay, ModalContent,
     ModalHeader, ModalFooter, ModalBody, ModalCloseButton, useDisclosure
 } from '@chakra-ui/react'
-
+import axios from 'axios'
 import { connect } from 'react-redux'
 import * as actions from '../../actions/regional_officer_actions'
 
@@ -22,7 +22,7 @@ function RegionalOfTracker(props) {
         }
 
     }, [props.User])
-
+    const toast = useToast()
 
     useEffect(() => {
         const GetAllRegionalGrievances = async () => {
@@ -43,9 +43,39 @@ function RegionalOfTracker(props) {
 
 
     const MakeReply = async (gid) => {
-        const datetime = Date.now().toString()
+
         try {
-            const set = await props.SendReply({ message: message, DateTime: datetime }, gid, User?._id)
+            let obj = {
+                message: message
+            }
+
+            const request = await axios.post(`http://localhost:3001/api/forwards/send-reply/${gid}/${User._id}`, obj)
+                .then(response => response.data)
+
+            if (request) {
+                let d = request.success
+                if (d) {
+                    toast({
+                        position: 'top',
+                        render: () => (
+                            <Box color='white' p={3} bg='green.500'>
+                                Message sent!
+                            </Box>
+                        ),
+                    })
+                }
+                else {
+                    toast({
+                        position: 'top',
+                        render: () => (
+                            <Box color='white' p={3} bg='red.500'>
+                                {Error}
+                            </Box>
+                        ),
+                    })
+                }
+            }
+
         } catch (error) {
             SetError(error.message)
         }
@@ -138,7 +168,7 @@ function RegionalOfTracker(props) {
                                                             <ModalHeader>Enter Reply</ModalHeader>
                                                             <ModalCloseButton />
                                                             <ModalBody>
-                                                                <Textarea value={message} onChange={(e) => SetMessage(e.target.value)}/>
+                                                                <Textarea value={message} onChange={(e) => SetMessage(e.target.value)} />
                                                             </ModalBody>
 
                                                             <ModalFooter>

@@ -116,7 +116,7 @@ exports.SatisfiedWithReply = async (req,res,next) => {
 
         const updatedSolveCount = await Officer.findOneAndUpdate({"_id":reciever_id},{$inc:{solve_count:1}})
 
-        const upadateForwardSatisfied = await Forward.findOneAndUpdate({"_id":forward_id},{$set:{satisfied:true}})
+        const upadateForwardSatisfied = await Forward.updateMany({"grievance_id":grievance_id},{$set:{satisfied:true}})
 
         if(!updatedGrievance){
             res.status(200).json({

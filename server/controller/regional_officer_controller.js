@@ -88,7 +88,7 @@ exports.GetRegionRelatedGrievances = async (req, res, next) => {
     const region = req.params.region
 
     try {
-        const grievances = await Grievance.find({ assigned_in_role: "2", "region": region })
+        const grievances = await Grievance.find({ assigned_in_role: "X", "region": region })
         if (grievances.length > 0) {
             res.status(200).json({
                 success: true,

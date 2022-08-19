@@ -13,7 +13,7 @@ function AddNodalOfficer(props) {
     const toast = useToast()
 
     const HandleSubmit = async (data) => {
-        console.log(data)
+        
         let obj = {
             email:data.email,
             password:data.pass,

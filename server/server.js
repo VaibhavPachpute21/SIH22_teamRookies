@@ -13,8 +13,8 @@ const cors = require('cors')
 const cron = require('node-schedule')
 
 
-const {IncDayCount} = require('./cron-jobs/DayCountInc')
-const {ResetAndForward} = require("./cron-jobs/DayCountInc")
+
+const {ResetAndForward,FindAssignedToTwo,IncDayCount} = require("./cron-jobs/DayCountInc")
 
 
 app.use(express.json())
@@ -49,7 +49,8 @@ app.use("/api/regional",require("./routes/regional_officer_routes"))
  cron.scheduleJob("*/2 * * * * *",()=>{
 
     IncDayCount(),
-    ResetAndForward()     
+    ResetAndForward(),    
+    FindAssignedToTwo() 
 
 
 })
