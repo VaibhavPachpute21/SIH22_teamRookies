@@ -23,6 +23,7 @@ import AddNodalOfficer from '../Slides/AddNodalOfficer'
 import NodalOfficersList from '../Slides/NodalOfficersList'
 import OfficersRankingPage from '../Slides/OfficersRankingPage'
 import SolvedGrievance from '../Slides/SolvedGrievance'
+import AddNewUniAdmin from '../Slides/AddNewUniAdmin'
 import cookie from 'js-cookie'
 
 export default function Dashboard() {
@@ -208,7 +209,7 @@ export default function Dashboard() {
         }
         {
           shutter === 3 ? (
-            User.role == "1" ? <RegisterNewCollage /> : User.role == "0P" || User.role == "1B" ? <AddNewGrievance User={User ? User : null} /> : User.role === "3" ? <AddNodalOfficer /> : User.role == "0I" ? <AddInstituteGrievance /> : <>nothing Here</>
+            User.role == "1" ? <RegisterNewCollage /> : User.role == "0P" || User.role == "1B" ? <AddNewGrievance User={User ? User : null} /> : User.role === "3" ? <AddNewUniAdmin /> : User.role == "0I" ? <AddInstituteGrievance /> : <>nothing Here</>
           ) : (null)
         }
         {/* {
