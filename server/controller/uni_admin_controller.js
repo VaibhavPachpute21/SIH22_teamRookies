@@ -1,7 +1,7 @@
 const { Officer } = require('../models/officer_model')
 const {UniAdmin} = require("../models/uni_admin_model")
 exports.Assign1Aor1B = async (req, res, next) => {
-    const { email, password, role, fullname, committee, avatar, banner, phone_number, college_name, university, district, state } = req.body;
+    const { email, password, role, fullname, committee,gender, avatar, banner, phone_number, college_name, university, district, state } = req.body;
 
     try {
         if (role === "1A") {
@@ -10,7 +10,7 @@ exports.Assign1Aor1B = async (req, res, next) => {
                 let max = findUserWithUniAndMax.university_nodal_no
 
                 const newUser = await Officer.create({
-                    email, password, role, fullname, committee, avatar, banner, phone_number, college_name, university, district, state
+                    email, password, role, gender,fullname, committee, avatar, banner, phone_number, college_name, university, district, state
                 })
 
                 if (newUser) {
@@ -24,7 +24,7 @@ exports.Assign1Aor1B = async (req, res, next) => {
             }
             else {
                 const newUser = await Officer.create({
-                    email, password, role, fullname, committee, avatar, banner, phone_number, college_name, university, district, state
+                    email, password, role, fullname,gender, committee, avatar, banner, phone_number, college_name, university, district, state
                 })
                 sendToken(newUser, 201, res);
             }
@@ -35,7 +35,7 @@ exports.Assign1Aor1B = async (req, res, next) => {
                 let max = findUserWithUniAndMax.university_nodal_no
 
                 const newUser = await Officer.create({
-                    email, password, role, fullname, committee, avatar, banner, phone_number, college_name, university, district, state
+                    email, password, role, fullname, gender,committee, avatar, banner, phone_number, college_name, university, district, state
                 })
 
                 if (newUser) {
@@ -49,7 +49,7 @@ exports.Assign1Aor1B = async (req, res, next) => {
             }
             else {
                 const newUser = await Officer.create({
-                    email, password, role, fullname, committee, avatar, banner, phone_number, college_name, university, district, state
+                    email, password, role, fullname,gender, committee, avatar, banner, phone_number, college_name, university, district, state
                 })
                 sendToken(newUser, 201, res);
             }
@@ -98,6 +98,39 @@ exports.login = async (req, res, next) => {
     }
 }
 
+exports.AllOfficers = async (req,res,next) => {
+    try {
+        const Officer1A = await Officer.find({"role":"1A"})
+        const Officer1B = await Officer.find({"role":"1B"})
+
+        if(!Officer1A){
+            res.status(200).json({
+                success:true,
+                Officer1B
+            })
+        }
+        if(!Officer1B){
+            res.status(200).json({
+                success:true,
+                Officer1A
+            })
+        }
+        if(!Officer1A && !Officer1B){
+            res.status(200).json({
+                success:false,
+                message:"Couldnt get officers"
+            })
+        }
+        res.status(200).json({
+            success:true,
+            Officer1A,
+            Officer1B
+        })
+
+    } catch (error) {
+        res.status(400).json({ success: false, message: error.message })
+    }
+}
 
 
 const sendToken = async (user, statusCode, res) => {

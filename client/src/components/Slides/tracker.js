@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { GrFormAttachment } from 'react-icons/gr'
 import { connect } from 'react-redux'
 import * as actions from '../../actions/grievant_actions'
-import axios from 'axios';
+
 import cookie from 'js-cookie'
 
 const DashboardTracker = (props) => {

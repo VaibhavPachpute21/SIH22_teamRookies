@@ -3,8 +3,9 @@ const { Grievance } = require('../models/grievance_model')
 const { Forward } = require('../models/forward_model')
 
 exports.register = async (req, res, next) => {
-    const { email, password, role, fullname, committee, avatar, banner, phone_number, college_name, university, district, state } = req.body;
-
+    const { email, password, role, fullname, committee, avatar, banner, gender,
+        phone_number, college_name, university, district, state } = req.body;
+        
     try {
 
         const findUserWithUniAndMax = await Officer.findOne({ "university": university }).sort('-university_nodal_no')
@@ -12,7 +13,9 @@ exports.register = async (req, res, next) => {
             let max = findUserWithUniAndMax.university_nodal_no
 
             const newUser = await Officer.create({
-                email, password, role, fullname, committee, avatar, banner, phone_number, college_name, university, district, state
+                email, password, role, fullname, committee, avatar,
+                gender,
+                banner, phone_number, college_name, university, district, state
             })
 
             if (newUser) {
@@ -26,7 +29,9 @@ exports.register = async (req, res, next) => {
         }
         else {
             const newUser = await Officer.create({
-                email, password, role, fullname, committee, avatar, banner, phone_number, college_name, university, district, state
+                email, password, role, fullname, committee,
+                gender,
+                avatar, banner, phone_number, college_name, university, district, state
             })
             sendToken(newUser, 201, res);
         }
@@ -176,16 +181,16 @@ exports.AllMyGrievances = async (req, res, next) => {
                 forwards
             })
         }
-        if(role === "0I"){
-            const grievances = await Grievance.find({"grievant_institute":institute})
-            if(!grievances){
+        if (role === "0I") {
+            const grievances = await Grievance.find({ "grievant_institute": institute })
+            if (!grievances) {
                 res.status(200).json({
-                    success:false,
+                    success: false,
                     message: "You have no grievances, yet"
                 })
             }
             res.status(200).json({
-                success:true,
+                success: true,
                 grievances
             })
         }
