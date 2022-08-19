@@ -58,7 +58,7 @@ function AddNewGrievance(props) {
             grievance_description: "some description",
             grievant_university: "mu",
             imgs: Files,
-            region:User?.region ? (User.region):("None")
+            region:User?.region ? User.region:"None"
 
         }
      
