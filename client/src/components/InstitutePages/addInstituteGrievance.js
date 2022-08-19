@@ -22,41 +22,37 @@ function AddInstituteGrievance(props) {
             grievance_description: "some description",
             grievant_university: "mu",
             imgs: Files,
-            grievant_institute:User.institute_name
+            grievant_institute:User.institute_name,
+            region:User.institute_region
         }
         try {
             const newGrievance = await axios.post('http://localhost:3001/api/grievance/make-grievance',obj)
-            console.log(newGrievance)
-            if (newGrievance.data) {
-                let alias = newGrievance
-                if (alias.grievanceData) {
-                    let success = alias.grievanceData?.success
-
-                    if (success) {
-                        toast({
-                            position: 'top',
-                            render: () => (
-                                <Box color='white' p={3} bg='green.500'>
-                                    Grievance submitted
-                                </Box>
-                            ),
-                        })
-                        // navigate('/TrackGrievance/34-20')
-                    }
-                    else {
-                        toast({
-                            position: 'top',
-                            render: () => (
-                                <Box color='white' p={3} bg='red.500'>
-                                    {Error}
-                                </Box>
-                            ),
-                        })
-                    }
-
+            let d = newGrievance.data
+            if(d.success){
+                let success = d?.success
+                if (success) {
+                    toast({
+                        position: 'top',
+                        render: () => (
+                            <Box color='white' p={3} bg='green.500'>
+                                Grievance submitted
+                            </Box>
+                        ),
+                    })
+                    // navigate('/TrackGrievance/34-20')
                 }
-
+                else {
+                    toast({
+                        position: 'top',
+                        render: () => (
+                            <Box color='white' p={3} bg='red.500'>
+                                {Error}
+                            </Box>
+                        ),
+                    })
+                }
             }
+         
         } catch (error) {
             SetError(error.message)
         }
