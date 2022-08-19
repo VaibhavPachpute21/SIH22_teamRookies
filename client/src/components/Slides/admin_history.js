@@ -68,14 +68,19 @@ const AdminDashboardHistory = (props) => {
     }, [props.data])
 
     const MakeReply = async (gid) => {
-        const datetime = Date.now().toString()
+      
         try {
-            const set = await props.SendReply({ message: message, DateTime: datetime }, gid, User?._id)
+                let obj = {
+                    message:message
+                }
+
+            const set = await props.SendReply(obj, gid, User?._id)
         } catch (error) {
             SetError(error.message)
         }
     }
-    
+
+
 
 
 
@@ -128,7 +133,7 @@ const AdminDashboardHistory = (props) => {
                                                     <Button
                                                         color="white"
                                                         bg="#5A4FCF"
-                                                        onClick={() => { onClose(); MakeReply(item._id) }}>
+                                                        onClick={() => { onClose(); MakeReply(item.grievance_id) }}>
                                                         Send
                                                     </Button>
 
@@ -145,7 +150,7 @@ const AdminDashboardHistory = (props) => {
                                                     Grievance id
                                                 </Text>
                                                 <Text>
-                                                    {item?._id}
+                                                    {item.grievance_id}
                                                 </Text>
                                             </HStack>
 

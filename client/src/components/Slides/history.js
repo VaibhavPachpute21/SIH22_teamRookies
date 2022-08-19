@@ -65,7 +65,7 @@ const DashboardHistory = (props) => {
     }, [props.data])
 
 
-
+   
 
 
 
@@ -116,7 +116,7 @@ const DashboardHistory = (props) => {
                                                     Grievance id
                                                 </Text>
                                                 <Text>
-                                                    {item?._id}
+                                                    {item?.grievance_id}
                                                 </Text>
                                             </HStack>
 

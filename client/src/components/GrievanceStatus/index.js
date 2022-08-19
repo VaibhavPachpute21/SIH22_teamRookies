@@ -16,6 +16,7 @@ const GrievanceStatus = (props) => {
     const [currentR, setCurrentR] = useState('')
     const [forwards, setForwards] = useState([])
     const [forwardId, setForwardIs] = useState('')
+    
     useEffect(() => {
         const GetAllForwards = async () => {
             try {
@@ -62,7 +63,7 @@ const GrievanceStatus = (props) => {
         }
     }, [satisfiedConfirm, props.SatisfiedWithReply])
 
-
+    
     const end = function (username, reciever_id, university, replies, i, id, satisfied, updatedAt) {
 
         return (
