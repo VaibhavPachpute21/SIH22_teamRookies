@@ -29,7 +29,12 @@ const DashboardHistory = (props) => {
     useEffect(() => {
         const fetchMyGrievances = async () => {
             try {
-                await props.GetMyGrievances(User._id,User.role)
+                if(User.institute_name && User.role === "0I"){
+                    await props.GetMyGrievances(User._id,User.role,User.institute_name)
+                }
+                else{
+                    await props.GetMyGrievances(User._id,User.role,"nan")
+                }
             } catch (error) {
                 SetError(error.message)
             }

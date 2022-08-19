@@ -27,7 +27,13 @@ function OfficersRankingPage(props) {
         }
     }, [props.data])
 
-
+    const SendEmails = () => {
+        let Emails = []
+        officers.map((item)=>{
+            Emails.push(item.grievant_id)
+        })
+        console.log(Emails)
+    }
 
     return (
         <Flex w={'100%'} h={'100%'} justifyContent={'center'} alignItems={'center'} padding={5} overflowX={'hidden'} >
@@ -111,13 +117,18 @@ function OfficersRankingPage(props) {
                                 <ModalHeader>Modal Title</ModalHeader>
                                 <ModalCloseButton />
                                 <ModalBody>
-                                    <FormLabel>Add message</FormLabel>
-                                    <Textarea ></Textarea>
+                                    <FormLabel>Add title for email</FormLabel>
+                                    <Input placeholder="Congrat's for soliving 100 grievances"/>
+
+                                    <FormLabel>Add message for email</FormLabel>
+                                    <Textarea placeholder="Good job..."></Textarea>
                                 </ModalBody>
 
                                 <ModalFooter>
-                                    <Button colorScheme='blue' mr={3} onClick={onClose}>
-                                        Send Appretiation
+                                    <Button
+                                    
+                                    color="white" bg="#5A4FCF" mr={3} onClick={()=>{onClose();SendEmails()}}>
+                                        Send emails
                                     </Button>
                                 </ModalFooter>
                             </ModalContent>
@@ -125,14 +136,6 @@ function OfficersRankingPage(props) {
                     </Box>
 
                 </Flex>
-
-
-
-
-
-
-
-
             </Flex>
         </Flex>
     )

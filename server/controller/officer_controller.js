@@ -123,6 +123,7 @@ exports.update = async (req, res, next) => {
 exports.AllMyGrievances = async (req, res, next) => {
     const id = req.params.id
     const role = req.params.role
+    const institute = req.params.institute
 
     try {
         if (role == "1A" || role == "1B") {
@@ -149,7 +150,7 @@ exports.AllMyGrievances = async (req, res, next) => {
                 forwards
             })
         }
-        if (role == "0P") {
+        if (role === "0P") {
             const myGrievances = await Grievance.find({ "grievant_id": id })
             const forwards = await Forward.find({ "current_reciever": id })
             if (!myGrievances) {
@@ -173,6 +174,19 @@ exports.AllMyGrievances = async (req, res, next) => {
                 success: true,
                 myGrievances,
                 forwards
+            })
+        }
+        if(role === "0I"){
+            const grievances = await Grievance.find({"grievant_institute":institute})
+            if(!grievances){
+                res.status(200).json({
+                    success:false,
+                    message: "You have no grievances, yet"
+                })
+            }
+            res.status(200).json({
+                success:true,
+                grievances
             })
         }
 

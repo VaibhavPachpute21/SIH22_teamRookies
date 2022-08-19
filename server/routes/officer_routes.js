@@ -12,6 +12,6 @@ router.route("/info").post(userinfo)
 
 router.route("/update").post(update)
 
-router.route("/mygrievances/:id/:role").get(AllMyGrievances)
+router.route("/mygrievances/:id/:role/:institute").get(AllMyGrievances)
 
 module.exports = router;

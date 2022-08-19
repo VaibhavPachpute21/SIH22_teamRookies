@@ -43,7 +43,7 @@ const AdminDashboardHistory = (props) => {
     useEffect(() => {
         const fetchMyGrievances = async () => {
             try {
-                await props.GetMyGrievances(User._id,User?.role)
+                await props.GetMyGrievances(User._id, User?.role)
             } catch (error) {
                 SetError(error.message)
             }
@@ -75,9 +75,9 @@ const AdminDashboardHistory = (props) => {
             SetError(error.message)
         }
     }
-    console.log(currentGrievances)
-
     
+
+
 
     return (
         <Box w="100%" h="100%">
@@ -114,27 +114,27 @@ const AdminDashboardHistory = (props) => {
 
                                         borderTop={'3px solid #5A4FCF'}
                                         key={i} w="100%" h="15vh">
-                                             <Modal isOpen={isOpen} onClose={onClose}>
-                                        <ModalOverlay />
-                                        <ModalContent>
-                                            <ModalHeader>Write reply</ModalHeader>
-                                            <ModalCloseButton />
-                                            <ModalBody>
-                                                <FormLabel>{`To ${item?.grievant_name}`}</FormLabel>
-                                                <Textarea type="text" value={message} onChange={(e) => SetMessage(e.target.value)} />
-                                            </ModalBody>
+                                        <Modal isOpen={isOpen} onClose={onClose}>
+                                            <ModalOverlay />
+                                            <ModalContent>
+                                                <ModalHeader>Write reply</ModalHeader>
+                                                <ModalCloseButton />
+                                                <ModalBody>
+                                                    <FormLabel>{`To ${item?.grievant_name}`}</FormLabel>
+                                                    <Textarea type="text" value={message} onChange={(e) => SetMessage(e.target.value)} />
+                                                </ModalBody>
 
-                                            <ModalFooter>
-                                                <Button
-                                                    color="white"
-                                                    bg="#5A4FCF"
-                                                    onClick={() => { onClose(); MakeReply(item._id) }}>
-                                                    Send
-                                                </Button>
+                                                <ModalFooter>
+                                                    <Button
+                                                        color="white"
+                                                        bg="#5A4FCF"
+                                                        onClick={() => { onClose(); MakeReply(item._id) }}>
+                                                        Send
+                                                    </Button>
 
-                                            </ModalFooter>
-                                        </ModalContent>
-                                    </Modal>
+                                                </ModalFooter>
+                                            </ModalContent>
+                                        </Modal>
                                         <HStack
                                             marginTop={2}
                                             alignItems={'flex-start'}
@@ -151,7 +151,7 @@ const AdminDashboardHistory = (props) => {
 
                                             <HStack w="15%" h="100%" alignItems={'center'}>
                                                 <Button
-                                                    onClick={()=>{onOpen();console.log(item.grievant_name)}}
+                                                    onClick={() => { onOpen(); console.log(item.grievant_name) }}
                                                     color={'white'}
                                                     bg="#5A4FCF"
                                                     h="100%">
@@ -229,13 +229,29 @@ const AdminDashboardHistory = (props) => {
                                         </HStack>
 
                                         <HStack w="15%" h="100%" alignItems={'center'}>
-                                            <Button
-                                                onClick={()=>{onOpen()}}
-                                                color={'white'}
-                                                bg="#5A4FCF"
-                                                h="100%">
-                                                Send reply
-                                            </Button>
+                                            {
+                                                item?.satisfied ? (
+                                                    <Button
+                                                        disabled={true}
+                                                        onClick={() => { onOpen() }}
+                                                        color={'white'}
+                                                        bg="darkgreen"
+                                                        _hover={{}}
+                                                        h="100%">
+                                                        Solved
+                                                    </Button>
+                                                ) : (
+
+                                                    <Button
+                                                        onClick={() => { onOpen() }}
+                                                        color={'white'}
+                                                        bg="#5A4FCF"
+                                                        h="100%">
+                                                        Send reply
+                                                    </Button>
+                                                )
+                                            }
+
                                         </HStack>
                                     </HStack>
 

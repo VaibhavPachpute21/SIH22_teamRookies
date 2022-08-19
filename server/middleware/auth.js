@@ -4,6 +4,7 @@ const {User} = require('../models/user_model')
 const {Officer} = require("../models/officer_model")
 const {UniAdmin} = require("../models/uni_admin_model")
 const { SuperAdmin } = require('../models/superadmin_model')
+const { Institute } = require('../models/institute_model')
 
 exports.protect = async (req,res,next) =>{
     let token;
@@ -24,6 +25,8 @@ exports.protect = async (req,res,next) =>{
         
         const supa = await SuperAdmin.findById(decoded.id)
 
+        const insitute = await Institute.findById(decoded.id)
+
         if(user){
             req.user = user;
             req.type = "user"
@@ -42,6 +45,11 @@ exports.protect = async (req,res,next) =>{
         if(supa){
             req.user = supa
             req.type = "superadmin"
+            next();
+        }
+        if(insitute){
+            req.user = insitute
+            req.type = "institute"
             next();
         }
        

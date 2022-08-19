@@ -43,8 +43,8 @@ export async function UpdateUser(id,data){
     }
 }
 
-export async function GetMyGrievances(id,role){
-    const request = await axios.get(`http://localhost:3001/api/officer/mygrievances/${id}/${role}`)
+export async function GetMyGrievances(id,role,institute){
+    const request = await axios.get(`http://localhost:3001/api/officer/mygrievances/${id}/${role}/${institute}`)
     .then(response=>response.data)
     return{
         type:"my_grievances",
