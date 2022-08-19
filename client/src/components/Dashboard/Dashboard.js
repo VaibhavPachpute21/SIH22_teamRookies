@@ -229,7 +229,7 @@ export default function Dashboard() {
         } */}
         {
           shutter === 5 ? (
-            User.role == 0 || User.role != "0I" ? <UserProfile userData={User} /> : <InstituteProfile />
+            User.role == 0 || User.role != "0I" ? <UserProfile userData={User} /> : <InstituteProfile userData={User} />
           ) : (null)
         }
 
