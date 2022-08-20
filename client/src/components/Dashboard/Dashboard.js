@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { HStack, Flex, Box, VStack, IconButton, Divider, Text } from '@chakra-ui/react'
+import { HStack, Flex, Box, VStack, IconButton, Divider, Text, Link } from '@chakra-ui/react'
 import { AiOutlineHome } from 'react-icons/ai'
 import { MdOutlineRecentActors } from 'react-icons/md'
 import { MdPendingActions } from 'react-icons/md'
@@ -26,6 +26,7 @@ import SolvedGrievance from '../Slides/SolvedGrievance'
 import AddNewUniAdmin from '../Slides/AddNewUniAdmin'
 import RegionalOfTracker from '../Slides/RegionalOfTracker'
 import cookie from 'js-cookie'
+import { useNavigate } from 'react-router-dom'
 
 export default function Dashboard() {
 
@@ -33,6 +34,7 @@ export default function Dashboard() {
   const [authen, setAuthen] = useState(null)
   const auth = cookie.get('token');
   const [User, SetUser] = useState({})
+  const navigate = useNavigate()
 
 
   console.log(User)
@@ -124,7 +126,7 @@ export default function Dashboard() {
           </Flex>
         </Box>
 
-        <Box w="100%" h="10%">
+        {User.role=="2" || User.role=="1A"?null:<Box w="100%" h="10%">
           <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
             <IconButton
               onClick={() => { setShutter(2) }}
@@ -136,9 +138,9 @@ export default function Dashboard() {
               fontSize={'3xl'}
               icon={<MdPendingActions />} />
           </Flex>
-        </Box>
+        </Box>}
 
-        <Box w="100%" h="10%">
+        {User.role=="2" || User.role=="1A" ?null: <Box w="100%" h="10%">
           <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
             <IconButton
               onClick={() => { setShutter(3) }}
@@ -150,7 +152,7 @@ export default function Dashboard() {
               fontSize={'3xl'}
               icon={<IoMdAddCircleOutline />} />
           </Flex>
-        </Box>
+        </Box>}
 
         <Divider w="50%" />
 
@@ -173,7 +175,7 @@ export default function Dashboard() {
             <IconButton
               background={'#5A4FCF'}
               borderRadius={10}
-
+              onClick={()=>{cookie.remove('token') ; navigate("/")}}
               color={'white'}
               _hover={{ background: '#5247cd' }}
               fontSize={'2xl'}
@@ -203,7 +205,7 @@ export default function Dashboard() {
               <DashboardHistory User={User ? User : null} /> :
               User.role === "1" ? <NodalOfficersList /> :
                 User.role === "3" ? <OfficersRankingPage /> :
-                  User.role == "2" ? <RegionalOfTracker User={User?User:null} /> :
+                  User.role == "2" ? <RegionalOfTracker User={User ? User : null} /> :
                     <AdminDashboardHistory User={User ? User : null} />
           ) : (null)
         }
@@ -219,7 +221,7 @@ export default function Dashboard() {
           shutter === 3 ? (
             User.role == "1" ? <RegisterNewCollage /> :
               User.role == "0P" || User.role == "1B" ? <AddNewGrievance User={User ? User : null} /> :
-                User.role === "3" ? <AddNewUniAdmin /> : User.role == "0I" ? <AddInstituteGrievance User={User?User:null} /> : <>nothing Here</>
+                User.role === "3" ? <AddNewUniAdmin /> : User.role == "0I" ? <AddInstituteGrievance User={User ? User : null} /> : <>nothing Here</>
           ) : (null)
         }
         {/* {

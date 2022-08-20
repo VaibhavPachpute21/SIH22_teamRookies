@@ -30,7 +30,7 @@ function RegisterNewCollage(props) {
             director_phone_number: data.iDphone,
             user_name: data.uName,
             user_phone: data.uPhone,
-            user_email: "abhinav@gmail.com",
+            user_email: data.uMail,
             password: data.uPassword
         }
         try {
@@ -336,13 +336,13 @@ function RegisterNewCollage(props) {
 
                             <Box w={'25%'} p={4}>
                                 <FormLabel>User Login Id</FormLabel>
-                                <Input borderColor={'black'} placeholder='Enter Phone number' type={'text'}
-                                    id='uPhone' name='uPhone'
-                                    {...register('uPhone', { required: { value: true, message: "Please Enter Phone number !", }, })}
+                                <Input borderColor={'black'} placeholder='Enter Login Id' type={'text'}
+                                    id='uPhone' name='uMail'
+                                    {...register('uMail', { required: { value: true, message: "Please Enter Mail !", }, })}
                                 />
-                                {errors.uPhone && errors.uPhone.message ? (
+                                {errors.uMail && errors.uMail.message ? (
                                     <Box textAlign={'left'} fontSize={'12px'} py={1} maxH={'0px'} color={'red'}>
-                                        {errors.uPhone.message}
+                                        {errors.uMail.message}
                                     </Box>
                                 ) : (null)
                                 }
