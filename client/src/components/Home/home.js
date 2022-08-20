@@ -15,13 +15,12 @@ import { Carousel } from 'react-responsive-carousel';
 import ChatBot from 'react-simple-chatbot';
 
 const theme = {
-    background: '#c2e0f2',
     headerBgColor: '#5A4FCF',
     headerFontSize: '20px',
-    botBubbleColor: '#0F3789',
+    botBubbleColor: '#5A4FCF',
     headerFontColor: 'white',
     botFontColor: 'white',
-    userBubbleColor: '#FF5733',
+    userBubbleColor: '#5A4FCF',
     userFontColor: 'white',
 };
 
@@ -294,75 +293,75 @@ export default function Home() {
                     </Box>
                     <Box w={'100%'} height={'100%'} alignSelf={"end"}>
                         <ThemeProvider theme={theme}>
-                        <ChatBot
-                         headerTitle="Grievance Bot"
-                         steps={[
-                            {
-                                id: '0',
-                                message: 'Welcome to grievance portal!',
-                                trigger: '1',
-                            },
-                            {
-                                id: '1',
-                                message: 'How can I help you',
-                                trigger: '2'
-                            }, {
-                                id: '2',
-                                options: [
-                                    { value: 1, label: 'Track Grievance', trigger: 'track-grievance' },
-                                    { value: 2, label: 'Register New Grievance', trigger: 'register-grievance' },
-                                ],
-                            },
-                            {
-                                id: 'register-grievance',
-                                component: (
-                                    <>
-                                        <Link
-                                            fontWeight={500}
-                                            _hover={{ 'textDecoration': 'none' }}
-                                            href='/Login'>Click here to Register</Link>
-                                    </>
-                                ),
-                                trigger: 'restart'
-                            },
-                            {
-                                id: 'track-grievance',
-                                message: "Enter grievance id",
-                                trigger: 'grievance_id'
-                            }, {
-                                id: 'grievance_id',
-                                user: true,
-                                trigger: 4
-                            },
-                            {
-                                id: '4',
-                                message: "Checking Status of {previousValue}",
-                                trigger: 'status'
-                            },
-                            {
-                                id: "status",
-                                component: <GStatus />,
-                                asMessage: true,
-                                trigger: 'restart'
-                            },
-                            {
-                                id: 'restart',
-                                message: "Need more help?",
-                                trigger: "restartopt"
-                            },
-                            {
-                                id: 'restartopt',
-                                options: [
-                                    { value: 1, label: 'Yes', trigger: '2' },
-                                    { value: 2, label: 'No', trigger: 'last' },
-                                ],
-                            },
-                            {
-                                id: 'last',
-                                message: "Thank You!",
-                                end: true
-                            }
-                        ]} />
+                            <ChatBot
+                                headerTitle="Grievance Bot"
+                                steps={[
+                                    {
+                                        id: '0',
+                                        message: 'Welcome to grievance portal!',
+                                        trigger: '1',
+                                    },
+                                    {
+                                        id: '1',
+                                        message: 'How can I help you',
+                                        trigger: '2'
+                                    }, {
+                                        id: '2',
+                                        options: [
+                                            { value: 1, label: 'Track Grievance', trigger: 'track-grievance' },
+                                            { value: 2, label: 'Register New Grievance', trigger: 'register-grievance' },
+                                        ],
+                                    },
+                                    {
+                                        id: 'register-grievance',
+                                        component: (
+                                            <>
+                                                <Link
+                                                    fontWeight={500}
+                                                    _hover={{ 'textDecoration': 'none' }}
+                                                    href='/Login'>Click here to Register</Link>
+                                            </>
+                                        ),
+                                        trigger: 'restart'
+                                    },
+                                    {
+                                        id: 'track-grievance',
+                                        message: "Enter grievance id",
+                                        trigger: 'grievance_id'
+                                    }, {
+                                        id: 'grievance_id',
+                                        user: true,
+                                        trigger: 4
+                                    },
+                                    {
+                                        id: '4',
+                                        message: "Checking Status of {previousValue}",
+                                        trigger: 'status'
+                                    },
+                                    {
+                                        id: "status",
+                                        component: <GStatus />,
+                                        asMessage: true,
+                                        trigger: 'restart'
+                                    },
+                                    {
+                                        id: 'restart',
+                                        message: "Need more help?",
+                                        trigger: "restartopt"
+                                    },
+                                    {
+                                        id: 'restartopt',
+                                        options: [
+                                            { value: 1, label: 'Yes', trigger: '2' },
+                                            { value: 2, label: 'No', trigger: 'last' },
+                                        ],
+                                    },
+                                    {
+                                        id: 'last',
+                                        message: "Thank You!",
+                                        end: true
+                                    }
+                                ]} />
                         </ThemeProvider>
                     </Box>
 
