@@ -2,7 +2,7 @@ const { UniAdmin } = require('../models/uni_admin_model')
 const { SuperAdmin } = require('../models/superadmin_model')
 const { Officer } = require('../models/officer_model')
 const {Grievance} = require('../models/grievance_model')
-
+const {Appreciation} = require('../sendEmails/index')
 
 exports.createSuperAdmin = async (req, res, next) => {
     const { email, fullname, gender, dob, role, password, phone_number } = req.body;
@@ -142,4 +142,18 @@ exports.CreateUniAdmin = async (req, res, next) => {
         })
     }
 
+}
+
+
+exports.SendAppreciation = async (req,res,next) => {
+    const {Emails} = req.body
+    
+    try {
+        await Appreciation(Emails)    
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            error: error.message
+        })
+    }
 }

@@ -20,3 +20,12 @@ export async function GetSolvedGrievances(){
         payload:request
     }
 }
+
+export async function SendAppreciation(data){
+    const request = await axios.post('http://localhost:3001/api/superadmin/send-appreciation',data)
+    .then(response=>response.data)
+    return {
+        type:"send_appre",
+        payload:request
+    }
+}

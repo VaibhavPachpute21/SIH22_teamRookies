@@ -64,7 +64,7 @@ const GrievanceStatus = (props) => {
         }
     }, [satisfiedConfirm, props.SatisfiedWithReply])
 
-    console.log(props)
+   
 
     const end = function (username, reciever_id, university, replies, i, id, satisfied, updatedAt,officer_name) {
 

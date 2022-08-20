@@ -52,7 +52,6 @@ exports.CreateGrievance = async (req, res, next) => {
             newGrievance
         })
     } catch (error) {
-        
         res.status(200).send(error.message)
     }
 }

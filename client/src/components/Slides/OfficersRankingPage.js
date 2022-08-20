@@ -27,12 +27,15 @@ function OfficersRankingPage(props) {
         }
     }, [props.data])
 
-    const SendEmails = () => {
+    const SendEmails = async () => {
         let Emails = []
         officers.map((item)=>{
-            Emails.push(item.grievant_id)
+            Emails.push(item.email)
         })
-        
+        let obj = {
+            Emails:Emails
+        }
+        props.SendAppreciation(obj)
     }
 
     return (
