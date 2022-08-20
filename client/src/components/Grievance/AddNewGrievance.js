@@ -248,6 +248,8 @@ function AddNewGrievance(props) {
                                 accept={'image/png, image/jpeg'} />
                         </Box>
 
+                        
+
                         <Box alignItems={'center'} textAlign='center' w={'100%'} bg='white' py={[2, 2, 10, 10]}>
                             <Button w="30%" alignItems={'center'} bg='#5A4FCF' color='white' type="submit">
                                 Submit
