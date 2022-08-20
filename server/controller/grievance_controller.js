@@ -26,14 +26,7 @@ exports.CreateGrievance = async (req, res, next) => {
             
         })
 
-
-
-        if (!newGrievance) {
-            res.status(200).json({
-                success: false,
-                message: "error"
-            })
-        }
+       
         await Forward.create({
             previous_reciever: "None",
             current_reciever: firstOfficerReciever._id,
@@ -41,8 +34,15 @@ exports.CreateGrievance = async (req, res, next) => {
             officer_avatar: firstOfficerReciever.avatar,
             officer_university: firstOfficerReciever.university,
             assigned_to_role:"1A",
-            officer_name:firstOfficerReciever[0].fullname
+            officer_name:firstOfficerReciever.fullname
         })
+
+        if (!newGrievance) {
+            res.status(200).json({
+                success: false,
+                message: "error"
+            })
+        }
 
          /* await FirstSendMessage(grievant_name,firstOfficerReciever.fullname) */
       /*   await SendEmail(firstOfficerReciever.fullname,grievant_name,grievance_nature) */
@@ -52,6 +52,7 @@ exports.CreateGrievance = async (req, res, next) => {
             newGrievance
         })
     } catch (error) {
+        
         res.status(200).send(error.message)
     }
 }
