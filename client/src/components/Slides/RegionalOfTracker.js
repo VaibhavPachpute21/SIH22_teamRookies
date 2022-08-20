@@ -30,8 +30,8 @@ function RegionalOfTracker(props) {
                 await props.GetRegionGrievances(User?.region)
                 if (props.data) {
                     let alias = props.data?.regionData
-                    if (alias) {
-                        setgrievances(alias?.grievances)
+                    if (alias.grievances?.length > 0) {
+                        setgrievances(alias.grievances)
                     }
                 }
             } catch (error) {

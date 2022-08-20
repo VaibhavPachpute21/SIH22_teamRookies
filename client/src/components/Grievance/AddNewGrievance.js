@@ -49,28 +49,27 @@ function AddNewGrievance(props) {
 
     const HandleSubmit = async (data) => {
 
-        let obj = {
-            grievant_id: User._id,
-            grievance_nature: data.nature,
-            principal_name: data.pName,
-            grievant_name:User.fullname,
-            grievance_title: data.title,
-            grievance_description: "some description",
-            grievant_university: "mu",
-            imgs: Files,
-            region:User?.region ? User.region:"None"
-
-        }
-     
-
         try {
+            let obj = {
+                grievant_id: User?._id,
+                grievance_nature: data.nature,
+                principal_name: data.pName,
+                grievant_name: User.fullname,
+                grievance_title: data.title,
+                grievance_description: data.description,
+                grievant_university: "mu",
+                imgs: Files,
+                region: User?.region ? User.region : "east"
+
+            }
+
             await props.AddGrievance(obj)
 
             if (props.data) {
                 let alias = props.data
                 if (alias.grievanceData) {
                     let success = alias.grievanceData?.success
-
+                    console.log(success)
                     if (success) {
                         toast({
                             position: 'top',
@@ -101,6 +100,7 @@ function AddNewGrievance(props) {
         }
 
     }
+    console.log(props.data)
 
     const HandleFileSubmit = (e) => {
         let file = e.target.files[0]
@@ -228,11 +228,11 @@ function AddNewGrievance(props) {
 
                         <Box w={'100%'} bg='white' px={[2, 2, 10, 10]} >
                             <Text fontSize={'18px'} pb={2} paddingLeft={0}>Discription of Grievance:</Text>
-                            {/* <Textarea variant={'flushed'} id="discription" name="discription"
+                            <Textarea variant={'flushed'} id="discription" name="discription"
                                 placeholder='Add discription of your Grievance...' wrap='true'
                                 cols={95} rows={5} style={{ border: '1px solid grey', padding: '5px', borderRadius: '5px' }}
-                                {...register('discription', { required: { value: true, message: "Discription is required!", } })} /> */}
-                            <ControlledEditor/>
+                                {...register('discription', { required: { value: true, message: "Discription is required!", } })} />
+
                             {errors.discription && errors.discription.message ? (
                                 <Box textAlign={'left'} fontSize={'12px'} py={1} maxH={'0px'} color={'red'}>
                                     {errors.discription.message}

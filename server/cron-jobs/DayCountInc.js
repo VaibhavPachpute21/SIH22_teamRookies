@@ -38,7 +38,8 @@ exports.FindAssignedToTwo = async (req, res, next) => {
                         grievance_id: doc._id,
                         officer_avatar: regionalOfficer[0]?.avatar,
                         officer_university: regionalOfficer[0]?.university,
-                        assigned_to_role: "2"
+                        assigned_to_role: "2",
+                        officer_name:regionalOfficer[0]?.fullname
                     })
                     await Grievance.findByIdAndUpdate(doc._id, { $set: { assigned_in_role: "X" } }, { new: true })
                 }
