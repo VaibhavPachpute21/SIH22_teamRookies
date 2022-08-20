@@ -26,6 +26,9 @@ const forwardSchema = new mongoose.Schema({
     officer_avatar:{
         type:String
     },
+    officer_name:{
+        type:String
+    },
     officer_university:{
         type:String
     },

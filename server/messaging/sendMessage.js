@@ -25,4 +25,15 @@ exports.SendMessage = async (grievant_name, grievance_title, reciever_name) => {
 }
 
 
+exports.ReplyNotify = async (grievant_name, grievance_title, reciever_name) => {
+    client.messages.create({
+        from: "+1 314 912 3216",
+        to: "+918799817029",
+        body: `Hey ${grievant_name}! you have recieved a new reply regarding your grievance on ${grievance_title} by ${reciever_name}`
+    }).then(data => console.log(data))
+        .catch(err => console.log(err))
+}
+
+
+
 

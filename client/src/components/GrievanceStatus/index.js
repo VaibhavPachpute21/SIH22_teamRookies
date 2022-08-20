@@ -4,7 +4,7 @@ import { FiThumbsUp } from 'react-icons/fi'
 import { FiThumbsDown } from 'react-icons/fi'
 import * as actions from '../../actions/grievant_actions'
 import { connect } from 'react-redux'
-import { useLocation,useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 const GrievanceStatus = (props) => {
@@ -16,7 +16,7 @@ const GrievanceStatus = (props) => {
     const [currentR, setCurrentR] = useState('')
     const [forwards, setForwards] = useState([])
     const [forwardId, setForwardIs] = useState('')
-    
+
     const navigate = useNavigate()
     useEffect(() => {
         const GetAllForwards = async () => {
@@ -63,10 +63,10 @@ const GrievanceStatus = (props) => {
 
         }
     }, [satisfiedConfirm, props.SatisfiedWithReply])
-    
-   
-    
-    const end = function (username, reciever_id, university, replies, i, id, satisfied, updatedAt) {
+
+
+
+    const end = function (username, reciever_id, university, replies, i, id, satisfied, updatedAt,officer_name) {
 
         return (
             <Box key={i} w="100%" h="max-content">
@@ -104,7 +104,7 @@ const GrievanceStatus = (props) => {
 
 
                                 <Box>
-                                    {`Grievance was forwarded to a new nodal officer with _id:${reciever_id}`}
+                                    {`Grievance was forwarded to a new nodal officer: ${officer_name}`}
                                 </Box>
 
                                 <Box w="100%" h="40%">
@@ -167,12 +167,12 @@ const GrievanceStatus = (props) => {
                                                                         </Text>
                                                                         <HStack py={2}>
                                                                             <IconButton
-                                                                            disabled={satisfied?true:false}
+                                                                                disabled={satisfied ? true : false}
                                                                                 size={'sm'}
                                                                                 colorScheme={'red'}
                                                                                 icon={<FiThumbsDown />} />
                                                                             <IconButton
-                                                                            disabled={satisfied?true:false}
+                                                                                disabled={satisfied ? true : false}
                                                                                 size={'sm'}
                                                                                 onClick={() => { SetSatisfied(reciever_id, id); setsatisfiedId(item._id) }}
                                                                                 colorScheme={'green'}
@@ -213,21 +213,21 @@ const GrievanceStatus = (props) => {
                             </Box>
 
                         </HStack>
-                        <Flex 
-                py={5}
-                 alignItems={'center'} justifyContent={'center'}>
-                    <Text fontWeight={600}>
-                        {
-                            satisfied && i == forwards.length-1 ? (
-                                `Grievance closed on ${updatedAt?.split('T')[0]}`
-                            ) : ("")
-                        }
-                    </Text>
-                </Flex>
+                        <Flex
+                            py={5}
+                            alignItems={'center'} justifyContent={'center'}>
+                            <Text fontWeight={600}>
+                                {
+                                    satisfied && i == forwards.length - 1 ? (
+                                        `Grievance closed on ${updatedAt?.split('T')[0]}`
+                                    ) : ("")
+                                }
+                            </Text>
+                        </Flex>
                     </Box>
-                   
+
                 </HStack>
-               
+
 
             </Box>
         )
@@ -239,7 +239,7 @@ const GrievanceStatus = (props) => {
             <Flex w="100%" h="100%" alignItems={'center'} justifyContent={'center'}>
                 <VStack py={5} w="85%" h="100%" alignItems={'center'} spacing={7}>
                     {forwards?.map((item, i) => (
-                        end("Nodal Officer", item.current_reciever, item.officer_university, item.replies, i, item._id, item.satisfied, item.updatedAt)
+                        end(item.assigned_to_role === "1A" || item.assigned_to_role === "1B" ? `Nodal officer`:`Regional officer`, item.current_reciever, item.officer_university, item.replies, i, item._id, item.satisfied, item.updatedAt,item.officer_name)
                     ))}
                 </VStack>
             </Flex>

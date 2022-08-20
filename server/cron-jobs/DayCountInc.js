@@ -8,7 +8,7 @@ const { RegionalOfficer } = require('../models/regional_officers_model')
 
 exports.IncDayCount = async (req, res, next) => {
     try {
-        const Lt15 = await Grievance.updateMany({ satisfied: false, assigned_in_role: { $ne: "2" },assigned_in_role: { $ne: "X" }, day_counter: { $lt: 15 } },
+        const Lt15 = await Grievance.updateMany({ satisfied: false, assigned_in_role: { $ne: "2" }, assigned_in_role: { $ne: "X" }, day_counter: { $lt: 15 } },
             { $inc: { day_counter: 1 } })
 
         if (!Lt15) {
@@ -20,18 +20,18 @@ exports.IncDayCount = async (req, res, next) => {
     }
 }
 
-exports.FindAssignedToTwo = async (req,res,next) => {
+exports.FindAssignedToTwo = async (req, res, next) => {
     try {
-        const role2 = await Grievance.find({"assigned_in_role":"2"})
+        const role2 = await Grievance.find({ "assigned_in_role": "2" })
 
-        role2?.forEach(async (doc)=>{
-            if(role2.length > 0){
+        role2?.forEach(async (doc) => {
+            if (role2.length > 0) {
 
                 const regionalOfficer = await RegionalOfficer.aggregate([
-                    {$match:{"region":doc.region}},
-                    {$sample:{size:1}}
+                    { $match: { "region": doc.region } },
+                    { $sample: { size: 1 } }
                 ])
-                if(regionalOfficer.length > 0){
+                if (regionalOfficer.length > 0) {
                     await Forward.create({
                         previous_reciever: "Change",
                         current_reciever: regionalOfficer[0]?._id,
@@ -42,7 +42,7 @@ exports.FindAssignedToTwo = async (req,res,next) => {
                     })
                     await Grievance.findByIdAndUpdate(doc._id, { $set: { assigned_in_role: "X" } }, { new: true })
                 }
-                
+
             }
         })
 
@@ -71,7 +71,6 @@ exports.ResetAndForward = async (req, res, next) => {
 
                     await Grievance.findByIdAndUpdate(doc._id, { $set: { assigned_in_role: "1B" } }, { new: true })
 
-
                     const AllGrievances = await Grievance.find({})
 
                     AllGrievances?.forEach(async (doc2) => {
@@ -88,8 +87,11 @@ exports.ResetAndForward = async (req, res, next) => {
                                 grievance_id: doc2._id,
                                 officer_avatar: firstBOfficer[0]?.avatar,
                                 officer_university: firstBOfficer[0]?.university,
-                                assigned_to_role: "1B"
+                                assigned_to_role: "1B",
+                                officer_name:firstBOfficer[0]?.fullname
                             })
+                            //  SendMessage(doc.grievant_name,doc.grievance_title,nextOfficer[0]?.fullname) 
+                            /*   await SendEmail(firstOfficerReciever.fullname,grievant_name,grievance_nature) */
                         } else {
 
                             const currentOff = await Officer.find({ role: doc2.assigned_in_role, _id: doc2.reciever_id })
@@ -110,6 +112,8 @@ exports.ResetAndForward = async (req, res, next) => {
                                     assigned_to_role: "1B"
                                 })
 
+                                //  SendMessage(doc.grievant_name,doc.grievance_title,nextOfficer[0]?.fullname) 
+                                /*   await SendEmail(firstOfficerReciever.fullname,grievant_name,grievance_nature) */
                             }
                             else {
                                 await Grievance.findByIdAndUpdate(doc2._id, { $set: { assigned_in_role: "2" } }, { new: true })
@@ -133,10 +137,13 @@ exports.ResetAndForward = async (req, res, next) => {
                             current_reciever: nextOfficer[0]._id,
                             grievance_id: doc._id,
                             officer_avatar: nextOfficer[0].avatar,
-                            officer_university: nextOfficer[0].university
+                            officer_university: nextOfficer[0].university,
+                            assigned_to_role: "1A",
+                            officer_name:nextOfficer[0].fullname
                         })
 
                         //  SendMessage(doc.grievant_name,doc.grievance_title,nextOfficer[0]?.fullname) 
+                        /*   await SendEmail(firstOfficerReciever.fullname,grievant_name,grievance_nature) */
                     } catch (error) {
                         /// Some error handling
                     }
