@@ -50,6 +50,8 @@ const FeedBackForm = (props) => {
     const [fishowTooltip, fisetShowToolTip] = React.useState(false)
 
     const [within15days, setwithin15days] = useState('')
+    const [most_helpful_officer, setMosthelpful] = useState('')
+
 
     const [Error, SetError] = useState('')
 
@@ -62,9 +64,15 @@ const FeedBackForm = (props) => {
             officer_behaviour_on_call: fifthsliderValue,
             response_within_15days: within15days,
             grievance_id: pathname?.split("/")[2],
-            most_helpful_officer: "",
-            suggestions:suggestions
+            most_helpful_officer: most_helpful_officer,
+            suggestions: suggestions
         }
+        try {
+            await props.CreateFeedback(obj)
+        } catch (error) {
+            SetError(error.message)
+        }
+
     }
 
     useEffect(() => {
@@ -80,14 +88,16 @@ const FeedBackForm = (props) => {
     useEffect(() => {
         if (props.data) {
             const alias = props.data?.feedbackData
-            if (alias?.officers.length > 0) {
+            if (alias?.officers?.length > 0) {
                 setrelatedOfficers(alias?.officers)
             }
-            if(alias?.regional.length > 0){
+            if (alias?.regional?.length > 0) {
                 setRegionalRelatedOfficers(alias?.regional)
             }
         }
     }, [props.data])
+
+   
 
 
     return (
@@ -308,12 +318,16 @@ const FeedBackForm = (props) => {
                                             relatedOfficers && relatedOfficers.length > 0 ? (
                                                 relatedOfficers?.map((item, i) => (
                                                     item !== null ?
-                                                        <VStack w="100%">
+                                                        <VStack
+                                                            key={i}
+                                                            w="100%">
 
 
                                                             <Checkbox
                                                                 fontWeight={600}
-                                                                key={i} w="100%" h="20%">
+                                                                w="100%" h="20%"
+                                                                onChange={() => { setMosthelpful(item._id) }}
+                                                            >
                                                                 {item?.fullname}
                                                             </Checkbox>
                                                             <Box>
@@ -332,12 +346,16 @@ const FeedBackForm = (props) => {
                                                 regionalRelatedOfficers?.map((item, i) => (
 
                                                     item !== null ?
-                                                        <VStack w="100%">
+                                                        <VStack
+                                                            key={i}
+                                                            w="100%">
 
 
                                                             <Checkbox
                                                                 fontWeight={600}
-                                                                key={i} w="100%" h="20%">
+                                                                w="100%" h="20%"
+                                                                onChange={() => { setMosthelpful(item._id) }}
+                                                            >
                                                                 {item?.fullname}
                                                             </Checkbox>
                                                             <Box>

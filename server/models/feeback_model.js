@@ -43,7 +43,7 @@ const feedbackSchema = new mongoose.Schema({
     },
     response_within_15days:{
         type:String,
-        enum:['y','n']
+        enum:['Yes','No']
     },
     most_helpful_officer:{
         type:String
