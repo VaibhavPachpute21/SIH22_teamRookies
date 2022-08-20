@@ -87,13 +87,11 @@ function AddInstituteGrievance(props) {
 
 
     return (
-        <Flex h='max-content' justifyContent={'center'} padding={2}
-            overflowX={'none'}
-        >
+        <Flex h='100%' overflowX={'hidden'} justifyContent={'center'} padding={10}>
             {
                 User ? (
                     
-                        <Flex flexDirection={'column'} w={['100%', '90%', '80%', '80%']} boxShadow={'dark-lg'}>
+                        <Flex flexDirection={'column'} w={['100%', '90%', '80%', '80%']} h={'max-content'} boxShadow={'dark-lg'}>
                             <form onSubmit={handleSubmit(HandleSubmit)}>
                                 <FormControl>
                                     <Box w={'100%'} bg='white' paddingTop={5}>

@@ -147,7 +147,7 @@ function AddNewGrievance(props) {
                             </Box>
                             <Box w={['90%', '90%', '25%', '25%']}>
                                 <Text fontSize={'18px'} paddingLeft={2}>DOB:</Text>
-                                <Input variant={'filled'} value={props.User.dob} readOnly={true} />
+                                <Input variant={'filled'} value={"22/3/2000"} readOnly={true} />
                             </Box>
                         </Flex>
                         <Flex w={'100%'} h='100%' bg='white' py={[5, 5, 5, 5]} px={[2, 2, 10, 10]} gap={[2, 2, 5, 5]} flexDirection={['column', 'column', 'row', 'row']} >
@@ -155,10 +155,10 @@ function AddNewGrievance(props) {
                                 <Text fontSize={'18px'} paddingLeft={2}>Collage:</Text>
                                 <Input variant={'filled'} value={props.User.college_name} readOnly={true} />
                             </Box>
-                            <Box w={['90%', '90%', '25%', '25%']}>
+                            {/* <Box w={['90%', '90%', '25%', '25%']}>
                                 <Text fontSize={'18px'} paddingLeft={2}>Enrollment no:</Text>
                                 <Input variant={'filled'} value={props.User.enrollment} readOnly={true} />
-                            </Box>
+                            </Box> */}
                             <Box w={['90%', '90%', '25%', '25%']}>
                                 <Text fontSize={'18px'} paddingLeft={2}>University:</Text>
                                 <Input variant={'filled'} value={props.User.university} readOnly={true} />
@@ -192,15 +192,14 @@ function AddNewGrievance(props) {
                                 <Select variant={'flushed'} name="nature" id="nature" placeholder='Select Nature of Grievance'
                                     {...register('nature', { required: { value: true, message: "Please choose Nature of Grievance", } })}
                                 >
-                                    <option>Eligibility Criteria</option>
-                                    <option>Scholarship Disbursement</option>
-                                    <option>Fresh Application</option>
-                                    <option>Renewal Application</option>
-                                    <option>Name of institute {"&"} course on NSP</option>
-                                    <option>Scholarship scheme not visible on NSP</option>
-                                    <option>Document</option>
-                                    <option>Merit list</option>
-                                    <option>Bank acoount</option>
+                                    <option>Non-refund of fee by Institution</option>
+                                    <option>Non-return of original certificates.</option>
+                                    <option>Non-observation of laid down norms and standards.</option>
+                                    <option>Delays in according approvals.</option>
+                                    <option>Charging of capitation fee.</option>
+                                    <option>Complaints against officers and staff.</option>
+                                    <option>Non-refund of security amount.</option>
+                                    <option>Demand of gratification.</option>
                                     <option>Any technical queries</option>
                                     <option>Other</option>
                                 </Select>
