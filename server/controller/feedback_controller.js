@@ -5,7 +5,7 @@ const {Officer} = require('../models/officer_model')
 const {RegionalOfficer} = require('../models/regional_officers_model')
 exports.CreateFeedback = async (req,res,next) => {
 
-    const id = req.params.id
+
 
     const {happy_with_response_time,reply_helpful_enough,experience,
         notifications_on_time,officer_behaviour_on_call,response_within_15days,
@@ -13,13 +13,7 @@ exports.CreateFeedback = async (req,res,next) => {
         most_helpful_officer,suggestions} = req.body
         
         try {
-            const getGrievance = await Grievance.findById(id)
-            if(!getGrievance){
-                res.status(200).json({
-                    success:false,
-                    message:"No such grievance found"
-                })
-            }
+            
             const feedback = await Feedback.create({
                 grievance_id,
                 happy_with_response_time,reply_helpful_enough,experience,
@@ -39,6 +33,7 @@ exports.CreateFeedback = async (req,res,next) => {
             })
             
         } catch (error) {
+            console.log(error)
             res.status(400).json({
                 success:false,
                 message:error.message
