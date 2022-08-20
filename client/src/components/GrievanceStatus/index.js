@@ -104,7 +104,7 @@ const GrievanceStatus = (props) => {
 
 
                                 <Box>
-                                    {`Grievance was forwarded to a new nodal officer: ${officer_name}`}
+                                    {`Grievance was forwarded to a new nodal officer: ${reciever_id}`}
                                 </Box>
 
                                 <Box w="100%" h="40%">

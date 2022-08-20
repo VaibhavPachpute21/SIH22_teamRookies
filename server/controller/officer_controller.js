@@ -148,7 +148,7 @@ exports.AllMyGrievances = async (req, res, next) => {
                     message: "You have no forward history too, yet"
                 })
             }
-            console.log(forwards)
+            
             res.status(200).json({
                 success: true,
                 myGrievances,

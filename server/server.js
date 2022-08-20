@@ -50,7 +50,7 @@ app.use("/api/regional",require("./routes/regional_officer_routes"))
 
     IncDayCount(),
     ResetAndForward(),    
-    FindAssignedToTwo() 
+    FindAssignedToTwo()  
 
 
 })

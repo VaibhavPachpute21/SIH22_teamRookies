@@ -3,7 +3,7 @@ const { Grievance } = require('../models/grievance_model')
 const { Officer } = require("../models/officer_model")
 const { SendMessage } = require("../messaging/sendMessage")
 const { RegionalOfficer } = require('../models/regional_officers_model')
-
+const {SendEmail} = require('../sendEmails/index')
 
 
 exports.IncDayCount = async (req, res, next) => {
@@ -22,7 +22,8 @@ exports.IncDayCount = async (req, res, next) => {
 
 exports.FindAssignedToTwo = async (req, res, next) => {
     try {
-        const role2 = await Grievance.find({ "assigned_in_role": "2" })
+        let role2 = await Grievance.find({ "assigned_in_role": "2" })
+        
 
         role2?.forEach(async (doc) => {
             if (role2.length > 0) {
@@ -41,13 +42,17 @@ exports.FindAssignedToTwo = async (req, res, next) => {
                         assigned_to_role: "2",
                         officer_name:regionalOfficer[0]?.fullname
                     })
-                    await Grievance.findByIdAndUpdate(doc._id, { $set: { assigned_in_role: "X" } }, { new: true })
+                  const g = await Grievance.findByIdAndUpdate(doc._id, { $set: { assigned_in_role: "X" } }, { new: true })
+                  console.log(g)
+                    /*   SendMessage(doc.grievant_name,doc.grievance_title,regionalOfficer[0]?.fullname)  */
+                   /*  await SendEmail(regionalOfficer[0]?.fullname,doc.grievant_name,doc.grievance_nature)  */
                 }
 
             }
         })
 
     } catch (error) {
+        console.log(error)
         res.status(400).send(error.message)
     }
 }
@@ -91,8 +96,8 @@ exports.ResetAndForward = async (req, res, next) => {
                                 assigned_to_role: "1B",
                                 officer_name:firstBOfficer[0]?.fullname
                             })
-                            //  SendMessage(doc.grievant_name,doc.grievance_title,nextOfficer[0]?.fullname) 
-                            /*   await SendEmail(firstOfficerReciever.fullname,grievant_name,grievance_nature) */
+                           /*   SendMessage(doc.grievant_name,doc.grievance_title,firstBOfficer[0]?.fullname)  */
+                            /*  await SendEmail(firstBOfficer[0]?.fullname,doc2.grievant_name,doc2.grievance_nature)  */
                         } else {
 
                             const currentOff = await Officer.find({ role: doc2.assigned_in_role, _id: doc2.reciever_id })
@@ -112,13 +117,12 @@ exports.ResetAndForward = async (req, res, next) => {
                                     officer_university: theNextOfficer[0].university,
                                     assigned_to_role: "1B"
                                 })
-
-                                //  SendMessage(doc.grievant_name,doc.grievance_title,nextOfficer[0]?.fullname) 
-                                /*   await SendEmail(firstOfficerReciever.fullname,grievant_name,grievance_nature) */
+                            /* 
+                                SendMessage(doc.grievant_name,doc.grievance_title,nextOfficer[0]?.fullname)  */
+                              /*   await SendEmail(theNextOfficer[0]?.fullname,doc.grievant_name,doc.grievance_nature)  */
                             }
                             else {
                                 await Grievance.findByIdAndUpdate(doc2._id, { $set: { assigned_in_role: "2" } }, { new: true })
-
                             }
 
                         }
@@ -143,8 +147,8 @@ exports.ResetAndForward = async (req, res, next) => {
                             officer_name:nextOfficer[0].fullname
                         })
 
-                        //  SendMessage(doc.grievant_name,doc.grievance_title,nextOfficer[0]?.fullname) 
-                        /*   await SendEmail(firstOfficerReciever.fullname,grievant_name,grievance_nature) */
+                       /*  SendMessage(doc.grievant_name,doc.grievance_title,nextOfficer[0]?.fullname)  */
+                        /* await SendEmail(nextOfficer[0]?.fullname,grievant_name,grievance_nature)  */
                     } catch (error) {
                         /// Some error handling
                     }
