@@ -5,6 +5,7 @@ import './Home.css';
 import { FiPhone } from 'react-icons/fi';
 import { AiOutlineMail } from 'react-icons/ai';
 import { IoLocationSharp } from 'react-icons/io5'
+import { ThemeProvider } from 'styled-components';
 import {
     Table, Flex, Box, Th, Td, Tbody, Tr, TableContainer, Thead, Button, Image, GridItem, SimpleGrid, Heading,
     Grid, Text, Container, Icon, VStack, FormControl, Input, HStack, Accordion, AccordionItem, AccordionButton, AccordionIcon, AccordionPanel, Link
@@ -13,6 +14,16 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import ChatBot from 'react-simple-chatbot';
 
+const theme = {
+    background: '#c2e0f2',
+    headerBgColor: '#5A4FCF',
+    headerFontSize: '20px',
+    botBubbleColor: '#0F3789',
+    headerFontColor: 'white',
+    botFontColor: 'white',
+    userBubbleColor: '#FF5733',
+    userFontColor: 'white',
+};
 
 
 export default function Home() {
@@ -282,7 +293,10 @@ export default function Home() {
 
                     </Box>
                     <Box w={'100%'} height={'100%'} alignSelf={"end"}>
-                        <ChatBot steps={[
+                        <ThemeProvider theme={theme}>
+                        <ChatBot
+                         headerTitle="Grievance Bot"
+                         steps={[
                             {
                                 id: '0',
                                 message: 'Welcome to grievance portal!',
@@ -349,6 +363,7 @@ export default function Home() {
                                 end: true
                             }
                         ]} />
+                        </ThemeProvider>
                     </Box>
 
                 </Box>
