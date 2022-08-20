@@ -310,7 +310,34 @@ export default function Home() {
                                         options: [
                                             { value: 1, label: 'Track Grievance', trigger: 'track-grievance' },
                                             { value: 2, label: 'Register New Grievance', trigger: 'register-grievance' },
+                                            { value: 3, label: 'Process Of Solving Grievances', trigger: 'process-grievance' },
+                                            { value: 4, label: 'Sign Up', trigger: 'signUp' },
                                         ],
+                                    },
+                                    {
+                                        id:'process-grievance',
+                                        component:(
+                                            <>
+                                            <p>1.Login to your account </p>
+                                            <p>2.Click on Add tab </p>
+                                            <p>3.Enter Detais and send Grievance</p>
+                                            <p>4.Officers will check grievance and solve all queries.</p>
+                                            </>
+                                        ),
+                                        asMessage:true,
+                                        trigger: 'restart'
+                                    },
+                                    {
+                                        id: 'signUp',
+                                        component: (
+                                            <>
+                                                <Link
+                                                    fontWeight={500}
+                                                    _hover={{ 'textDecoration': 'none' }}
+                                                    href='/Registration'>Click here to Register</Link>
+                                            </>
+                                        ),
+                                        trigger: 'restart'
                                     },
                                     {
                                         id: 'register-grievance',
@@ -319,7 +346,7 @@ export default function Home() {
                                                 <Link
                                                     fontWeight={500}
                                                     _hover={{ 'textDecoration': 'none' }}
-                                                    href='/Login'>Click here to Register</Link>
+                                                    href='/Login'>Add Grievance</Link>
                                             </>
                                         ),
                                         trigger: 'restart'
