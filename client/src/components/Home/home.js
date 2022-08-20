@@ -1,14 +1,18 @@
 import React, { useState } from "react";
+import { Component } from 'react';
+import PropTypes from 'prop-types';
 import './Home.css';
 import { FiPhone } from 'react-icons/fi';
 import { AiOutlineMail } from 'react-icons/ai';
-import {IoLocationSharp} from 'react-icons/io5'
+import { IoLocationSharp } from 'react-icons/io5'
 import {
     Table, Flex, Box, Th, Td, Tbody, Tr, TableContainer, Thead, Button, Image, GridItem, SimpleGrid, Heading,
-    Grid, Text, Container, Icon, VStack, FormControl, Input, HStack, Accordion, AccordionItem, AccordionButton, AccordionIcon, AccordionPanel
+    Grid, Text, Container, Icon, VStack, FormControl, Input, HStack, Accordion, AccordionItem, AccordionButton, AccordionIcon, AccordionPanel, Link
 } from '@chakra-ui/react'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
+import ChatBot from 'react-simple-chatbot';
+
 
 
 export default function Home() {
@@ -257,7 +261,7 @@ export default function Home() {
                         <Text fontSize="2xl" fontWeight={600}>Contact Us</Text>
                         <HStack>
                             <Box w={'20%'}>
-                            <Icon as={IoLocationSharp} w={25} size={50} h={50} />
+                                <Icon as={IoLocationSharp} w={25} size={50} h={50} />
                             </Box>
                             <Box w={'80%'}>University Grants Commission (UGC)
                                 Bahadur Shah Zafar Marg,
@@ -265,20 +269,86 @@ export default function Home() {
                         </HStack>
                         <HStack>
                             <Box w={'20%'}>
-                            <Icon as={FiPhone} w={25} size={50} h={50} />
+                                <Icon as={FiPhone} w={25} size={50} h={50} />
                             </Box>
                             <Box w={'80%'}>011-23604446, 011-23604200</Box>
                         </HStack>
                         <HStack>
                             <Box w={'20%'}>
-                            <Icon as={AiOutlineMail} w={25} size={50} h={50} />
+                                <Icon as={AiOutlineMail} w={25} size={50} h={50} />
                             </Box>
                             <Box w={'80%'}>contact.ugc@nic.in</Box>
                         </HStack>
 
                     </Box>
-                    <Box w={'100%'} height={'60vh'} bg={'red.200'} alignSelf={"end"}>
-
+                    <Box w={'100%'} height={'100%'} alignSelf={"end"}>
+                        <ChatBot steps={[
+                            {
+                                id: '0',
+                                message: 'Welcome to grievance portal!',
+                                trigger: '1',
+                            },
+                            {
+                                id: '1',
+                                message: 'How can I help you',
+                                trigger: '2'
+                            }, {
+                                id: '2',
+                                options: [
+                                    { value: 1, label: 'Track Grievance', trigger: 'track-grievance' },
+                                    { value: 2, label: 'Register New Grievance', trigger: 'register-grievance' },
+                                ],
+                            },
+                            {
+                                id: 'register-grievance',
+                                component: (
+                                    <>
+                                        <Link
+                                            fontWeight={500}
+                                            _hover={{ 'textDecoration': 'none' }}
+                                            href='/Login'>Click here to Register</Link>
+                                    </>
+                                ),
+                                trigger: 'restart'
+                            },
+                            {
+                                id: 'track-grievance',
+                                message: "Enter grievance id",
+                                trigger: 'grievance_id'
+                            }, {
+                                id: 'grievance_id',
+                                user: true,
+                                trigger: 4
+                            },
+                            {
+                                id: '4',
+                                message: "Checking Status of {previousValue}",
+                                trigger: 'status'
+                            },
+                            {
+                                id: "status",
+                                component: <GStatus />,
+                                asMessage: true,
+                                trigger: 'restart'
+                            },
+                            {
+                                id: 'restart',
+                                message: "Need more help?",
+                                trigger: "restartopt"
+                            },
+                            {
+                                id: 'restartopt',
+                                options: [
+                                    { value: 1, label: 'Yes', trigger: '2' },
+                                    { value: 2, label: 'No', trigger: 'last' },
+                                ],
+                            },
+                            {
+                                id: 'last',
+                                message: "Thank You!",
+                                end: true
+                            }
+                        ]} />
                     </Box>
 
                 </Box>
@@ -290,3 +360,40 @@ export default function Home() {
 
     );
 }
+
+
+
+class GStatus extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            grievance_id: ''
+        };
+    }
+
+    componentWillMount() {
+        const { steps } = this.props;
+        const { grievance_id } = steps;
+
+        this.setState({ grievance_id, grievance_id, grievance_id });
+    }
+
+    render() {
+        const { grievance_id } = this.state;
+        return (
+            <div style={{ width: '100%' }}>
+                <h3>Status of {grievance_id.value}</h3>
+                <p>The grievance {grievance_id.value} was sent to Nodal officer at 2:30PM</p>
+            </div>
+        );
+    }
+}
+
+GStatus.propTypes = {
+    steps: PropTypes.object,
+};
+
+GStatus.defaultProps = {
+    steps: undefined,
+};
