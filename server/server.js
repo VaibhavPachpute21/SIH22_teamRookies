@@ -41,7 +41,7 @@ app.use("/api/uniadmin",require("./routes/uni_admin_routes"))
 app.use("/api/institute",require("./routes/institute_routes"))
 app.use("/api/regional",require("./routes/regional_officer_routes"))
 
-
+app.use('/api/feedback',require('./routes/feedback_routes'))
 
 
 // Cron jobs

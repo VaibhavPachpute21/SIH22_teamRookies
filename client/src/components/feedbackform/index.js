@@ -9,13 +9,20 @@ import {
     FormLabel,
     Textarea,
     Button,
+    Text,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from 'react'
 import Confetti from 'react-confetti'
+import { connect } from 'react-redux'
+import * as actions from '../../actions/feedback_actions'
+import { useLocation } from 'react-router-dom'
 
-const FeedBackForm = () => {
+const FeedBackForm = (props) => {
 
-    const [pieces, Setpieces] = useState(150)
+    const [pieces, Setpieces] = useState(20)
+    const { pathname } = useLocation()
+    const [suggestions, Setsuggestions] = useState('')
+
     useEffect(() => {
 
         setTimeout(() => {
@@ -23,6 +30,9 @@ const FeedBackForm = () => {
         }, 4000)
 
     }, [])
+
+    const [relatedOfficers, setrelatedOfficers] = useState([])
+    const [regionalRelatedOfficers, setRegionalRelatedOfficers] = useState([])
 
     const [firstsliderValue, setfirstSliderValue] = React.useState(5)
     const [fshowTooltip, fsetShowTooltip] = React.useState(false)
@@ -39,11 +49,51 @@ const FeedBackForm = () => {
     const [fifthsliderValue, setfifthSliderValue] = React.useState(5)
     const [fishowTooltip, fisetShowToolTip] = React.useState(false)
 
+    const [within15days, setwithin15days] = useState('')
+
+    const [Error, SetError] = useState('')
+
+    const SendFeedback = async () => {
+        let obj = {
+            happy_with_response_time: firstsliderValue,
+            reply_helpful_enough: secondsliderValue,
+            experience: thirdsliderValue,
+            notifications_on_time: fourthsliderValue,
+            officer_behaviour_on_call: fifthsliderValue,
+            response_within_15days: within15days,
+            grievance_id: pathname?.split("/")[2],
+            most_helpful_officer: "",
+            suggestions:suggestions
+        }
+    }
+
+    useEffect(() => {
+        if (pathname) {
+            try {
+                props.GetHelpfulOfficers(pathname?.split("/")[2])
+            } catch (error) {
+                SetError(error.message)
+            }
+        }
+    }, [pathname])
+
+    useEffect(() => {
+        if (props.data) {
+            const alias = props.data?.feedbackData
+            if (alias?.officers.length > 0) {
+                setrelatedOfficers(alias?.officers)
+            }
+            if(alias?.regional.length > 0){
+                setRegionalRelatedOfficers(alias?.regional)
+            }
+        }
+    }, [props.data])
+
 
     return (
         <Box w="100vw" h="max-content" overflowX={'hidden'}>
             <Confetti
-                gravity={.6}
+                gravity={.7}
                 width={window.innerWidth || 300}
                 height={window.innerHeight || 200}
                 initialVelocityY={300}
@@ -233,7 +283,7 @@ const FeedBackForm = () => {
                                             <FormLabel>
                                                 Yes
                                             </FormLabel>
-                                            <Checkbox />
+                                            <Checkbox onChange={() => setwithin15days('Yes')} />
                                         </Box>
 
                                         <Box>
@@ -242,7 +292,7 @@ const FeedBackForm = () => {
                                             <FormLabel>
                                                 No
                                             </FormLabel>
-                                            <Checkbox />
+                                            <Checkbox onChange={() => setwithin15days('No')} />
                                         </Box>
                                     </HStack>
                                 </VStack>
@@ -254,7 +304,53 @@ const FeedBackForm = () => {
                                         Which officer was the most helpful?
                                     </Heading>
                                     <HStack>
+                                        {
+                                            relatedOfficers && relatedOfficers.length > 0 ? (
+                                                relatedOfficers?.map((item, i) => (
+                                                    item !== null ?
+                                                        <VStack w="100%">
 
+
+                                                            <Checkbox
+                                                                fontWeight={600}
+                                                                key={i} w="100%" h="20%">
+                                                                {item?.fullname}
+                                                            </Checkbox>
+                                                            <Box>
+                                                                <Text>
+                                                                    {item?.role} officer
+                                                                </Text>
+                                                            </Box>
+                                                        </VStack>
+                                                        : (null)
+
+                                                ))
+                                            ) : ("No related officers")
+                                        }
+                                        {
+                                            regionalRelatedOfficers && regionalRelatedOfficers.length > 0 ? (
+                                                regionalRelatedOfficers?.map((item, i) => (
+
+                                                    item !== null ?
+                                                        <VStack w="100%">
+
+
+                                                            <Checkbox
+                                                                fontWeight={600}
+                                                                key={i} w="100%" h="20%">
+                                                                {item?.fullname}
+                                                            </Checkbox>
+                                                            <Box>
+                                                                <Text>
+                                                                    {item?.role} {item?.region} officer
+                                                                </Text>
+                                                            </Box>
+                                                        </VStack>
+                                                        : (null)
+
+                                                ))
+                                            ) : ("No related officers")
+                                        }
                                     </HStack>
                                 </VStack>
                             </GridItem>
@@ -266,14 +362,19 @@ const FeedBackForm = () => {
                                     </Heading>
 
                                     <Textarea
-                                    height={300}
-                                    placeholder="Constructive feedback is required..."/>
+                                        height={300}
+                                        placeholder="Constructive feedback is required..."
+                                        value={suggestions}
+                                        onChange={(e) => Setsuggestions(e.target.value)}
+                                    />
 
                                 </VStack>
                             </GridItem>
 
                             <GridItem>
-                                <Button color={'white'} bg="#5247cd">
+                                <Button
+                                    onClick={() => SendFeedback()}
+                                    color={'white'} bg="#5247cd">
                                     Submit
                                 </Button>
                             </GridItem>
@@ -286,4 +387,10 @@ const FeedBackForm = () => {
     )
 }
 
-export default FeedBackForm;
+const mapStateToProps = (state) => {
+    return {
+        data: state.feedback
+    }
+}
+
+export default connect(mapStateToProps, actions)(FeedBackForm);
