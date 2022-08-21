@@ -1,17 +1,72 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Box, Button, Flex, FormLabel, Heading, Input,useToast,Textarea, FormControl, SimpleGrid, GridItem, Select } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
+import {connect} from 'react-redux'
+import * as actions from '../../actions/superadmin_actions'
+function AddNewUniAdmin(props) {
 
-export default function AddNewUniAdmin() {
+    const toast = useToast()
+
     const { register, handleSubmit, formState: { errors } } = useForm({ mode: 'onChange' });
+    const [Error,SetError] = useState('')
 
+    const HandleSubmit = async (data) => {
+
+
+        let obj = {
+            email:data.email,
+            password:data.pass,
+            fullname:data.fName,
+            committee:data.committee,
+            phone_number:data.phone,
+            university:data.university,
+            state:data.state,
+            gender:data.gender
+        }
+        try {
+            await props.CreateUniAdmin(obj)
+            if (props.data) {
+                let alias = props.data
+                if (alias.superData) {
+                    let success = alias.superData?.success
+                   
+                    if (success) {
+                        toast({
+                            position: 'top',
+                            render: () => (
+                                <Box color='white' p={3} bg='green.500'>
+                                    Officer added
+                                </Box>
+                            ),
+                        })
+                        // navigate('/TrackGrievance/34-20')
+                    }
+                    else {
+                        toast({
+                            position: 'top',
+                            render: () => (
+                                <Box color='white' p={3} bg='red.500'>
+                                    {Error}
+                                </Box>
+                            ),
+                        })
+                    }
+
+                }
+
+            }
+
+        } catch (error) {
+            SetError(error.message)
+        }
+    }
 
   return (
     <Flex w='100%' h={'100%'} justifyContent={'center'} padding={5} overflowX={'hidden'}>
     <Flex w={'90%'} h={'max-content'} border={'1px solid black'} flexDirection={'column'} overflowX={'hidden'} >
         <Flex w={'100%'} justifyContent={'center'}><Heading>Add New University Admin</Heading></Flex>
         <Box h={'100%'} w='100%'>
-            <form>
+            <form onSubmit={handleSubmit(HandleSubmit)}>
                 <FormControl padding={[2, 3, 5]} align={'center'}>
                     <SimpleGrid
                         columns={2}
@@ -157,3 +212,10 @@ export default function AddNewUniAdmin() {
 </Flex>
   )
 }
+const mapStateToProps = (state) => {
+    return{
+        data:state.superadmin
+    }
+}
+
+export default  connect(mapStateToProps,actions)(AddNewUniAdmin)

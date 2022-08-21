@@ -42,15 +42,12 @@ const uniAdminSchema = new mongoose.Schema({
     university: {
         type: String,
     },
-    college_name: {
-        type: String,
-    },
-    district: {
-        type: String,
-    },
     state: {
         type: String,
     },
+    gender:{
+        type:String
+    }
 }, { timestamps: true })
 
 uniAdminSchema.pre("save", async function (next) {

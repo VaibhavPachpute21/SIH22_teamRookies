@@ -9,6 +9,9 @@ export default function superadmin_reducer(state={},action){
         case "send_appree":
             return {...state,superData:action.payload}
 
+        case "create_uni_admin":
+            return {...state,superData:action.payload}
+
         default:
             return state
     }

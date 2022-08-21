@@ -29,3 +29,12 @@ export async function SendAppreciation(data){
         payload:request
     }
 }
+
+
+export async function CreateUniAdmin(data){
+    const request = await axios.post('http://localhost:3001/api/superadmin/create-uniadmin',data)
+    return{
+        type:"create_uni_admin",
+        payload:request
+    }
+}

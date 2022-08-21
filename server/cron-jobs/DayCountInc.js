@@ -43,7 +43,7 @@ exports.FindAssignedToTwo = async (req, res, next) => {
                         officer_name:regionalOfficer[0]?.fullname
                     })
                   const g = await Grievance.findByIdAndUpdate(doc._id, { $set: { assigned_in_role: "X" } }, { new: true })
-                  console.log(g)
+           
                     /*   SendMessage(doc.grievant_name,doc.grievance_title,regionalOfficer[0]?.fullname)  */
                    /*  await SendEmail(regionalOfficer[0]?.fullname,doc.grievant_name,doc.grievance_nature)  */
                 }
