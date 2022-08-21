@@ -254,7 +254,7 @@ const UserProfile = (props) => {
                                         alignItems={'center'} justifyContent={'center'} w="100%" h="8vh">
                                         <Box py={2} w="30%" h="100%">
                                             <FormLabel>
-                                                College
+                                                {props.userData.college_name? "Collage":"Commitee"}
                                             </FormLabel>
                                         </Box>
 
@@ -270,7 +270,7 @@ const UserProfile = (props) => {
                                                     }}
                                                     w={["100%", "100%", "30%", "30%"]}
                                                     type="text"
-                                                    value={User ? props.userData.college_name : "Not found"} />
+                                                    value={props.userData.college_name? props.userData.college_name : props.userData.committee} />
                                             </Flex>
 
                                         </Box>

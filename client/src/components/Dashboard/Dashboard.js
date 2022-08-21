@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { HStack, Flex, Box, VStack, IconButton, Divider, Text, Link } from '@chakra-ui/react'
+import { HStack, Flex, Box, VStack, IconButton, Divider, Text, Link, Tooltip } from '@chakra-ui/react'
 import { AiOutlineHome } from 'react-icons/ai'
 import { MdOutlineRecentActors } from 'react-icons/md'
 import { MdPendingActions } from 'react-icons/md'
@@ -100,6 +100,7 @@ export default function Dashboard() {
         <Box
           w="100%" h="10%">
           <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
+            <Tooltip label={'Home'}>
             <IconButton
               onClick={() => { setShutter(0) }}
               borderRadius={10}
@@ -108,12 +109,14 @@ export default function Dashboard() {
               color={'white'}
               fontSize={'3xl'}
               icon={<AiOutlineHome />} />
+              </Tooltip>
           </Flex>
 
         </Box>
 
         <Box w="100%" h="10%">
           <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
+            <Tooltip label={User.role=="1"?"Officers List":'Recent Grivances'}>
             <IconButton
               onClick={() => { setShutter(1) }}
               background={shutter == 1 ? '#362ca0' : '#5A4FCF'}
@@ -123,11 +126,13 @@ export default function Dashboard() {
               _hover={{ background: '#5247cd' }}
               fontSize={'3xl'}
               icon={<MdOutlineRecentActors />} />
+              </Tooltip>
           </Flex>
         </Box>
 
         {User.role=="2" || User.role=="1A"?null:<Box w="100%" h="10%">
           <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
+          <Tooltip label={User.role=="1"?"Add new Nodal Officer":'Track Grivances'}>
             <IconButton
               onClick={() => { setShutter(2) }}
               background={shutter == 2 ? '#362ca0' : '#5A4FCF'}
@@ -137,11 +142,13 @@ export default function Dashboard() {
               _hover={{ background: '#5247cd' }}
               fontSize={'3xl'}
               icon={<MdPendingActions />} />
+              </Tooltip>
           </Flex>
         </Box>}
 
         {User.role=="2" || User.role=="1A" ?null: <Box w="100%" h="10%">
           <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
+          <Tooltip label={User.role=="0P" || User.role=="0I"?'Add Grivance':User.role == "1" ? "Add Institute":"Add Nodal Officer"}>
             <IconButton
               onClick={() => { setShutter(3) }}
               background={shutter == 3 ? '#362ca0' : '#5A4FCF'}
@@ -151,6 +158,7 @@ export default function Dashboard() {
               _hover={{ background: '#5247cd' }}
               fontSize={'3xl'}
               icon={<IoMdAddCircleOutline />} />
+              </Tooltip>
           </Flex>
         </Box>}
 
@@ -158,6 +166,7 @@ export default function Dashboard() {
 
         <Box w="100%" h="10%">
           <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
+          <Tooltip label={'Profile'}>
             <IconButton
               onClick={() => { setShutter(5) }}
               background={shutter == 5 ? '#362ca0' : '#5A4FCF'}
@@ -168,10 +177,12 @@ export default function Dashboard() {
               _hover={{ background: '#5247cd' }}
               fontSize={'3xl'}
               icon={<AiOutlineUser />} />
+              </Tooltip>
           </Flex>
         </Box>
         <Box w="100%" h="50%">
           <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'flex-end'}>
+          <Tooltip label={'Log Out'}>
             <IconButton
               background={'#5A4FCF'}
               borderRadius={10}
@@ -180,6 +191,7 @@ export default function Dashboard() {
               _hover={{ background: '#5247cd' }}
               fontSize={'2xl'}
               icon={<AiOutlineLogout />} />
+              </Tooltip>
 
           </Flex>
         </Box>
