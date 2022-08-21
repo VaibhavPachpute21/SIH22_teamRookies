@@ -8,7 +8,6 @@ import { FiSettings } from 'react-icons/fi'
 import { AiOutlineUser, AiOutlineLogout } from 'react-icons/ai'
 import axios from 'axios'
 import AddNewGrievance from '../Grievance/AddNewGrievance'
-import DashboardAdd from '../Slides/add'
 import DashboardHistory from '../Slides/history'
 import AdminHome from '../Slides/admin_home'
 import UserHome from '../Slides/user_home'
@@ -116,7 +115,7 @@ export default function Dashboard() {
 
         <Box w="100%" h="10%">
           <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
-            <Tooltip label={User.role=="1"?"Officers List":'Recent Grivances'}>
+            <Tooltip label={User.role=="1"?"Officers List":User.role=="3"?"Top Officers":'Recent Grivances'}>
             <IconButton
               onClick={() => { setShutter(1) }}
               background={shutter == 1 ? '#362ca0' : '#5A4FCF'}
@@ -148,7 +147,7 @@ export default function Dashboard() {
 
         {User.role=="2" || User.role=="1A" ?null: <Box w="100%" h="10%">
           <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
-          <Tooltip label={User.role=="0P" || User.role=="0I"?'Add Grivance':User.role == "1" ? "Add Institute":"Add Nodal Officer"}>
+          <Tooltip label={User.role=="0P" || User.role=="0I"?'Add Grivance':User.role == "1" ? "Add Institute":User.role=="3"?"Add University Admin":"Add Nodal Officer"}>
             <IconButton
               onClick={() => { setShutter(3) }}
               background={shutter == 3 ? '#362ca0' : '#5A4FCF'}

@@ -19,7 +19,6 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux'
 import promiseMiddleware from 'redux-promise'
 import reducers from './reducers/index'
-import Test from "./components/Test";
 import PrivateRoute from './components/private/private_route'
 import FeedBackForm from './components/feedbackform/index'
 

@@ -19,7 +19,7 @@ function AddInstituteGrievance(props) {
             principal_name: data.pName,
             grievant_name:User.fullname,
             grievance_title: data.title,
-            grievance_description: "some description",
+            grievance_description: data.discription,
             grievant_university: "mu",
             imgs: Files,
             grievant_institute:User.institute_name,
