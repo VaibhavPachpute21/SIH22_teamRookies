@@ -14,13 +14,14 @@ const DashboardTracker = (props) => {
     const [error, SetError] = useState('')
     const [Grievances, SetGrievances] = useState([])
 
-    
+
 
     const [authen, setAuthen] = useState(null)
     const auth = cookie.get('token');
-    const [User,setUser] = useState({})
+    const [User, setUser] = useState({})
 
-    
+
+
 
     const chart = {
         options: {
@@ -37,6 +38,9 @@ const DashboardTracker = (props) => {
             xaxis: {
                 type: 'datetime',
                 categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
+                , labels: {
+                    format: 'dd/MM',
+                }
             },
             tooltip: {
                 x: {
@@ -128,13 +132,13 @@ const DashboardTracker = (props) => {
     const nav = useNavigate()
 
 
-    useEffect(()=>{
-        if(props.User){
+    useEffect(() => {
+        if (props.User) {
             setUser(props.User)
         }
-},[props.User])
+    }, [props.User])
 
-   useEffect(() => {
+    useEffect(() => {
         const GetAllGrievances = async () => {
             try {
                 await props.GetAllGrievances(User._id)
@@ -143,7 +147,7 @@ const DashboardTracker = (props) => {
             }
         }
         GetAllGrievances()
-    }, [User._id,props.grievance])
+    }, [User._id, props.grievance])
 
     useEffect(() => {
         if (props.data) {
@@ -158,7 +162,31 @@ const DashboardTracker = (props) => {
         }
     }, [props.data])
 
-   
+    useEffect(() => {
+        if (Grievances.length > 0) {
+
+            
+              let obj = [];
+              
+              Grievances.forEach((item, i) => {
+                const date = item?.createdAt?.split("T")[0];
+                const newObj = {
+                  date,
+                  count: 1
+                };
+                const found = obj.find((doc) => doc.date === date);
+                if (found) {
+                  const count = found.count + 1;
+                  console.log(count);
+                  obj = obj.map((doc) => doc.date === date ? { ...doc, count } : doc
+                  );
+                } else {
+                  obj.push(newObj);
+                }
+              });
+              console.log(obj);
+        }
+    }, [Grievances])
 
 
     const setTabsArray = (a, b) => {
@@ -356,173 +384,173 @@ const DashboardTracker = (props) => {
                         overflow={'scroll'}
                         w="100%">
                         {
-                        Grievances && Grievances.length > 0 ? (
-                            Grievances?.map((item, i) => (
-                                <HStack key={i} w="100%" minH={"75vh"}>
-                                    <Box
-                                        w="25%" h="70vh">
-                                        <VStack
-                                            borderTop={'4px solid #5A4FCF'}
-                                            w="90%" h="80%">
-                                            <Box w="100%" h="10%">
-                                                <HStack w="100%" h="100%">
+                            Grievances && Grievances.length > 0 ? (
+                                Grievances?.map((item, i) => (
+                                    <HStack key={i} w="100%" minH={"75vh"}>
+                                        <Box
+                                            w="25%" h="70vh">
+                                            <VStack
+                                                borderTop={'4px solid #5A4FCF'}
+                                                w="90%" h="80%">
+                                                <Box w="100%" h="10%">
+                                                    <HStack w="100%" h="100%">
 
+                                                        <Text
+                                                            w="80%"
+                                                            fontWeight={600} fontSize={'sm'}>
+                                                            {item._id}
+                                                        </Text>
+                                                    </HStack>
+                                                </Box>
+
+                                                <Box w="100%" h="20%">
+                                                    <VStack w="100%" h='100%'>
+                                                        <Box w="100%" h="20%">
+                                                            <Text
+                                                                opacity={.8}
+                                                                fontWeight={700} color={'#5A4FCF'}>
+                                                                Grievance to
+                                                            </Text>
+                                                        </Box>
+                                                        <Box w="100%" h="80%">
+                                                            <Text
+                                                                w="90%"
+                                                                fontWeight={600}
+                                                                fontSize={'sm'}
+                                                            >
+                                                                {item.reciever_id}
+                                                            </Text>
+                                                        </Box>
+                                                    </VStack>
+                                                </Box>
+                                                <Box w="100%" h="20%">
+                                                    <VStack w="100%" h='100%'>
+                                                        <Box w="100%" h="20%">
+                                                            <Text
+                                                                opacity={.8}
+                                                                fontWeight={700} color={'#5A4FCF'}>
+                                                                Grievance status
+                                                            </Text>
+                                                        </Box>
+                                                        <Box w="100%" h="80%">
+                                                            <Text
+                                                                fontWeight={600}
+                                                                fontSize={'md'}
+                                                            >
+                                                                {
+                                                                    item.satisfied ? (
+                                                                        "Solved"
+                                                                    ) : ("Pending")
+                                                                }
+                                                            </Text>
+                                                        </Box>
+                                                    </VStack>
+                                                </Box>
+                                                <Box w="100%" h="20%">
+                                                    <VStack w="100%" h='100%'>
+                                                        <Box w="100%" h="20%">
+                                                            <Text
+                                                                opacity={.8}
+                                                                fontWeight={700} color={'#5A4FCF'}>
+                                                                Grievance priority
+                                                            </Text>
+                                                        </Box>
+                                                        <Box w="100%" h="80%">
+                                                            <Text
+                                                                fontWeight={600}
+                                                                fontSize={'md'}
+                                                            >
+                                                                2
+                                                            </Text>
+                                                        </Box>
+                                                    </VStack>
+                                                </Box>
+
+                                                <Box w="100%" h="5%">
+                                                    <HStack w="100%" h='100%'>
+                                                        <Icon marginTop={5} as={GrFormAttachment} w={6} h={6} />
+                                                        <Box w="100%" h="20%">
+                                                            <Text
+                                                                opacity={.8}
+                                                                fontWeight={700} color={'#5A4FCF'}>
+                                                                {
+                                                                    item.imgs?.length
+                                                                } Attachments
+                                                            </Text>
+                                                        </Box>
+
+                                                    </HStack>
+                                                </Box>
+                                            </VStack>
+                                        </Box>
+
+                                        <Box w="75%" h="70vh">
+                                            <VStack
+                                                py={3}
+                                                px={5} w="100%" h="100%" alignItems={'flex-start'} justifyContent={'flex-start'}>
+                                                <Box w="70%" h="7%">
+                                                    <HStack w="100%" h="100%">
+                                                        <Box w="40%">
+                                                            <Text
+                                                                fontWeight={600} color={'#5A4FCF'}
+                                                            >
+                                                                Submission Date
+                                                            </Text>
+                                                        </Box>
+                                                        <Box w="40%">
+                                                            <Text w="100%">
+                                                                {item.createdAt?.split('T')[0]}
+                                                            </Text>
+                                                        </Box>
+                                                    </HStack>
+                                                </Box>
+
+                                                <Box w="100%" h="20%">
                                                     <Text
-                                                        w="80%"
-                                                        fontWeight={600} fontSize={'sm'}>
-                                                        {item._id}
+                                                        fontFamily={'monospace'}
+                                                        fontSize={'2xl'}
+                                                        fontWeight={600}>
+                                                        {item.grievance_title}
                                                     </Text>
-                                                </HStack>
-                                            </Box>
+                                                </Box>
 
-                                            <Box w="100%" h="20%">
-                                                <VStack w="100%" h='100%'>
-                                                    <Box w="100%" h="20%">
-                                                        <Text
-                                                            opacity={.8}
-                                                            fontWeight={700} color={'#5A4FCF'}>
-                                                            Grievance to
-                                                        </Text>
-                                                    </Box>
-                                                    <Box w="100%" h="80%">
-                                                        <Text
-                                                            w="90%"
-                                                            fontWeight={600}
-                                                            fontSize={'sm'}
-                                                        >
-                                                            {item.reciever_id}
-                                                        </Text>
-                                                    </Box>
-                                                </VStack>
-                                            </Box>
-                                            <Box w="100%" h="20%">
-                                                <VStack w="100%" h='100%'>
-                                                    <Box w="100%" h="20%">
-                                                        <Text
-                                                            opacity={.8}
-                                                            fontWeight={700} color={'#5A4FCF'}>
-                                                            Grievance status
-                                                        </Text>
-                                                    </Box>
-                                                    <Box w="100%" h="80%">
-                                                        <Text
-                                                            fontWeight={600}
-                                                            fontSize={'md'}
-                                                        >
-                                                            {
-                                                                item.satisfied ? (
-                                                                    "Solved"
-                                                                ) : ("Pending")
-                                                            }
-                                                        </Text>
-                                                    </Box>
-                                                </VStack>
-                                            </Box>
-                                            <Box w="100%" h="20%">
-                                                <VStack w="100%" h='100%'>
-                                                    <Box w="100%" h="20%">
-                                                        <Text
-                                                            opacity={.8}
-                                                            fontWeight={700} color={'#5A4FCF'}>
-                                                            Grievance priority
-                                                        </Text>
-                                                    </Box>
-                                                    <Box w="100%" h="80%">
-                                                        <Text
-                                                            fontWeight={600}
-                                                            fontSize={'md'}
-                                                        >
-                                                            2
-                                                        </Text>
-                                                    </Box>
-                                                </VStack>
-                                            </Box>
+                                                <Box w="70%" h="5%">
+                                                    <Text fontWeight={'400'}
+                                                        opacity={.7}
+                                                        color={'#5A4FCF'}>
+                                                        The grievance
+                                                    </Text>
+                                                </Box>
 
-                                            <Box w="100%" h="5%">
-                                                <HStack w="100%" h='100%'>
-                                                    <Icon marginTop={5} as={GrFormAttachment} w={6} h={6} />
-                                                    <Box w="100%" h="20%">
-                                                        <Text
-                                                            opacity={.8}
-                                                            fontWeight={700} color={'#5A4FCF'}>
-                                                            {
-                                                                item.imgs?.length
-                                                            } Attachments
-                                                        </Text>
-                                                    </Box>
+                                                <Box w="100%" h="68%">
+                                                    <Text
+                                                        noOfLines={14}
+                                                        fontFamily={'monospace'}
+                                                        fontSize={'md'}
+                                                        fontWeight={500}>
+                                                        {item.grievance_description}
+                                                    </Text>
+                                                </Box>
 
-                                                </HStack>
-                                            </Box>
-                                        </VStack>
-                                    </Box>
+                                                <Box w="100%" h="5%">
+                                                    <Button
+                                                        onClick={() => { nav(`/TrackGrievance/${item._id}`, { state: { url: item._id } }) }}
+                                                        bg="#5A4FCF"
+                                                        color="white"
+                                                        size="sm">
+                                                        Track your grievance
+                                                    </Button>
+                                                </Box>
 
-                                    <Box w="75%" h="70vh">
-                                        <VStack
-                                            py={3}
-                                            px={5} w="100%" h="100%" alignItems={'flex-start'} justifyContent={'flex-start'}>
-                                            <Box w="70%" h="7%">
-                                                <HStack w="100%" h="100%">
-                                                    <Box w="40%">
-                                                        <Text
-                                                            fontWeight={600} color={'#5A4FCF'}
-                                                        >
-                                                            Submission Date
-                                                        </Text>
-                                                    </Box>
-                                                    <Box w="40%">
-                                                        <Text w="100%">
-                                                            {item.createdAt?.split('T')[0]}
-                                                        </Text>
-                                                    </Box>
-                                                </HStack>
-                                            </Box>
+                                            </VStack>
+                                        </Box>
+                                    </HStack>
+                                ))
+                            ) : (<Box>
+                                No Grievances found
+                            </Box>)
 
-                                            <Box w="100%" h="20%">
-                                                <Text
-                                                    fontFamily={'monospace'}
-                                                    fontSize={'2xl'}
-                                                    fontWeight={600}>
-                                                    {item.grievance_title}
-                                                </Text>
-                                            </Box>
 
-                                            <Box w="70%" h="5%">
-                                                <Text fontWeight={'400'}
-                                                    opacity={.7}
-                                                    color={'#5A4FCF'}>
-                                                    The grievance
-                                                </Text>
-                                            </Box>
-
-                                            <Box w="100%" h="68%">
-                                                <Text
-                                                    noOfLines={14}
-                                                    fontFamily={'monospace'}
-                                                    fontSize={'md'}
-                                                    fontWeight={500}>
-                                                    {item.grievance_description}
-                                                </Text>
-                                            </Box>
-
-                                            <Box w="100%" h="5%">
-                                                <Button
-                                                    onClick={() => { nav(`/TrackGrievance/${item._id}`, { state:{url:item._id} }) }}
-                                                    bg="#5A4FCF"
-                                                    color="white"
-                                                    size="sm">
-                                                    Track your grievance
-                                                </Button>
-                                            </Box>
-
-                                        </VStack>
-                                    </Box>
-                                </HStack>
-                            ))
-                        ):(<Box>
-                            No Grievances found
-                        </Box>)
-
-                            
                         }
                     </VStack>
                 </Box>

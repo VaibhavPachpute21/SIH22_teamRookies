@@ -73,7 +73,7 @@ exports.login = async (req, res, next) => {
                 message: "Please provide all credentials"
             })
         }
-        const officer = await Institute.findOne({ email }).select("+password")
+        const officer = await Institute.findOne({ "user_email":email }).select("+password")
         if (!officer) {
             res.status(401).send({ success: false, message: "Invalid credentials" })
             return;
