@@ -2,6 +2,8 @@ import React from 'react'
 import { HStack, Link, Box, Flex, Icon, Image } from '@chakra-ui/react'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import cookie from 'js-cookie'
+
+
 export default function Header() {
     return (
         <HStack
@@ -35,7 +37,7 @@ export default function Header() {
                                 fontWeight={500}
                                 _hover={{ 'textDecoration': 'none' }}
                                 href='/Login'>Login/ Register</Link>
-
+                            
                             <Link
                                 fontWeight={500}
                                 _hover={{ 'textDecoration': 'none' }}

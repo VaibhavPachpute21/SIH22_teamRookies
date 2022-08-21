@@ -13,7 +13,7 @@ import {
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import ChatBot from 'react-simple-chatbot';
-
+import axios from 'axios'
 const theme = {
     headerBgColor: '#5A4FCF',
     headerFontSize: '20px',
@@ -409,7 +409,8 @@ class GStatus extends Component {
         super(props);
 
         this.state = {
-            grievance_id: ''
+            grievance_id: '',
+            data:{}
         };
     }
 
@@ -417,15 +418,30 @@ class GStatus extends Component {
         const { steps } = this.props;
         const { grievance_id } = steps;
 
-        this.setState({ grievance_id, grievance_id, grievance_id });
+        this.setState({ grievance_id, grievance_id, grievance_id },this.GetGrievanceStatus);
     }
 
+    GetGrievanceStatus = async () => {
+        const { grievance_id } = this.state;
+        
+        const req = await axios.get(`http://localhost:3001/api/grievance/get-grievance-info/${grievance_id.value}`)
+        .then(response => response.data)
+        if(req?.latestForward){
+            let dat = req.latestForward
+            this.setState({
+                data: dat[0]
+            })
+        }
+    }
+    
+
     render() {
+        const off = this.state.data
         const { grievance_id } = this.state;
         return (
             <div style={{ width: '100%' }}>
                 <h3>Status of {grievance_id.value}</h3>
-                <p>The grievance {grievance_id.value} was sent to Nodal officer at 2:30PM</p>
+                <p>The grievance {grievance_id.value} was sent to {off.assigned_to_role === "1A" || off.assigned_to_role === "1B" ? "Nodal officer":"Regional officer" } {off.officer_name} at {off?.createdAt?.split('T')[1]}</p>
             </div>
         );
     }

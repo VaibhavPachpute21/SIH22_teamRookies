@@ -20,42 +20,32 @@ const DashboardTracker = (props) => {
     const auth = cookie.get('token');
     const [User, setUser] = useState({})
 
+    const [dates,setDates] = useState([])
+    const [counts,setCounts] = useState([])
 
-
+    const [FromTo,setFromTo] = useState([])
+   
 
     const chart = {
         options: {
             chart: {
-                height: 350,
-                type: 'area'
-            },
-            dataLabels: {
-                enabled: false
-            },
-            stroke: {
-                curve: 'smooth'
+              id: "basic-bar"
+
             },
             xaxis: {
-                type: 'datetime',
-                categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
-                , labels: {
-                    format: 'dd/MM',
-                }
-            },
-            tooltip: {
-                x: {
-                    format: 'dd/MM/yy HH:mm'
-                },
-            },
-        },
-        series: [{
-            name: 'series1',
-            data: [31, 40, 28, 51, 42, 109, 100]
-        }, {
-            name: 'series2',
-            data: [11, 32, 45, 32, 34, 52, 41]
-        }]
-    }
+              categories: dates
+            }
+          },
+          series: [
+            {
+              name: "Number of grievances",
+              data: counts
+            }
+          ]
+        };
+            
+        
+    
 
 
     const FakeGrievances = [
@@ -131,6 +121,8 @@ const DashboardTracker = (props) => {
 
     const nav = useNavigate()
 
+    
+
 
     useEffect(() => {
         if (props.User) {
@@ -154,7 +146,7 @@ const DashboardTracker = (props) => {
             let d = props.data
             if (d.grievanceData) {
                 let f = d?.grievanceData
-                console.log(f)
+                
                 if (f) {
                     SetGrievances(f.allGrievances)
                 }
@@ -163,7 +155,7 @@ const DashboardTracker = (props) => {
     }, [props.data])
 
     useEffect(() => {
-        if (Grievances.length > 0) {
+        if (Grievances?.length > 0) {
 
             
               let obj = [];
@@ -184,10 +176,21 @@ const DashboardTracker = (props) => {
                   obj.push(newObj);
                 }
               });
-              console.log(obj);
+              let dat = []
+              let cou = []
+              obj.forEach((item,i)=>{
+                let alias = Object.values(item)
+                dat.push(alias[0])
+                cou.push(alias[1])
+              })
+
+              setDates(dat)
+              setCounts(cou)
+              
         }
     }, [Grievances])
 
+   
 
     const setTabsArray = (a, b) => {
         let cloneArray = [...filterTabs]
@@ -302,12 +305,14 @@ const DashboardTracker = (props) => {
                                         <Box w="50%">
                                             <FormLabel fontSize={'sm'}>From</FormLabel>
                                             <Input
+                                            onChange={(e)=>{setFromTo(e.target.value)}}
                                                 size="sm"
                                                 type={'date'} />
                                         </Box>
                                         <Box w="50%">
                                             <FormLabel fontSize={'sm'}>To</FormLabel>
                                             <Input
+                                            onChange={(e)=>{setFromTo(e.target.value)}}
                                                 size="sm"
                                                 type={'date'} />
                                         </Box>
@@ -397,7 +402,8 @@ const DashboardTracker = (props) => {
 
                                                         <Text
                                                             w="80%"
-                                                            fontWeight={600} fontSize={'sm'}>
+                                                            fontWeight={600} 
+                                                            fontSize={'sm'}>
                                                             {item._id}
                                                         </Text>
                                                     </HStack>
