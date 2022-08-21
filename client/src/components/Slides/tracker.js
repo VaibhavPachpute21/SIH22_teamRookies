@@ -213,7 +213,7 @@ const DashboardTracker = (props) => {
             </HStack>
 
             <HStack w="100%" h="95%">
-                <Box
+                {User.role=="0P"?null: <Box
                     w="30%" h="100%">
                     <VStack w="100%" h="100%">
                         <Box w="100%" h="10%">
@@ -342,13 +342,13 @@ const DashboardTracker = (props) => {
                         </Box>
 
                     </VStack>
-                </Box>
+                </Box>}
 
                 <Box
                     px={5}
                     borderLeft={'1px'}
                     borderColor={'#5A4FCF'}
-                    w="80%"
+                    w={User.role=="0P"?"100%": "80%"}
                     h="100%" >
                     <VStack
                         maxH={'80vh'}

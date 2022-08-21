@@ -16,6 +16,7 @@ import './styles/drawer.css'
 import * as actions from '../../actions/user_actions'
 import axios from 'axios';
 import { connect } from 'react-redux';
+import { useNavigate } from 'react-router-dom'
 
 
 const AdminDashboardHistory = (props) => {
@@ -34,6 +35,7 @@ const AdminDashboardHistory = (props) => {
     const [currentGrievances, setcurrentGrievances] = useState([])
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [message, SetMessage] = useState('')
+    const nav = useNavigate()
 
     useEffect(() => {
         SetUser(props.User)
@@ -155,13 +157,15 @@ const AdminDashboardHistory = (props) => {
                                             </HStack>
 
                                             <HStack w="15%" h="100%" alignItems={'center'}>
-                                                <Button
+                                                {User.role=="1B"?<Button
+                                                onClick={() => { nav(`/TrackGrievance/${item.grievance_id}`, { state:{url:item.grievance_id} }) }}
+                                                >TrackGrievance</Button>: <Button
                                                     onClick={() => { onOpen(); console.log(item.grievant_name) }}
                                                     color={'white'}
                                                     bg="#5A4FCF"
                                                     h="100%">
                                                     Send reply
-                                                </Button>
+                                                </Button>}
                                             </HStack>
                                         </HStack>
 
@@ -247,7 +251,7 @@ const AdminDashboardHistory = (props) => {
                                                     </Button>
                                                 ) : (
 
-                                                    <Button
+                                                    User.role =="1B" ? <Button>Track Grievance</Button>: <Button
                                                         onClick={() => { onOpen() }}
                                                         color={'white'}
                                                         bg="#5A4FCF"
