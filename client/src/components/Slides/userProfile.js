@@ -144,7 +144,7 @@ const UserProfile = (props) => {
                                         }}
                                         w={["100%", "100%", "30%", "30%"]}
                                         type="email"
-                                        value={User ? User.email : "Not found"} />
+                                        value={props.userData.email} />
                                 </Flex>
 
                             </Box>
@@ -168,7 +168,7 @@ const UserProfile = (props) => {
 
                                         w={["100%", "100%", "30%", "30%"]}
                                         type="text"
-                                        value={User.dob || "3/2/2002"} />
+                                        value={props.userData.dob || "3/2/2002"} />
                                 </Flex>
 
                             </Box>
@@ -196,7 +196,7 @@ const UserProfile = (props) => {
                                         }}
                                         w={["100%", "100%", "30%", "30%"]}
                                         type="text"
-                                        value={User ? User.role : "Not found"} />
+                                        value={User ? props.userData.role: "Not found"} />
                                 </Flex>
                             </Box>
                         </HStack>
@@ -222,7 +222,7 @@ const UserProfile = (props) => {
                                             }));
                                         }} w={["100%", "100%", "30%", "30%"]}
                                         type="number"
-                                        value={User ? User.phone_number : "Not found"} />
+                                        value={User ? props.userData.phone_number : "Not found"} />
                                 </Flex>
 
                             </Box>
@@ -270,7 +270,7 @@ const UserProfile = (props) => {
                                                     }}
                                                     w={["100%", "100%", "30%", "30%"]}
                                                     type="text"
-                                                    value={User ? User.college_name : "Not found"} />
+                                                    value={User ? props.userData.college_name : "Not found"} />
                                             </Flex>
 
                                         </Box>
@@ -297,7 +297,7 @@ const UserProfile = (props) => {
                                                     }}
                                                     w={["100%", "100%", "30%", "30%"]}
                                                     type="text"
-                                                    value={User ? User.university : "Not found"} />
+                                                    value={User ? props.userData.university : "Not found"} />
                                             </Flex>
                                         </Box>
                                     </HStack>
@@ -324,7 +324,7 @@ const UserProfile = (props) => {
                                                     }}
                                                     w={["100%", "100%", "30%", "30%"]}
                                                     type="text"
-                                                    value={User ? User.state : "Not found"} />
+                                                    value={User ? props.userData.state : "Not found"} />
                                             </Flex>
 
                                         </Box>
@@ -352,7 +352,7 @@ const UserProfile = (props) => {
                                                     }}
                                                     w={["100%", "100%", "30%", "30%"]}
                                                     type="text"
-                                                    value={User ? User.district : "Not found"} />
+                                                    value={User ? props.userData.district : "Not found"} />
                                             </Flex>
                                         </Box>
                                     </HStack>

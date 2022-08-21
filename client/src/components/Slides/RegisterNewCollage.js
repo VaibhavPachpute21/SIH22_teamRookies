@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Button, Flex, FormLabel, Heading, Input, Textarea, FormControl, useToast } from '@chakra-ui/react'
+import { Box, Button, Flex, FormLabel, Heading, Input, Textarea, FormControl, useToast,Select } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 import { connect } from 'react-redux'
 import * as actions from '../../actions/institute_actions'
@@ -115,10 +115,16 @@ function RegisterNewCollage(props) {
 
                             <Box w={'25%'} p={4}>
                                 <FormLabel>Institute Region</FormLabel>
-                                <Input borderColor={'black'} placeholder='Enter Institute Region' type={'text'}
+                                <Select borderColor={'black'} placeholder='Enter Institute Region' type={'text'}
                                     id='iRegion' name='iRegion'
                                     {...register('iRegion', { required: { value: true, message: "Please Enter Institute Region !", }, })}
-                                />
+                                >
+                                    <option>east</option>
+                                    <option>west</option>
+                                    <option>north</option>
+                                    <option>south</option>
+
+                                </Select>
                                 {errors.iRegion && errors.iRegion.message ? (
                                     <Box textAlign={'left'} fontSize={'12px'} py={1} maxH={'0px'} color={'red'}>
                                         {errors.iRegion.message}
