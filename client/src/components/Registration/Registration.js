@@ -25,7 +25,7 @@ function Registration(props) {
     let obj = {
       email: data.email,
       password: data.pass,
-      role: 0,
+      role: "0P",
       fullname: data.fName,
       committee: "CSGRC",
       phone_number: data.phone,

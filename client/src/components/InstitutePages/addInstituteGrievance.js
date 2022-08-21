@@ -27,6 +27,8 @@ function AddInstituteGrievance(props) {
         }
         try {
             const newGrievance = await axios.post('http://localhost:3001/api/grievance/make-grievance',obj)
+            
+            console.log(newGrievance)
             let d = newGrievance.data
             if(d.success){
                 let success = d?.success
