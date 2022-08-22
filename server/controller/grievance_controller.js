@@ -44,10 +44,12 @@ exports.CreateGrievance = async (req, res, next) => {
             })
         }
 
+
         console.log(`Grievance by ${grievant_name} was forwarded to ${firstOfficerReciever.fullname}`)
 
         /*   await FirstSendMessage(grievant_name,firstOfficerReciever.fullname)  */
-      /*  await SendEmail(firstOfficerReciever.fullname,grievant_name,grievance_nature)  */
+          //await FirstSendMessage(grievant_name,firstOfficerReciever.fullname) 
+
 
         res.status(200).json({
             success: true,

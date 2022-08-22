@@ -11,7 +11,7 @@ export default function Header() {
                 '5vh', '7vh', '10vh'
             ]} w={"100vw"}>
             <Flex w={'100%'} h={'100%'} flexDirection={'row'} alignItems={'flex-start'} >
-                {/*  <Box w={'20%'} h='100px' paddingLeft={5} ><Image src='./image/logo.png' height={'100px'} /> </Box> */}
+                 <Box w={'20%'} h='100px' paddingLeft={5} ><Image src='./image/logo.png' height={'100px'} /> </Box>
                 <Box w={'80%'} h='100%'>
                     <Flex
                         w={'100%'} h='100%' flexDirection={'row'} alignItems={'flex-end'}>
@@ -36,21 +36,27 @@ export default function Header() {
                             <Link
                                 fontWeight={500}
                                 _hover={{ 'textDecoration': 'none' }}
-                                href='/Login'>Login/ Register</Link>
+                                href='/Login'>Login</Link>
                             
                             <Link
                                 fontWeight={500}
                                 _hover={{ 'textDecoration': 'none' }}
-                                href='/Dashboard'>Dashboard</Link>
+                                href='/Registration'>Register</Link>
+                            
+                            
+                            {/* <Link
+                                fontWeight={500}
+                                _hover={{ 'textDecoration': 'none' }}
+                                href='/Dashboard'>Dashboard</Link> */}
 
-                            <Link
+                            {/* <Link
                                 fontWeight={500}
                                 onClick={()=>{cookie.remove('token')}}
                                 _hover={{ 'textDecoration': 'none' }}
-                                href='/Dashboard'>Logout</Link>
+                                href='/Dashboard'>Logout</Link> */}
+
 
                         </HStack>
-
                         <Flex
                             flexDirection={'row'}
                             justifyContent={
@@ -58,7 +64,7 @@ export default function Header() {
                             }
                             alignItems={'flex-end'}
                             paddingTop={3}
-                            w="90%">
+                            w={["90%","90%","0%","0%"]}>
                             <Icon
 
                                 display={{ md: 'none', base: 'flex' }}
