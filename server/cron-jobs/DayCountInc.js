@@ -24,7 +24,7 @@ exports.FindAssignedToTwo = async (req, res, next) => {
     try {
         let role2 = await Grievance.find({ "assigned_in_role": "2" })
         
-
+        
         role2?.forEach(async (doc) => {
             if (role2.length > 0) {
 
@@ -32,6 +32,7 @@ exports.FindAssignedToTwo = async (req, res, next) => {
                     { $match: { "region": doc.region } },
                     { $sample: { size: 1 } }
                 ])
+                console.log(regionalOfficer)
                 if (regionalOfficer.length > 0) {
                     await Forward.create({
                         previous_reciever: "Change",
@@ -44,8 +45,12 @@ exports.FindAssignedToTwo = async (req, res, next) => {
                     })
                     await Grievance.findByIdAndUpdate(doc._id, { $set: { assigned_in_role: "X" } }, { new: true })
            
-                     SendMessage(doc.grievant_name,doc.grievance_title,regionalOfficer[0]?.fullname)   
+                    console.log(`Grievance by ${doc.grievant_name} was forwarded to ${regionalOfficer[0]?.fullname}`)
+                    if(regionalOfficer[0].fullname){
+                        /*   SendMessage(doc.grievant_name,doc.grievance_title,regionalOfficer[0]?.fullname)    */
                    /*  await SendEmail(regionalOfficer[0]?.fullname,doc.grievant_name,doc.grievance_nature)  */
+                    }
+                   
                 }
 
             }
@@ -96,7 +101,8 @@ exports.ResetAndForward = async (req, res, next) => {
                                 assigned_to_role: "1B",
                                 officer_name:firstBOfficer[0]?.fullname
                             })
-                              SendMessage(doc.grievant_name,doc.grievance_title,firstBOfficer[0]?.fullname) 
+                            console.log(`Grievance by ${doc2.grievant_name} was forwarded to ${firstBOfficer[0]?.fullname}`)
+                           /*    SendMessage(doc.grievant_name,doc.grievance_title,firstBOfficer[0]?.fullname)  */
                             /*  await SendEmail(firstBOfficer[0]?.fullname,doc2.grievant_name,doc2.grievance_nature)  */
                         } else {
 
@@ -117,8 +123,8 @@ exports.ResetAndForward = async (req, res, next) => {
                                     officer_university: theNextOfficer[0].university,
                                     assigned_to_role: "1B"
                                 })
-                             
-                                SendMessage(doc.grievant_name,doc.grievance_title,nextOfficer[0]?.fullname)  
+                                console.log(`Grievance by ${doc2.grievant_name} was forwarded to ${theNextOfficer[0]?.fullname}`)
+                               /*  SendMessage(doc.grievant_name,doc.grievance_title,nextOfficer[0]?.fullname)   */
                               /*   await SendEmail(theNextOfficer[0]?.fullname,doc.grievant_name,doc.grievance_nature)  */
                             }
                             else {
@@ -146,8 +152,8 @@ exports.ResetAndForward = async (req, res, next) => {
                             assigned_to_role: "1A",
                             officer_name:nextOfficer[0].fullname
                         })
-
-                       SendMessage(doc.grievant_name,doc.grievance_title,nextOfficer[0]?.fullname)  
+                        console.log(`Grievance by ${doc.grievant_name} was forwarded to ${nextOfficer[0]?.fullname}`)
+                      /*  SendMessage(doc.grievant_name,doc.grievance_title,nextOfficer[0]?.fullname)  */ 
                         /* await SendEmail(nextOfficer[0]?.fullname,grievant_name,grievance_nature)  */
                     } catch (error) {
                         /// Some error handling
