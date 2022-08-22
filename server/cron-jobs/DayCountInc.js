@@ -44,7 +44,7 @@ exports.FindAssignedToTwo = async (req, res, next) => {
                     })
                     await Grievance.findByIdAndUpdate(doc._id, { $set: { assigned_in_role: "X" } }, { new: true })
            
-                     SendMessage(doc.grievant_name,doc.grievance_title,regionalOfficer[0]?.fullname)   
+                     //SendMessage(doc.grievant_name,doc.grievance_title,regionalOfficer[0]?.fullname)   
                    /*  await SendEmail(regionalOfficer[0]?.fullname,doc.grievant_name,doc.grievance_nature)  */
                 }
 
@@ -96,7 +96,7 @@ exports.ResetAndForward = async (req, res, next) => {
                                 assigned_to_role: "1B",
                                 officer_name:firstBOfficer[0]?.fullname
                             })
-                              SendMessage(doc.grievant_name,doc.grievance_title,firstBOfficer[0]?.fullname) 
+                              //SendMessage(doc.grievant_name,doc.grievance_title,firstBOfficer[0]?.fullname) 
                             /*  await SendEmail(firstBOfficer[0]?.fullname,doc2.grievant_name,doc2.grievance_nature)  */
                         } else {
 
@@ -118,7 +118,7 @@ exports.ResetAndForward = async (req, res, next) => {
                                     assigned_to_role: "1B"
                                 })
                              
-                                SendMessage(doc.grievant_name,doc.grievance_title,nextOfficer[0]?.fullname)  
+                                //SendMessage(doc.grievant_name,doc.grievance_title,nextOfficer[0]?.fullname)  
                               /*   await SendEmail(theNextOfficer[0]?.fullname,doc.grievant_name,doc.grievance_nature)  */
                             }
                             else {
@@ -147,7 +147,7 @@ exports.ResetAndForward = async (req, res, next) => {
                             officer_name:nextOfficer[0].fullname
                         })
 
-                       SendMessage(doc.grievant_name,doc.grievance_title,nextOfficer[0]?.fullname)  
+                       //SendMessage(doc.grievant_name,doc.grievance_title,nextOfficer[0]?.fullname)  
                         /* await SendEmail(nextOfficer[0]?.fullname,grievant_name,grievance_nature)  */
                     } catch (error) {
                         /// Some error handling
