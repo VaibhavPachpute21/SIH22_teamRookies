@@ -10,10 +10,12 @@ exports.SendMessageToForward = async (req,res,next) => {
     try {
         const latestForward = await Forward.find({message_sent_to_grievant:{$ne:true}}).limit(1).sort({$natural:-1})
         if(latestForward.length > 0){
-            latestForward?.forEach(async (doc)=>{
-            const grievance = await Grievance.findById(doc.grievance_id)
-            if(grievance){
-                 SendMessage("User",grievance?.grievance_title,doc?.officer_name)
+            latestForward?.forEach(async (doc,i)=>{
+                
+            
+            if(typeof(doc?.officer_name) !== undefined){
+                const grievance = await Grievance.findById(doc?.grievance_id)
+                // await SendMessage("User",grievance?.grievance_title,doc?.officer_name)
                 await Forward.findOneAndUpdate({_id:doc._id},{$set:{message_sent_to_grievant:true}})
             }
             })
@@ -51,8 +53,9 @@ exports.FindAssignedToTwo = async (req, res, next) => {
                     { $match: { "region": doc.region } },
                     { $sample: { size: 1 } }
                 ])
+                
                
-                if (regionalOfficer.length > 0) {
+                if (regionalOfficer) {
                     await Forward.create({
                         previous_reciever: "Change",
                         current_reciever: regionalOfficer[0]?._id,
@@ -65,8 +68,6 @@ exports.FindAssignedToTwo = async (req, res, next) => {
                     })
                     await Grievance.findByIdAndUpdate(doc._id, { $set: { assigned_in_role: "X" } }, { new: true })
            
-
-                    console.log(`Grievance by ${doc.grievant_name} was forwarded to ${regionalOfficer[0]?.fullname}`)
                
                    
                 }

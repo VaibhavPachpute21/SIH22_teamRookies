@@ -46,12 +46,16 @@ app.use('/api/feedback',require('./routes/feedback_routes'))
 
 // Cron jobs
 
+cron.scheduleJob("*/35 * * * * *",()=>{
+    SendMessageToForward()
+})
+
  cron.scheduleJob("*/2 * * * * *",()=>{
 
     IncDayCount(),
     ResetAndForward(),    
-    FindAssignedToTwo(),
-    SendMessageToForward()
+    FindAssignedToTwo()
+
 
 })
  
