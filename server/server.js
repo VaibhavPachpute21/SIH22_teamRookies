@@ -15,7 +15,7 @@ const cron = require('node-schedule')
 
 
 const {ResetAndForward,FindAssignedToTwo,IncDayCount,SendMessageToForward} = require("./cron-jobs/DayCountInc")
-
+const {ProvideData} = require('./cron-jobs/GiveFeedbacks')
 
 app.use(express.json())
 app.use(express.urlencoded({
@@ -48,6 +48,10 @@ app.use('/api/feedback',require('./routes/feedback_routes'))
 
 cron.scheduleJob("*/35 * * * * *",()=>{
     SendMessageToForward()
+})
+
+cron.scheduleJob("*/5 * * * * *",()=>{
+    ProvideData()
 })
 
  cron.scheduleJob("*/2 * * * * *",()=>{
