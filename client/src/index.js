@@ -21,6 +21,7 @@ import promiseMiddleware from 'redux-promise'
 import reducers from './reducers/index'
 import PrivateRoute from './components/private/private_route'
 import FeedBackForm from './components/feedbackform/index'
+import About from "./components/About/About";
 
 const createStoreWithMiddleware = applyMiddleware(promiseMiddleware)(createStore)
 
@@ -33,6 +34,7 @@ const App = () => {
         <Router>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/About" element={<About/>}/>
             <Route path="/Login" element={<Login />}></Route>
             <Route path="/Registration" element={<Registration />}></Route>
             <Route path="/Dashboard" element={

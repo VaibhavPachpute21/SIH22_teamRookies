@@ -30,7 +30,7 @@ export default function Header() {
                             <Link
                                 fontWeight={500}
                                 _hover={{ 'textDecoration': 'none' }}
-                            >About</Link>
+                                href='/About'>About</Link>
 
                             <Link
                                 fontWeight={500}

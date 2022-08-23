@@ -98,8 +98,8 @@ export default function Home() {
                 </div>
             </Carousel>
 
-            <HStack w="100%" h="100%" align={'start'} >
-                <Box w="70%" h="100%">
+            <Flex w="100%" h="100%" align={'start'} flexDirection={['column','column','row','row']} >
+                <Box w={["100%","100%","70%","70%"]} h="100%">
 
                     <VStack spacing={5} py={2} w="100%" h="max-content">
                         <VStack borderTop={'4px solid #5A4FCF'} padding={5}
@@ -285,7 +285,7 @@ export default function Home() {
 
                 </Box>
 
-                <Box w="30%" h="100%" marginTop={0} padding={2} >
+                <Box w={["100%","100%","30%","30%"  ]}h="100%" marginTop={0} padding={2} >
                     <Box w={'100%'} padding={5} border={'1px solid black'} borderRadius={15} boxShadow={'dark-lg'} marginBottom={15} >
                         <Text fontSize="2xl" fontWeight={600}>Contact Us</Text>
                         <HStack>
@@ -433,7 +433,7 @@ export default function Home() {
                     </Box>
 
                 </Box>
-            </HStack>
+            </Flex>
 
 
 

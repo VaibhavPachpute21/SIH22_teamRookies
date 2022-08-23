@@ -353,21 +353,19 @@ function Login(props) {
 
   return (
     <Box overflow={'none'}
-      w={"100vw"} h={["100vh", "90vh", "90vh"]}>
-      <HStack w="100%" h="100%" >
-        <Box w={["100%", "100%", "60%", "60%"]} h="100%"
-        >
+      w={"100vw"} h={["100%", "90vh", "90vh"]}>
+      <Flex w="100%" h="100%" flexDirection={['column', 'column', 'row', 'row']} >
+        <Box w={["100%", "100%", "60%", "60%"]} h="100%" >
           <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
             <Box w="80%">
               <Flex w="100%" h="100%">
-                <HStack justifyContent={'start'} w="62%">
+                <HStack justifyContent={'start'} w={["100%","62%","62%"]}>
                   <Text
                     fontSize={'md'}>
-                    Don't have an account?
-                  </Text>
-                  <Link href='/Registration' fontWeight={600} color={"#5A4FCF"}>
-                    Sign up
-                  </Link>
+                    Don't have an account? 
+                    <Link href='/Registration' fontWeight={600} color={"#5A4FCF"}>
+                      Sign up
+                    </Link></Text>
                 </HStack>
               </Flex>
             </Box>
@@ -375,7 +373,7 @@ function Login(props) {
               <VStack w="100%" h="100%" justifyContent={'flex-start'}>
                 <Box w="100%">
                   <Heading
-                    fontSize={'5xl'}
+                    fontSize={['3xl','5xl','5xl']}
                     fontWeight={700} py={2} paddingBottom={6} >
                     Log in to your account
                   </Heading>
@@ -509,7 +507,7 @@ function Login(props) {
           </Flex>
         </Box>
 
-        <Box w={["0%", "40%", "40%"]} h="100%"
+        <Box w={["0%", "0%", "40%", "40%"]} display={['none', 'none', 'block', 'block']} h="100%"
           bg="#5A4FCF"
         >
           <Flex
@@ -540,7 +538,7 @@ function Login(props) {
             ></Box>
           </Flex>
         </Box>
-      </HStack>
+      </Flex>
     </Box>
   )
 }
