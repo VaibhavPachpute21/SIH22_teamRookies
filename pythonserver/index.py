@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 import pandas as pd
-import 
+import numpy as np
 
 
 app = Flask(__name__)
@@ -8,8 +8,10 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
-@app.route('/addData')
-def addData():
+@app.route('/addData',methods=['POST'])
+def addData(data):
+    obj = request.get_json()
+    print(obj)
     return 'ok',200
 
 
