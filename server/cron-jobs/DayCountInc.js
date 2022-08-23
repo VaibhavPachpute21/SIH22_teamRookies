@@ -15,7 +15,7 @@ exports.SendMessageToForward = async (req,res,next) => {
             
             if(typeof(doc?.officer_name) !== undefined){
                 const grievance = await Grievance.findById(doc?.grievance_id)
-                // await SendMessage("User",grievance?.grievance_title,doc?.officer_name)
+                SendMessage("User",grievance?.grievance_title,doc?.officer_name)
                 await Forward.findOneAndUpdate({_id:doc._id},{$set:{message_sent_to_grievant:true}})
             }
             })
