@@ -14,7 +14,7 @@ const cron = require('node-schedule')
 
 
 
-const {ResetAndForward,FindAssignedToTwo,IncDayCount} = require("./cron-jobs/DayCountInc")
+const {ResetAndForward,FindAssignedToTwo,IncDayCount,SendMessageToForward} = require("./cron-jobs/DayCountInc")
 
 
 app.use(express.json())
@@ -50,8 +50,8 @@ app.use('/api/feedback',require('./routes/feedback_routes'))
 
     IncDayCount(),
     ResetAndForward(),    
-    FindAssignedToTwo()  
-
+    FindAssignedToTwo(),
+    SendMessageToForward()
 
 })
  

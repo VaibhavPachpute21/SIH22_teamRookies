@@ -10,6 +10,13 @@ const forwardSchema = new mongoose.Schema({
     grievance_id:{
         type:String
     },
+    reciever_phone:{
+        type:String,
+    },
+    message_sent_to_grievant:{
+        type:Boolean,
+        default:false
+    },
     replies:[
         {
             message:{

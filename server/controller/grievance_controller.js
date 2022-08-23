@@ -34,7 +34,8 @@ exports.CreateGrievance = async (req, res, next) => {
             officer_avatar: firstOfficerReciever.avatar,
             officer_university: firstOfficerReciever.university,
             assigned_to_role:"1A",
-            officer_name:firstOfficerReciever.fullname
+            officer_name:firstOfficerReciever.fullname,
+            reciever_phone:firstOfficerReciever.phone_number
         })
 
         if (!newGrievance) {
@@ -47,7 +48,7 @@ exports.CreateGrievance = async (req, res, next) => {
 
         console.log(`Grievance by ${grievant_name} was forwarded to ${firstOfficerReciever.fullname}`)
 
-           await FirstSendMessage(grievant_name,firstOfficerReciever.fullname) 
+        //    await FirstSendMessage(grievant_name,firstOfficerReciever.fullname) 
           //await FirstSendMessage(grievant_name,firstOfficerReciever.fullname) 
 
 
