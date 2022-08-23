@@ -8,13 +8,13 @@ exports.SendEmail = async (email_to,grievant_name,grievant_nature) => {
     const message = {
         to: "pandeysandeep1190@gmail.com",
         from: "pandeysandeep1190@gmail.com",
-        subject: "Hello from sendgrid",
+        subject: "Message UGC Portal",
         html:  `<!doctype html>
         <html>
           <head>
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-            <title>Simple Transactional Email</title>
+            <title>Message from UGC Portal</title>
             <style>
               /* -------------------------------------
                   GLOBAL RESETS
@@ -414,7 +414,7 @@ exports.Appreciation = async (emails) => {
   const message = {
       to: emails,
       from: "pandeysandeep1190@gmail.com",
-      subject: "Hello from sendgrid",
+      subject: "Message from UGC Admin",
       html: `<!doctype html>
       <html>
       
@@ -555,10 +555,9 @@ exports.Appreciation = async (emails) => {
                                                   <p
                                                       style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;">
                                                       As a UGC Admin I would like to thank you from core of my heart for
-                                                      alerting us about {Nature of Grievance}!</p>
+                                                      alerting us about Grievance!</p>
                                                   <p
                                                       style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;">
-      <<<<<<< HEAD
                                                       There is no denying the fact that you have made valuable contribution in
                                                       solving peoples grievances</p>
       
@@ -566,15 +565,13 @@ exports.Appreciation = async (emails) => {
                                                       style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;">
                                                       Your ability has taken you to new high! This great job is all because of your hardwork and dedication!</p>
                                                   <strong>Many congrats to you, Keep up the good work!</strong>
-      =======
                                                       Your opinions keeps us on our toes. There is no denying fact that you have made valuable contribution by raising 
                                                       this Grievance. Thank you for taking time to bring this to our attention</p>
       
                                                   <p
                                                       style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;">
                                                       </p>
-                                                  <strong>Mant congrats to you,Best wishesh for future!</strong>
-      >>>>>>> 66da60b9b7959d6c542c0eb116989b8b868c3a1d
+                                                  <strong>Mant congrats to you,Best wishesh for future!</strong
                                                   <p><Strong>UGC Admin</Strong></p>
                                                   
                                               </td>

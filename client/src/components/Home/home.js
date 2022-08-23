@@ -441,7 +441,7 @@ class GStatus extends Component {
         return (
             <div style={{ width: '100%' }}>
                 <h3>Status of {grievance_id.value}</h3>
-                <p>The grievance {grievance_id.value} was sent to {off.assigned_to_role === "1A" || off.assigned_to_role === "1B" ? "Nodal officer":"Regional Officer" } at {off.createdAt.split('T')[0]}</p>
+                <p>The grievance {grievance_id.value} was sent to {off.assigned_to_role === "1A" || off.assigned_to_role === "1B" ? "Nodal officer":"Regional Officer" } at {off.createdAt?.split('T')[0]}</p>
             </div>
         );
     }
