@@ -122,7 +122,7 @@ const DashboardHistory = (props) => {
 
                                             <HStack w="15%" h="100%" alignItems={'center'}>
                                                 <Button
-
+                                                    Py={5}
                                                     color={'white'}
                                                     bg="#5A4FCF"
                                                     h="100%">
@@ -172,7 +172,7 @@ const DashboardHistory = (props) => {
 
                                         <HStack w="15%" h="100%" alignItems={'center'}>
                                             <Button
-
+                                                py={5}
                                                 color={'white'}
                                                 bg="#5A4FCF"
                                                 h="100%">
@@ -235,6 +235,7 @@ const DashboardHistory = (props) => {
 
                                         <HStack w="15%" h="100%" alignItems={'center'}>
                                             <Button
+                                                py={2}
                                                 onClick={()=>navigate(`/TrackGrievance/${item?._id}`)}
                                                 color={'white'}
                                                 bg="#5A4FCF"

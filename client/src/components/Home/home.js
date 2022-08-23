@@ -15,6 +15,7 @@ import { Carousel } from 'react-responsive-carousel';
 import ChatBot from 'react-simple-chatbot';
 import axios from 'axios'
 const theme = {
+    background: '#f5f8fb',
     headerBgColor: '#5A4FCF',
     headerFontSize: '20px',
     botBubbleColor: '#5A4FCF',
@@ -28,6 +29,7 @@ const theme = {
 export default function Home() {
 
     const [SlideIndex, setSlideIndex] = useState(0)
+    const [open, setOpen] = useState(false)
 
 
     return (
@@ -41,7 +43,7 @@ export default function Home() {
                     <img
                         style={{ "background-size": 'cover', "background-position": "center", "height": "100%", "width": "100%" }}
                         src="./image/s1.jpg" />
-                    {
+                    {/* {
                         SlideIndex == 0 ? (
                             <Flex borderTop={'6px solid #5A4FCF'} w={'30%'} height={'40vh'} bg={'white'}
                                 borderRadius={'xl'} alignSelf={"end"} position={'absolute'} marginTop={'-55vh'} right={10}>
@@ -81,7 +83,7 @@ export default function Home() {
                                 </VStack>
                             </Flex>
                         ) : (null)
-                    }
+                    } */}
 
                 </div>
                 <div style={{ height: "70vh" }}>
@@ -96,7 +98,7 @@ export default function Home() {
                 </div>
             </Carousel>
 
-            <HStack w="100%" h="90vh" align={'start'} >
+            <HStack w="100%" h="100%" align={'start'} >
                 <Box w="70%" h="100%">
 
                     <VStack spacing={5} py={2} w="100%" h="max-content">
@@ -111,7 +113,15 @@ export default function Home() {
                                 </HStack>
                             </Box>
                             <Box w="100%" h="50%">
-                                The University Grants Commission (UGC) came into existence on 28th December, 1953 and became a statutory Organization of the Government of India by an Act of Parliament in 1956, for the coordination,determination and maintenance of standards of teaching, examination and research in university educatio
+                                India, the country of the Vedas and the most magnificent fusion
+                                of diverse perspectives, has one of the most well-known
+                                educational systems in the world. The efficient and orderly
+                                operation of a system is essential for its growth. By
+                                maintaining effective communication across the system's many
+                                components, we can make sure of this. The UGC's Centralised
+                                Assistance Cell takes this responsibility. Any complaints from
+                                the institution, students, professors, or employed personnel are
+                                appreciated.
                             </Box>
                             <Box alignSelf={'start'}>
                                 <Button bg={'#5A4FCF'} color='white' >Know More</Button>
@@ -208,21 +218,23 @@ export default function Home() {
                                 </HStack>
                             </Box>
                             <Box w="100%" h="50%">
-                                <Accordion>
+                                <Accordion defaultIndex={[0]} allowMultiple>
                                     <AccordionItem>
                                         <h2>
                                             <AccordionButton>
                                                 <Box flex='1' textAlign='left' fontSize={25}>
-                                                    FAQ 1
+                                                    How should an HEI register?
                                                 </Box>
                                                 <AccordionIcon />
                                             </AccordionButton>
                                         </h2>
                                         <AccordionPanel pb={4} fontSize={18}>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                                            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                            commodo consequat.
+                                            The HEI has already been registered by the university to
+                                            which it belongs. And, if the HEI is a university, it will
+                                            have been registered with the regulatory body to which it
+                                            belongs. As a result, HEIs can log in directly from our
+                                            platform using the login credentials supplied by their
+                                            presiding body.
                                         </AccordionPanel>
                                     </AccordionItem>
 
@@ -230,16 +242,20 @@ export default function Home() {
                                         <h2>
                                             <AccordionButton>
                                                 <Box flex='1' textAlign='left' fontSize={25}>
-                                                    FAQ 2
+                                                    What is the institute's grievance resolution
+                                                    procedure?
                                                 </Box>
                                                 <AccordionIcon />
                                             </AccordionButton>
                                         </h2>
                                         <AccordionPanel pb={4} fontSize={18}>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                                            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                            commodo consequat.
+                                            To get its grievance resolved, an institute must login
+                                            using the Unique Id provided by its university /
+                                            Regulatory body . Then, via its dashboard, it may file a
+                                            fresh grievance. The institute can use the tracking board
+                                            to follow and view the status of its current grievance. In
+                                            the grievance history, the institute may also see past
+                                            grievances.
                                         </AccordionPanel>
                                     </AccordionItem>
 
@@ -247,16 +263,19 @@ export default function Home() {
                                         <h2>
                                             <AccordionButton>
                                                 <Box flex='1' textAlign='left' fontSize={25}>
-                                                    FAQ 3
+                                                    What is the students/teacher/staff grievance
+                                                    resolution procedure?
                                                 </Box>
                                                 <AccordionIcon />
                                             </AccordionButton>
                                         </h2>
                                         <AccordionPanel pb={4} fontSize={18}>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                                            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                            commodo consequat.
+                                            The aggrieved student/teacher/staff can register through
+                                            the registration site, and their grievance will be
+                                            recorded and resolved by their individual universities. If
+                                            the student/teacher/staff want to escalate their claim to
+                                            the regulating body's Public grievance cell, they can do
+                                            so.
                                         </AccordionPanel>
                                     </AccordionItem>
                                 </Accordion>
@@ -291,10 +310,31 @@ export default function Home() {
                         </HStack>
 
                     </Box>
+                    <Box w={'100%'} h={'100%'} bg='red.200'>
+                        <Flex w={'100%'} flexDirection={'column'}>
+                        <Flex w="100%" h="50%" flexDirection={'column'}>
+                                <Box maxW="100%" p={2}>
+                                    <Image src="https://grievance.ugc.ac.in/images/ugc1.png" />
+                                </Box>
+                                <Box maxW="100%" p={2}>
+                                    <Image src="https://grievance.ugc.ac.in/images/grievance.png" />
+                                </Box>
+                                <Box maxW="100%" p={2}>
+                                    <Image src="https://grievance.ugc.ac.in/images/reminder.png" />
+                                </Box>
+                                <Box maxW="100%" p={2}>
+                                    <Image src="https://grievance.ugc.ac.in/images/status.png" />
+                                </Box>
+                            </Flex>                
+                        </Flex>
+
+                    </Box>
                     <Box w={'100%'} height={'100%'} alignSelf={"end"}>
                         <ThemeProvider theme={theme}>
                             <ChatBot
                                 headerTitle="Grievance Bot"
+                                floating={true}
+                                opened={open}
                                 steps={[
                                     {
                                         id: '0',
@@ -315,16 +355,16 @@ export default function Home() {
                                         ],
                                     },
                                     {
-                                        id:'process-grievance',
-                                        component:(
+                                        id: 'process-grievance',
+                                        component: (
                                             <>
-                                            <p>1.Login to your account </p>
-                                            <p>2.Click on Add tab </p>
-                                            <p>3.Enter Detais and send Grievance</p>
-                                            <p>4.Officers will check grievance and solve all queries.</p>
+                                                <p>1.Login to your account </p>
+                                                <p>2.Click on Add tab </p>
+                                                <p>3.Enter Detais and send Grievance</p>
+                                                <p>4.Officers will check grievance and solve all queries.</p>
                                             </>
                                         ),
-                                        asMessage:true,
+                                        asMessage: true,
                                         trigger: 'restart'
                                     },
                                     {
@@ -410,7 +450,7 @@ class GStatus extends Component {
 
         this.state = {
             grievance_id: '',
-            data:{}
+            data: {}
         };
     }
 
@@ -418,22 +458,22 @@ class GStatus extends Component {
         const { steps } = this.props;
         const { grievance_id } = steps;
 
-        this.setState({ grievance_id, grievance_id, grievance_id },this.GetGrievanceStatus);
+        this.setState({ grievance_id, grievance_id, grievance_id }, this.GetGrievanceStatus);
     }
 
     GetGrievanceStatus = async () => {
         const { grievance_id } = this.state;
-        
+
         const req = await axios.get(`http://localhost:3001/api/grievance/get-grievance-info/${grievance_id.value}`)
-        .then(response => response.data)
-        if(req?.latestForward){
+            .then(response => response.data)
+        if (req?.latestForward) {
             let dat = req.latestForward
             this.setState({
                 data: dat[0]
             })
         }
     }
-    
+
 
     render() {
         const off = this.state.data
@@ -441,7 +481,7 @@ class GStatus extends Component {
         return (
             <div style={{ width: '100%' }}>
                 <h3>Status of {grievance_id.value}</h3>
-                <p>The grievance {grievance_id.value} was sent to {off.assigned_to_role === "1A" || off.assigned_to_role === "1B" ? "Nodal officer":"Regional Officer" } at {off.createdAt?.split('T')[0]}</p>
+                <p>The grievance {grievance_id.value} was sent to {off.assigned_to_role === "1A" || off.assigned_to_role === "1B" ? "Nodal officer" : "Regional Officer"} at {off.createdAt?.split('T')[0]}</p>
             </div>
         );
     }

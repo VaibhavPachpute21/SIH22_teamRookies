@@ -97,12 +97,12 @@ function Registration(props) {
                   <Heading
                     fontSize={'5xl'}
                     color={'white'} fontFamily={'monospace'}>
-                    Lorem Ispum
+                    Heading
                   </Heading>
                 </Box>
                 <Box w="60%">
                   <Text color={'white'} fontWeight={600}>
-                    &#129505; Leave a review! Lorem ipsum dolor sit amet, consectetur adipiscing elit. In mollis lacus orci, eget laoreet diam elementum in. Curabitur libero justo, volutpat at nunc non, fermentum efficitur sem.
+                  content  
                   </Text>
                 </Box>
               </VStack>
@@ -201,7 +201,7 @@ function Registration(props) {
                     <FormLabel>State</FormLabel>
                     <InputGroup size={'md'}>
                       <InputLeftAddon bg="#5A4FCF" children={<AiOutlineUser color={'white'} />} />
-                      <Input type={'text'} name={"state"} id="state" placeholder='state'
+                      <Input type={'text'} name={"state"} id="state" placeholder='State'
                         {...register('state', { required: { value: true, message: "State name is required!", } })} />
                     </InputGroup >
                     {errors.state && errors.state.message ? (

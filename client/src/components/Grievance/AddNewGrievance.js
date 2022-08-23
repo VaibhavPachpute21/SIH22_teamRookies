@@ -123,9 +123,9 @@ function AddNewGrievance(props) {
 
 
     return (
-        <Flex h='100%' overflowX={'hidden'} justifyContent={'center'} padding={10}
+        <Flex  overflowX={'hidden'} justifyContent={'center'} padding={10}
         >
-            <Flex flexDirection={'column'} height='max-content' w={['100%', '90%', '80%', '80%']} border={'1px solid black'}
+            <Flex flexDirection={'column'} w={['100%', '90%', '80%', '80%']} border={'1px solid black'}
             >
                 <form onSubmit={handleSubmit(HandleSubmit)}>
                     <FormControl>

@@ -72,7 +72,7 @@ function Login(props) {
 
 
   const HandleLoginSubmit = async (data) => {
-  
+
     let obj = {
       email: data.mail,
       password: data.password
@@ -90,16 +90,16 @@ function Login(props) {
     }
 
     if (role === "Nodal Officer") {
-      
-      try {
-        const request = await axios.post('http://localhost:3001/api/officer/login',obj)
-        .then(response => response.data)
 
-        if(request){
+      try {
+        const request = await axios.post('http://localhost:3001/api/officer/login', obj)
+          .then(response => response.data)
+
+        if (request) {
           let errr = request?.message
-            let token = request?.token
+          let token = request?.token
           if (request.success) {
-            
+
             toast({
               position: 'top',
               render: () => (
@@ -121,25 +121,25 @@ function Login(props) {
             })
           }
         }
-        
-       
+
+
         if (request?.payload?.success != false) {
           navigate("/Dashboard")
-        } 
+        }
       } catch (error) {
         SetError(error.message)
       }
     }
-    if(role === "University"){
+    if (role === "University") {
       try {
-        const request = await axios.post('http://localhost:3001/api/uniadmin/login',obj)
-        .then(response => response.data)
+        const request = await axios.post('http://localhost:3001/api/uniadmin/login', obj)
+          .then(response => response.data)
 
-        if(request){
+        if (request) {
           let errr = request?.message
-            let token = request?.token
+          let token = request?.token
           if (request.success) {
-            
+
             toast({
               position: 'top',
               render: () => (
@@ -161,26 +161,26 @@ function Login(props) {
             })
           }
         }
-        
-       
+
+
         if (request?.payload?.success != false) {
           navigate("/Dashboard")
-        } 
+        }
       } catch (error) {
         SetError(error.message)
       }
     }
 
-if(role === "UGC Admin"){
+    if (role === "UGC Admin") {
       try {
-        const request = await axios.post('http://localhost:3001/api/superadmin/login',obj)
-        .then(response => response.data)
+        const request = await axios.post('http://localhost:3001/api/superadmin/login', obj)
+          .then(response => response.data)
 
-        if(request){
+        if (request) {
           let errr = request?.message
-            let token = request?.token
+          let token = request?.token
           if (request.success) {
-            
+
             toast({
               position: 'top',
               render: () => (
@@ -202,24 +202,24 @@ if(role === "UGC Admin"){
             })
           }
         }
-        
+
         if (request?.payload?.success != false) {
           navigate("/Dashboard")
-        } 
+        }
       } catch (error) {
         SetError(error.message)
       }
     }
-    if(role === "Institute"){
+    if (role === "Institute") {
       try {
-        const request = await axios.post('http://localhost:3001/api/institute/login',obj)
-        .then(response => response.data)
+        const request = await axios.post('http://localhost:3001/api/institute/login', obj)
+          .then(response => response.data)
 
-        if(request){
+        if (request) {
           let errr = request?.message
-            let token = request?.token
+          let token = request?.token
           if (request.success) {
-            
+
             toast({
               position: 'top',
               render: () => (
@@ -241,25 +241,25 @@ if(role === "UGC Admin"){
             })
           }
         }
-        
-       
+
+
         if (request?.payload?.success != false) {
           navigate("/Dashboard")
-        } 
+        }
       } catch (error) {
         SetError(error.message)
       }
     }
-    if(role === "Regional Officer"){
+    if (role === "Regional Officer") {
       try {
-        const request = await axios.post('http://localhost:3001/api/regional/login',obj)
-        .then(response => response.data)
+        const request = await axios.post('http://localhost:3001/api/regional/login', obj)
+          .then(response => response.data)
 
-        if(request){
+        if (request) {
           let errr = request?.message
-            let token = request?.token
+          let token = request?.token
           if (request.success) {
-            
+
             toast({
               position: 'top',
               render: () => (
@@ -281,11 +281,11 @@ if(role === "UGC Admin"){
             })
           }
         }
-        
-       
+
+
         if (request?.payload?.success != false) {
           navigate("/Dashboard")
-        } 
+        }
       } catch (error) {
         SetError(error.message)
       }
@@ -335,11 +335,6 @@ if(role === "UGC Admin"){
 
     }
   }, [props.data])
-  
-
-   
-  
-
 
 
   useEffect(() => {
@@ -381,19 +376,10 @@ if(role === "UGC Admin"){
                 <Box w="100%">
                   <Heading
                     fontSize={'5xl'}
-                    fontWeight={700} py={2}  >
+                    fontWeight={700} py={2} paddingBottom={6} >
                     Log in to your account
                   </Heading>
                 </Box>
-                {/* <Box w="80%">
-                  <Text
-                    fontSize={'sm'}
-                    fontWeight={600} opacity={.6}>
-                    Start complaining! &#128540;.
-                    Kidding, we got everything covered from sending, tracking and managing your grievances.
-                    All you need to do is say.
-                  </Text>
-                </Box> */}
               </VStack>
             </Box>
             <Box py={2} w="80%" h="max-content" border={'1px solid black'} borderRadius={10} shadow={'dark-lg'} >
@@ -535,12 +521,12 @@ if(role === "UGC Admin"){
                   <Heading
                     fontSize={'5xl'}
                     color={'white'}  >
-                    Lorem Ispum
+                    Heading
                   </Heading>
                 </Box>
                 <Box w="60%">
                   <Text color={'white'} fontWeight={600}>
-                    &#129505; Leave a review! Lorem ipsum dolor sit amet, consectetur adipiscing elit. In mollis lacus orci, eget laoreet diam elementum in. Curabitur libero justo, volutpat at nunc non, fermentum efficitur sem.
+                    Content
                   </Text>
                 </Box>
               </VStack>
@@ -562,7 +548,7 @@ if(role === "UGC Admin"){
 const mapStateToProps = (state) => {
   return {
     data: state.users,
-    offdata:state.officer
+    offdata: state.officer
   }
 }
 

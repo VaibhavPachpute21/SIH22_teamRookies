@@ -83,13 +83,13 @@ export default function Dashboard() {
 
         <Box
           w="100%" h="10%">
-          <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
+          {/* <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
             <Text color={'white'}
               fontSize={'lg'}
               fontFamily={'monospace'}
-            >koo
+            >
             </Text>
-          </Flex>
+          </Flex> */}
 
         </Box>
 

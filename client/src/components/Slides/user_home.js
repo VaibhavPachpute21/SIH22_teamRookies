@@ -14,7 +14,7 @@ const UserHome = (props) => {
     }
 
     return (
-        <Flex spacing={10} w="100%" h="100%" overflowX={'hidden'}
+        <Flex spacing={10} w="100%" h="max-content" 
             flexDirection={["column", "column", "column", "column"]}>
             <Flex flexDirection={["column"]}
                 paddingLeft={8}

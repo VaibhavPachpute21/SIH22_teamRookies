@@ -11,7 +11,7 @@ export default function Header() {
                 '5vh', '7vh', '10vh'
             ]} w={"100vw"}>
             <Flex w={'100%'} h={'100%'} flexDirection={'row'} alignItems={'flex-start'} >
-                 {/* <Box w={'20%'} h='100px' paddingLeft={5} ><Image src='./image/logo.png' height={'100px'} /> </Box> */}
+                 <Box w={'20%'} h='100%' paddingLeft={5} ><Image src='./image/logo.png' height={'100px'} /> </Box>
                 <Box w={'80%'} h='100%'>
                     <Flex
                         w={'100%'} h='100%' flexDirection={'row'} alignItems={'flex-end'}>
@@ -19,6 +19,8 @@ export default function Header() {
                             display={{ md: 'flex', base: 'none' }}
                             flexDirection={'row'}
                             alignItems={'flex-end'}
+                            pt={[0,0,5,9]}
+                            verticalAlign={'center'}
                             justifyContent={'flex-end'} spacing={10} w="90%">
 
                             <Link
@@ -29,10 +31,7 @@ export default function Header() {
                                 fontWeight={500}
                                 _hover={{ 'textDecoration': 'none' }}
                             >About</Link>
-                            {/* <Link
-                            fontWeight={500}
-                            _hover={{'textDecoration':'none'}}
-                            href='/Registration'>Register</Link> */}
+
                             <Link
                                 fontWeight={500}
                                 _hover={{ 'textDecoration': 'none' }}

@@ -103,6 +103,7 @@ const AdminDashboardHistory = (props) => {
 
                 <Box w="100%" h="90%" overflow={'scroll'}>
                     <Text
+                    textAlign={'start'}
                         fontWeight={600}
                         fontSize={'xl'}
                         py={3}>
@@ -184,7 +185,9 @@ const AdminDashboardHistory = (props) => {
                                 ))
                             ) : (null)
                         }
+                        <Box w={'100%'}>
                         <Text
+                        textAlign={'start'}
                             fontWeight={600}
                             fontSize={'xl'}
                             py={3}>
@@ -192,6 +195,7 @@ const AdminDashboardHistory = (props) => {
                                 currentGrievances && currentGrievances.length > 0 ? ("Current grievances") : ("Current grievances")
                             }
                         </Text>
+                        </Box>
                         {
                             currentGrievances?.map((item, i) => (
 
