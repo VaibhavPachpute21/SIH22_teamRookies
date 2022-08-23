@@ -55,7 +55,6 @@ exports.FindAssignedToTwo = async (req, res, next) => {
                 ])
                 
                
-                if (regionalOfficer) {
                     await Forward.create({
                         previous_reciever: "Change",
                         current_reciever: regionalOfficer[0]?._id,
@@ -70,7 +69,7 @@ exports.FindAssignedToTwo = async (req, res, next) => {
            
                
                    
-                }
+                
 
             }
         })
