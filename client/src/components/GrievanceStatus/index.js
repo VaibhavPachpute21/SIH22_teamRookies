@@ -64,12 +64,12 @@ const GrievanceStatus = (props) => {
         }
     }, [satisfiedConfirm, props.SatisfiedWithReply])
 
-   
 
-    const end = function (username, reciever_id, university, replies, i, id, satisfied, updatedAt,officer_name) {
+
+    const end = function (username, reciever_id, university, replies, i, id, satisfied, updatedAt, officer_name) {
 
         return (
-            <Box key={i} w="100%" h="max-content">
+            typeof(reciever_id) !== undefined ? <Box key={i} w="100%" h="max-content">
                 <HStack w="100%" h="100%" alignItems={'flex-start'} justifyContent={'center'}>
                     <VStack w="5%" h="100%">
                         <Box w="100%" h="10%">
@@ -229,7 +229,7 @@ const GrievanceStatus = (props) => {
                 </HStack>
 
 
-            </Box>
+            </Box> : null
         )
     }
 
@@ -239,7 +239,7 @@ const GrievanceStatus = (props) => {
             <Flex w="100%" h="100%" alignItems={'center'} justifyContent={'center'}>
                 <VStack py={5} w="85%" h="100%" alignItems={'center'} spacing={7}>
                     {forwards?.map((item, i) => (
-                        end(item.assigned_to_role === "1A" || item.assigned_to_role === "1B" ? `Nodal officer`:`Regional officer`, item.current_reciever, item.officer_university, item.replies, i, item._id, item.satisfied, item.updatedAt,item.officer_name)
+                        end(item.assigned_to_role === "1A" || item.assigned_to_role === "1B" ? `Nodal officer` : `Regional officer`, item.current_reciever, item.officer_university, item.replies, i, item._id, item.satisfied, item.updatedAt, item.officer_name)
                     ))}
                 </VStack>
             </Flex>

@@ -128,7 +128,7 @@ const AdminDashboardHistory = (props) => {
 
 
     return (
-        <Box w="100%" h="100%">
+        <Box w="100%" h="100%" p={2}>
 
             <VStack w="100%" h="100%">
                 <Box w="100%" h="10%">

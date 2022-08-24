@@ -96,7 +96,7 @@ const DashboardHistory = (props) => {
                         }
 
                     </Text>
-                    <Flex w="100%" minH={'70vh'} spacing={5}>
+                    <Flex w="100%" minH={'70vh'} spacing={5} flexDirection={'column'}>
                         {
                             forwards && forwards.length > 0 ? (
                                 forwards?.map((item, i) => (
@@ -123,6 +123,7 @@ const DashboardHistory = (props) => {
                                             <HStack w="15%" h="100%" alignItems={'center'}>
                                                 <Button
                                                     Py={5}
+                                                    onClick={() => navigate(`/TrackGrievance/${item?.grievance_id}`)}
                                                     color={'white'}
                                                     bg="#5A4FCF"
                                                     h="100%">
@@ -174,6 +175,7 @@ const DashboardHistory = (props) => {
                                             <Button
                                                 py={5}
                                                 color={'white'}
+                                                onClick={() => navigate(`/TrackGrievance/${item?._id}`)}
                                                 bg="#5A4FCF"
                                                 h="100%">
                                                 Check status
