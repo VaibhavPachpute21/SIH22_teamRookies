@@ -123,7 +123,7 @@ function AddNewGrievance(props) {
 
 
     return (
-        <Flex  overflowX={'hidden'} justifyContent={'center'} padding={10}
+        <Flex  overflowX={'hidden'} justifyContent={'center'} padding={[2,2,10,10]}
         >
             <Flex flexDirection={'column'} w={['100%', '90%', '80%', '80%']} border={'1px solid black'}
             >

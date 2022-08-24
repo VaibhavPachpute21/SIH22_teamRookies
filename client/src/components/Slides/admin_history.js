@@ -142,7 +142,7 @@ const AdminDashboardHistory = (props) => {
                     </Flex>
                 </Box>
 
-                <Box w="100%" h="90%" overflow={'scroll'}>
+                <Box w={["100%","100%","100%","100%"]} h="100%" overflow={'scroll'}>
                     <Text
                     textAlign={'start'}
                         fontWeight={600}
@@ -196,7 +196,7 @@ const AdminDashboardHistory = (props) => {
                                                 </Text>
                                             </HStack>
 
-                                            <HStack w={["100%","100%","15%","15%"]} h="100%" alignItems={'center'}>
+                                            <HStack w={["100%","100%","15%","15%"]} paddingTop={5} h="100%" alignItems={'center'}>
                                                 {User.role=="1B"?<Button
                                                 onClick={() => { nav(`/TrackGrievance/${item.grievance_id}`, { state:{url:item.grievance_id} }) }}
                                                 >TrackGrievance</Button>: <Button
@@ -238,7 +238,7 @@ const AdminDashboardHistory = (props) => {
                         {
                             currentGrievances?.map((item, i) => (
 
-                                <VStack
+                                <Flex flexDirection={['column','column','column','column']}
                                     spacing={8}
                                     boxShadow={'md'}
 
@@ -266,21 +266,22 @@ const AdminDashboardHistory = (props) => {
                                             </ModalFooter>
                                         </ModalContent>
                                     </Modal>
-                                    <HStack
+
+                                    <Flex flexDirection={['column','column','row','row']}
                                         marginTop={2}
                                         alignItems={'flex-start'}
                                         justifyContent={'space-between'}
-                                        w="100%" h="20%">
-                                        <HStack w="40%" h="100%">
-                                            <Text fontWeight={600}>
+                                        w="100%" h={["max-content","20%","20%"]}>
+                                        <Flex w={["100%","100%","40%","40%"]} h="100%" flexDirection={['column','column','row','row']} >
+                                            <Text fontWeight={500}>
                                                 Grievance id
                                             </Text>
                                             <Text>
                                                 {item?._id}
                                             </Text>
-                                        </HStack>
+                                        </Flex>
 
-                                        <HStack w="15%" h="100%" alignItems={'center'}>
+                                        <HStack w={["50%","50%","15%","15%"]} h="100%" alignItems={'center'}>
                                             {
                                                 item?.satisfied ? (
                                                     <Button
@@ -305,24 +306,21 @@ const AdminDashboardHistory = (props) => {
                                             }
 
                                         </HStack>
-                                    </HStack>
+                                    </Flex>
 
                                     <HStack w="100%" h="5%">
-                                        <HStack w="40%" h="100%">
+                                        <Flex w={["100%","100%","40%","40%"]} h="100%" flexDirection={['column','column','row','row']}>
                                             <Text fontWeight={600}>
                                                 Forwarded to you on
                                             </Text>
                                             <Text>
                                                 {item?.updatedAt.split('T')[0]}
                                             </Text>
-
-
-
-                                        </HStack>
+                                        </Flex>
                                     </HStack>
 
                                     <HStack w="100%" h="5%">
-                                        <HStack w="40%" h="100%">
+                                        <HStack w={["100%","100%","40%","40%"]} h="100%">
                                             <Text fontWeight={600}>
                                                 {15 - (item?.day_counter)}
                                             </Text>
@@ -332,19 +330,25 @@ const AdminDashboardHistory = (props) => {
                                         </HStack>
                                     </HStack>
 
-                                    <VStack
+                                    <Flex flexDirection={['column','column','row','row']}
                                         py={2}
                                         alignItems={'flex-start'}
                                         w="100%" h="max-content">
+                                        <Text>Title:</Text>
                                         <Text fontWeight={600}>
                                             {item?.grievance_title}
-                                        </Text>
-
+                                        </Text> 
+                                    </Flex>
+                                    <Flex flexDirection={['column','column','row','row']}
+                                        py={2}
+                                        alignItems={'flex-start'}
+                                        w="100%" h="max-content">                                        
+                                        <Text>Description:</Text>
                                         <Text w="100%" h="max-content">
                                             {item?.grievance_description}
                                         </Text>
-                                    </VStack>
-                                </VStack>
+                                    </Flex>
+                                </Flex>
                             ))
                         }
                     </Flex>
