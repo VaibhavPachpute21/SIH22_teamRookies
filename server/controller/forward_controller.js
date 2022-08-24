@@ -8,6 +8,8 @@ exports.CreateReply = async (req, res, next) => {
         message
     } = req.body
 
+
+
     const grievance_id = req.params.gid
     const reciever_id = req.params.rid
 
@@ -34,10 +36,10 @@ exports.CreateReply = async (req, res, next) => {
 
         const officer = await Officer.findOne({"_id":reciever_id})
 
-        /* if(grievance && officer){
+        /*  if(grievance && officer){
             ReplyNotify(grievance.grievant_name,grievance.grievance_nature,officer?.fullname)
-        }
- */
+        } */
+ 
         if (!newReply) {
             res.status(200).json({
                 success: true,
