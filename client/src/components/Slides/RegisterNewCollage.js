@@ -98,8 +98,8 @@ function RegisterNewCollage(props) {
                             </Box>
                         </Flex>
 
-                        <Flex w={'100%'} >
-                            <Box w={'25%'} p={4}>
+                        <Flex w={'100%'} flexDirection={['column','column','row','row']} >
+                            <Box w={['100%','100%','25%','25%']} p={4}>
                                 <FormLabel>Institute Code</FormLabel>
                                 <Input borderColor={'black'} placeholder='Enter Code' type={'text'}
                                     id='iCode' name='iCode'
@@ -113,7 +113,7 @@ function RegisterNewCollage(props) {
                                 }
                             </Box>
 
-                            <Box w={'25%'} p={4}>
+                            <Box w={['100%','100%','25%','25%']} p={4}>
                                 <FormLabel>Institute Region</FormLabel>
                                 <Select borderColor={'black'} placeholder='Enter Institute Region' type={'text'}
                                     id='iRegion' name='iRegion'
@@ -133,7 +133,7 @@ function RegisterNewCollage(props) {
                                 }
                             </Box>
 
-                            <Box w={'25%'} p={4}>
+                            <Box w={['100%','100%','25%','25%']} p={4}>
                                 <FormLabel>Institute District</FormLabel>
                                 <Input borderColor={'black'} placeholder='Enter Institute District' type={'text'}
                                     id='iDistrict' name='iDistrict'
@@ -147,7 +147,7 @@ function RegisterNewCollage(props) {
                                 }
                             </Box>
 
-                            <Box w={'25%'} p={4}>
+                            <Box w={['100%','100%','25%','25%']} p={4}>
                                 <FormLabel>Institute State</FormLabel>
                                 <Input borderColor={'black'} placeholder='Enter Institute State' type={'text'}
                                     id='iState' name='iState'
@@ -162,8 +162,8 @@ function RegisterNewCollage(props) {
                             </Box>
                         </Flex>
 
-                        <Flex w={'100%'} p={4}>
-                            <Box w={'60%'} >
+                        <Flex w={'100%'} p={4} flexDirection={['column','column','row','row']} >
+                            <Box w={['100%','100%','60%','60%']} >
                                 <FormLabel>Institute Address</FormLabel>
                                 <Textarea borderColor={'black'} placeholder='Enter Institute Addres' type={'text'}
                                     id='iAddress' name='iAddress'
@@ -176,7 +176,7 @@ function RegisterNewCollage(props) {
                                 ) : (null)
                                 }
                             </Box>
-                            <Box w={'20%'} p={4}>
+                            <Box w={['100%','100%','20%','20%']} p={4}>
                                 <FormLabel>Institute Pincode</FormLabel>
                                 <Input borderColor={'black'} placeholder='Enter Pincode' type={'text'}
                                     id='iPin' name='iPin'
@@ -189,7 +189,7 @@ function RegisterNewCollage(props) {
                                 ) : (null)
                                 }
                             </Box>
-                            <Box w={'20%'} p={4}>
+                            <Box w={['100%','100%','20%','20%']} p={4}>
                                 <FormLabel>Institute STD Code</FormLabel>
                                 <Input borderColor={'black'} placeholder='Enter STD Code' type={'text'}
                                     id='iSTD' name='iSTD'
@@ -204,8 +204,8 @@ function RegisterNewCollage(props) {
                             </Box>
                         </Flex>
 
-                        <Flex w={'100%'}>
-                            <Box w={'25%'} p={4}>
+                        <Flex w={'100%'} flexDirection={['column','column','row','row']}>
+                            <Box w={['100%','100%','25%','25%']} p={4}>
                                 <FormLabel>Year of Establishment</FormLabel>
                                 <Input borderColor={'black'} placeholder='Enter Year of Establishment' type={'text'}
                                     id='iYear' name='iYear'
@@ -219,7 +219,7 @@ function RegisterNewCollage(props) {
                                 }
                             </Box>
 
-                            <Box w={'25%'} p={4}>
+                            <Box  w={['100%','100%','25%','25%']} p={4}>
                                 <FormLabel>Web Address</FormLabel>
                                 <Input borderColor={'black'} placeholder='Enter Web Address' type={'text'}
                                     id='iWeb' name='iWeb'
@@ -233,7 +233,7 @@ function RegisterNewCollage(props) {
                                 }
                             </Box>
 
-                            <Box w={'25%'} p={4}>
+                            <Box  w={['100%','100%','25%','25%']} p={4}>
                                 <FormLabel>Institute Email</FormLabel>
                                 <Input borderColor={'black'} placeholder='Enter Mail' type={'text'}
                                     id='iMail' name='iMail'
@@ -247,7 +247,7 @@ function RegisterNewCollage(props) {
                                 }
                             </Box>
 
-                            <Box w={'25%'} p={4}>
+                            <Box  w={['100%','100%','25%','25%']} p={4}>
                                 <FormLabel>Institute University</FormLabel>
                                 <Input borderColor={'black'} placeholder='Enter University' type={'text'}
                                     id='iUniversity' name='iUniversity'
@@ -263,9 +263,9 @@ function RegisterNewCollage(props) {
 
                         </Flex>
 
-                        <Flex w={'100%'}>
+                        <Flex w={'100%'} flexDirection={['column','column','row','row']}>
 
-                            <Box w={'25%'} p={4}>
+                            <Box  w={['100%','100%','25%','25%']} p={4}>
                                 <FormLabel>Name of Director</FormLabel>
                                 <Input borderColor={'black'} placeholder='Enter Director name' type={'text'}
                                     id='iDirector' name='iDirector'
@@ -279,7 +279,7 @@ function RegisterNewCollage(props) {
                                 }
                             </Box>
 
-                            <Box w={'25%'} p={4}>
+                            <Box  w={['100%','100%','25%','25%']} p={4}>
                                 <FormLabel>Director Email</FormLabel>
                                 <Input borderColor={'black'} placeholder='Enter Mail' type={'text'}
                                     id='iDMail' name='iDMail'
@@ -293,7 +293,7 @@ function RegisterNewCollage(props) {
                                 }
                             </Box>
 
-                            <Box w={'25%'} p={4}>
+                            <Box  w={['100%','100%','25%','25%']} p={4}>
                                 <FormLabel>Director Phone number</FormLabel>
                                 <Input borderColor={'black'} placeholder='Enter Phone number' type={'text'}
                                     id='iDphone' name='iDphone'
@@ -311,8 +311,8 @@ function RegisterNewCollage(props) {
 
                         <Flex w={'100%'} justifyContent={'center'}><Heading size={'lg'}>User Info</Heading></Flex>
 
-                        <Flex w={'100%'}>
-                            <Box w={'25%'} p={4}>
+                        <Flex w={'100%'} flexDirection={['column','column','row','row']}>
+                            <Box  w={['100%','100%','25%','25%']} p={4}>
                                 <FormLabel>Name</FormLabel>
                                 <Input borderColor={'black'} placeholder='Enter Name of User' type={'text'}
                                     id='uName' name='uName'
@@ -326,7 +326,7 @@ function RegisterNewCollage(props) {
                                 }
                             </Box>
 
-                            <Box w={'25%'} p={4}>
+                            <Box  w={['100%','100%','25%','25%']} p={4}>
                                 <FormLabel>Phone</FormLabel>
                                 <Input borderColor={'black'} placeholder='Enter Phone number' type={'text'}
                                     id='uPhone' name='uPhone'
@@ -340,7 +340,7 @@ function RegisterNewCollage(props) {
                                 }
                             </Box>
 
-                            <Box w={'25%'} p={4}>
+                            <Box  w={['100%','100%','25%','25%']} p={4}>
                                 <FormLabel>User Login Id</FormLabel>
                                 <Input borderColor={'black'} placeholder='Enter Login Id' type={'text'}
                                     id='uPhone' name='uMail'
@@ -354,7 +354,7 @@ function RegisterNewCollage(props) {
                                 }
                             </Box>
 
-                            <Box w={'25%'} p={4}>
+                            <Box  w={['100%','100%','25%','25%']} p={4}>
                                 <FormLabel>Password</FormLabel>
                                 <Input borderColor={'black'} placeholder='Enter Password' type={'text'}
                                     id='uPassword' name='uPassword'

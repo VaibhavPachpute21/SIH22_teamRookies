@@ -114,17 +114,17 @@ function RegionalOfTracker(props) {
                                     </h2>
                                     <AccordionPanel pb={4}>
                                         <Box w={'100%'}>
-                                            <Flex w={'100%'}>
-                                                <Box w={"15%"}>
-                                                    <strong>Nature of Grievance</strong>
+                                            <Flex w={'100%'} flexDirection={['column','column','row','row']}>
+                                                <Box w={["100%","100%","15%","15%"]}>
+                                                    <strong>Nature of Grievance:</strong>
                                                 </Box>
                                                 <Box w={'80%'} textAlign={'justify'}>
                                                     <Text>{item?.grievance_nature}</Text>
                                                 </Box>
                                             </Flex>
-                                            <Flex w={'100%'}>
-                                                <Box w={"15%"}>
-                                                    <strong>Description</strong>
+                                            <Flex w={'100%'} flexDirection={['column','column','row','row']}>
+                                                <Box w={["100%","100%","15%","15%"]}>
+                                                    <strong>Description:</strong>
                                                 </Box>
                                                 <Box w={'80%'} textAlign={'justify'}>
                                                     <Text>
@@ -132,27 +132,27 @@ function RegionalOfTracker(props) {
                                                     </Text>
                                                 </Box>
                                             </Flex>
-                                            <Flex w={'100%'}>
-                                                <Box w={"15%"}>
-                                                    <strong>Grievant Institute</strong>
+                                            <Flex w={'100%'} flexDirection={['column','column','row','row']}>
+                                                <Box w={["100%","100%","15%","15%"]}>
+                                                    <strong>Grievant Institute:</strong>
                                                 </Box>
                                                 <Box w={'80%'} textAlign={'justify'}>
                                                     <Text>{item?.grievant_institute}</Text>
                                                 </Box>
                                             </Flex>
 
-                                            <Flex w={'100%'}>
-                                                <Box w={"15%"}>
-                                                    <strong>Grievance Raised on</strong>
+                                            <Flex w={'100%'} flexDirection={['column','column','row','row']}>
+                                                <Box w={["100%","100%","15%","15%"]}>
+                                                    <strong>Grievance Raised on:</strong>
                                                 </Box>
                                                 <Box w={'80%'} textAlign={'justify'}>
                                                     <Text>{item?.createdAt?.split('T')[0]}</Text>
                                                 </Box>
                                             </Flex>
 
-                                            <Flex w={'100%'}>
-                                                <Box w={"15%"}>
-                                                    <strong>Attachments</strong>
+                                            <Flex w={'100%'} flexDirection={['column','column','row','row']}>
+                                                <Box w={["100%","100%","15%","15%"]}>
+                                                    <strong>Attachments:</strong>
                                                 </Box>
                                                 <Box w={'80%'} textAlign={'justify'}>
                                                     <Text>{item?.imgs.length} attachment</Text>

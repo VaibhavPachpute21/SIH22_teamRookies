@@ -36,50 +36,50 @@ export default function NodalOfficersList() {
                             <Box
                                 key={i}
                                 w={'100%'} h={"max-content"} margin={2} border={'0.5px solid gray'} borderTop={'4px solid #5A4FCF'} borderRadius={15}  >
-                                <Flex w={'95%'}>
-                                    <Box w={'40%'} padding={2}>
+                                <Flex w={'95%'} flexDirection={['column','column','row','row']}>
+                                    <Box w={['100%','100%','40%','40%']} padding={2}>
                                         <FormLabel>Full Name</FormLabel>
                                         <Input value={item?.fullname} />
                                     </Box>
 
-                                    <Box w={'20%'} padding={2}>
+                                    <Box w={['100%','100%','20%','20%']} padding={2}>
                                         <FormLabel>Gender</FormLabel>
                                         <Input value={item?.gender} />
                                     </Box>
 
-                                    <Box w={'20%'} padding={2}>
+                                    <Box  w={['100%','100%','20%','20%']} padding={2}>
                                         <FormLabel>Phone number</FormLabel>
                                         <Input value={item?.phone_number} />
                                     </Box>
 
-                                    <Box w={'20%'} padding={2}>
+                                    <Box  w={['100%','100%','20%','20%']} padding={2}>
                                         <FormLabel>Email</FormLabel>
                                         <Input value={item?.email} />
                                     </Box>
 
                                 </Flex>
-                                <Flex w={'95%'}>
-                                    <Box w={'20%'} padding={2}>
+                                <Flex w={'95%'} flexDirection={['column','column','row','row']}>
+                                    <Box w={['100%','100%','20%','20%']} padding={2}>
                                         <FormLabel>District</FormLabel>
                                         <Input value={item?.district} />
                                     </Box>
 
-                                    <Box w={'20%'} padding={2}>
+                                    <Box  w={['100%','100%','20%','20%']} padding={2}>
                                         <FormLabel>State</FormLabel>
                                         <Input value={item?.state} />
                                     </Box>
 
-                                    <Box w={'20%'} padding={2}>
+                                    <Box w={['100%','100%','20%','20%']} padding={2}>
                                         <FormLabel>University</FormLabel>
                                         <Input value={item?.phone_number} />
                                     </Box>
 
-                                    <Box w={'20%'} padding={2}>
+                                    <Box  w={['100%','100%','20%','20%']} padding={2}>
                                         <FormLabel>commitee </FormLabel>
                                         <Input value={item?.committee} />
                                     </Box>
 
-                                    <Box w={'20%'} padding={2}>
+                                    <Box w={['100%','100%','20%','20%']} padding={2}>
                                         <FormLabel>Role </FormLabel>
                                         <Input value={item?.role} />
                                     </Box>
@@ -105,50 +105,50 @@ export default function NodalOfficersList() {
                             <Box
                                 key={i}
                                 w={'100%'} h={"max-content"} margin={2} border={'0.5px solid gray'} borderTop={'4px solid #5A4FCF'} borderRadius={15}  >
-                                <Flex w={'95%'}>
-                                    <Box w={'40%'} padding={2}>
+                                <Flex w={'95%'} flexDirection={['column','column','row','row']}>
+                                    <Box w={['100%','100%','40%','40%']} padding={2}>
                                         <FormLabel>Full Name</FormLabel>
                                         <Input value={item?.fullname} />
                                     </Box>
 
-                                    <Box w={'20%'} padding={2}>
+                                    <Box  w={['100%','100%','20%','20%']} padding={2}>
                                         <FormLabel>Gender</FormLabel>
                                         <Input value={item?.gender} />
                                     </Box>
 
-                                    <Box w={'20%'} padding={2}>
+                                    <Box  w={['100%','100%','20%','20%']} padding={2}>
                                         <FormLabel>Phone number</FormLabel>
                                         <Input value={item?.phone_number} />
                                     </Box>
 
-                                    <Box w={'20%'} padding={2}>
+                                    <Box  w={['100%','100%','20%','20%']} padding={2}>
                                         <FormLabel>Email</FormLabel>
                                         <Input value={item?.email} />
                                     </Box>
 
                                 </Flex>
-                                <Flex w={'95%'}>
-                                    <Box w={'20%'} padding={2}>
+                                <Flex w={'95%'} flexDirection={['column','column','row','row']}>
+                                    <Box  w={['100%','100%','20%','20%']} padding={2}>
                                         <FormLabel>District</FormLabel>
                                         <Input value={item?.district} />
                                     </Box>
 
-                                    <Box w={'20%'} padding={2}>
+                                    <Box  w={['100%','100%','20%','20%']} padding={2}>
                                         <FormLabel>State</FormLabel>
                                         <Input value={item?.state} />
                                     </Box>
 
-                                    <Box w={'20%'} padding={2}>
+                                    <Box  w={['100%','100%','20%','20%']} padding={2}>
                                         <FormLabel>University</FormLabel>
                                         <Input value={item?.phone_number} />
                                     </Box>
 
-                                    <Box w={'20%'} padding={2}>
+                                    <Box  w={['100%','100%','20%','20%']} padding={2}>
                                         <FormLabel>commitee </FormLabel>
                                         <Input value={item?.committee} />
                                     </Box>
 
-                                    <Box w={'20%'} padding={2}>
+                                    <Box  w={['100%','100%','20%','20%']} padding={2}>
                                         <FormLabel>Role </FormLabel>
                                         <Input value={item?.role} />
                                     </Box>

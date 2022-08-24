@@ -197,15 +197,28 @@ const AdminDashboardHistory = (props) => {
                                             </HStack>
 
                                             <HStack w={["100%","100%","15%","15%"]} paddingTop={5} h="100%" alignItems={'center'}>
-                                                {User.role=="1B"?<Button
+                                            {
+                                                item?.satisfied ? (
+                                                    <Button
+                                                        disabled={true}
+                                                        onClick={() => { onOpen() }}
+                                                        color={'white'}
+                                                        bg="darkgreen"
+                                                        py={[2,2,5,5]}
+                                                        _hover={{}}
+                                                        h="100%">
+                                                        Solved
+                                                    </Button>
+                                                ) :(User.role=="1B"?<Button
                                                 onClick={() => { nav(`/TrackGrievance/${item.grievance_id}`, { state:{url:item.grievance_id} }) }}
                                                 >TrackGrievance</Button>: <Button
                                                     onClick={() => { onOpen(); }}
                                                     color={'white'}
                                                     bg="#5A4FCF"
+                                                    py={[2,2,5,5]}
                                                     h="100%">
                                                     Send reply
-                                                </Button>}
+                                                </Button>)}
                                             </HStack>
                                         </Flex>
 
@@ -289,6 +302,7 @@ const AdminDashboardHistory = (props) => {
                                                         onClick={() => { onOpen() }}
                                                         color={'white'}
                                                         bg="darkgreen"
+                                                        py={[2,2,5,5]}
                                                         _hover={{}}
                                                         h="100%">
                                                         Solved
@@ -299,6 +313,7 @@ const AdminDashboardHistory = (props) => {
                                                         onClick={() => { onOpen() }}
                                                         color={'white'}
                                                         bg="#5A4FCF"
+                                                        py={[2,2,5,5]}
                                                         h="100%">
                                                         Send reply
                                                     </Button>
