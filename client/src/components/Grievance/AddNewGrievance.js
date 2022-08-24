@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Box, Button, Flex, Input, Text, Select, FormControl, useToast, Textarea } from '@chakra-ui/react'
+import { Box, Button, Flex, Input, Text, Select, FormControl, useToast, Textarea, AlertDialogOverlay } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/grievant_actions'
@@ -65,46 +65,40 @@ function AddNewGrievance(props) {
 
             await props.AddGrievance(obj)
 
-            if (props.data) {
-                let alias = props.data
-                if (alias.grievanceData) {
-                    let d = alias?.grievanceData
-                    
-                    if (d) {
-                        let f = d?.success
-                        if(f){
-                            toast({
-                                position: 'top',
-                                render: () => (
-                                    <Box color='white' p={3} bg='green.500'>
-                                        Grievance submitted
-                                    </Box>
-                                ),
-                            })
-                        }
-                        else {
-                            toast({
-                                position: 'top',
-                                render: () => (
-                                    <Box color='white' p={3} bg='red.500'>
-                                        {error}
-                                    </Box>
-                                ),
-                            })
-                        }
-                        
-                        // navigate('/TrackGrievance/34-20')
-                    }
-
-                }
-
-            }
         } catch (error) {
             SetError(error.message)
         }
 
     }
-    console.log(props.data)
+
+    useEffect(()=>{
+
+        if (props.data) {
+            let alias = props.data
+            if (alias.grievanceData) {
+                let d = alias?.grievanceData?.newGrievance
+                
+                if (d) {
+
+                        toast({
+                            position: 'top',
+                            render: () => (
+                                <Box color='white' p={3} bg='green.500'>
+                                    Grievance submitted
+                                </Box>
+                            ),
+                        })
+        
+                    
+                    // navigate('/TrackGrievance/34-20')
+                }
+                
+
+            }
+
+        }
+    },[props.data])
+    
 
     const HandleFileSubmit = (e) => {
         let file = e.target.files[0]
