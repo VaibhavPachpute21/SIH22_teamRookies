@@ -3,10 +3,24 @@ import { Box, VStack, HStack, Heading, Icon, IconButton, Flex, Tag, Text, Avatar
 import { MdPendingActions, MdOutlineMoreVert } from 'react-icons/md'
 import ChartComponent from '../Chart/index'
 import {BsChat} from 'react-icons/bs'
+import { useEffect, useState } from 'react'
 
 const AdminHome = (props) => {
+    const [dash,setDash] = useState([])
 
-    
+    useEffect(()=>{
+        if(props.dashData){
+            let data = []
+            data.push(props?.dashData?.pendingGrievances)
+            data.push(props?.dashData?.newGrievacestoday)
+            data.push(props?.dashData?.totalOfficers)
+            data.push(props?.dashData?.totalUniversity)
+            setDash(data)
+
+        }
+    },[props.dashData])
+
+
 
     const fakeData = [
         {
@@ -15,15 +29,15 @@ const AdminHome = (props) => {
         },
         {
             number: 341,
-            text: "New Grievances for you."
+            text: "New Grievances today!"
         },
         {
             number: 5,
-            text: "New emails today."
+            text: "Total officers."
         },
         {
             number: 7,
-            text: "New messages"
+            text: "Total universities"
         }
     ]
 
@@ -96,7 +110,7 @@ const AdminHome = (props) => {
                                     <Heading
                                         size={'xl'}
                                     >
-                                        {item.number}
+                                        {dash[i]}
                                     </Heading>
                                 </Box>
 

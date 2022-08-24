@@ -231,7 +231,9 @@ import * as actions from '../../actions/grievant_actions'
             User.role === "0P" || User.role === "0I" ? <UserHome
               runner={GoToAddGrievance}
               runner1={GoToViewGrievance}
-              userData={User} /> : <AdminHome userData={User} />
+              userData={User} /> : <AdminHome
+              dashData = {snips?snips:null}
+              userData={User} />
           ) : (null)
         }
         {

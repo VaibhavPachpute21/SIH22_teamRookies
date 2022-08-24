@@ -37,7 +37,7 @@ def AnalyseData(data):
     percentage_happy = (counts / 5) * 100
 
     
-    # percentage_happy[1]
+    print(percentage_happy[1])
 
     
 
@@ -46,7 +46,6 @@ def AnalyseData(data):
 
 
     
-
 @app.route('/')
 def home():
     return render_template('index.html')
