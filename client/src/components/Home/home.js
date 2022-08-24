@@ -7,6 +7,7 @@ import { AiOutlineMail } from 'react-icons/ai';
 import { IoLocationSharp } from 'react-icons/io5'
 import { ThemeProvider } from 'styled-components';
 import {
+    useMediaQuery,
     Table, Flex, Box, Th, Td, Tbody, Tr, TableContainer, Thead, Button, Image, GridItem, SimpleGrid, Heading,
     Grid, Text, Container, Icon, VStack, FormControl, Input, HStack, Accordion, AccordionItem, AccordionButton, AccordionIcon, AccordionPanel, Link
 } from '@chakra-ui/react'
@@ -29,7 +30,7 @@ const theme = {
 
 
 export default function Home() {
-
+    const [isLargerThan425] = useMediaQuery('(min-width: 424px)')
     const [SlideIndex, setSlideIndex] = useState(0)
     const [open, setOpen] = useState(false)
 
@@ -37,72 +38,48 @@ export default function Home() {
     return (
 
         <Box w="100%" minH="100%">
-            <Header/>
+            <Header />
             <Carousel onChange={(i) => { setSlideIndex(i) }}
                 autoPlay={true} infiniteLoop={true} showArrows={true}
                 showStatus={false} showIndicators={false} showThumbs={false}
             >
-                <div style={{ height: "70vh" }}>
+                isLargerThan425 ? (<div style={{ height: "70vh" }}>
                     <img
-                        style={{ "background-size": 'cover', "background-position": "center", "height": "100%", "width": "100%" }}
-                        src="./image/s1.jpg" />
-                    {/* {
-                        SlideIndex == 0 ? (
-                            <Flex borderTop={'6px solid #5A4FCF'} w={'30%'} height={'40vh'} bg={'white'}
-                                borderRadius={'xl'} alignSelf={"end"} position={'absolute'} marginTop={'-55vh'} right={10}>
-                                <VStack w="100%" h="100%" >
-                                    <form style={{ width: "90%", height: "80%", display: 'flex', alignItems: 'center' }}>
-                                        <FormControl w="100%" h="100%" py={10}>
-                                            <SimpleGrid spacing={10} columns={1}>
-                                                <GridItem colSpan={1}>
-                                                </GridItem>
+                        style={{ "background-size": 'contain', "background-position": "center", "height": "100%", "width": "100%" }}
+                        src={"https://i.ibb.co/QpcD551/Banner3-Og.png"} />
 
-                                                <GridItem colSpan={1}>
-                                                    <Input
-                                                        size="lg"
-                                                        type="email"
-                                                        placeholder="Enter email"
-                                                    />
-                                                </GridItem>
-
-                                                <GridItem colSpan={1}>
-                                                    <Input
-                                                        size="lg"
-                                                        type="email"
-                                                        placeholder="Enter password"
-                                                    />
-                                                </GridItem>
-
-                                                <GridItem colSpan={1}>
-                                                    <Button
-                                                        bg="#5A4FCF"
-                                                        w="100%"
-                                                        color={'white'}
-                                                    >Login</Button>
-                                                </GridItem>
-                                            </SimpleGrid>
-                                        </FormControl>
-                                    </form>
-                                </VStack>
-                            </Flex>
-                        ) : (null)
-                    } */}
 
                 </div>
                 <div style={{ height: "70vh" }}>
                     <img
                         style={{ "background-size": 'cover', "background-position": "center", "height": "100%", "width": "100%" }}
-                        src="./image/s2.jpg" />
+                        src={"https://i.ibb.co/g3T2Vvc/Banner2-OG.png"} />
                 </div>
                 <div style={{ height: "70vh" }}>
                     <img
                         style={{ "background-size": 'cover', "background-position": "center", "height": "100%", "width": "100%" }}
-                        src="./image/s3.jpg" />
+                        src={"https://i.ibb.co/vXBfXCK/Banner1-original.png"} />
+                </div>):(<div style={{ height: "50vh" }}>
+                    <img
+                        style={{ "background-size": 'contain', "background-position": "center", "height": "100%", "width": "100%" }}
+                        src={"https://i.ibb.co/BtYw6bb/Banner3-Mobile-Og.png"} />
+
+
                 </div>
+                <div style={{ height: "50vh" }}>
+                    <img
+                        style={{ "background-size": 'cover', "background-position": "center", "height": "100%", "width": "100%" }}
+                        src={"https://i.ibb.co/rKjhDMV/Banner2-Mobile-OG.png"} />
+                </div>
+                <div style={{ height: "50vh" }}>
+                    <img
+                        style={{ "background-size": 'cover', "background-position": "center", "height": "100%", "width": "100%" }}
+                        src={"https://i.ibb.co/ydvV6L1/Banner1-Mobile.png"} />
+                </div>)
             </Carousel>
 
-            <Flex w="100%" h="100%" align={'start'} flexDirection={['column','column','row','row']} >
-                <Box w={["100%","100%","70%","70%"]} h="100%">
+            <Flex w="100%" h="100%" align={'start'} flexDirection={['column', 'column', 'row', 'row']} >
+                <Box w={["100%", "100%", "70%", "70%"]} h="100%">
 
                     <VStack spacing={5} py={2} w="100%" h="max-content">
                         <VStack borderTop={'4px solid #5A4FCF'} padding={5}
@@ -288,7 +265,7 @@ export default function Home() {
 
                 </Box>
 
-                <Box w={["100%","100%","30%","30%"  ]}h="100%" marginTop={0} padding={2} >
+                <Box w={["100%", "100%", "30%", "30%"]} h="100%" marginTop={0} padding={2} >
                     <Box w={'100%'} padding={5} border={'1px solid black'} borderRadius={15} boxShadow={'dark-lg'} marginBottom={15} >
                         <Text fontSize="2xl" fontWeight={600}>Contact Us</Text>
                         <HStack>
@@ -315,7 +292,7 @@ export default function Home() {
                     </Box>
                     <Box w={'100%'} h={'100%'} bg='red.200'>
                         <Flex w={'100%'} flexDirection={'column'}>
-                        <Flex w="100%" h="50%" flexDirection={'column'}>
+                            <Flex w="100%" h="50%" flexDirection={'column'}>
                                 <Box maxW="100%" p={2}>
                                     <Image src="https://grievance.ugc.ac.in/images/ugc1.png" />
                                 </Box>
@@ -328,7 +305,7 @@ export default function Home() {
                                 <Box maxW="100%" p={2}>
                                     <Image src="https://grievance.ugc.ac.in/images/status.png" />
                                 </Box>
-                            </Flex>                
+                            </Flex>
                         </Flex>
 
                     </Box>

@@ -67,14 +67,14 @@ function AddNewUniAdmin(props) {
     }
 
     return (
-        <Flex w='100%' h={'100%'} justifyContent={'center'} padding={5} overflowX={'hidden'}>
+        <Flex w='100%' h={'100%'} justifyContent={'center'} padding={[2,2,5,5]} overflowX={'hidden'}>
             <Flex w={'90%'} h={'max-content'} border={'1px solid black'} flexDirection={'column'} overflowX={'hidden'} >
                 <Flex w={'100%'} justifyContent={'center'}><Heading>Add New University Admin</Heading></Flex>
                 <Box h={'100%'} w='100%'>
                     <form onSubmit={handleSubmit(HandleSubmit)}>
                         <FormControl padding={[2, 3, 5]} align={'center'}>
                             <SimpleGrid
-                                columns={2}
+                                columns={[1,2,2,2]}
                                 spacing={3}
                                 row={7}
                             // spacingX={['10', '10', '150']}

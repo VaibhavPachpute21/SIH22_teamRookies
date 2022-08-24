@@ -57,16 +57,16 @@ function SolvedGrievance(props) {
                                 </h2>
                                 <AccordionPanel pb={4}>
                                     <Box w={'100%'}>
-                                        <Flex w={'100%'}>
-                                            <Box w={"15%"}>
+                                        <Flex w={'100%'} flexDirection={['column','column','row','row']} >
+                                            <Box w={["100%","100%","15%","15%"]}>
                                                 <strong>Nature of Grievance</strong>
                                             </Box>
                                             <Box w={'80%'} textAlign={'justify'}>
                                                 <Text>{item?.grievance_nature}</Text>
                                             </Box>
                                         </Flex>
-                                        <Flex w={'100%'}>
-                                            <Box w={"15%"}>
+                                        <Flex w={'100%'} flexDirection={['column','column','row','row']} >
+                                            <Box w={["100%","100%","15%","15%"]}>
                                                 <strong>Description</strong>
                                             </Box>
                                             <Box w={'80%'} textAlign={'justify'}>
@@ -75,8 +75,8 @@ function SolvedGrievance(props) {
                                                 </Text>
                                             </Box>
                                         </Flex>
-                                        <Flex w={'100%'}>
-                                            <Box w={"15%"}>
+                                        <Flex w={'100%'} flexDirection={['column','column','row','row']}>
+                                            <Box w={["100%","100%","15%","15%"]} >
                                                 <strong>Grievant Institute</strong>
                                             </Box>
                                             <Box w={'80%'} textAlign={'justify'}>
@@ -84,8 +84,8 @@ function SolvedGrievance(props) {
                                             </Box>
                                         </Flex>
 
-                                        <Flex w={'100%'}>
-                                            <Box w={"15%"}>
+                                        <Flex w={'100%'} flexDirection={['column','column','row','row']}>
+                                            <Box w={["100%","100%","15%","15%"]}>
                                                 <strong>Grievance Raised on</strong>
                                             </Box>
                                             <Box w={'80%'} textAlign={'justify'}>
@@ -93,8 +93,8 @@ function SolvedGrievance(props) {
                                             </Box>
                                         </Flex>
 
-                                        <Flex w={'100%'}>
-                                            <Box w={"15%"}>
+                                        <Flex w={'100%'} flexDirection={['column','column','row','row']}>
+                                            <Box w={["100%","100%","15%","15%"]}>
                                                 <strong>Grievance Solved on</strong>
                                             </Box>
                                             <Box w={'80%'} textAlign={'justify'}>

@@ -51,41 +51,41 @@ function OfficersRankingPage(props) {
                             <Box
                                 key={i}
                                 w={'100%'} h={"max-content"} margin={2} border={'0.5px solid gray'} borderTop={'4px solid #5A4FCF'} borderRadius={15}  >
-                                <Flex w={'95%'}>
-                                    <Box w={'40%'} padding={2}>
+                                <Flex w={'95%'} flexDirection={['column','column','row','row']} >
+                                    <Box w={['100%','100%','40%','40%']} padding={2}>
                                         <FormLabel>Full Name</FormLabel>
                                         <Input value={item?.fullname} variant={'filled'} _placeholder={{ color: 'black' }} readOnly={true} />
                                     </Box>
 
-                                    <Box w={'20%'} padding={2}>
+                                    <Box w={['100%','100%','20%','20%']} padding={2}>
                                         <FormLabel>Gender</FormLabel>
                                         <Input value={item?.gender} variant={'filled'} _placeholder={{ color: 'black' }} readOnly={true} />
                                     </Box>
 
-                                    <Box w={'20%'} padding={2}>
+                                    <Box w={['100%','100%','20%','20%']} padding={2}>
                                         <FormLabel>Phone number</FormLabel>
                                         <Input value={item?.phone_number} variant={'filled'} _placeholder={{ color: 'black' }} readOnly={true} />
                                     </Box>
 
-                                    <Box w={'20%'} padding={2}>
+                                    <Box w={['100%','100%','20%','20%']} padding={2}>
                                         <FormLabel>Email</FormLabel>
                                         <Input value={item?.email} variant={'filled'} _placeholder={{ color: 'black' }} readOnly={true} />
                                     </Box>
 
                                 </Flex>
 
-                                <Flex w={'95%'}>
-                                    <Box w={'20%'} padding={2}>
+                                <Flex w={'95%'} flexDirection={['column','column','row','row']} >
+                                    <Box w={['100%','100%','20%','20%']} padding={2}>
                                         <FormLabel>District</FormLabel>
                                         <Input value={item?.district} variant={'filled'} _placeholder={{ color: 'black' }} readOnly={true} />
                                     </Box>
 
-                                    <Box w={'20%'} padding={2}>
+                                    <Box w={['100%','100%','20%','20%']} padding={2}>
                                         <FormLabel>commitee </FormLabel>
                                         <Input value={item?.committee} variant={'filled'} _placeholder={{ color: 'black' }} readOnly={true} />
                                     </Box>
 
-                                    <Box w={'20%'} padding={2}>
+                                    <Box w={['100%','100%','20%','20%']} padding={2}>
                                         <FormLabel>Likes </FormLabel>
                                         <Input value={item?.solve_count} variant={'filled'} _placeholder={{ color: 'black' }} readOnly={true} />
                                     </Box>
