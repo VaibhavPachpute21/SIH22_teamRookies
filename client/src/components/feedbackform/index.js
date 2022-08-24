@@ -13,6 +13,7 @@ import {
   SliderMark,
   Tooltip,
   Checkbox,
+  useToast,
   FormLabel,
   Textarea,
   Button,
@@ -23,11 +24,13 @@ import Confetti from "react-confetti";
 import { connect } from "react-redux";
 import * as actions from "../../actions/feedback_actions";
 import { useLocation } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 const FeedBackForm = (props) => {
   const [pieces, Setpieces] = useState(20);
   const { pathname } = useLocation();
   const [suggestions, Setsuggestions] = useState("");
+
+  const toast = useToast()
 
   useEffect(() => {
     setTimeout(() => {
@@ -57,6 +60,7 @@ const FeedBackForm = (props) => {
   const [most_helpful_officer, setMosthelpful] = useState("");
 
   const [Error, SetError] = useState("");
+  const navigate = useNavigate()
 
   const SendFeedback = async () => {
     let obj = {
@@ -95,6 +99,38 @@ const FeedBackForm = (props) => {
       }
       if (alias?.regional?.length > 0) {
         setRegionalRelatedOfficers(alias?.regional);
+      }
+    }
+  }, [props.data]);
+
+  useEffect(() => {
+    if (props.data) {
+      const alias = props.data?.feedbackData;
+      
+      if(alias?.feedback){
+        let success = alias?.success
+        console.log(success)
+        if (success) {
+          toast({
+            position: 'top',
+            render: () => (
+              <Box color='white' p={3} bg='green.500'>
+                Thank you for the feedback!
+              </Box>
+            ),
+          })
+          navigate('/')
+        }
+        else {
+          toast({
+            position: 'top',
+            render: () => (
+              <Box color='white' p={3} bg='red.500'>
+                {Error}
+              </Box>
+            ),
+          })
+        }
       }
     }
   }, [props.data]);
