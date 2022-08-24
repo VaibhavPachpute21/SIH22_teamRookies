@@ -15,7 +15,7 @@ exports.SendMessageToForward = async (req,res,next) => {
             
             if(typeof(doc?.officer_name) !== undefined){
                 const grievance = await Grievance.findById(doc?.grievance_id)
-                const officer = await Officer.findById(grievance.reciever_id)
+                const officer = await Officer.findById(grievance?.reciever_id)
 
                 /* await SendEmail(officer?.email,grievance?.grievant_name,grievance?.grievance_nature)
              await SendMessage("User",grievance?.grievance_title,doc?.officer_name)  */

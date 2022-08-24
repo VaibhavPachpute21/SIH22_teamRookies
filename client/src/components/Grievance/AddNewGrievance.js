@@ -68,28 +68,32 @@ function AddNewGrievance(props) {
             if (props.data) {
                 let alias = props.data
                 if (alias.grievanceData) {
-                    let success = alias.grievanceData?.success
-                    console.log(success)
-                    if (success) {
-                        toast({
-                            position: 'top',
-                            render: () => (
-                                <Box color='white' p={3} bg='green.500'>
-                                    Grievance submitted
-                                </Box>
-                            ),
-                        })
+                    let d = alias?.grievanceData
+                    
+                    if (d) {
+                        let f = d?.success
+                        if(f){
+                            toast({
+                                position: 'top',
+                                render: () => (
+                                    <Box color='white' p={3} bg='green.500'>
+                                        Grievance submitted
+                                    </Box>
+                                ),
+                            })
+                        }
+                        else {
+                            toast({
+                                position: 'top',
+                                render: () => (
+                                    <Box color='white' p={3} bg='red.500'>
+                                        {error}
+                                    </Box>
+                                ),
+                            })
+                        }
+                        
                         // navigate('/TrackGrievance/34-20')
-                    }
-                    else {
-                        toast({
-                            position: 'top',
-                            render: () => (
-                                <Box color='white' p={3} bg='red.500'>
-                                    {error}
-                                </Box>
-                            ),
-                        })
                     }
 
                 }

@@ -49,7 +49,7 @@ function RegionalOfTracker(props) {
                 message: message
             }
 
-            await props.SendReply(obj,gid,User._id)
+            await props.SendReply(obj,gid?gid:null,User._id)
             let request = props.data
             
             if (request.regionData) {

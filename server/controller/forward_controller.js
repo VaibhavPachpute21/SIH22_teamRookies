@@ -4,14 +4,11 @@ const {Officer} = require('../models/officer_model')
 const {ReplyNotify} = require('../messaging/sendMessage')
 
 exports.CreateReply = async (req, res, next) => {
+
     const {
         message
     } = req.body
 
-
-
-    const grievance_id = req.params.gid
-    const reciever_id = req.params.rid
 
     var currentdate = new Date();
     const datetime = currentdate.getDate() + "/"
@@ -25,21 +22,25 @@ exports.CreateReply = async (req, res, next) => {
         message: message,
         DateTime: datetime
     }
+
+
     
 
+    const grievance_id = req.params?.gid
+    const reciever_id = req.params?.rid
+    
     try {
-        const newReply =
-            await Forward.findOneAndUpdate({ "current_reciever": reciever_id, "grievance_id": grievance_id }
+        const newReply = await Forward.findOneAndUpdate({ "current_reciever": reciever_id, "grievance_id": grievance_id }
                 , { $push: { replies: obj } })
             
-        const grievance = await Grievance.findOne({"grievance_id":grievance_id})
+       /*  const grievance = await Grievance.findOne({"grievance_id":grievance_id})
 
         const officer = await Officer.findOne({"_id":reciever_id})
 
-        /*  if(grievance && officer){
+         if(grievance && officer){
             ReplyNotify(grievance.grievant_name,grievance.grievance_nature,officer?.fullname)
-        } */
- 
+        } 
+  */
         if (!newReply) {
             res.status(200).json({
                 success: true,
