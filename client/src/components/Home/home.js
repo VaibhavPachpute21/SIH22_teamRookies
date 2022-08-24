@@ -14,6 +14,8 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import ChatBot from 'react-simple-chatbot';
 import axios from 'axios'
+import Footer from "../footer/Footer";
+import Header from "../navbar/Header";
 const theme = {
     background: '#f5f8fb',
     headerBgColor: '#5A4FCF',
@@ -35,6 +37,7 @@ export default function Home() {
     return (
 
         <Box w="100%" minH="100%">
+            <Header/>
             <Carousel onChange={(i) => { setSlideIndex(i) }}
                 autoPlay={true} infiniteLoop={true} showArrows={true}
                 showStatus={false} showIndicators={false} showThumbs={false}
@@ -436,7 +439,7 @@ export default function Home() {
             </Flex>
 
 
-
+            <Footer></Footer>
         </Box>
 
     );

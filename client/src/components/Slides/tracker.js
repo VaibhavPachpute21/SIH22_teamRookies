@@ -212,7 +212,7 @@ const DashboardTracker = (props) => {
 
 
     return (
-        <VStack py={3} w="100%" h="100%">
+        <Flex py={3} w="100%" h={["max-content","max-content","100%","100%"]} flexDirection={'column'}>
             <HStack
                 w="100%" h="5%">
                 <Box w="80%"
@@ -243,10 +243,10 @@ const DashboardTracker = (props) => {
                 </Box>
             </HStack>
 
-            <HStack w="100%" h="95%">
+            <Flex w="100%" h="95%" flexDirection={['column','column','row','row']}>
                 {User.role=="0P"?null: <Box
-                    w="30%" h="100%">
-                    <VStack w="100%" h="100%">
+                    w={["100%","100%","30%","30%"]} h="100%">
+                    <Flex w="100%" h={["max-content","100%","100%"]} flexDirection={'column'}>
                         <Box w="100%" h="10%">
                             <Flex
                                 px={3}
@@ -264,23 +264,14 @@ const DashboardTracker = (props) => {
                             </Flex>
                         </Box>
 
-                        <Box
-                            py={2}
-                            borderTop={'1px'}
-                            borderColor={'#5A4FCF'}
-                            w="100%" h="50%">
+                        <Box py={2} borderTop={'1px'} borderColor={'#5A4FCF'} w="100%" h="50%">
                             <VStack
                                 spacing={3} w="100%" h="100%">
                                 <Box
-                                    px={3}
-                                    w="100%"
-                                    h="10%"
-                                >
+                                    px={3} w="100%" h="10%" >
                                     <Text
-                                        fontSize={'lg'}
-                                        opacity={.8}
-                                        fontFamily={'monospace'}
-                                        fontWeight={600}
+                                        fontSize={'lg'} opacity={.8}
+                                        fontFamily={'monospace'} fontWeight={600}
                                         color={'#5A4FCF'}>
                                         Date
                                     </Text>
@@ -325,7 +316,7 @@ const DashboardTracker = (props) => {
                             borderTop={'1px'}
                             borderColor={'#5A4FCF'}
                             w="100%" h="40%" >
-                            <VStack w="100%" h="100%">
+                            <Flex w="100%" h={["max-content","max-content","100%","100%"]} flexDirection={'column'}>
                                 <Box
                                     py={3}
                                     px={3}
@@ -341,10 +332,10 @@ const DashboardTracker = (props) => {
                                 </Box>
 
 
-                                <VStack
-                                    spacing={3}
+                                <Flex
+                                    spacing={3} flexDirection={'column'}
                                     px={3}
-                                    py={3} w="100%" h="90%">
+                                    py={3} w="100%" h={["max-content","max-content","90%","90%"]}>
                                     {grievance_nature?.map((item, i) => (
                                         i < 6 ? (
                                             <HStack spacing={3} key={i} w="100%" h="10%">
@@ -370,33 +361,32 @@ const DashboardTracker = (props) => {
                                                 </Link>
                                             </Box>
                                         </Flex></Box>
-                                </VStack>
-                            </VStack>
+                                </Flex>
+                            </Flex>
                         </Box>
 
-                    </VStack>
+                    </Flex>
                 </Box>}
 
                 <Box
                     px={5}
                     borderLeft={'1px'}
                     borderColor={'#5A4FCF'}
-                    w={User.role=="0P"?"100%": "80%"}
+                    w={User.role=="0P"?"100%": (["100%","100%","80%","80%"])}
                     h="100%" >
                     <VStack
-                        maxH={'80vh'}
-                        overflowY={'hidden'}
-                        overflow={'scroll'}
+                        maxH={['max-content','max-content','80vh','80vh']}
+                        overflowY={'hidden'} overflow={'scroll'}
                         w="100%">
                         {
                             Grievances && Grievances.length > 0 ? (
                                 Grievances?.map((item, i) => (
-                                    <HStack key={i} w="100%" minH={"75vh"}>
+                                    <Flex key={i} w="100%" flexDirection={['column','column','row','row']} minH={"75vh"}>
                                         <Box
-                                            w="25%" h="70vh">
+                                            w={["100%","100%","25%","25%"]} h="70vh">
                                             <VStack
                                                 borderTop={'4px solid #5A4FCF'}
-                                                w="90%" h="80%">
+                                                w={["100%","100%","90%","90%"]} h="80%">
                                                 <Box w="100%" h="10%">
                                                     <HStack w="100%" h="100%">
 
@@ -490,11 +480,11 @@ const DashboardTracker = (props) => {
                                             </VStack>
                                         </Box>
 
-                                        <Box w="75%" h="70vh">
+                                        <Box w={["100%","100%","75%","75%"]} h={["100%","100%","70vh","70vh"]}>
                                             <VStack
                                                 py={3}
                                                 px={5} w="100%" h="100%" alignItems={'flex-start'} justifyContent={'flex-start'}>
-                                                <Box w="70%" h="7%">
+                                                <Box w={["100%","100%","70%","70%"]} h="7%">
                                                     <HStack w="100%" h="100%">
                                                         <Box w="40%">
                                                             <Text
@@ -550,7 +540,7 @@ const DashboardTracker = (props) => {
 
                                             </VStack>
                                         </Box>
-                                    </HStack>
+                                    </Flex>
                                 ))
                             ) : (<Box>
                                 No Grievances found
@@ -560,8 +550,8 @@ const DashboardTracker = (props) => {
                         }
                     </VStack>
                 </Box>
-            </HStack>
-        </VStack>
+            </Flex>
+        </Flex>
     );
 }
 

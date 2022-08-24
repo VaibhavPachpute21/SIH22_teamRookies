@@ -7,6 +7,7 @@ import {
     ModalFooter,
     ModalBody,
     ModalCloseButton,
+    useToast,
     useDisclosure,
     Checkbox, IconButton, Avatar, Heading, Tag, Select, Button, FormLabel, Textarea
 } from '@chakra-ui/react'
@@ -20,6 +21,9 @@ import { useNavigate } from 'react-router-dom'
 
 
 const AdminDashboardHistory = (props) => {
+
+    const toast = useToast()
+    
 
     const Filters = [
         "All", "Institute", "Student", "Employee", "Solved", "Unsolved"
@@ -56,7 +60,6 @@ const AdminDashboardHistory = (props) => {
     useEffect(() => {
         if (props.data) {
             let alias = props.data
-            console.log(alias)
             if (alias.userData) {
                 let d = alias.userData
                 if (d.forwards) {
@@ -69,6 +72,43 @@ const AdminDashboardHistory = (props) => {
         }
     }, [props.data])
 
+    useEffect(() => {
+        if (props.data) {
+          let alias = props.data
+          if (alias.userData) {
+                let newReply = alias?.userData
+                if(newReply?.newReply){
+                    let success =newReply?.success
+                    
+                    if (success) {
+                        toast({
+                          position: 'top',
+                          render: () => (
+                            <Box color='white' p={3} bg='green.500'>
+                              Reply Sent! 
+                            </Box>
+                          ),
+                        })
+                       
+                      }
+                      else {
+                        toast({
+                          position: 'top',
+                          render: () => (
+                            <Box color='white' p={3} bg='red.500'>
+                              Some error occured
+                            </Box>
+                          ),
+                        })
+                      }
+                }
+        
+    
+          }
+    
+        }
+      }, [props.data])
+
     const MakeReply = async (gid) => {
       
         try {
@@ -77,6 +117,7 @@ const AdminDashboardHistory = (props) => {
                 }
 
             const set = await props.SendReply(obj, gid, User?._id)
+
         } catch (error) {
             SetError(error.message)
         }
@@ -92,7 +133,7 @@ const AdminDashboardHistory = (props) => {
             <VStack w="100%" h="100%">
                 <Box w="100%" h="10%">
                     <Flex w="100%" h="100%" alignItems={'flex-end'} justifyContent={'flex-end'}>
-                        <Select w="20%">
+                        <Select w={["100%","100%","20%","20%"]}>
                             <option>All</option>
                             <option>Solved</option>
                             <option>Unsolved</option>
@@ -111,24 +152,22 @@ const AdminDashboardHistory = (props) => {
                             forwards && forwards.length > 0 ? ("Some grievances you've missed") : ("Current grievances")
                         }
                     </Text>
-                    <VStack w="100%" minH={'70vh'} spacing={5}>
+                    <Flex w="100%" minH={'70vh'} spacing={5} flexDirection={'column'}>
 
                         {
                             forwards && forwards.length > 0 ? (
                                 forwards?.map((item, i) => (
-                                    <VStack
-                                        spacing={8}
-                                        boxShadow={'md'}
-
+                                    <Flex flexDirection={['column','column','column','column']}
+                                        spacing={8} boxShadow={'md'}
                                         borderTop={'3px solid #5A4FCF'}
-                                        key={i} w="100%" h="15vh">
+                                        key={i} w="100%" h={["100%","100%","15vh","15vh"]}>
                                         <Modal isOpen={isOpen} onClose={onClose}>
                                             <ModalOverlay />
                                             <ModalContent>
                                                 <ModalHeader>Write reply</ModalHeader>
                                                 <ModalCloseButton />
                                                 <ModalBody>
-                                                    <FormLabel>{`To ${item?.grievant_name}`}</FormLabel>
+                                                    <FormLabel>Enter Reply</FormLabel>
                                                     <Textarea type="text" value={message} onChange={(e) => SetMessage(e.target.value)} />
                                                 </ModalBody>
 
@@ -143,12 +182,12 @@ const AdminDashboardHistory = (props) => {
                                                 </ModalFooter>
                                             </ModalContent>
                                         </Modal>
-                                        <HStack
+                                        <Flex flexDirection={['column','column','row','row']}
                                             marginTop={2}
                                             alignItems={'flex-start'}
                                             justifyContent={'space-between'}
-                                            w="100%" h="20%">
-                                            <HStack w="40%" h="100%">
+                                            w="100%" h={["100%","100%","20%","20%"]}>
+                                            <HStack w={["100%","100%","40%","40%"]} h="100%">
                                                 <Text fontWeight={600}>
                                                     Grievance id
                                                 </Text>
@@ -157,21 +196,21 @@ const AdminDashboardHistory = (props) => {
                                                 </Text>
                                             </HStack>
 
-                                            <HStack w="15%" h="100%" alignItems={'center'}>
+                                            <HStack w={["100%","100%","15%","15%"]} h="100%" alignItems={'center'}>
                                                 {User.role=="1B"?<Button
                                                 onClick={() => { nav(`/TrackGrievance/${item.grievance_id}`, { state:{url:item.grievance_id} }) }}
                                                 >TrackGrievance</Button>: <Button
-                                                    onClick={() => { onOpen(); console.log(item.grievant_name) }}
+                                                    onClick={() => { onOpen(); }}
                                                     color={'white'}
                                                     bg="#5A4FCF"
                                                     h="100%">
                                                     Send reply
                                                 </Button>}
                                             </HStack>
-                                        </HStack>
+                                        </Flex>
 
                                         <HStack w="100%" h="5%">
-                                            <HStack w="40%" h="100%">
+                                            <HStack w={["100%","100%","40%","40%"]} h="100%">
                                                 <Text fontWeight={600}>
                                                     Forwarded to you on
                                                 </Text>
@@ -181,7 +220,7 @@ const AdminDashboardHistory = (props) => {
                                             </HStack>
                                         </HStack>
 
-                                    </VStack>
+                                    </Flex>
                                 ))
                             ) : (null)
                         }
@@ -308,7 +347,7 @@ const AdminDashboardHistory = (props) => {
                                 </VStack>
                             ))
                         }
-                    </VStack>
+                    </Flex>
                 </Box>
             </VStack>
 

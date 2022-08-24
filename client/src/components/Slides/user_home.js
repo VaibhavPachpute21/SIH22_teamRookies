@@ -14,7 +14,7 @@ const UserHome = (props) => {
     }
 
     return (
-        <Flex spacing={10} w="100%" h="max-content" 
+        <Flex spacing={10} w="100%" h="max-content" overflowX={'scroll'}
             flexDirection={["column", "column", "column", "column"]}>
             <Flex flexDirection={["column"]}
                 paddingLeft={8}
@@ -25,10 +25,10 @@ const UserHome = (props) => {
             </Flex>
             <Divider minH={1} bg={'#5A4FCF'} mt={2} />
 
-            <Flex padding={8} spacing={10} flexDirection={["row"]} justifyContent={'space-evenly'}>
+            <Flex padding={8} spacing={10} flexDirection={["column","column","row","row"]} justifyContent={'space-evenly'}>
                 <Box borderTop={'4px solid #5A4FCF'} padding={5}
                     borderRadius={'2xl'} boxShadow={'xl'} alignItems={'center'}
-                    justifyContent={'center'} bg="white" w="35%" h="max-content">
+                    justifyContent={'center'} bg="white" w={["100%","100%","35%","35%"]} h="max-content">
                     <Box w="100%" h="max-content">
                         <HStack w="100%" h="100%" alignItems={'center'} justifyContent={'center'}>
                             <Box w="100%" h="100%">
@@ -42,7 +42,7 @@ const UserHome = (props) => {
                 </Box>
                 <Box borderTop={'4px solid #5A4FCF'} padding={5}
                     borderRadius={'2xl'} boxShadow={'xl'} alignItems={'center'}
-                    justifyContent={'center'} bg="white" w="35%" h="max-content">
+                    justifyContent={'center'} bg="white"  w={["100%","100%","35%","35%"]} h="max-content">
                     <Box w="100%" h="max-content">
                         <HStack w="100%" h="100%" alignItems={'center'} justifyContent={'center'}>
                             <Box w="100%" h="100%">
@@ -56,8 +56,8 @@ const UserHome = (props) => {
                 </Box>
             </Flex>
 
-            <Flex padding={4} flexDirection={"row"} justifyContent={'space-evenly'}>
-                <Box borderTop={'4px solid #5A4FCF'} borderBottom={'4px solid #5A4FCF'} w="20%" borderRadius={'2xl'} boxShadow={'xl'}>
+            <Flex padding={4} flexDirection={["column","column","row","row"]} justifyContent={'space-evenly'}>
+                <Box borderTop={'4px solid #5A4FCF'} borderBottom={'4px solid #5A4FCF'} w={["100%","100%","20%","20%"]} marginBottom={2} borderRadius={'2xl'} boxShadow={'xl'}>
                     <Box >
                         <Image src='https://i.imgur.com/qfeGLmR.png' borderTopRadius={'2xl'} />
                         <Heading size='lg' p={1}>DATA SECURITY</Heading>
@@ -65,7 +65,7 @@ const UserHome = (props) => {
                         </Text>
                     </Box>
                 </Box>
-                <Box borderTop={'4px solid #5A4FCF'} borderBottom={'4px solid #5A4FCF'} w="20%" borderRadius={'2xl'} boxShadow={'xl'}>
+                <Box borderTop={'4px solid #5A4FCF'} borderBottom={'4px solid #5A4FCF'} w={["100%","100%","20%","20%"]} marginBottom={2} borderRadius={'2xl'} boxShadow={'xl'}>
                     <Box >
                         <Image src='https://i.imgur.com/FcmRNkq.png' borderTopRadius={'2xl'} />
                         <Heading size='lg' p={1}>TRACK YOUR GRIEVANCES</Heading>
@@ -74,7 +74,7 @@ const UserHome = (props) => {
                         </Text>
                     </Box>
                 </Box>
-                <Box borderTop={'4px solid #5A4FCF'} borderBottom={'4px solid #5A4FCF'} w="20%" borderRadius={'2xl'} boxShadow={'xl'}>
+                <Box borderTop={'4px solid #5A4FCF'} borderBottom={'4px solid #5A4FCF'} w={["100%","100%","20%","20%"]} marginBottom={2} borderRadius={'2xl'} boxShadow={'xl'}>
                     <Box >
                         <Image src='https://i.imgur.com/o9LI13A.png' borderTopRadius={'2xl'} />
                         <Heading size='lg' p={1}>TIME BOUND SYSTEM</Heading>

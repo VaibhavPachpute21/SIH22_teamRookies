@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import cookie from 'js-cookie'
 import './styles/drawer.css'
 import * as actions from '../../actions/user_actions'
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { connect } from 'react-redux';
 
 
@@ -65,13 +65,13 @@ const DashboardHistory = (props) => {
     }, [props.data])
 
 
-   
+
 
 
 
     return (
         <Box w="100%" h="100%">
-            <VStack w="100%" h="100%">
+            <Flex w="100%" h="100%" flexDirection={'column'}>
                 <Box w="100%" h="10%">
                     <Flex w="100%" h="100%" alignItems={'flex-end'} justifyContent={'flex-end'}>
                         <Select w="20%">
@@ -96,7 +96,7 @@ const DashboardHistory = (props) => {
                         }
 
                     </Text>
-                    <VStack w="100%" minH={'70vh'} spacing={5}>
+                    <Flex w="100%" minH={'70vh'} spacing={5}>
                         {
                             forwards && forwards.length > 0 ? (
                                 forwards?.map((item, i) => (
@@ -213,69 +213,71 @@ const DashboardHistory = (props) => {
                         {
                             instituteGrievances?.map((item, i) => (
 
-                                <VStack
+                                <Flex flexDirection={'column'}
                                     spacing={8}
                                     boxShadow={'md'}
-
+                                    padding={2}
                                     borderTop={'3px solid #5A4FCF'}
                                     key={i} w="100%" h="max-content">
-                                    <HStack
+                                    <Flex flexDirection={['column', 'column', 'row', 'row']}
                                         marginTop={2}
                                         alignItems={'flex-start'}
                                         justifyContent={'space-between'}
                                         w="100%" h="20%">
-                                        <HStack w="40%" h="100%">
+                                        <Box w={["100%","100%","40%","40%"]} h="100%">
                                             <Text fontWeight={600}>
-                                                Grievance id
+                                                <strong>Grievance id</strong>
                                             </Text>
                                             <Text>
                                                 {item?._id}
                                             </Text>
-                                        </HStack>
+                                            <VStack
+                                                py={2}
+                                                alignItems={'flex-start'}
+                                                w="100%" h="max-content">
+                                                <Text fontWeight={600}>
+                                                  <strong>Title:-</strong>{item?.grievance_title}
+                                                </Text>
 
-                                        <HStack w="15%" h="100%" alignItems={'center'}>
+                                                <Text w="100%" h="max-content">
+                                                 <strong>Description:-</strong>   {item?.grievance_description}
+                                                </Text>
+                                            </VStack>
+                                            <HStack w="100%" h="5%">
+                                                <HStack w={["100%","100%","40%","40%"]} h="100%">
+                                                    <Text fontWeight={600}>
+                                                        {15 - (item?.day_counter)}
+                                                    </Text>
+                                                    <Text>
+                                                        days to forward
+                                                    </Text>
+                                                </HStack>
+                                            </HStack>
+                                        </Box>
+
+                                        <Box w="15%" h="100%" alignItems={'center'}>
                                             <Button
                                                 py={2}
-                                                onClick={()=>navigate(`/TrackGrievance/${item?._id}`)}
+                                                onClick={() => navigate(`/TrackGrievance/${item?._id}`)}
                                                 color={'white'}
                                                 bg="#5A4FCF"
                                                 h="100%">
                                                 Check status
                                             </Button>
-                                        </HStack>
-                                    </HStack>
+                                        </Box>
+                                    </Flex>
 
 
 
-                                    <HStack w="100%" h="5%">
-                                        <HStack w="40%" h="100%">
-                                            <Text fontWeight={600}>
-                                                {15 - (item?.day_counter)}
-                                            </Text>
-                                            <Text>
-                                                days to forward
-                                            </Text>
-                                        </HStack>
-                                    </HStack>
 
-                                    <VStack
-                                        py={2}
-                                        alignItems={'flex-start'}
-                                        w="100%" h="max-content">
-                                        <Text fontWeight={600}>
-                                            {item?.grievance_title}
-                                        </Text>
 
-                                        <Text w="100%" h="max-content">
-                                            {item?.grievance_description}
-                                        </Text>
-                                    </VStack>
-                                </VStack>
+
+                                </Flex>
                             ))
                         }
-                    </VStack>
+                    </Flex>
                 </Box>
-            </VStack>
+            </Flex>
         </Box>
     );
 }

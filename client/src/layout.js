@@ -8,14 +8,11 @@ export default function Layout(props) {
   return (
     <div>
       <div>
-        {
+        {/* {
           path && path.pathname !== "/Dashboard" ? (<Header />) : (null)
-        }
+        } */}
       </div>
       {props.children}
-      <div>
-        {path && path.pathname !== "/Dashboard" ? <Footer/> :null}
-      </div>
     </div>
   )
 }

@@ -18,6 +18,7 @@ import { AiOutlineUser } from 'react-icons/ai';
 import * as actions from '../../actions/user_actions'
 import axios from 'axios';
 import cookie from 'js-cookie'
+import Header from '../navbar/Header';
 
 function Login(props) {
 
@@ -353,9 +354,10 @@ function Login(props) {
 
   return (
     <Box overflow={'none'}
-      w={"100vw"} h={["100%", "90vh", "90vh"]}>
+      w={"100vw"} h={["100%", "90vh", "100%"]}>
+      <Header/>
       <Flex w="100%" h="100%" flexDirection={['column', 'column', 'row', 'row']} >
-        <Box w={["100%", "100%", "60%", "60%"]} h="100%" >
+        <Box w={["100%", "100%", "60%", "60%"]} h="100%" paddingBottom={5} >
           <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
             <Box w="80%">
               <Flex w="100%" h="100%">
@@ -507,7 +509,7 @@ function Login(props) {
           </Flex>
         </Box>
 
-        <Box w={["0%", "0%", "40%", "40%"]} display={['none', 'none', 'block', 'block']} h="100%"
+        <Box w={["0%", "0%", "40%", "40%"]} display={['none', 'none', 'block', 'block']} h="80vh"
           bg="#5A4FCF"
         >
           <Flex

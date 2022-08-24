@@ -9,21 +9,21 @@ export default function InstituteProfile(props) {
 
   return (
     <Flex h={'100%'} w={"100%"} alignContent={'center'} justifyContent={'center'} padding={2} overflowX={'hidden'} >
-      <Flex w={"90%"} flexDirection={"column"} bg="white" padding={10}>
+      <Flex w={["100%","100%","90%","90%"]} flexDirection={"column"} bg="white" padding={[2,2,10,10]}>
         <Flex w={"100%"} flexDirection='column'>
           <Box w="100%">
 
             <Heading size={'md'} fontWeight={'semibold'} bg={'purple.400'} padding={2} color={'white'} border={'1px solid black'} >Institute information</Heading>
 
             <Box w="100%" padding={2} border={'1px'}>
-              <Text fontSize={'18px'}>Institute Name - <strong style={{ fontWeight: "600" }}>{props.userData.institute_name}</strong></Text>
+              <Text fontSize={'18px'}>Institute Name- <strong style={{ fontWeight: "600" }}>{props.userData.institute_name}</strong></Text>
             </Box>
 
-            <Flex w="100%">
-              <Box w="50%" padding={2} border={'1px'}>
-                <Text fontSize={'18px'} w={"50%"}>Institute Code - <strong style={{ fontWeight: "600" }}>{props.userData.institute_code}</strong></Text>
+            <Flex w="100%" flexDirection={['column','column','row','row']}>
+              <Box w={["100%","100","50%","50%"]} padding={2} border={'1px'}>
+                <Text fontSize={'18px'} w={["100%","100","50%","50%"]}>Institute Code - <strong style={{ fontWeight: "600" }}>{props.userData.institute_code}</strong></Text>
               </Box>
-              <Box w="50%" padding={2} border={'1px'}>
+              <Box w={["100%","100","50%","50%"]} padding={2} border={'1px'}>
                 <Text fontSize={'18px'}>Institute Region - <strong style={{ fontWeight: "600" }}>{props.userData.institute_region}</strong></Text>
               </Box>
             </Flex>
@@ -32,29 +32,29 @@ export default function InstituteProfile(props) {
               <Text fontSize={'18px'}>Address - <strong style={{ fontWeight: "600" }}>{props.userData.institute_address}</strong></Text>
             </Box>
 
-            <Flex w="100%">
-              <Box w="50%" padding={2} border={'1px'}>
-                <Text fontSize={'18px'} w={"50%"}>District - <strong style={{ fontWeight: "600" }}>{props.userData.institute_district}</strong></Text>
+            <Flex w="100%" flexDirection={['column','column','row','row']}>
+              <Box w={["100%","100","50%","50%"]} padding={2} border={'1px'}>
+                <Text fontSize={'18px'} w={["100%","100","50%","50%"]}>District - <strong style={{ fontWeight: "600" }}>{props.userData.institute_district}</strong></Text>
               </Box>
-              <Box w="50%" padding={2} border={'1px'}>
+              <Box w={["100%","100","50%","50%"]} padding={2} border={'1px'}>
                 <Text fontSize={'18px'}>Taluka - <strong style={{ fontWeight: "600" }}>{props.userData.institute_district}</strong></Text>
               </Box>
             </Flex>
 
-            <Flex w="100%">
-              <Box w="50%" padding={2} border={'1px'}>
-                <Text fontSize={'18px'} w={"50%"}>Pincode - <strong style={{ fontWeight: "600" }}>{props.userData.institute_pincode}</strong></Text>
+            <Flex w="100%" flexDirection={['column','column','row','row']}>
+              <Box w={["100%","100","50%","50%"]} padding={2} border={'1px'}>
+                <Text fontSize={'18px'}w={["100%","100","50%","50%"]}>Pincode - <strong style={{ fontWeight: "600" }}>{props.userData.institute_pincode}</strong></Text>
               </Box>
-              <Box w="50%" padding={2} border={'1px'}>
+              <Box w={["100%","100","50%","50%"]} padding={2} border={'1px'}>
                 <Text fontSize={'18px'}>STD Code - <strong style={{ fontWeight: "600" }}>{props.userData.institute_std_code}</strong></Text>
               </Box>
             </Flex>
 
-            <Flex w="100%">
-              <Box w="50%" padding={2} border={'1px'}>
-                <Text fontSize={'18px'} w={"50%"}>Year of Establishment - <strong style={{ fontWeight: "600" }}>{props.userData.institute_year_of_start}</strong></Text>
+            <Flex w="100%" flexDirection={['column','column','row','row']}>
+              <Box w={["100%","100","50%","50%"]} padding={2} border={'1px'}>
+                <Text fontSize={'18px'} w={["100%","100","50%","50%"]}>Year of Establishment - <strong style={{ fontWeight: "600" }}>{props.userData.institute_year_of_start}</strong></Text>
               </Box>
-              <Box w="50%" padding={2} border={'1px'}>
+              <Box w={["100%","100","50%","50%"]} padding={2} border={'1px'}>
                 <Text fontSize={'18px'}>Web Address - <strong style={{ fontWeight: "600" }}>{props.userData.institute_web_address}</strong></Text>
               </Box>
             </Flex>
@@ -63,18 +63,18 @@ export default function InstituteProfile(props) {
               <Text fontSize={'18px'}>E-Mail Address - <strong style={{ fontWeight: "600" }}>{props.userData.institute_email}</strong></Text>
             </Box>
 
-            <Flex w="100%">
-              <Box w="50%" padding={2} border={'1px'}>
-                <Text fontSize={'18px'} w={"50%"}>Login ID - <strong style={{ fontWeight: "600" }}>{props.userData.user_email}</strong></Text>
+            <Flex w="100%" flexDirection={['column','column','row','row']}>
+              <Box w={["100%","100","50%","50%"]} padding={2} border={'1px'}>
+                <Text fontSize={'18px'} w={["100%","100","50%","50%"]}>Login ID - <strong style={{ fontWeight: "600" }}>{props.userData.user_email}</strong></Text>
               </Box>
-              <Box w="50%" padding={2} border={'1px'}>
+              <Box w={["100%","100","50%","50%"]} padding={2} border={'1px'}>
                 <Text fontSize={'18px'}>Representative - <strong style={{ fontWeight: "600" }}>{props.userData.user_name}</strong></Text>
               </Box>
             </Flex>
 
           </Box>
 
-          <Box w="100%" pt='5'>
+          <Box w="100%" flexDirection={['column','column','row','row']} pt='5'>
 
             <Heading size={'md'} fontWeight={'semibold'} bg={'purple.400'} padding={2}
               color={'white'} border={'1px solid black'} >Contact Information (Director / Principal)</Heading>
@@ -83,11 +83,11 @@ export default function InstituteProfile(props) {
               <Text fontSize={'18px'}>Name - <strong style={{ fontWeight: "600" }}>{props.userData.name_of_director}</strong></Text>
             </Box>
 
-            <Flex w="100%">
-              <Box w="50%" padding={2} border={'1px'}>
-                <Text fontSize={'18px'} w={"50%"}>Phone No. - <strong style={{ fontWeight: "600" }}>{props.userData.director_phone_number}</strong></Text>
+            <Flex w="100%" flexDirection={['column','column','row','row']}>
+              <Box w={["100%","100","50%","50%"]} padding={2} border={'1px'}>
+                <Text fontSize={'18px'} w={["100%","100","50%","50%"]}>Phone No. - <strong style={{ fontWeight: "600" }}>{props.userData.director_phone_number}</strong></Text>
               </Box>
-              <Box w="50%" padding={2} border={'1px'}>
+              <Box w={["100%","100","50%","50%"]} padding={2} border={'1px'}>
                 <Text fontSize={'18px'}>Email - <strong style={{ fontWeight: "600" }}>{props.userData.director_email}</strong></Text>
               </Box>
             </Flex>

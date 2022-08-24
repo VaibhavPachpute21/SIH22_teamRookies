@@ -89,7 +89,7 @@ function AddInstituteGrievance(props) {
 
 
     return (
-        <Flex h='100%' overflowX={'hidden'} justifyContent={'center'} padding={10}>
+        <Flex h='100%' overflowX={'hidden'} justifyContent={'center'} padding={[2,2,10,10]}>
             {
                 User ? (
                     
@@ -97,7 +97,7 @@ function AddInstituteGrievance(props) {
                             <form onSubmit={handleSubmit(HandleSubmit)}>
                                 <FormControl>
                                     <Box w={'100%'} bg='white' paddingTop={5}>
-                                        <Text textAlign={'center'} fontSize={'3xl'}>Institute's Information</Text>
+                                        <Text textAlign={'center'} fontSize={['xl','3xl','3xl']}>Institute's Information</Text>
                                     </Box>
                                     <Flex w={'100%'} h='100%' bg='white' py={[5, 5, 5, 5]} px={[2, 2, 10, 10]} gap={[2, 2, 5, 5]} flexDirection={['column', 'column', 'row', 'row']} >
                                         <Box w={['90%', '90%', '50%', '50%']}>
@@ -147,8 +147,8 @@ function AddInstituteGrievance(props) {
                                         </Box>
                                     </Flex>
     
-                                    <Box w={'100%'} bg='white' py={[5]} px={10}>
-                                        <Text textAlign={'center'} fontSize={'3xl'}>Enter Details To submit Grievance</Text>
+                                    <Box w={'100%'} bg='white' py={[5]} px={[2,2,10,10]}>
+                                        <Text textAlign={'center'} fontSize={['xl','3xl','3xl']}>Enter Details To submit Grievance</Text>
                                     </Box>
     
                                     <Flex w={'100%'} h='100%' bg='white' py={[5, 5, 5, 5]} px={[2, 2, 10, 10]} gap={[2, 2, 5, 5]} flexDirection={['column', 'column', 'row', 'row']} >
