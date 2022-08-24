@@ -6,7 +6,7 @@ exports.SendEmail = async (email_to,grievant_name,grievant_nature) => {
     sgMail.setApiKey(process.env.EMAIL_API_KEY)
 
     const message = {
-        to: "pandeysandeep1190@gmail.com",
+        to: email_to,
         from: "pandeysandeep1190@gmail.com",
         subject: "Message UGC Portal",
         html:  `<!doctype html>

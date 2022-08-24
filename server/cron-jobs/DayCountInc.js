@@ -8,14 +8,17 @@ const {SendEmail} = require('../sendEmails/index')
 
 exports.SendMessageToForward = async (req,res,next) => {
     try {
-        const latestForward = await Forward.find({message_sent_to_grievant:{$ne:true}}).limit(1).sort({$natural:-1})
+        const latestForward = await Forward.find({message_sent_to_grievant:{$ne:true}},{message_sent_to_grievant:false}).limit(1).sort({$natural:-1})
         if(latestForward.length > 0){
             latestForward?.forEach(async (doc,i)=>{
                 
             
             if(typeof(doc?.officer_name) !== undefined){
                 const grievance = await Grievance.findById(doc?.grievance_id)
-                await SendMessage("User",grievance?.grievance_title,doc?.officer_name)
+                const officer = await Officer.findById(grievance.reciever_id)
+
+                /* await SendEmail(officer?.email,grievance?.grievant_name,grievance?.grievance_nature)
+             await SendMessage("User",grievance?.grievance_title,doc?.officer_name)  */
                 await Forward.findOneAndUpdate({_id:doc._id},{$set:{message_sent_to_grievant:true}})
             }
             })
