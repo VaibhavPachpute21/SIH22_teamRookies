@@ -40,3 +40,13 @@ export async function SatisfiedWithReply(id,rid,fid){
         payload:request
     }
 }
+
+
+export async function GetDashboardData(){
+    const request = await axios.get(`http://localhost:3001/api/grievance/get-dashboard-data`)
+    .then(response=>response.data)
+    return {
+        type:"get_dashboard_data",
+        payload:request
+    }
+}

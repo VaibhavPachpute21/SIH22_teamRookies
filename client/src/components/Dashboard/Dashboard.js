@@ -26,15 +26,18 @@ import AddNewUniAdmin from '../Slides/AddNewUniAdmin'
 import RegionalOfTracker from '../Slides/RegionalOfTracker'
 import cookie from 'js-cookie'
 import { useNavigate } from 'react-router-dom'
+import {connect} from 'react-redux'
+import * as actions from '../../actions/grievant_actions'
 
-export default function Dashboard() {
+ function Dashboard(props) {
 
   const [shutter, setShutter] = useState(0)
   const [authen, setAuthen] = useState(null)
   const auth = cookie.get('token');
   const [User, SetUser] = useState({})
   const navigate = useNavigate()
-
+  const [Error,SetError] = useState('')
+  const [snips,setsnips] = useState({})
 
   console.log(User)
   useEffect(() => {
@@ -69,7 +72,28 @@ export default function Dashboard() {
     setShutter(number)
   }
 
-  console.log(User)
+  useEffect(()=>{
+    const GetDashboardData = async () => {
+      try {
+        await props.GetDashboardData()
+      } catch (error) {
+        SetError(error.message)
+      }
+    }
+    GetDashboardData()
+  },[])
+
+  useEffect(()=>{
+    if(props.data){
+      let nums = props.data?.grievanceData
+      if(nums){
+        setsnips(nums)
+      }
+    }
+  },[props.data])
+
+  console.log(snips)
+
   return (
     <HStack
       w={'100vw'}
@@ -251,3 +275,10 @@ export default function Dashboard() {
     </HStack>
   )
 }
+const mapStateToProps = (state) => {
+  return{
+    data:state.grievance
+  }
+}
+
+export default connect(mapStateToProps,actions)(Dashboard)
