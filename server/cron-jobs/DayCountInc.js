@@ -16,8 +16,8 @@ exports.SendMessageToForward = async (req, res, next) => {
                 if (typeof (doc?.officer_name) !== undefined) {
                     const grievance = await Grievance.findById(doc?.grievance_id)
                     const officer = await Officer.findById(grievance?.reciever_id)
-                    await SendEmail(officer?.email, grievance?.grievant_name, grievance?.grievance_nature)
-                    await SendMessage("User", grievance?.grievance_title, doc?.officer_name)
+                    // await SendEmail(officer?.email, grievance?.grievant_name, grievance?.grievance_nature)
+                    // await SendMessage("User", grievance?.grievance_title, doc?.officer_name)
                     await Forward.findOneAndUpdate({ _id: doc._id }, { $set: { message_sent_to_grievant: true } })
                 }
             })
@@ -57,7 +57,7 @@ exports.FindAssignedToTwo = async (req, res, next) => {
                 ])
 
 
-                await Forward.create({
+                {await Forward.create({
                     previous_reciever: "Change",
                     current_reciever: regionalOfficer[0]?._id,
                     grievance_id: doc._id,
@@ -66,7 +66,7 @@ exports.FindAssignedToTwo = async (req, res, next) => {
                     assigned_to_role: "2",
                     officer_name: regionalOfficer[0]?.fullname,
                     reciever_phone: regionalOfficer[0].phone_number
-                })
+                })}
                 await Grievance.findByIdAndUpdate(doc._id, { $set: { assigned_in_role: "X" } }, { new: true })
 
 

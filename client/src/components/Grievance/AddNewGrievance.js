@@ -71,34 +71,35 @@ function AddNewGrievance(props) {
 
     }
 
-    useEffect(()=>{
+    useEffect(() => {
 
         if (props.data) {
             let alias = props.data
             if (alias.grievanceData) {
                 let d = alias?.grievanceData?.newGrievance
-                
+
+
                 if (d) {
 
-                        toast({
-                            position: 'top',
-                            render: () => (
-                                <Box color='white' p={3} bg='green.500'>
-                                    Grievance submitted
-                                </Box>
-                            ),
-                        })
-        
-                    
+                    toast({
+                        position: 'top',
+                        render: () => (
+                            <Box color='white' p={3} bg='green.500'>
+                                Grievance submitted
+                            </Box>
+                        ),
+                    })
+
+                    console.log(d)
                     // navigate('/TrackGrievance/34-20')
                 }
-                
+
 
             }
 
         }
-    },[props.data])
-    
+    }, [props.data])
+
 
     const HandleFileSubmit = (e) => {
         let file = e.target.files[0]
@@ -121,7 +122,7 @@ function AddNewGrievance(props) {
 
 
     return (
-        <Flex  overflowX={'hidden'} justifyContent={'center'} padding={[2,2,10,10]}
+        <Flex overflowX={'hidden'} justifyContent={'center'} padding={[2, 2, 10, 10]}
         >
             <Flex flexDirection={'column'} w={['100%', '90%', '80%', '80%']} border={'1px solid black'}
             >
@@ -174,16 +175,16 @@ function AddNewGrievance(props) {
                         <Flex w={'100%'} h='100%' bg='white' py={[5, 5, 5, 5]} px={[2, 2, 10, 10]} gap={[2, 2, 5, 5]} flexDirection={['column', 'column', 'row', 'row']} >
                             <Box w={['90%', '90%', '50%', '50%']}>
                                 <Text fontSize={'18px'} paddingLeft={0}>Principal Name:</Text>
-                                <Input variant={'flushed'} placeholder='Principal Name' name="pName" id="pName"
-                                    {...register('pName', { required: { value: true, message: "Please enter principals name", } })}
+                                <Input variant={'flushed'} value={props.User.state} readOnly={true}  //name="pName" id="pName"
+                                // {...register('pName', { required: { value: true, message: "Please enter principals name", } })}
 
                                 />
-                                {errors.pName && errors.pName.message ? (
+                                {/* {errors.pName && errors.pName.message ? (
                                     <Box textAlign={'left'} fontSize={'12px'} py={1} maxH={'0px'} color={'red'}>
                                         {errors.pName.message}
                                     </Box>
                                 ) : (null)
-                                }
+                                } */}
                             </Box>
                             <Box w={['90%', '90%', '50%', '50%']}>
                                 <Text fontSize={'18px'} paddingLeft={0}>Nature of Grievance:</Text>
@@ -245,7 +246,7 @@ function AddNewGrievance(props) {
                                 accept={'image/png, image/jpeg'} />
                         </Box>
 
-                        
+
 
                         <Box alignItems={'center'} textAlign='center' w={'100%'} bg='white' py={[2, 2, 10, 10]}>
                             <Button w="30%" alignItems={'center'} bg='#5A4FCF' color='white' type="submit">

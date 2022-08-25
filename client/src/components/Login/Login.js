@@ -562,12 +562,12 @@ function Login(props) {
                   <Heading
                     fontSize={'5xl'}
                     color={'white'}  >
-                    Heading
+                    
                   </Heading>
                 </Box>
                 <Box w="60%">
                   <Text color={'white'} fontWeight={600}>
-                    Content
+                    
                   </Text>
                 </Box>
               </VStack>
