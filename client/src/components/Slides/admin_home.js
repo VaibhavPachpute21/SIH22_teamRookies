@@ -1,136 +1,158 @@
-import { Box, VStack, HStack, Heading, Icon, IconButton, Flex, Tag, Text, Avatar } from '@chakra-ui/react'
+import {
+  Box,
+  VStack,
+  HStack,
+  Heading,
+  Icon,
+  IconButton,
+  Flex,
+  Tag,
+  Text,
+  Avatar,
+} from "@chakra-ui/react";
 
-import { MdPendingActions, MdOutlineMoreVert } from 'react-icons/md'
-import ChartComponent from '../Chart/index'
-import {BsChat} from 'react-icons/bs'
-import { useEffect, useState } from 'react'
+import { MdPendingActions, MdOutlineMoreVert } from "react-icons/md";
+import ChartComponent from "../Chart/index";
+import { BsChat } from "react-icons/bs";
+import { useEffect, useState } from "react";
 
 const AdminHome = (props) => {
-    const [dash,setDash] = useState([])
+  const [dash, setDash] = useState([]);
 
-    useEffect(()=>{
-        if(props.dashData){
-            let data = []
-            data.push(props?.dashData?.pendingGrievances)
-            data.push(props?.dashData?.newGrievacestoday)
-            data.push(props?.dashData?.totalOfficers)
-            data.push(props?.dashData?.totalUniversity)
-            setDash(data)
+  useEffect(() => {
+    if (props.dashData) {
+      let data = [];
+      data.push(props?.dashData?.pendingGrievances);
+      data.push(props?.dashData?.newGrievacestoday);
+      data.push(props?.dashData?.totalOfficers);
+      data.push(props?.dashData?.totalUniversity);
+      setDash(data);
+    }
+  }, [props.dashData]);
 
-        }
-    },[props.dashData])
+  const fakeData = [
+    {
+      number: 5241,
+      text: "Your pending grievances.",
+    },
+    {
+      number: 341,
+      text: "New Grievances today!",
+    },
+    {
+      number: 5,
+      text: "Total officers.",
+    },
+    {
+      number: 7,
+      text: "Total universities",
+    },
+  ];
 
+  const RecentlyContacted = [
+    {
+      username: "Abhinav",
+      email: "abhinav@gmail.com",
+    },
+    {
+      username: "Saurabh",
+      email: "saurabh@gmail.com",
+    },
+    {
+      username: "Shahima",
+      email: "shahima@gmail.com",
+    },
+    {
+      username: "Jaimit",
+      email: "Jaimit@gmail.com",
+    },
+  ];
 
+  return (
+    <Flex
+      spacing={10}
+      w="100%"
+      h="max-content"
+      overflowX={"hidden"}
+      flexDirection={["column", "column", "column", "column"]}
+    >
+      <Flex
+        flexDirection={["column"]}
+        paddingLeft={8}
+        w="100%"
+        h={["100%", "100%", "10%", "10%"]}
+      >
+        <Heading fontFamily={"monospace"}>
+          Good Morning,{props.userData.fullname}!
+        </Heading>
+      </Flex>
+      <Flex
+        flexDirection={["column", "column", "row", "row"]}
+        paddingLeft={8}
+        spacing={10}
+        w="100%"
+        h={["100%", "100%", "100%", "30%"]}
+      >
+        {fakeData?.map((item, i) => (
+          <Flex
+            flexDirection={["column"]}
+            key={i}
+            w={["100%", "100%", "100%", "25%"]}
+            h="100%"
+            boxShadow="xl"
+            padding={[2, 2, 0, 0]}
+            borderRadius={20}
+          >
+            <HStack
+              w="100%"
+              h={["30%", "30%", "20%", "20%"]}
+              alignItems={"center"}
+              justifyContent={"center"}
+            >
+              <HStack
+                w="100%"
+                h="100%"
+                alignItems={"flex-start"}
+                justifyContent={"space-around"}
+              >
+                <Icon color={"#5A4FCF"} w={20} h={20}>
+                  <MdPendingActions />
+                </Icon>
 
-    const fakeData = [
-        {
-            number: 5241,
-            text: "Your pending grievances."
-        },
-        {
-            number: 341,
-            text: "New Grievances today!"
-        },
-        {
-            number: 5,
-            text: "Total officers."
-        },
-        {
-            number: 7,
-            text: "Total universities"
-        }
-    ]
+                <IconButton
+                  color={"#5A4FCF"}
+                  fontSize={"3xl"}
+                  _hover={{}}
+                  icon={<MdOutlineMoreVert />}
+                  background={"none"}
+                ></IconButton>
+              </HStack>
+            </HStack>
 
-    const RecentlyContacted = [
-        {
-            username:"Abhinav",
-            email:"abhinav@gmail.com"
-        },
-        {
-            username:"Saurabh",
-            email:"saurabh@gmail.com"
-        },
-        {
-            username:"Shahima",
-            email:"shahima@gmail.com"
-        },
-        {
-            username:"Jaimit",
-            email:"Jaimit@gmail.com"
-        },
-       
-    ]
+            <VStack w="100%" h={["100%", "100%", "100%", "80%"]}>
+              <Box p={5} w="100%" h={["100%", "100%", "100%", "50%"]}>
+                <Heading size={"xl"}>{dash[i]}</Heading>
+              </Box>
 
+              <Box p={0} w="80%" h={["100%", "100%", "100%", "50%"]}>
+                <Text fontSize={"md"} fontWeight={500}>
+                  {item.text}
+                </Text>
+              </Box>
+            </VStack>
+          </Flex>
+        ))}
+      </Flex>
 
-
-    return (
-        <Flex spacing={10} w="100%" h="100%" overflowX={'hidden'}
-        flexDirection={["column","column","column","column"]}
-        >
-            <Flex flexDirection={["column"]}
-                paddingLeft={8}
-                w="100%" h={["100%","100%","10%","10%"]} >
-                <Heading fontFamily={'monospace'}>
-                    Good Morning,{props.userData.fullname}!
-                </Heading>
-            </Flex>
-            <Flex flexDirection={['column','column','row','row']}
-                paddingLeft={8}
-                spacing={10} w="100%" h={["100%","100%","100%","30%"]}>
-                {
-                    fakeData?.map((item, i) => (
-                        <Flex flexDirection={['column']}
-                            key={i} w={["100%","100%","100%","25%"]} h="100%"
-                            boxShadow='xl'
-                            padding={[2,2,0,0]}
-                            borderRadius={20}>
-                            <HStack w="100%" h={["30%","30%","20%","20%"]} alignItems={'center'} justifyContent={'center'}>
-                                <HStack w="100%" h="100%"
-                                    alignItems={'flex-start'} justifyContent={'space-around'}>
-                                    <Icon
-                                        color={"#5A4FCF"}
-                                        w={20} h={20}>
-                                        <MdPendingActions />
-                                    </Icon>
-
-                                    <IconButton
-                                        color={"#5A4FCF"}
-                                        fontSize={'3xl'}
-                                        _hover={{}}
-                                        icon={<MdOutlineMoreVert />}
-                                        background={'none'}
-                                    ></IconButton>
-                                </HStack>
-                            </HStack>
-
-                            <VStack w="100%" h={["100%","100%","100%","80%"]}>
-                                <Box
-                                    p={5}
-                                    w="100%" h={["100%","100%","100%","50%"]}>
-                                    <Heading
-                                        size={'xl'}
-                                    >
-                                        {dash[i]}
-                                    </Heading>
-                                </Box>
-
-                                <Box
-                                    p={0}
-                                    w="80%" h={["100%","100%","100%","50%"]}>
-                                    <Text
-                                        fontSize={'md'}
-                                        fontWeight={500}
-                                    >
-                                        {item.text}
-                                    </Text>
-                                </Box>
-                            </VStack>
-                        </Flex>
-                    ))
-                }
-            </Flex>
-
-            <Flex flexDirection={['column','column','row','row']}
+      <iframe
+        title="Grievances Portal - Page 1"
+        width="100%"
+        height="750px"
+        src="https://app.powerbi.com/view?r=eyJrIjoiYWY5NzI5ODItOGIxOS00MDMzLWE4MDctMDllNzBhYjUwNWU2IiwidCI6ImUzNzJhNzI2LTNiYzMtNDdiOS05MWU0LWE0M2E5ZmU2YzQ2YyJ9"
+        frameborder="0"
+        allowFullScreen="true"
+      ></iframe>
+      {/* <Flex flexDirection={['column','column','row','row']}
                 paddingLeft={8}
                 marginTop={5}
                 w="100%" h={["100%","100%","100%","100%"]}>
@@ -260,9 +282,9 @@ const AdminHome = (props) => {
                         </VStack>
                     </Box>
                 </Flex>
-            </Flex>
-        </Flex>
-    );
-}
+            </Flex> */}
+    </Flex>
+  );
+};
 
 export default AdminHome;
