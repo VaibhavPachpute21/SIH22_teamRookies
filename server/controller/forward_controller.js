@@ -6,7 +6,7 @@ const {ReplyNotify} = require('../messaging/sendMessage')
 exports.CreateReply = async (req, res, next) => {
 
     const {
-        message
+        message,userType,img_link
     } = req.body
 
 
@@ -20,7 +20,9 @@ exports.CreateReply = async (req, res, next) => {
 
     let obj = {
         message: message,
-        DateTime: datetime
+        DateTime: datetime,
+        user_type:userType,
+        img_link:img_link
     }
 
 
@@ -37,9 +39,9 @@ exports.CreateReply = async (req, res, next) => {
 
         const officer = await Officer.findOne({"_id":reciever_id})
 
-         if(grievance && officer){
+         /* if(grievance && officer){
             ReplyNotify(grievance.grievant_name,grievance.grievance_nature,officer?.fullname)
-        } 
+        }  */
   
         if (!newReply) {
             res.status(200).json({
@@ -83,4 +85,26 @@ exports.CreateReply = async (req, res, next) => {
             res.status(400).send(error.message)
         }
 
+    }
+
+    exports.GetUserFromGrievance = async (req,res,next) => {
+        const id = req.params.gid
+        try {
+            const user = await Grievance.find({_id:id})
+            if(!user){
+                res.status(200).json({
+                    success:false,
+                    message:"Could not find grievance"
+                })
+            }
+            res.status(200).json({
+                success:true,
+                user
+            })
+        } catch (error) {
+            res.status(400).json({
+                success:false,
+                message:error.message
+            })
+        }
     }

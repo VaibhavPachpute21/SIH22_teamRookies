@@ -19,7 +19,14 @@ const forwardSchema = new mongoose.Schema({
     },
     replies:[
         {
+            user_type:{
+                type:String,
+                enum:["user","admin"]
+            },
             message:{
+                type:String
+            },
+            img_link:{
                 type:String
             },
             DateTime:{
@@ -40,6 +47,9 @@ const forwardSchema = new mongoose.Schema({
         type:String
     },
     assigned_to_role:{
+        type:String
+    },
+    short_id:{
         type:String
     },
     satisfied:{

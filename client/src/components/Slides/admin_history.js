@@ -113,7 +113,8 @@ const AdminDashboardHistory = (props) => {
       
         try {
                 let obj = {
-                    message:message
+                    message:message,
+                    userType:"admin"
                 }
 
             const set = await props.SendReply(obj, gid, User?._id)
@@ -123,6 +124,8 @@ const AdminDashboardHistory = (props) => {
         }
     }
 
+
+    
    
 
 

@@ -241,9 +241,9 @@ function AddNewGrievance(props) {
 
                         <Box w={'100%'} bg='white' py={3} px={[2, 2, 10, 10]} >
                             <Text fontSize={'18px'} pb={2} paddingLeft={0}>Please upload image related to grievance if any:</Text>
-                            <Input type={'file'}
-                                onChange={(e) => { HandleFileSubmit(e) }}
-                                accept={'image/png, image/jpeg'} />
+                            <input name="file1" type="file" 
+                                         onChange={(e) => { HandleFileSubmit(e) }}
+                                        accept="application/pdf"></input>
                         </Box>
 
 

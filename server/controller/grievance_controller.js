@@ -3,10 +3,14 @@ const { Officer } = require("../models/officer_model")
 const { Forward } = require("../models/forward_model")
 const { FirstSendMessage } = require('../messaging/sendMessage')
 const { SendEmail } = require('../sendEmails/index')
+
+
+
+
 exports.CreateGrievance = async (req, res, next) => {
     const { grievant_id, reciever_id, grievant_university, grievant_institute,
         region,
-        grievance_nature, grievant_name, principal_name, grievance_title, grievance_description, imgs } = req.body
+        grievance_nature, grievant_name, principal_name, grievance_title, grievance_description, imgs, short_id } = req.body
 
     try {
         const firstOfficerReciever = await Officer.findOne({ "university": grievant_university, "role": "1A" }).sort('university_nodal_no')
@@ -22,7 +26,8 @@ exports.CreateGrievance = async (req, res, next) => {
             grievance_title: grievance_title, grievance_description: grievance_description,
             assigned_in_role: "1A",
             region: region,
-            grievant_institute: grievant_institute
+            grievant_institute: grievant_institute,
+            short_id:short_id,
 
         })
 
@@ -35,7 +40,8 @@ exports.CreateGrievance = async (req, res, next) => {
             officer_university: firstOfficerReciever.university,
             assigned_to_role: "1A",
             officer_name: firstOfficerReciever.fullname,
-            reciever_phone: firstOfficerReciever.phone_number
+            reciever_phone: firstOfficerReciever.phone_number,
+            short_id:short_id,
         })
 
         if (!newGrievance) {
@@ -166,7 +172,7 @@ exports.GetGrievanceStatus = async (req, res, next) => {
     const id = req.params.id
 
     try {
-        const latestForward = await Forward.find({ "grievance_id": id }).limit(1).sort({ $natural: -1 })
+        const latestForward = await Forward.find({ short_id: id }).limit(1).sort({ $natural: -1 })
         if (!latestForward) {
             res.status(200).json({
                 success: false,

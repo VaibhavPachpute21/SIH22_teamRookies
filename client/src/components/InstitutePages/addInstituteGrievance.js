@@ -16,6 +16,13 @@ function AddInstituteGrievance(props) {
     const navigate = useNavigate()
 
     const HandleSubmit = async (data) => {
+        const date = Date.now();
+        console.log(date); // 👉️ Wed Jun 22 2022
+
+        // const timestampInMs = date.getTime();
+
+        const unixTimestamp = Math.floor(date / 1000);
+        console.log(unixTimestamp);
         let obj = {
             grievant_id: User._id,
             grievance_nature: data.nature,
@@ -26,8 +33,9 @@ function AddInstituteGrievance(props) {
             grievant_university: "mu",
             imgs: Files,
             grievant_institute: User.institute_name,
-            region: User.institute_region
-        }
+            region: User.institute_region,
+            short_id: `GRIEV_${unixTimestamp}`,
+        };
         try {
             const newGrievance = await axios.post('http://localhost:3001/api/grievance/make-grievance', obj)
 
@@ -46,7 +54,7 @@ function AddInstituteGrievance(props) {
                     })
                     console.log(d.newGrievance.grievant_id)
 
-                     navigate('/trackGrievance/'+`${d.newGrievance._id}`)
+                    navigate('/trackGrievance/' + `${d.newGrievance._id}`)
                 }
                 else {
                     toast({
@@ -160,7 +168,7 @@ function AddInstituteGrievance(props) {
                                     <Box w={['90%', '90%', '50%', '50%']}>
                                         <Text fontSize={'18px'} paddingLeft={0}>Principal Name:</Text>
                                         <Input variant={'flushed'} value={User?.name_of_director} readOnly={true} // name="pName" id="pName"
-                                           // {...register('pName', { required: { value: true, message: "Please enter principals name", } })}
+                                        // {...register('pName', { required: { value: true, message: "Please enter principals name", } })}
 
                                         />
                                         {errors.pName && errors.pName.message ? (
@@ -225,9 +233,9 @@ function AddInstituteGrievance(props) {
 
                                 <Box w={'100%'} bg='white' py={3} px={[2, 2, 10, 10]} >
                                     <Text fontSize={'18px'} pb={2} paddingLeft={0}>Please upload image related to grievance if any:</Text>
-                                    <input
+                                    <input name="file1" type="file"
                                         onChange={(e) => { HandleFileSubmit(e) }}
-                                        type={'file'}></input>
+                                        accept="application/pdf"></input>
                                 </Box>
 
                                 <Box alignItems={'center'} textAlign='center' w={'100%'} bg='white' py={[2, 2, 10, 10]}>
