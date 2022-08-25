@@ -27,7 +27,9 @@ exports.CreateGrievance = async (req, res, next) => {
             assigned_in_role: "1A",
             region: region,
             grievant_institute: grievant_institute,
-            short_id:short_id,
+            short_id: short_id,
+            createdAt: createdAt
+
 
         })
 
@@ -41,7 +43,10 @@ exports.CreateGrievance = async (req, res, next) => {
             assigned_to_role: "1A",
             officer_name: firstOfficerReciever.fullname,
             reciever_phone: firstOfficerReciever.phone_number,
-            short_id:short_id,
+            short_id: short_id, createdAt: createdAt,
+
+            updatedAt:
+                updatedAt
         })
 
         if (!newGrievance) {

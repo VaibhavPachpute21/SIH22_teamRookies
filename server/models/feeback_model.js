@@ -1,4 +1,6 @@
 const mongoose = require('mongoose')
+const moment = require('moment-timezone'); 
+moment().tz("Asia/Kolkata").format();
 
 const feedbackSchema = new mongoose.Schema({
     solver_officer_id:{
@@ -50,9 +52,12 @@ const feedbackSchema = new mongoose.Schema({
     },
     suggestions:{
         type:String
-    }
+    },
+    createdAt: {type: Date, },
+    
+    updatedAt: {type: Date, }
 
-},{timestamps:true})
+})
 
 const Feedback = mongoose.model('Feedback',feedbackSchema)
 

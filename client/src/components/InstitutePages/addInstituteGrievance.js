@@ -28,7 +28,8 @@ function AddInstituteGrievance(props) {
   const toast = useToast();
   const [Files, SetFiles] = useState([]);
   const navigate = useNavigate();
-
+  const moment = require('moment-timezone'); 
+  moment().tz("Asia/Kolkata").format();
   const HandleSubmit = async (data) => {
     const date = Date.now();
     console.log(date); // 👉️ Wed Jun 22 2022
@@ -49,6 +50,7 @@ function AddInstituteGrievance(props) {
       grievant_institute: User.institute_name,
       region: User.institute_region,
       short_id: `GRIEV_${unixTimestamp}`,
+      createdAt:Date.now()
     };
     try {
       const newGrievance = await axios.post(
@@ -65,7 +67,7 @@ function AddInstituteGrievance(props) {
             position: "top",
             render: () => (
               <Box color="white" p={3} bg="green.500">
-                Grievance submitted {d.newGrievance._id}
+                Grievance submitted {d.newGrievance.short_id}
               </Box>
             ),
           });
