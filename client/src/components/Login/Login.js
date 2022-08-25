@@ -292,6 +292,47 @@ function Login(props) {
       }
     }
 
+    if (role === "Regional Admin") {
+      try {
+        const request = await axios.post('http://localhost:3001/api/regionaladmin/login', obj)
+          .then(response => response.data)
+
+        if (request) {
+          let errr = request?.message
+          let token = request?.token
+          if (request.success) {
+
+            toast({
+              position: 'top',
+              render: () => (
+                <Box color='white' p={3} bg='green.500'>
+                  Login complete
+                </Box>
+              ),
+            })
+            cookie.set("token", token)
+          }
+          else {
+            toast({
+              position: 'top',
+              render: () => (
+                <Box color='white' p={3} bg='red.500'>
+                  {errr}
+                </Box>
+              ),
+            })
+          }
+        }
+
+
+        if (request?.payload?.success != false) {
+          navigate("/Dashboard")
+        }
+      } catch (error) {
+        SetError(error.message)
+      }
+    }
+
 
   }
 
@@ -400,8 +441,8 @@ function Login(props) {
                           <option>Institute</option>
                           <option>University</option>
                           <option>Nodal Officer</option>
+                          <option>Regional Admin</option>
                           <option>Regional Officer</option>
-                          <option>Chief Vigilance Officer</option>
                           <option>UGC Admin</option>
                         </Select>
                       </InputGroup>

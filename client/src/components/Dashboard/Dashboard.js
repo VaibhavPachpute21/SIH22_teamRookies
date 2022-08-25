@@ -24,20 +24,21 @@ import OfficersRankingPage from '../Slides/OfficersRankingPage'
 import SolvedGrievance from '../Slides/SolvedGrievance'
 import AddNewUniAdmin from '../Slides/AddNewUniAdmin'
 import RegionalOfTracker from '../Slides/RegionalOfTracker'
+import Rejected from '../Slides/Rejected'
 import cookie from 'js-cookie'
 import { useNavigate } from 'react-router-dom'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import * as actions from '../../actions/grievant_actions'
 
- function Dashboard(props) {
+function Dashboard(props) {
 
   const [shutter, setShutter] = useState(0)
   const [authen, setAuthen] = useState(null)
   const auth = cookie.get('token');
   const [User, SetUser] = useState({})
   const navigate = useNavigate()
-  const [Error,SetError] = useState('')
-  const [snips,setsnips] = useState({})
+  const [Error, SetError] = useState('')
+  const [snips, setsnips] = useState({})
 
   console.log(User)
   useEffect(() => {
@@ -72,7 +73,7 @@ import * as actions from '../../actions/grievant_actions'
     setShutter(number)
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     const GetDashboardData = async () => {
       try {
         await props.GetDashboardData()
@@ -81,16 +82,16 @@ import * as actions from '../../actions/grievant_actions'
       }
     }
     GetDashboardData()
-  },[])
+  }, [])
 
-  useEffect(()=>{
-    if(props.data){
+  useEffect(() => {
+    if (props.data) {
       let nums = props.data?.grievanceData
-      if(nums){
+      if (nums) {
         setsnips(nums)
       }
     }
-  },[props.data])
+  }, [props.data])
 
   console.log(snips)
 
@@ -124,64 +125,64 @@ import * as actions from '../../actions/grievant_actions'
           w="100%" h="10%">
           <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
             <Tooltip label={'Home'}>
-            <IconButton
-              onClick={() => { setShutter(0) }}
-              borderRadius={10}
-              background={shutter == 0 ? '#362ca0' : '#5A4FCF'}
-              _hover={{ background: '#5247cd' }}
-              color={'white'}
-              fontSize={'3xl'}
-              icon={<AiOutlineHome />} />
-              </Tooltip>
+              <IconButton
+                onClick={() => { setShutter(0) }}
+                borderRadius={10}
+                background={shutter == 0 ? '#362ca0' : '#5A4FCF'}
+                _hover={{ background: '#5247cd' }}
+                color={'white'}
+                fontSize={'3xl'}
+                icon={<AiOutlineHome />} />
+            </Tooltip>
           </Flex>
 
         </Box>
 
         <Box w="100%" h="10%">
           <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
-            <Tooltip label={User.role=="1"?"Officers List":User.role=="3"?"Top Officers":'Recent Grivances'}>
-            <IconButton
-              onClick={() => { setShutter(1) }}
-              background={shutter == 1 ? '#362ca0' : '#5A4FCF'}
-              borderRadius={10}
+            <Tooltip label={User.role == "1" ? "Officers List" : User.role == "3" ? "Top Officers" : 'Recent Grivances'}>
+              <IconButton
+                onClick={() => { setShutter(1) }}
+                background={shutter == 1 ? '#362ca0' : '#5A4FCF'}
+                borderRadius={10}
 
-              color={'white'}
-              _hover={{ background: '#5247cd' }}
-              fontSize={'3xl'}
-              icon={<MdOutlineRecentActors />} />
-              </Tooltip>
+                color={'white'}
+                _hover={{ background: '#5247cd' }}
+                fontSize={'3xl'}
+                icon={<MdOutlineRecentActors />} />
+            </Tooltip>
           </Flex>
         </Box>
 
-        {User.role=="2" || User.role=="1A"?null:<Box w="100%" h="10%">
+        {User.role == "2" || User.role == "1A" || User.role == "4" ? null : <Box w="100%" h="10%">
           <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
-          <Tooltip label={User.role=="1"?"Add new Nodal Officer":'Track Grivances'}>
-            <IconButton
-              onClick={() => { setShutter(2) }}
-              background={shutter == 2 ? '#362ca0' : '#5A4FCF'}
-              borderRadius={10}
+            <Tooltip label={User.role == "1" ? "Add new Nodal Officer" : 'Track Grivances'}>
+              <IconButton
+                onClick={() => { setShutter(2) }}
+                background={shutter == 2 ? '#362ca0' : '#5A4FCF'}
+                borderRadius={10}
 
-              color={'white'}
-              _hover={{ background: '#5247cd' }}
-              fontSize={'3xl'}
-              icon={<MdPendingActions />} />
-              </Tooltip>
+                color={'white'}
+                _hover={{ background: '#5247cd' }}
+                fontSize={'3xl'}
+                icon={<MdPendingActions />} />
+            </Tooltip>
           </Flex>
         </Box>}
 
-        {User.role=="2" || User.role=="1A" ?null: <Box w="100%" h="10%">
+        {User.role == "2" || User.role == "1A" || User.role == "4" ? null : <Box w="100%" h="10%">
           <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
-          <Tooltip label={User.role=="0P" || User.role=="0I"?'Add Grivance':User.role == "1" ? "Add Institute":User.role=="3"?"Add University Admin":"Add Nodal Officer"}>
-            <IconButton
-              onClick={() => { setShutter(3) }}
-              background={shutter == 3 ? '#362ca0' : '#5A4FCF'}
-              borderRadius={10}
+            <Tooltip label={User.role == "0P" || User.role == "0I" ? 'Add Grivance' : User.role == "1" ? "Add Institute" : User.role == "3" ? "Add University Admin" : "Add Nodal Officer"}>
+              <IconButton
+                onClick={() => { setShutter(3) }}
+                background={shutter == 3 ? '#362ca0' : '#5A4FCF'}
+                borderRadius={10}
 
-              color={'white'}
-              _hover={{ background: '#5247cd' }}
-              fontSize={'3xl'}
-              icon={<IoMdAddCircleOutline />} />
-              </Tooltip>
+                color={'white'}
+                _hover={{ background: '#5247cd' }}
+                fontSize={'3xl'}
+                icon={<IoMdAddCircleOutline />} />
+            </Tooltip>
           </Flex>
         </Box>}
 
@@ -189,32 +190,32 @@ import * as actions from '../../actions/grievant_actions'
 
         <Box w="100%" h="10%">
           <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
-          <Tooltip label={'Profile'}>
-            <IconButton
-              onClick={() => { setShutter(5) }}
-              background={shutter == 5 ? '#362ca0' : '#5A4FCF'}
-              marginBottom={5}
-              borderRadius={10}
+            <Tooltip label={'Profile'}>
+              <IconButton
+                onClick={() => { setShutter(5) }}
+                background={shutter == 5 ? '#362ca0' : '#5A4FCF'}
+                marginBottom={5}
+                borderRadius={10}
 
-              color={'white'}
-              _hover={{ background: '#5247cd' }}
-              fontSize={'3xl'}
-              icon={<AiOutlineUser />} />
-              </Tooltip>
+                color={'white'}
+                _hover={{ background: '#5247cd' }}
+                fontSize={'3xl'}
+                icon={<AiOutlineUser />} />
+            </Tooltip>
           </Flex>
         </Box>
         <Box w="100%" h="50%">
           <Flex w="100%" h="100%" flexDirection={'column'} alignItems={'center'} justifyContent={'flex-end'}>
-          <Tooltip label={'Log Out'}>
-            <IconButton
-              background={'#5A4FCF'}
-              borderRadius={10}
-              onClick={()=>{cookie.remove('token') ; navigate("/")}}
-              color={'white'}
-              _hover={{ background: '#5247cd' }}
-              fontSize={'2xl'}
-              icon={<AiOutlineLogout />} />
-              </Tooltip>
+            <Tooltip label={'Log Out'}>
+              <IconButton
+                background={'#5A4FCF'}
+                borderRadius={10}
+                onClick={() => { cookie.remove('token'); navigate("/") }}
+                color={'white'}
+                _hover={{ background: '#5247cd' }}
+                fontSize={'2xl'}
+                icon={<AiOutlineLogout />} />
+            </Tooltip>
 
           </Flex>
         </Box>
@@ -232,7 +233,7 @@ import * as actions from '../../actions/grievant_actions'
               runner={GoToAddGrievance}
               runner1={GoToViewGrievance}
               userData={User} /> : <AdminHome
-              dashData = {snips?snips:null}
+              dashData={snips ? snips : null}
               userData={User} />
           ) : (null)
         }
@@ -242,8 +243,9 @@ import * as actions from '../../actions/grievant_actions'
               <DashboardHistory User={User ? User : null} /> :
               User.role === "1" ? <NodalOfficersList /> :
                 User.role === "3" ? <OfficersRankingPage /> :
-                  User.role == "2" ? <RegionalOfTracker User={User ? User : null} /> :
-                    <AdminDashboardHistory User={User ? User : null} />
+                  User.role === "4" ? <Rejected /> :
+                    User.role == "2" ? <RegionalOfTracker User={User ? User : null} /> :
+                      <AdminDashboardHistory User={User ? User : null} />
           ) : (null)
         }
         {
@@ -278,9 +280,9 @@ import * as actions from '../../actions/grievant_actions'
   )
 }
 const mapStateToProps = (state) => {
-  return{
-    data:state.grievance
+  return {
+    data: state.grievance
   }
 }
 
-export default connect(mapStateToProps,actions)(Dashboard)
+export default connect(mapStateToProps, actions)(Dashboard)
