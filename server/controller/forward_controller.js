@@ -33,14 +33,14 @@ exports.CreateReply = async (req, res, next) => {
         const newReply = await Forward.findOneAndUpdate({ "current_reciever": reciever_id, "grievance_id": grievance_id }
                 , { $push: { replies: obj } })
             
-       /*  const grievance = await Grievance.findOne({"grievance_id":grievance_id})
+         const grievance = await Grievance.findOne({"grievance_id":grievance_id})
 
         const officer = await Officer.findOne({"_id":reciever_id})
 
          if(grievance && officer){
             ReplyNotify(grievance.grievant_name,grievance.grievance_nature,officer?.fullname)
         } 
-  */
+  
         if (!newReply) {
             res.status(200).json({
                 success: true,

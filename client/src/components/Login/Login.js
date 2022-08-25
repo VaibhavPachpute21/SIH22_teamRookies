@@ -294,7 +294,7 @@ function Login(props) {
 
     if (role === "Regional Admin") {
       try {
-        const request = await axios.post('http://localhost:3001/api/regionaladmin/login', obj)
+        const request = await axios.post('http://localhost:3001/api/regionaladmins/login', obj)
           .then(response => response.data)
 
         if (request) {

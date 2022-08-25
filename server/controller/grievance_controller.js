@@ -1,15 +1,15 @@
 const { Grievance } = require('../models/grievance_model')
 const { Officer } = require("../models/officer_model")
 const { Forward } = require("../models/forward_model")
-const {FirstSendMessage} = require('../messaging/sendMessage')
-const {SendEmail} = require('../sendEmails/index')
+const { FirstSendMessage } = require('../messaging/sendMessage')
+const { SendEmail } = require('../sendEmails/index')
 exports.CreateGrievance = async (req, res, next) => {
-    const { grievant_id, reciever_id, grievant_university,grievant_institute, 
+    const { grievant_id, reciever_id, grievant_university, grievant_institute,
         region,
         grievance_nature, grievant_name, principal_name, grievance_title, grievance_description, imgs } = req.body
 
     try {
-        const firstOfficerReciever = await Officer.findOne({ "university": grievant_university,"role":"1A" }).sort('university_nodal_no')
+        const firstOfficerReciever = await Officer.findOne({ "university": grievant_university, "role": "1A" }).sort('university_nodal_no')
         if (!firstOfficerReciever) {
             console.log("No nodal officer for university")
         }
@@ -17,25 +17,25 @@ exports.CreateGrievance = async (req, res, next) => {
         const newGrievance = await Grievance.create({
             grievant_id: grievant_id, reciever_id: firstOfficerReciever._id,
             grievant_university: grievant_university, imgs: imgs,
-            grievance_nature: grievance_nature, principal_name: principal_name, 
-            grievant_name:grievant_name,
+            grievance_nature: grievance_nature, principal_name: principal_name,
+            grievant_name: grievant_name,
             grievance_title: grievance_title, grievance_description: grievance_description,
-            assigned_in_role:"1A",
-            region:region,
-            grievant_institute:grievant_institute
-            
+            assigned_in_role: "1A",
+            region: region,
+            grievant_institute: grievant_institute
+
         })
 
-       
+
         await Forward.create({
             previous_reciever: "None",
             current_reciever: firstOfficerReciever._id,
             grievance_id: newGrievance._id,
             officer_avatar: firstOfficerReciever.avatar,
             officer_university: firstOfficerReciever.university,
-            assigned_to_role:"1A",
-            officer_name:firstOfficerReciever.fullname,
-            reciever_phone:firstOfficerReciever.phone_number
+            assigned_to_role: "1A",
+            officer_name: firstOfficerReciever.fullname,
+            reciever_phone: firstOfficerReciever.phone_number
         })
 
         if (!newGrievance) {
@@ -48,8 +48,8 @@ exports.CreateGrievance = async (req, res, next) => {
 
         console.log(`Grievance by ${grievant_name} was forwarded to ${firstOfficerReciever.fullname}`)
 
-        //    await FirstSendMessage(grievant_name,firstOfficerReciever.fullname) 
-          //await FirstSendMessage(grievant_name,firstOfficerReciever.fullname) 
+        await FirstSendMessage(grievant_name, firstOfficerReciever.fullname)
+        await FirstSendMessage(grievant_name, firstOfficerReciever.fullname)
 
 
         res.status(200).json({
@@ -112,26 +112,26 @@ exports.EditGrievance = async (req, res, next) => {
 
 }
 
-exports.SatisfiedWithReply = async (req,res,next) => {
+exports.SatisfiedWithReply = async (req, res, next) => {
     const grievance_id = req.params.id
     const reciever_id = req.params.rid
     const forward_id = req.params.fid
 
     try {
-        const updatedGrievance = await Grievance.findOneAndUpdate({"_id":grievance_id},{$set:{"satisfied":true}})
+        const updatedGrievance = await Grievance.findOneAndUpdate({ "_id": grievance_id }, { $set: { "satisfied": true } })
 
-        const updatedSolveCount = await Officer.findOneAndUpdate({"_id":reciever_id},{$inc:{solve_count:1}})
+        const updatedSolveCount = await Officer.findOneAndUpdate({ "_id": reciever_id }, { $inc: { solve_count: 1 } })
 
-        const upadateForwardSatisfied = await Forward.updateMany({"grievance_id":grievance_id},{$set:{satisfied:true}})
+        const upadateForwardSatisfied = await Forward.updateMany({ "grievance_id": grievance_id }, { $set: { satisfied: true } })
 
-        if(!updatedGrievance){
+        if (!updatedGrievance) {
             res.status(200).json({
-                success:false,
-                message:"Could not update grievance"
+                success: false,
+                message: "Could not update grievance"
             })
         }
         res.status(200).json({
-            success:true,
+            success: true,
             updatedGrievance
         })
     } catch (error) {
@@ -162,19 +162,19 @@ exports.DeleteGrievance = async (req, res, next) => {
 }
 
 
-exports.GetGrievanceStatus = async (req,res,next) => {
+exports.GetGrievanceStatus = async (req, res, next) => {
     const id = req.params.id
-   
+
     try {
-        const latestForward = await Forward.find({"grievance_id":id}).limit(1).sort({$natural:-1})
-        if(!latestForward){
+        const latestForward = await Forward.find({ "grievance_id": id }).limit(1).sort({ $natural: -1 })
+        if (!latestForward) {
             res.status(200).json({
-                success:false,
-                message:"Could not find information"
+                success: false,
+                message: "Could not find information"
             })
         }
         res.status(200).json({
-            success:true,
+            success: true,
             latestForward
         })
     } catch (error) {
