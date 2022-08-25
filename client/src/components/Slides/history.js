@@ -233,10 +233,7 @@ const DashboardHistory = (props) => {
                     <Text fontWeight={600}>
                       <strong>Grievance id</strong>
                     </Text>
-                    <Text>
-                      AICTE/{item?.region}/{item?.grievant_university}/
-                      {item?.createdAt.split("-")[0]}/{item?._id.slice(0, 5)}
-                    </Text>
+                    <Text>{item?.short_id}</Text>
                     <VStack
                       py={2}
                       alignItems={"flex-start"}

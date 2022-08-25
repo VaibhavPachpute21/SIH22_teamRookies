@@ -1,68 +1,64 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
-
-const grievanceSchema = new mongoose.Schema({
+const grievanceSchema = new mongoose.Schema(
+  {
     grievant_id: {
-        type: String,
-
+      type: String,
     },
-    grievant_name:{
-        type:String
+    grievant_name: {
+      type: String,
     },
-    grievant_institute:{
-        type:String,
+    grievant_institute: {
+      type: String,
     },
     reciever_id: {
-        type: String,
-
+      type: String,
     },
     grievance_nature: {
-        type: String,
-
+      type: String,
     },
     principal_name: {
-        type: String,
-
+      type: String,
     },
     grievance_title: {
-        type: String,
-
+      type: String,
     },
     grievance_description: {
-        type: String,
-
+      type: String,
     },
     grievant_university: {
-        type: String,
+      type: String,
     },
     imgs: {
-        type: Array
+      type: Array,
     },
     day_counter: {
-        type: Number,
-        default: 0
+      type: Number,
+      default: 0,
     },
     satisfied_count: {
-        type: Number,
-        default: 0
+      type: Number,
+      default: 0,
     },
     satisfied: {
-        type: Boolean,
-        default: false
+      type: Boolean,
+      default: false,
     },
-    assigned_in_role:{
-        type:String,
-        enum:['1A','1B']
+    assigned_in_role: {
+      type: String,
+      enum: ["1A", "1B"],
     },
-    region:{
-        type:String,
-        enum:["east","west","north","south"]
-    }
+    region: {
+      type: String,
+      enum: ["east", "west", "north", "south"],
+    },
+    short_id: {
+      type: String,
+    },
+  },
+  { timestamps: true }
+);
 
-}, { timestamps: true })
+const Grievance = mongoose.model("Grievance", grievanceSchema);
 
-const Grievance = mongoose.model("Grievance", grievanceSchema)
-
-
-
-module.exports = { Grievance }
+module.exports = { Grievance };

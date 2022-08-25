@@ -1,4 +1,4 @@
-import { Avatar, Box, Flex, HStack, Tag, Text, VStack, Link, Input, Button, useToast,IconButton, Divider, Image } from "@chakra-ui/react";
+import { Avatar, Box, Flex, HStack, Tag, Text, VStack, Link, Input, Button, useToast, IconButton, Divider, Image, Icon } from "@chakra-ui/react";
 import { useEffect, useState, useRef } from "react";
 import { FiThumbsUp } from 'react-icons/fi'
 import { FiThumbsDown } from 'react-icons/fi'
@@ -51,58 +51,57 @@ const GrievanceStatus = (props) => {
 
     const EnableFile = () => {
         inRef.current.click()
-      }
+    }
 
     const UploadFile = async (files) => {
         const file = files[0]
         const formData = new FormData()
         formData.append("file", file)
         formData.append("upload_preset", "blrx6dsr")
-    
+
         const data = await axios.post("https://api.cloudinary.com/v1_1/dvvzlzude/image/upload", formData)
-        
-          .then(response => response.data)
-    
+
+            .then(response => response.data)
+
         if (data) {
-            
-          seturlSuccess(true)
-          SetUrl(data?.url)
-          let clone = [...Files]
-          clone.push(file)
-          SetFiles(clone)
+
+            seturlSuccess(true)
+            SetUrl(data?.url)
+            let clone = [...Files]
+            clone.push(file)
+            SetFiles(clone)
         }
-    
-      }
 
-      useEffect(()=>{
-        if(Url){
-            
+    }
 
-  
-              toast({
+    useEffect(() => {
+        if (Url) {
+
+
+
+            toast({
                 position: 'top',
                 render: () => (
-                  <Box color='white' p={3} bg='green.500'>
-                    Image uploaded
-                  </Box>
+                    <Box color='white' p={3} bg='green.500'>
+                        Image uploaded
+                    </Box>
                 ),
-              })
-              
-            }
-            else if(Url==undefined) {
-              toast({
+            })
+
+        }
+        else if (Url == undefined) {
+            toast({
                 position: 'top',
                 render: () => (
-                  <Box color='white' p={3} bg='red.500'>
-                    {Error}
-                  </Box>
+                    <Box color='white' p={3} bg='red.500'>
+                        {Error}
+                    </Box>
                 ),
-              })
-            }
-        
-      },[Url])
+            })
+        }
 
-      
+    }, [Url])
+
 
     const SetSatisfied = (reciever_id, id) => {
 
@@ -141,38 +140,38 @@ const GrievanceStatus = (props) => {
                         let obj = {
                             message: message,
                             userType: "user",
-                            img_link:Url
+                            img_link: Url
                         }
-                        
 
-                         const newReply = await axios.post(`http://localhost:3001/api/forwards/send-reply/${gid}/${rid}`, obj)
+
+                        const newReply = await axios.post(`http://localhost:3001/api/forwards/send-reply/${gid}/${rid}`, obj)
                             .then(response => response.data)
                         if (newReply) {
-                            
-                            
 
-  
-                                toast({
-                                  position: 'top',
-                                  render: () => (
+
+
+
+                            toast({
+                                position: 'top',
+                                render: () => (
                                     <Box color='white' p={3} bg='green.500'>
-                                      Reply sent
+                                        Reply sent
                                     </Box>
-                                  ),
-                                })
-                                
-                              }
-                              else  {
-                                toast({
-                                  position: 'top',
-                                  render: () => (
+                                ),
+                            })
+
+                        }
+                        else {
+                            toast({
+                                position: 'top',
+                                render: () => (
                                     <Box color='white' p={3} bg='red.500'>
-                                      {Error}
+                                        {Error}
                                     </Box>
-                                  ),
-                                })
-                              }
-                        
+                                ),
+                            })
+                        }
+
                     }
                 }
 
@@ -290,18 +289,25 @@ const GrievanceStatus = (props) => {
 
                                                                                 </Text>
                                                                             ) : (
-                                                                            <Box><Text>
-                                                                                By you on {item.DateTime}
+                                                                                <Box><Text>
+                                                                                    By you on {item.DateTime}
 
-                                                                            </Text>
-                                                                            {item.img_link ? (
-                                                                                 <Image 
-                                                                                 w="50%"
-                                                                                 h="50%"
-                                                                                 src={item.img_link} alt="Hey"/>
-                                                                            ):null}
-                                                                           
-                                                                            </Box>)
+                                                                                </Text>
+                                                                                    {item.img_link && item.img_link?.split('.')[3] !== "pdf" ? (
+                                                                                        <Image
+                                                                                            w="50%"
+                                                                                            h="50%"
+                                                                                            src={item.img_link} alt="Hey" />
+                                                                                    ) :
+                                                                                        <Link
+                                                                                            color={'blue'}
+                                                                                            href={item.img_link}>
+                                                                                            <Icon as={GrAttachment} />
+                                                                                            Uploaded files
+                                                                                        </Link>
+                                                                                    }
+
+                                                                                </Box>)
                                                                         }
 
                                                                         <HStack py={2}>
@@ -354,11 +360,11 @@ const GrievanceStatus = (props) => {
                                                                                                 icon={<FiSend />} />
 
                                                                                             <IconButton
-                                                                                            onClick={() => EnableFile()}
-                                                                                            color={'white'}
+                                                                                                onClick={() => EnableFile()}
+                                                                                                color={'white'}
                                                                                                 bg="green"
                                                                                                 disabled={message ? false : true}
-                                                                                                
+
                                                                                                 icon={<GrAttachment />} />
                                                                                             <input
                                                                                                 style={{ width: '0', height: '0', display: 'none' }}
