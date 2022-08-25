@@ -44,6 +44,9 @@ app.use("/api/regional",require("./routes/regional_officer_routes"))
 
 app.use('/api/feedback',require('./routes/feedback_routes'))
 
+app.use('/api/regionaladmin',require('./routes/regional-routes'))
+
+app.use('/api/delete_request',require('./routes/deleterequest_routes'))
 
 // Cron jobs
 

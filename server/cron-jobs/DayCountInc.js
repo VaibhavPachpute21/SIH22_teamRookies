@@ -17,9 +17,9 @@ exports.SendMessageToForward = async (req, res, next) => {
                     const grievance = await Grievance.findById(doc?.grievance_id)
                     const officer = await Officer.findById(grievance?.reciever_id)
 
-                    await SendEmail(officer?.email, grievance?.grievant_name, grievance?.grievance_nature)
+/*                     await SendEmail(officer?.email, grievance?.grievant_name, grievance?.grievance_nature)
                     await SendMessage("User", grievance?.grievance_title, doc?.officer_name)
-                    await Forward.findOneAndUpdate({ _id: doc._id }, { $set: { message_sent_to_grievant: true } })
+                    await Forward.findOneAndUpdate({ _id: doc._id }, { $set: { message_sent_to_grievant: true } }) */
                 }
             })
         }

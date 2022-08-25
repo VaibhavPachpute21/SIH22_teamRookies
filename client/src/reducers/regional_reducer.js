@@ -5,6 +5,9 @@ export default function regional_reducers(state={},action){
 
         case "regional_send_reply":
             return {...state,regionData:action.payload}
+
+        case "create-regional-admin":
+            return {...state,regionalData:action.payload}
         default:
             return state
     }

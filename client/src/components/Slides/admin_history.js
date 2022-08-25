@@ -9,7 +9,7 @@ import {
     ModalCloseButton,
     useToast,
     useDisclosure,
-    Checkbox, IconButton, Avatar, Heading, Tag, Select, Button, FormLabel, Textarea
+    Checkbox, IconButton, Avatar, Heading, Tag, Select, Button, FormLabel, Textarea, Spacer
 } from '@chakra-ui/react'
 import { useState, useEffect } from 'react';
 import cookie from 'js-cookie'
@@ -44,7 +44,7 @@ const AdminDashboardHistory = (props) => {
     useEffect(() => {
         SetUser(props.User)
     }, [props.User])
-
+    
 
     useEffect(() => {
         const fetchMyGrievances = async () => {
@@ -292,9 +292,11 @@ const AdminDashboardHistory = (props) => {
                                             <Text>
                                                 {item?._id}
                                             </Text>
+
+                                            
                                         </Flex>
 
-                                        <HStack w={["50%","50%","15%","15%"]} h="100%" alignItems={'center'}>
+                                        <VStack w={["50%","50%","15%","15%"]} h="100%" alignItems={'center'}>
                                             {
                                                 item?.satisfied ? (
                                                     <Button
@@ -319,8 +321,14 @@ const AdminDashboardHistory = (props) => {
                                                     </Button>
                                                 )
                                             }
-
-                                        </HStack>
+                                            <Spacer/>
+                                            <Button 
+                                            color={'white'}
+                                            bg={'red'}
+                                            size="sm">
+                                                Reject grievance
+                                            </Button>
+                                        </VStack>
                                     </Flex>
 
                                     <HStack w="100%" h="5%">
