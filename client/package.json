@@ -18,7 +18,6 @@
     "http": "^0.0.1-security",
     "js-cookie": "^3.0.1",
     "mojoauth-web-sdk": "^1.1.9",
-    "moment-timezone": "^0.5.37",
     "react": "^18.2.0",
     "react-apexcharts": "^1.4.0",
     "react-confetti": "^6.1.0",

@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
-const moment = require('moment-timezone'); 
-moment().tz("Asia/Kolkata").format();
+
 const grievanceSchema = new mongoose.Schema(
   {
     grievant_id: {
@@ -55,10 +54,9 @@ const grievanceSchema = new mongoose.Schema(
     },
     short_id: {
       type: String,
-    }, createdAt: {type: Date, default: moment},
-    
-    updatedAt: {type: Date, default: moment}
-  }
+    },
+  },
+  { timestamps: true }
 );
 
 const Grievance = mongoose.model("Grievance", grievanceSchema);
