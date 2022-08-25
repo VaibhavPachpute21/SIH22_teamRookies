@@ -56,7 +56,7 @@ const GrievanceStatus = (props) => {
 
             try {
                 props.SatisfiedWithReply(pathname?.split("/")[2], currentR, forwardId)
-                navigate(`/feedback/${pathname?.split("/")[2]}`)
+                //navigate(`/feedback/${pathname?.split("/")[2]}`)
             } catch (error) {
                 Seterror(error.message)
             }

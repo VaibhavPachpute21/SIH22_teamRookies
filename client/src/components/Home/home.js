@@ -43,39 +43,27 @@ export default function Home() {
                 autoPlay={true} infiniteLoop={true} showArrows={true}
                 showStatus={false} showIndicators={false} showThumbs={false}
             >
-                isLargerThan425 ? (<div style={{ height: "70vh" }}>
+
+
+                <div style={{ height: "70vh" }}>
                     <img
                         style={{ "background-size": 'contain', "background-position": "center", "height": "100%", "width": "100%" }}
                         src={"https://i.ibb.co/QpcD551/Banner3-Og.png"} />
-
-
                 </div>
                 <div style={{ height: "70vh" }}>
                     <img
-                        style={{ "background-size": 'cover', "background-position": "center", "height": "100%", "width": "100%" }}
+                        style={{ "background-size": 'contain', "background-position": "center", "height": "100%", "width": "100%" }}
                         src={"https://i.ibb.co/g3T2Vvc/Banner2-OG.png"} />
                 </div>
                 <div style={{ height: "70vh" }}>
                     <img
                         style={{ "background-size": 'cover', "background-position": "center", "height": "100%", "width": "100%" }}
                         src={"https://i.ibb.co/vXBfXCK/Banner1-original.png"} />
-                </div>):(<div style={{ height: "50vh" }}>
-                    <img
-                        style={{ "background-size": 'contain', "background-position": "center", "height": "100%", "width": "100%" }}
-                        src={"https://i.ibb.co/BtYw6bb/Banner3-Mobile-Og.png"} />
+                </div>
 
 
-                </div>
-                <div style={{ height: "50vh" }}>
-                    <img
-                        style={{ "background-size": 'cover', "background-position": "center", "height": "100%", "width": "100%" }}
-                        src={"https://i.ibb.co/rKjhDMV/Banner2-Mobile-OG.png"} />
-                </div>
-                <div style={{ height: "50vh" }}>
-                    <img
-                        style={{ "background-size": 'cover', "background-position": "center", "height": "100%", "width": "100%" }}
-                        src={"https://i.ibb.co/ydvV6L1/Banner1-Mobile.png"} />
-                </div>)
+
+
             </Carousel>
 
             <Flex w="100%" h="100%" align={'start'} flexDirection={['column', 'column', 'row', 'row']} >
