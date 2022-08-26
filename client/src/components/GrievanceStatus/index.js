@@ -1,4 +1,4 @@
-import { Avatar, Box, Flex, HStack, Tag, Text, VStack, Link, Input, Button, useToast, IconButton, Divider, Image, Icon } from "@chakra-ui/react";
+import { Avatar, Box, Flex, HStack, Tag, Text, VStack, Link, Input, Button, useToast, IconButton,Divider, Image, Icon } from "@chakra-ui/react";
 import { useEffect, useState, useRef } from "react";
 import { FiThumbsUp } from 'react-icons/fi'
 import { FiThumbsDown } from 'react-icons/fi'
@@ -8,7 +8,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { FiSend } from 'react-icons/fi'
 import { GrAttachment } from 'react-icons/gr'
 import axios from "axios";
-
+import {GiCrossMark} from 'react-icons/gi'
+import cookie from 'js-cookie'
 const GrievanceStatus = (props) => {
 
     const [error, Seterror] = useState('')
@@ -26,8 +27,32 @@ const GrievanceStatus = (props) => {
     const [success, setSuccess] = useState(null)
     const [urlSuccess, seturlSuccess] = useState(null)
     const [Url, SetUrl] = useState('')
+    const [User,SetUser] = useState({})
 
-
+    const [authen, setAuthen] = useState(null)
+  const auth = cookie.get('token');
+    useEffect(() => {
+        async function VerifyUser() {
+          const request = await axios.get('http://localhost:3001/api/user/private', {
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${auth}`
+            }
+          })
+          if (request.data) {
+            let s = request.data?.success
+            setAuthen(s)
+            let user = request.data?.user
+            if (user) {
+              SetUser(user)
+            }
+          }
+        }
+        VerifyUser()
+    
+    
+      }, [])
+      console.log(User)
 
     const navigate = useNavigate()
     useEffect(() => {
@@ -185,6 +210,25 @@ const GrievanceStatus = (props) => {
     }
 
 
+    const DontLikeReply = async (replies,i,fid) => {
+        
+        const newReplies = await replies.map((item,i2)=>{
+            if(i2 == i){
+                item.validReason = true
+            }
+            return item
+        })
+        let obj = {
+            replies:newReplies
+        }
+    
+         try {
+            const badReply = await props.SetUnsatisfied(obj,fid)
+        } catch (error) {
+            
+        } 
+    }
+
     const end = function (username, reciever_id, university, replies, i, id, satisfied, updatedAt, officer_name, grievance_id) {
 
         return (
@@ -281,7 +325,13 @@ const GrievanceStatus = (props) => {
                                                                         <Text fontWeight={600}>
                                                                             {item.message}
                                                                         </Text>
-
+                                                                        <Text>
+                                                                            {item.validReason ? (
+                                                                                <Icon
+                                                                                color="red"
+                                                                                as={GiCrossMark}/>
+                                                                            ):(null)}
+                                                                        </Text>
                                                                         {
                                                                             item.user_type === "admin" ? (
                                                                                 <Text>
@@ -309,14 +359,16 @@ const GrievanceStatus = (props) => {
 
                                                                                 </Box>)
                                                                         }
-
-                                                                        <HStack py={2}>
+                                                                        {
+                                                                            User?.role === "0P" || User?.role === "0I" || User?.role === "1B" ? (
+                                                                                <HStack py={2}>
                                                                             {
                                                                                 item.user_type === "admin" ? (
                                                                                     <Box>
                                                                                         <IconButton
                                                                                             disabled={satisfied ? true : false}
                                                                                             size={'sm'}
+                                                                                            onClick={()=>{DontLikeReply(replies,i,id)}}
                                                                                             colorScheme={'red'}
                                                                                             icon={<FiThumbsDown />} />
                                                                                         <IconButton
@@ -330,6 +382,9 @@ const GrievanceStatus = (props) => {
                                                                             }
 
                                                                         </HStack>
+                                                                            ):(null)
+                                                                        }
+                                                                        
                                                                         {
                                                                             item.user_type === "admin" ? (
                                                                                 <Flex

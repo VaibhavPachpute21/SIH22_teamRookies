@@ -50,3 +50,15 @@ export async function GetDashboardData(){
         payload:request
     }
 }
+
+export async function SetUnsatisfied(replies,fid){
+    
+    const request = await axios.post(`http://localhost:3001/api/grievance/unsatisfied_with_reply/${fid}`,replies)
+    .then(response=>response.data)
+    return {
+        type:"unsatisfied_with_reply",
+        payload:request
+    }
+}
+
+

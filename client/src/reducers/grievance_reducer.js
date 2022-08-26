@@ -15,6 +15,9 @@ export default function grievance_reducer(state={},action){
         case "get_dashboard_data":
             return {...state,grievanceData:action.payload}
 
+        case "unsatisfied_with_reply":
+            return {...state,grievanceData:action.payload}
+
         default:
             return state
     }

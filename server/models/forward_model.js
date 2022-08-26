@@ -31,12 +31,13 @@ const forwardSchema = new mongoose.Schema({
             },
             DateTime:{
                 type:String
+            },
+            validReason:{
+                type:Boolean,
+                default:false
             }
         }
-    ],validReason:{
-        type:Boolean,
-        default:false
-    },
+    ],
     created_date:{
         type:Date
     },

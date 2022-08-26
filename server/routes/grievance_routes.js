@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const {CreateGrievance,EditGrievance,GetAllGrievances,DeleteGrievance,SatisfiedWithReply,GetGrievanceStatus} = require('../controller/grievance_controller')
+const {CreateGrievance,EditGrievance,GetAllGrievances,DeleteGrievance,SatisfiedWithReply,GetGrievanceStatus,UnSatisfiedWithReply} = require('../controller/grievance_controller')
 const {GetDashboardData} = require('../controller/infocontroller')
 
 router.route("/make-grievance").post(CreateGrievance)

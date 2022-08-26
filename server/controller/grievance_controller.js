@@ -119,14 +119,17 @@ exports.EditGrievance = async (req, res, next) => {
 }
 exports.UnSatisfiedWithReply = async (req,res,next) => {
     const forward_id = req.params.fid
-    const {repliesArray} = req.body
+    const {replies} = req.body
+    console.log(replies)
     try {
-        const UpdatedArray = await Forward.findByIdAndUpdate(forward_id,{$update:{replies:repliesArray}})
+        const UpdatedArray = await Forward.updateOne({"_id":forward_id},{$set:{replies:replies}})
+       
         if(!UpdatedArray){
             res.status(200).json({success:false,message:"Could not update reply"})
         }
         res.status(200).json({success:true,UpdatedArray})
     } catch (error) {
+        console.log(error.message)
         res.status(400).json({message: error.message})
     }
 }
