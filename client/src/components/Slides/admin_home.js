@@ -86,7 +86,7 @@ const AdminHome = (props) => {
           Good Morning,{props.userData.fullname}!
         </Heading>
       </Flex>
-      <Flex
+      {props.userData.role == "3" ?null:<Flex
         flexDirection={["column", "column", "row", "row"]}
         paddingLeft={8}
         spacing={10}
@@ -142,7 +142,7 @@ const AdminHome = (props) => {
             </VStack>
           </Flex>
         ))}
-      </Flex>
+      </Flex>}
 
       {props.userData.role == "3" ? <iframe
         title="Grievances Portal - Page 1"
@@ -151,6 +151,7 @@ const AdminHome = (props) => {
         src="https://app.powerbi.com/view?r=eyJrIjoiNTE4NDk5OWEtM2IxOS00ODUxLWJiM2ItOWMyYmRhYTIzYmM0IiwidCI6ImUzNzJhNzI2LTNiYzMtNDdiOS05MWU0LWE0M2E5ZmU2YzQ2YyJ9" frameborder="0"
         allowFullScreen="true"
       ></iframe> :
+
         <Flex flexDirection={['column', 'column', 'row', 'row']}
           paddingLeft={8}
           marginTop={5}

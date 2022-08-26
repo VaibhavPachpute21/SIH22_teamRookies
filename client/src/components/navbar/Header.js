@@ -1,10 +1,15 @@
-import React from 'react'
-import { HStack, Link, Box, Flex, Icon, Image } from '@chakra-ui/react'
+import React,{useEffect, useState} from 'react'
+import { HStack, Link, Box, Flex, Icon, Image, Accordion, Select,Input } from '@chakra-ui/react'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import cookie from 'js-cookie'
 
 
 export default function Header() {
+    const [language,setLang]=useState('English')
+
+    useEffect(()=>{
+        
+    },[language])
     return (
         <HStack
             minH={[
@@ -41,6 +46,14 @@ export default function Header() {
                                 fontWeight={500}
                                 _hover={{ 'textDecoration': 'none' }}
                                 href='/Registration'>Register</Link>
+
+                            
+                            <Select defaultValue={'English'}  w={'10%'} onChange={((e)=>{setLang(e.target.value) })} >
+                            <option>Tamil</option>
+                            <option>English</option>
+                            <option>Hindi</option>
+                            </Select>
+                            
                             
                             
                             {/* <Link

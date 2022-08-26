@@ -46,6 +46,7 @@ app.use("/api/regionaladmin", require("./routes/regional-routes"));
 
 app.use("/api/delete_request", require("./routes/deleterequest_routes"));
 
+app.use("/api/lang",require("./routes/lang_routes"))
 // Cron jobs
 
 cron.scheduleJob("*/35 * * * * *", () => {

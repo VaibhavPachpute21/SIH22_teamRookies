@@ -6,7 +6,6 @@ import * as actions from '../../actions/grievant_actions'
 import { useNavigate } from 'react-router-dom';
 import cookie from 'js-cookie'
 import axios from 'axios';
-import ControlledEditor from '../Slides/editor'
 
 
 function AddNewGrievance(props) {

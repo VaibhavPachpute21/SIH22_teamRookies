@@ -63,6 +63,10 @@ const officerSchema = new mongoose.Schema({
     },
     gender:{
         type:String
+    },
+    preffered_lang:{
+        type:String,
+        enum:["eng","tamil","hindi"]
     }
 },
     {

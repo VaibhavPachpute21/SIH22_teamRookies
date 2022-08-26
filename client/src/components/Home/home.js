@@ -1,35 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react'
 import { Component } from "react";
 import PropTypes from "prop-types";
 import "./Home.css";
+
 import { FiPhone } from "react-icons/fi";
 import { AiOutlineMail } from "react-icons/ai";
 import { IoLocationSharp } from "react-icons/io5";
 import { ThemeProvider } from "styled-components";
 import {
-  useMediaQuery,
-  Table,
-  Flex,
-  Box,
-  Th,
-  Td,
-  Tbody,
-  Tr,
-  TableContainer,
-  Thead,
-  Button,
-  Image,
-  GridItem,
-  SimpleGrid,
-  Heading,
-  Grid,
-  Text,
-  Container,
-  Icon,
-  VStack,
-  FormControl,
-  Input,
-  HStack,
+  useMediaQuery, Table, Flex, Box, Th, Td, Tbody, Tr, TableContainer, Thead, Button, Image,
+  GridItem, SimpleGrid, Heading, Grid, Text, Container, Icon, VStack,
+  FormControl, Input, HStack,
   Accordion,
   AccordionItem,
   AccordionButton,
@@ -43,6 +24,11 @@ import ChatBot from "react-simple-chatbot";
 import axios from "axios";
 import Footer from "../footer/Footer";
 import Header from "../navbar/Header";
+import cookie from 'js-cookie'
+
+
+
+
 const theme = {
   background: "#f5f8fb",
   headerBgColor: "#5A4FCF",
@@ -55,9 +41,51 @@ const theme = {
 };
 
 export default function Home() {
+  const [authen, setAuthen] = useState(null)
+  const auth = cookie.get('token');
+  const [User, SetUser] = useState({})
   const [isLargerThan425] = useMediaQuery("(min-width: 424px)");
   const [SlideIndex, setSlideIndex] = useState(0);
   const [open, setOpen] = useState(false);
+  const [error, seterror] = useState('')
+  const [language, setLang] = useState({})
+
+  useEffect(() => {
+    async function VerifyUser() {
+      const request = await axios.get('http://localhost:3001/api/user/private', {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${auth}`
+        }
+      })
+      if (request.data) {
+        let s = request.data?.success
+        setAuthen(s)
+        let user = request.data?.user
+        if (user) {
+          SetUser(user)
+        }
+      }
+    }
+    VerifyUser()
+
+
+  }, [auth])
+
+  useEffect(() => {
+    const GetLang = async () => {
+      try {
+        const lang = await axios.get(`http://localhost:3001/api/lang/get_lang/${User._id}/${User.role}`)
+          .then(response => { setLang(response.data?.data) })
+        console.log(language)
+      } catch (error) {
+        seterror(error.message)
+      }
+    }
+    GetLang()
+
+  }, [User?._id])
+
 
   return (
     <Box w="100%" minH="100%">
@@ -107,6 +135,39 @@ export default function Home() {
           />
         </div>
       </Carousel>
+      {/* <Carousel
+        onChange={(i) => {
+          setSlideIndex(i);
+        }}
+        autoPlay={true}
+        infiniteLoop={true}
+        showArrows={true}
+        showStatus={false}
+        showIndicators={false}
+        showThumbs={false}
+      >
+        <div style={{ height: "70vh" }}>
+          <Image
+            backgroundPosition={'center'}
+            backgroundSize={'70vh'}
+            src={"https://i.ibb.co/QpcD551/Banner3-Og.png"}
+          />
+        </div>
+        <div style={{ height: "70vh" }}>
+        <Image
+            backgroundPosition={'center'}
+            backgroundSize={'70vh'}
+            src={"https://i.ibb.co/g3T2Vvc/Banner2-OG.png"}
+          />
+        </div>
+        <div style={{ height: "70vh" }}>
+        <Image
+            backgroundPosition={'center'}
+            backgroundSize={'70vh'}
+            src={"https://i.ibb.co/vXBfXCK/Banner1-original.png"}
+          />
+        </div>
+      </Carousel> */}
 
       <Flex
         w="100%"
@@ -137,21 +198,16 @@ export default function Home() {
                   <Box w="100%" h="100%">
                     <Heading size="xl">
                       {" "}
-                      ABOUT UNIVERSITY GRANTS COMMISSION{" "}
+                      {User?.preffered_lang=="eng"?language?.lang?.eht1:User?.preffered_lang=="tamil"?language?.lang?.tht1:language?.lang?.hht1}
+{/*                       
+                      ABOUT UNIVERSITY GRANTS COMMISSION */}
+                      {" "}
                     </Heading>
                   </Box>
                 </HStack>
               </Box>
               <Box w="100%" h="50%">
-                India, the country of the Vedas and the most magnificent fusion
-                of diverse perspectives, has one of the most well-known
-                educational systems in the world. The efficient and orderly
-                operation of a system is essential for its growth. By
-                maintaining effective communication across the system's many
-                components, we can make sure of this. The UGC's Centralised
-                Assistance Cell takes this responsibility. Any complaints from
-                the institution, students, professors, or employed personnel are
-                appreciated.
+              {User?.preffered_lang=="eng"?language?.lang?.eht2:User?.preffered_lang=="tamil"?language?.lang?.tht2:language?.lang?.hht2}
               </Box>
               <Box alignSelf={"start"}>
                 <Button bg={"#5A4FCF"} color="white">
@@ -248,10 +304,10 @@ export default function Home() {
                 </HStack>
               </Box>
               <Flex w="100%" h="50%">
-                <Box maxW="25%" p={2}>
-                  <Image src="https://grievance.ugc.ac.in/images/ugc1.png" />
+                <Box maxW="100%" p={2}>
+                  <Image src="./image/b1.jpeg" />
                 </Box>
-                <Box maxW="25%" p={2}>
+                {/* <Box maxW="25%" p={2}>
                   <Image src="https://grievance.ugc.ac.in/images/grievance.png" />
                 </Box>
                 <Box maxW="25%" p={2}>
@@ -259,7 +315,7 @@ export default function Home() {
                 </Box>
                 <Box maxW="25%" p={2}>
                   <Image src="https://grievance.ugc.ac.in/images/status.png" />
-                </Box>
+                </Box> */}
               </Flex>
             </VStack>
           </VStack>
@@ -398,9 +454,9 @@ export default function Home() {
             <Flex w={"100%"} flexDirection={"column"}>
               <Flex w="100%" h="50%" flexDirection={"column"}>
                 <Box maxW="100%" p={2}>
-                  <Image src="https://grievance.ugc.ac.in/images/ugc1.png" />
+                  <Image src="./image/b2.jpeg" />
                 </Box>
-                <Box maxW="100%" p={2}>
+                {/* <Box maxW="100%" p={2}>
                   <Image src="https://grievance.ugc.ac.in/images/grievance.png" />
                 </Box>
                 <Box maxW="100%" p={2}>
@@ -408,7 +464,7 @@ export default function Home() {
                 </Box>
                 <Box maxW="100%" p={2}>
                   <Image src="https://grievance.ugc.ac.in/images/status.png" />
-                </Box>
+                </Box> */}
               </Flex>
             </Flex>
           </Box>

@@ -64,6 +64,10 @@ const userSchema = new mongoose.Schema({
     },
     enrollment: {
         type: Number
+    },
+    preffered_lang:{
+        type:String,
+        enum:["eng","tamil","hindi"]
     }
 },
     {
