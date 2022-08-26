@@ -6,7 +6,7 @@ import {
   FormControl,
   GridItem, Input, Flex, FormLabel, Button,
   InputLeftAddon, InputGroup, useToast,
-  Link, HStack, Icon, Text, VStack, Divider, FormErrorMessage, Select
+  Link, HStack, Icon, Text, VStack, Divider, FormErrorMessage, Select,Image
 } from '@chakra-ui/react';
 import './Login.css'
 import { RiLockPasswordFill } from 'react-icons/ri'
@@ -551,13 +551,15 @@ function Login(props) {
         </Box>
 
         <Box w={["0%", "0%", "40%", "40%"]} display={['none', 'none', 'block', 'block']} h="80vh"
-          bg="#5A4FCF"
+         bgImage={'./image/login.png'} backgroundRepeat={'no-repeat'}
+          // bg="#5A4FCF"
         >
           <Flex
             flexDirection={'column'}
             w="100%" h="100%">
             <Box w="100%" h="70%">
-              <VStack w="100%" h="100%" alignItems={'center'} justifyContent={'center'}>
+            {/* <Image src='./image/login.png' height={'100px'} /> */}
+              {/* <VStack w="100%" h="100%" alignItems={'center'} justifyContent={'center'}>
                 <Box>
                   <Heading
                     fontSize={'5xl'}
@@ -570,15 +572,9 @@ function Login(props) {
                     
                   </Text>
                 </Box>
-              </VStack>
+              </VStack> */}
             </Box>
-            <Box
-              bgRepeat={'no-repeat'}
-              bgSize={'cover'}
-              bgImage={'./image/pd.png'}
-              w="100%"
-              h="40%"
-            ></Box>
+            
           </Flex>
         </Box>
       </Flex>

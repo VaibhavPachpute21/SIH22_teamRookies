@@ -12,66 +12,66 @@ const UserProfile = (props) => {
 
     const toast = useToast()
 
-    useEffect(() => {
-        const GetUserInfo = async () => {
-            try {
-                await props.UserInfo(`${props.userData._id}`)
-            } catch (error) {
-                console.log(error.message)
-            }
-        }
-        GetUserInfo()
-    }, [])
+    // useEffect(() => {
+    //     const GetUserInfo = async () => {
+    //         try {
+    //             await props.UserInfo(`${props.userData._id}`)
+    //         } catch (error) {
+    //             console.log(error.message)
+    //         }
+    //     }
+    //     GetUserInfo()
+    // }, [])
 
-    useEffect(() => {
-        let alias = props.data
-        if (alias) {
-            let user = alias.userData?.TheUser
-            if (user) {
-                SetUser(user)
-            }
-        }
-    }, [props.data])
+    // useEffect(() => {
+    //     let alias = props.data
+    //     if (alias) {
+    //         let user = alias.userData?.TheUser
+    //         if (user) {
+    //             SetUser(user)
+    //         }
+    //     }
+    // }, [props.data])
 
-    const UpdateCallback = async () => {
-        try {
-            props.UpdateUser(`${props.userData._id}`, User)
+    // const UpdateCallback = async () => {
+    //     try {
+    //         props.UpdateUser(`${props.userData._id}`, User)
 
-            if (props.data) {
-                let alias = props.data
-                if(alias.userData){
-                    let core = alias.userData
-                    if(core.success){
-                        toast({
-                            position: 'top',
-                            render: () => (
-                              <Box color='white' p={3} bg='green.500'>
-                                User updated
-                              </Box>
-                            ),
-                          })
-                    }
-                    else{
-                        toast({
-                            position: 'top',
-                            render: () => (
-                              <Box color='white' p={3} bg='red.500'>
-                                Some error occured
-                              </Box>
-                            ),
-                          })
-                    }
-                }
-            }
+    //         if (props.data) {
+    //             let alias = props.data
+    //             if (alias.userData) {
+    //                 let core = alias.userData
+    //                 if (core.success) {
+    //                     toast({
+    //                         position: 'top',
+    //                         render: () => (
+    //                             <Box color='white' p={3} bg='green.500'>
+    //                                 User updated
+    //                             </Box>
+    //                         ),
+    //                     })
+    //                 }
+    //                 else {
+    //                     toast({
+    //                         position: 'top',
+    //                         render: () => (
+    //                             <Box color='white' p={3} bg='red.500'>
+    //                                 Some error occured
+    //                             </Box>
+    //                         ),
+    //                     })
+    //                 }
+    //             }
+    //         }
 
-        } catch (error) {
-            Seterror(error.message)
-        }
-    }
+    //     } catch (error) {
+    //         Seterror(error.message)
+    //     }
+    // }
 
 
     return (
-        <Box w="100%" h="100%" overflowX={'hidden'} > 
+        <Box w="100%" h="100%" overflowX={'hidden'} >
             <Flex w="100%" h="100%" alignItems={'flex-start'} flexDirection={['column']} >
                 <Box borderRadius={'2xl'}
                     w="100%" h="20%" bg="blue.200">
@@ -109,7 +109,7 @@ const UserProfile = (props) => {
                             </Button>
 
                             <Button color={'white'} bg="#5A4FCF" w="30%" size={'sm'}
-                                onClick={() => UpdateCallback()}
+                                // onClick={() => UpdateCallback()}
                             >
                                 Save
                             </Button>
@@ -152,7 +152,7 @@ const UserProfile = (props) => {
 
 
 
-                        <HStack
+                        {props.userData.role !="0P"?null: <HStack
                             py={5}
                             alignItems={'center'} justifyContent={'center'} w="100%" h="15%">
                             <Box py={2} w="30%" h="100%">
@@ -172,7 +172,7 @@ const UserProfile = (props) => {
                                 </Flex>
 
                             </Box>
-                        </HStack>
+                        </HStack>}
 
                         <HStack
                             py={5}
@@ -196,7 +196,7 @@ const UserProfile = (props) => {
                                         }}
                                         w={["100%", "100%", "30%", "30%"]}
                                         type="text"
-                                        value={User ? props.userData.role: "Not found"} />
+                                        value={User ? props.userData.role : "Not found"} />
                                 </Flex>
                             </Box>
                         </HStack>
@@ -251,14 +251,14 @@ const UserProfile = (props) => {
                                     <HStack
 
                                         py={5}
-                                        alignItems={'center'} justifyContent={'center'} w="100%" h="8vh">
-                                        <Box py={2} w="30%" h="100%">
+                                        alignItems={'center'} justifyContent={'center'} w="100%">
+                                        {/* <Box py={2} w="30%" h="100%">
                                             <FormLabel>
-                                                {props.userData.college_name? "Collage":"Commitee"}
+                                                {props.userData.college_name ? "Collage" : "Commitee"}
                                             </FormLabel>
-                                        </Box>
+                                        </Box> */}
 
-                                        <Box
+                                        {/* <Box
                                             w="60%" h="100%">
                                             <Flex w="100%" h="100%" flexDirection={'row'} justifyContent={'flex-end'}>
                                                 <Input
@@ -270,13 +270,13 @@ const UserProfile = (props) => {
                                                     }}
                                                     w={["100%", "100%", "30%", "30%"]}
                                                     type="text"
-                                                    value={props.userData.college_name? props.userData.college_name : props.userData.committee} />
+                                                    value={props.userData.college_name ? props.userData.college_name : props.userData.committee} />
                                             </Flex>
 
-                                        </Box>
+                                        </Box> */}
                                     </HStack>
 
-                                    <HStack
+                                    {/* <HStack
                                         py={5}
                                         alignItems={'center'} justifyContent={'center'} w="100%" h="8vh">
                                         <Box py={2} w="30%" h="100%">
@@ -300,7 +300,7 @@ const UserProfile = (props) => {
                                                     value={User ? props.userData.university : "Not found"} />
                                             </Flex>
                                         </Box>
-                                    </HStack>
+                                    </HStack> */}
 
                                     <HStack
                                         py={5}
