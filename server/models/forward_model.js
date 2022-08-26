@@ -33,7 +33,10 @@ const forwardSchema = new mongoose.Schema({
                 type:String
             }
         }
-    ],
+    ],validReason:{
+        type:Boolean,
+        default:false
+    },
     created_date:{
         type:Date
     },

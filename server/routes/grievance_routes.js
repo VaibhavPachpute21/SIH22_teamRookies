@@ -12,6 +12,8 @@ router.route("/get-grievances/:id").get(GetAllGrievances)
 
 router.route("/update-satisfied/:id/:rid/:fid").post(SatisfiedWithReply)
 
+router.route('/unsatisfied_with_reply/:fid').post(UnSatisfiedWithReply)
+
 router.route("/delete-grievance/:id").post(DeleteGrievance)
 
 router.route("/get-grievance-info/:id").get(GetGrievanceStatus)
