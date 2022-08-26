@@ -605,7 +605,7 @@ class GStatus extends Component {
       </div>
     ) : (
       <div style={{ width: "100%" }}>
-        <h3>INVALID GID</h3>
+        <h3>Please enter Valid Grievance ID</h3>
         {/* <p>
           The grievance {grievance_id.value} was sent to{" "}
           {off.assigned_to_role === "1A" || off.assigned_to_role === "1B"

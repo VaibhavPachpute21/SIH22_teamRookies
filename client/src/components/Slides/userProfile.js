@@ -1,21 +1,21 @@
-import { Box, HStack, VStack, Flex, Avatar, Text, Button, FormLabel, Input, useToast, Divider, Link } from "@chakra-ui/react";
+import { Box, HStack, VStack, Flex, Avatar, Text, Button, FormLabel, FormControl, Input, useToast, Divider, Link } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { connect } from 'react-redux'
 import * as actions from '../../actions/user_actions'
-
+import { Switch } from '@chakra-ui/react'
 
 
 const UserProfile = (props) => {
     const [VHeight, setVHeight] = useState("50vh")
     const [User, SetUser] = useState({})
     const [error, Seterror] = useState('')
-
+    const [Toggle, SetToggle] = useState(false)
     const toast = useToast()
-
+    const [UserId,SetUserId] = useState('')
     // useEffect(() => {
     //     const GetUserInfo = async () => {
     //         try {
-    //             await props.UserInfo(`${props.userData._id}`)
+    //             await props.UserInfo(`${props.User._id}`)
     //         } catch (error) {
     //             console.log(error.message)
     //         }
@@ -23,24 +23,15 @@ const UserProfile = (props) => {
     //     GetUserInfo()
     // }, [])
 
-    // useEffect(() => {
-    //     let alias = props.data
-    //     if (alias) {
-    //         let user = alias.userData?.TheUser
-    //         if (user) {
-    //             SetUser(user)
-    //         }
-    //     }
-    // }, [props.data])
-
+ 
     // const UpdateCallback = async () => {
     //     try {
-    //         props.UpdateUser(`${props.userData._id}`, User)
+    //         props.UpdateUser(`${props.User._id}`, User)
 
     //         if (props.data) {
     //             let alias = props.data
-    //             if (alias.userData) {
-    //                 let core = alias.userData
+    //             if (alias.User) {
+    //                 let core = alias.User
     //                 if (core.success) {
     //                     toast({
     //                         position: 'top',
@@ -69,7 +60,51 @@ const UserProfile = (props) => {
     //     }
     // }
 
+     
 
+
+
+     const TakeCareOfToggle = async (is) => {
+        console.log(is)
+        SetToggle(is)
+        try {
+            let obj = {
+                Toggle:!Toggle
+            }
+            props.SetLeaveToggle(props.User._id,obj)
+            Seterror(error.message)
+        }catch(error){
+            Seterror(error.message)
+    }
+    }
+
+    useEffect(() => {
+        if (User._id !== '') {
+            console.log(props.User._id)
+            SetUserId(props.User._id)
+            try {
+                props.GetLeaveStatus(props.User._id)
+            } catch (error) {
+                Seterror(error.message)
+            }
+        }
+
+    }, [User])
+
+    useEffect(() => {
+        if (props.data) {
+            let g = props?.data
+            if(g?.userData?.onLeave){
+
+                SetToggle(g?.userData?.onLeave)
+            }
+
+        }
+    }, [props.data]) 
+
+    useEffect(()=>{
+        SetUser(props.User)
+    },[props.User])
     return (
         <Box w="100%" h="100%" overflowX={'hidden'} >
             <Flex w="100%" h="100%" alignItems={'flex-start'} flexDirection={['column']} >
@@ -103,8 +138,17 @@ const UserProfile = (props) => {
 
                     <Box w={["100%", "30%", "30%"]} h="100%" paddingTop={['10vh', 1, 1]}>
                         <HStack w="100%" h="100%" spacing={10} alignItems={'center'} justifyContent={'center'}>
+                            <FormControl display='flex' alignItems='center'>
+                                <FormLabel htmlFor='email-alerts' mb='0'>
+                                     On leave
+                                </FormLabel>
+                                <Switch
+                                isChecked={Toggle}
+                                onChange={() => { TakeCareOfToggle(!Toggle) }}
+                                id='email-alerts' />
+                            </FormControl>
 
-                            <Button w="30%" size={'sm'}>
+                            {/* <Button w="30%" size={'sm'}>
                                 Cancel
                             </Button>
 
@@ -112,7 +156,7 @@ const UserProfile = (props) => {
                                 // onClick={() => UpdateCallback()}
                             >
                                 Save
-                            </Button>
+                            </Button> */}
                         </HStack>
                     </Box>
                 </Flex>
@@ -144,7 +188,7 @@ const UserProfile = (props) => {
                                         }}
                                         w={["100%", "100%", "30%", "30%"]}
                                         type="email"
-                                        value={props.userData.email} />
+                                        value={props.User.email} />
                                 </Flex>
 
                             </Box>
@@ -152,7 +196,7 @@ const UserProfile = (props) => {
 
 
 
-                        {props.userData.role !="0P"?null: <HStack
+                        {props.User.role != "0P" ? null : <HStack
                             py={5}
                             alignItems={'center'} justifyContent={'center'} w="100%" h="15%">
                             <Box py={2} w="30%" h="100%">
@@ -168,7 +212,7 @@ const UserProfile = (props) => {
 
                                         w={["100%", "100%", "30%", "30%"]}
                                         type="text"
-                                        value={props.userData.dob || "3/2/2002"} />
+                                        value={props.User.dob || "3/2/2002"} />
                                 </Flex>
 
                             </Box>
@@ -196,7 +240,7 @@ const UserProfile = (props) => {
                                         }}
                                         w={["100%", "100%", "30%", "30%"]}
                                         type="text"
-                                        value={User ? props.userData.role : "Not found"} />
+                                        value={User ? props.User.role : "Not found"} />
                                 </Flex>
                             </Box>
                         </HStack>
@@ -222,7 +266,7 @@ const UserProfile = (props) => {
                                             }));
                                         }} w={["100%", "100%", "30%", "30%"]}
                                         type="number"
-                                        value={User ? props.userData.phone_number : "Not found"} />
+                                        value={User ? props.User.phone_number : "Not found"} />
                                 </Flex>
 
                             </Box>
@@ -254,7 +298,7 @@ const UserProfile = (props) => {
                                         alignItems={'center'} justifyContent={'center'} w="100%">
                                         {/* <Box py={2} w="30%" h="100%">
                                             <FormLabel>
-                                                {props.userData.college_name ? "Collage" : "Commitee"}
+                                                {props.User.college_name ? "Collage" : "Commitee"}
                                             </FormLabel>
                                         </Box> */}
 
@@ -270,7 +314,7 @@ const UserProfile = (props) => {
                                                     }}
                                                     w={["100%", "100%", "30%", "30%"]}
                                                     type="text"
-                                                    value={props.userData.college_name ? props.userData.college_name : props.userData.committee} />
+                                                    value={props.User.college_name ? props.User.college_name : props.User.committee} />
                                             </Flex>
 
                                         </Box> */}
@@ -297,7 +341,7 @@ const UserProfile = (props) => {
                                                     }}
                                                     w={["100%", "100%", "30%", "30%"]}
                                                     type="text"
-                                                    value={User ? props.userData.university : "Not found"} />
+                                                    value={User ? props.User.university : "Not found"} />
                                             </Flex>
                                         </Box>
                                     </HStack> */}
@@ -324,7 +368,7 @@ const UserProfile = (props) => {
                                                     }}
                                                     w={["100%", "100%", "30%", "30%"]}
                                                     type="text"
-                                                    value={User ? props.userData.state : "Not found"} />
+                                                    value={User ? props.User.state : "Not found"} />
                                             </Flex>
 
                                         </Box>
@@ -352,7 +396,7 @@ const UserProfile = (props) => {
                                                     }}
                                                     w={["100%", "100%", "30%", "30%"]}
                                                     type="text"
-                                                    value={User ? props.userData.district : "Not found"} />
+                                                    value={User ? props.User.district : "Not found"} />
                                             </Flex>
                                         </Box>
                                     </HStack>

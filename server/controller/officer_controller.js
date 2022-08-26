@@ -46,6 +46,47 @@ exports.register = async (req, res, next) => {
 };
 
 
+exports.SetOfficerOnLeave = async (req,res,next) =>{
+    const officer_id = req.params.id
+    const {Toggle} = req.body
+   console.log(Toggle)
+    try {
+        const UpdateOfficer = await Officer.findByIdAndUpdate(officer_id,{$set:{officer_on_leave:Toggle}})   
+        if(!UpdateOfficer){
+            res.status(200).json({
+                success:false,
+                message:"Could not update"
+            })
+        }
+        res.status(200).json({
+            success:true,
+            UpdateOfficer
+        })
+    } catch (error) {
+        res.status(200).json({message:error.message})
+    }
+}
+
+exports.GetLeaveStatus = async (req,res,next) => {
+  
+    try {
+        const isOnLeave = await Officer.findById(req.params.id)
+        if(!isOnLeave){
+            res.status(200).json({
+                success:false,
+                message:"Could not update"
+            })
+        }
+        res.status(200).json({
+            success:true,
+            onLeave:isOnLeave?.officer_on_leave
+        })
+    } catch (error) {
+        res.status(200).json({message:error.message})
+    }
+}
+
+
 exports.login = async (req, res, next) => {
     const { email, password } = req.body
     try {

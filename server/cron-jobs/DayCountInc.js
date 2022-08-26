@@ -95,7 +95,8 @@ exports.ResetAndForward = async (req, res, next) => {
 
                 const nextOfficer = await Officer.find({
                     "university_nodal_no": currentOfficer.university_nodal_no + 1,
-                    "university": currentOfficer.university, role: doc.assigned_in_role
+                    "university": currentOfficer.university, role: doc.assigned_in_role,
+                    officer_on_leave:false
                 })
 
                 if (nextOfficer.length == 0) {

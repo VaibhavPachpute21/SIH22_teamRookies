@@ -18,6 +18,12 @@ export default function user_reducer(state={},action){
         case "user_send_reply":
             return {...state,userData:action.payload}
 
+        case "toggle_leave":
+            return {...state,userData:action.payload}
+        
+        case "toggle_leave_status":
+            return {...state,userData:action.payload}
+
         default:
             return state
     }

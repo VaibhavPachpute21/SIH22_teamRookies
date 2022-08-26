@@ -60,3 +60,23 @@ export async function SendReply(data,gid,rid){
         payload:request
     }
 }
+
+export async function SetLeaveToggle(id,data){
+    const request = await axios.post(`http://localhost:3001/api/officer/set_on_leave/${id}`,data)
+    .then(response=>response.data)
+    return{
+        type:"toggle_leave",
+        payload:request
+    } 
+}
+
+export async function GetLeaveStatus(id){
+    console.log(id)
+    const request = await axios.get(`http://localhost:3001/api/officer/get_current_leave_status/${id}`)
+    .then(response=>response.data)
+    return{
+        type:"toggle_leave_status",
+        payload:request
+    } 
+}
+

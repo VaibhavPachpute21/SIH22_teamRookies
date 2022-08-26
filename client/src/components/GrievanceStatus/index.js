@@ -1,4 +1,4 @@
-import { Avatar, Box, Flex, HStack, Tag, Text, VStack, Link, Input, Button, useToast, IconButton,Divider, Image, Icon } from "@chakra-ui/react";
+import { Avatar, Box, Flex, HStack, Tag, Text, VStack, Link, Input, Button, useToast, IconButton, Divider, Image, Icon } from "@chakra-ui/react";
 import { useEffect, useState, useRef } from "react";
 import { FiThumbsUp } from 'react-icons/fi'
 import { FiThumbsDown } from 'react-icons/fi'
@@ -8,10 +8,13 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { FiSend } from 'react-icons/fi'
 import { GrAttachment } from 'react-icons/gr'
 import axios from "axios";
-import {GiCrossMark} from 'react-icons/gi'
+import { GiCrossMark } from 'react-icons/gi'
 import cookie from 'js-cookie'
 const GrievanceStatus = (props) => {
-
+    const formatDate = (dateString) => {
+        const options = { year: "numeric", month: "long", day: "numeric" };
+        return new Date(dateString).toLocaleTimeString(undefined, options);
+    };
     const [error, Seterror] = useState('')
     const { pathname } = useLocation()
     const toast = useToast()
@@ -27,32 +30,32 @@ const GrievanceStatus = (props) => {
     const [success, setSuccess] = useState(null)
     const [urlSuccess, seturlSuccess] = useState(null)
     const [Url, SetUrl] = useState('')
-    const [User,SetUser] = useState({})
+    const [User, SetUser] = useState({})
 
     const [authen, setAuthen] = useState(null)
-  const auth = cookie.get('token');
+    const auth = cookie.get('token');
     useEffect(() => {
         async function VerifyUser() {
-          const request = await axios.get('http://localhost:3001/api/user/private', {
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization": `Bearer ${auth}`
+            const request = await axios.get('http://localhost:3001/api/user/private', {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${auth}`
+                }
+            })
+            if (request.data) {
+                let s = request.data?.success
+                setAuthen(s)
+                let user = request.data?.user
+                if (user) {
+                    SetUser(user)
+                }
             }
-          })
-          if (request.data) {
-            let s = request.data?.success
-            setAuthen(s)
-            let user = request.data?.user
-            if (user) {
-              SetUser(user)
-            }
-          }
         }
         VerifyUser()
-    
-    
-      }, [])
-      console.log(User)
+
+
+    }, [])
+    console.log(User)
 
     const navigate = useNavigate()
     useEffect(() => {
@@ -108,7 +111,7 @@ const GrievanceStatus = (props) => {
                 position: 'top',
                 render: () => (
                     <Box color='white' p={3} bg='green.500'>
-                        Image uploaded
+                        File uploaded
                     </Box>
                 ),
             })
@@ -172,10 +175,6 @@ const GrievanceStatus = (props) => {
                         const newReply = await axios.post(`http://localhost:3001/api/forwards/send-reply/${gid}/${rid}`, obj)
                             .then(response => response.data)
                         if (newReply) {
-
-
-
-
                             toast({
                                 position: 'top',
                                 render: () => (
@@ -210,23 +209,24 @@ const GrievanceStatus = (props) => {
     }
 
 
-    const DontLikeReply = async (replies,i,fid) => {
-        
-        const newReplies = await replies.map((item,i2)=>{
-            if(i2 == i){
+    const DontLikeReply = async (replies, i, fid) => {
+
+        const newReplies = await replies.map((item, i2) => {
+            if (i2 == i) {
                 item.validReason = true
             }
             return item
         })
         let obj = {
-            replies:newReplies
+            replies: newReplies
         }
-    
-         try {
-            const badReply = await props.SetUnsatisfied(obj,fid)
+
+        try {
+            const badReply = await props.SetUnsatisfied(obj, fid)
+            navigate('/Dashboard')
         } catch (error) {
-            
-        } 
+            SetError(error.message)
+        }
     }
 
     const end = function (username, reciever_id, university, replies, i, id, satisfied, updatedAt, officer_name, grievance_id) {
@@ -328,9 +328,9 @@ const GrievanceStatus = (props) => {
                                                                         <Text>
                                                                             {item.validReason ? (
                                                                                 <Icon
-                                                                                color="red"
-                                                                                as={GiCrossMark}/>
-                                                                            ):(null)}
+                                                                                    color="red"
+                                                                                    as={GiCrossMark} />
+                                                                            ) : (null)}
                                                                         </Text>
                                                                         {
                                                                             item.user_type === "admin" ? (
@@ -339,7 +339,7 @@ const GrievanceStatus = (props) => {
 
                                                                                 </Text>
                                                                             ) : (
-                                                                                <Box><Text>
+                                                                                <Flex><Text>
                                                                                     By you on {item.DateTime}
 
                                                                                 </Text>
@@ -357,82 +357,84 @@ const GrievanceStatus = (props) => {
                                                                                         </Link>
                                                                                     }
 
-                                                                                </Box>)
+                                                                                </Flex>)
                                                                         }
                                                                         {
                                                                             User?.role === "0P" || User?.role === "0I" || User?.role === "1B" ? (
-                                                                                <HStack py={2}>
-                                                                            {
-                                                                                item.user_type === "admin" ? (
-                                                                                    <Box>
-                                                                                        <IconButton
-                                                                                            disabled={satisfied ? true : false}
-                                                                                            size={'sm'}
-                                                                                            onClick={()=>{DontLikeReply(replies,i,id)}}
-                                                                                            colorScheme={'red'}
-                                                                                            icon={<FiThumbsDown />} />
-                                                                                        <IconButton
-                                                                                            disabled={satisfied ? true : false}
-                                                                                            size={'sm'}
-                                                                                            onClick={() => { SetSatisfied(reciever_id, id); setsatisfiedId(item._id) }}
-                                                                                            colorScheme={'green'}
-                                                                                            icon={<FiThumbsUp />} />
-                                                                                    </Box>
-                                                                                ) : (null)
-                                                                            }
-
-                                                                        </HStack>
-                                                                            ):(null)
-                                                                        }
-                                                                        
-                                                                        {
-                                                                            item.user_type === "admin" ? (
-                                                                                <Flex
-                                                                                    justifyContent={'flex-end'}
-                                                                                    alignItems={'flex-end'} w="100%" h="max-content">
-                                                                                    <Box>
-                                                                                        <VStack
-                                                                                            justifyContent={'flex-end'}
-                                                                                            alignItems={'flex-end'}>
-                                                                                            <Text
-                                                                                                fontWeight={600}
-                                                                                            >
-                                                                                                Send reply
-                                                                                            </Text>
-                                                                                            <Text fontSize={'10px'}>
-                                                                                                {"(Be respectful)"}
-                                                                                            </Text>
-                                                                                            <Input
-                                                                                                type="text" onChange={(e) => SetMessage(e.target.value)} />
+                                                                                <HStack py={2} w={'100%'}>
+                                                                                    {
+                                                                                        item.user_type === "admin" ? (
+                                                                                            <Flex flexDirection={'row'} w={'100%'}>
+                                                                                                <IconButton
+                                                                                                    disabled={satisfied ? true : false}
+                                                                                                    size={'sm'}
+                                                                                                    onClick={() => { DontLikeReply(replies, i, id) }}
+                                                                                                    colorScheme={'red'}
+                                                                                                    icon={<FiThumbsDown />} />
+                                                                                                <IconButton
+                                                                                                    disabled={satisfied ? true : false}
+                                                                                                    size={'sm'}
+                                                                                                    onClick={() => { SetSatisfied(reciever_id, id); setsatisfiedId(item._id) }}
+                                                                                                    colorScheme={'green'}
+                                                                                                    icon={<FiThumbsUp />} />
+                                                                                            </Flex>
+                                                                                        ) : (null)
+                                                                                    }
+                                                                                    {
+                                                                                        item.user_type === "admin" ? (
+                                                                                            <Flex
+                                                                                                justifyContent={'flex-end'}
+                                                                                                alignItems={'flex-end'} w="100%" h="max-content">
+                                                                                                <Box>
+                                                                                                    <VStack
+                                                                                                        justifyContent={'flex-end'}
+                                                                                                        alignItems={'flex-end'}>
+                                                                                                        <Text
+                                                                                                            fontWeight={600}
+                                                                                                        >
+                                                                                                            Send reply
+                                                                                                        </Text>
+                                                                                                        <Text fontSize={'10px'}>
+                                                                                                            {"(Be respectful)"}
+                                                                                                        </Text>
+                                                                                                        <Input
+                                                                                                            type="text" onChange={(e) => SetMessage(e.target.value)} />
 
 
 
-                                                                                            <IconButton
-                                                                                                disabled={message ? false : true}
-                                                                                                color={'white'}
-                                                                                                bg="green"
-                                                                                                onClick={() => { MakeReply(grievance_id, reciever_id) }}
-                                                                                                icon={<FiSend />} />
+                                                                                                        <Flex w={'100%'}>
+                                                                                                            <IconButton m={1}
+                                                                                                                disabled={message ? false : true}
+                                                                                                                color={'white'}
+                                                                                                                bg="green"
+                                                                                                                onClick={() => { MakeReply(grievance_id, reciever_id) }}
+                                                                                                                icon={<FiSend />} />
 
-                                                                                            <IconButton
-                                                                                                onClick={() => EnableFile()}
-                                                                                                color={'white'}
-                                                                                                bg="green"
-                                                                                                disabled={message ? false : true}
+                                                                                                            <IconButton m={1}
+                                                                                                                onClick={() => EnableFile()}
+                                                                                                                color={'white'}
+                                                                                                                bg="green"
+                                                                                                                disabled={message ? false : true}
 
-                                                                                                icon={<GrAttachment />} />
-                                                                                            <input
-                                                                                                style={{ width: '0', height: '0', display: 'none' }}
-                                                                                                onChange={(e) => { UploadFile(e.target.files) }}
-                                                                                                type="file"
-                                                                                                accept="image/* application/pdf"
-                                                                                                ref={inRef}
-                                                                                            />
-                                                                                        </VStack>
-                                                                                    </Box>
-                                                                                </Flex>
+                                                                                                                icon={<GrAttachment />} />
+                                                                                                        </Flex>
+                                                                                                        <input
+                                                                                                            style={{ width: '0', height: '0', display: 'none' }}
+                                                                                                            onChange={(e) => { UploadFile(e.target.files) }}
+                                                                                                            type="file"
+                                                                                                            accept="application/pdf"
+                                                                                                            ref={inRef}
+                                                                                                        />
+                                                                                                    </VStack>
+                                                                                                </Box>
+                                                                                            </Flex>
+                                                                                        ) : (null)
+                                                                                    }
+                                                                                </HStack>
                                                                             ) : (null)
                                                                         }
+
+
                                                                     </VStack>
                                                                 )
                                                             })
@@ -456,12 +458,12 @@ const GrievanceStatus = (props) => {
                                     w="100%" h="30%" flexDirection={'row'} justifyContent={'space-around'}>
 
                                     <Text>
-                                        20mins ago
+                                        {formatDate(updatedAt)}
                                     </Text>
 
-                                    <Text>
+                                    {/* <Text>
                                         2:50 PM
-                                    </Text>
+                                    </Text> */}
 
                                 </Flex>
 

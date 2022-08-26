@@ -23,7 +23,10 @@ import { useNavigate } from 'react-router-dom'
 const AdminDashboardHistory = (props) => {
 
     const toast = useToast()
-    
+    const formatDate = (dateString) => {
+        const options = { year: "numeric", month: "long", day: "numeric" };
+        return new Date(dateString).toLocaleTimeString(undefined, options);
+      };
 
     const Filters = [
         "All", "Institute", "Student", "Employee", "Solved", "Unsolved"
@@ -190,17 +193,19 @@ const AdminDashboardHistory = (props) => {
                                             alignItems={'flex-start'}
                                             justifyContent={'space-between'}
                                             w="100%" h={["100%","100%","20%","20%"]}>
-                                            <HStack w={["100%","100%","40%","40%"]} h="100%">
+                                            <HStack py={3} w={["100%","100%","40%","40%"]} h="100%">
                                                 <Text fontWeight={600}>
                                                     Grievance id
                                                 </Text>
                                                 <Text>
-                                                    {item.grievance_id}
+                                                    {item.short_id}
                                                 </Text>
                                             </HStack>
 
                                             <HStack w={["100%","100%","15%","15%"]} paddingTop={5} h="100%" alignItems={'center'}>
-                                            {
+                                            <Button
+                                                onClick={() => { nav(`/TrackGrievance/${item.grievance_id}`, { state:{url:item.grievance_id} }) }}
+                                                >TrackGrievance</Button>{
                                                 item?.satisfied ? (
                                                     <Button
                                                         disabled={true}
@@ -225,13 +230,13 @@ const AdminDashboardHistory = (props) => {
                                             </HStack>
                                         </Flex>
 
-                                        <HStack w="100%" h="5%">
+                                        <HStack w="100%" mt={5} h="15%">
                                             <HStack w={["100%","100%","40%","40%"]} h="100%">
                                                 <Text fontWeight={600}>
                                                     Forwarded to you on
                                                 </Text>
                                                 <Text>
-                                                    {item?.updatedAt.split('T')[0]}
+                                                    {formatDate(item?.updatedAt)}
                                                 </Text>
                                             </HStack>
                                         </HStack>
@@ -293,7 +298,7 @@ const AdminDashboardHistory = (props) => {
                                                 Grievance id
                                             </Text>
                                             <Text>
-                                                {item?._id}
+                                                {item?.short_id}
                                             </Text>
 
                                             
@@ -340,7 +345,7 @@ const AdminDashboardHistory = (props) => {
                                                 Forwarded to you on
                                             </Text>
                                             <Text>
-                                                {item?.updatedAt.split('T')[0]}
+                                                {formatDate(item?.updatedAt)}
                                             </Text>
                                         </Flex>
                                     </HStack>
@@ -365,7 +370,7 @@ const AdminDashboardHistory = (props) => {
                                             {item?.grievance_title}
                                         </Text> 
                                     </Flex>
-                                    <Flex flexDirection={['column','column','row','row']}
+                                    <Flex mt={2} flexDirection={['column','column','row','row']}
                                         py={2}
                                         alignItems={'flex-start'}
                                         w="100%" h="max-content">                                        

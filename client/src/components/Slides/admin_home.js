@@ -144,145 +144,144 @@ const AdminHome = (props) => {
         ))}
       </Flex>
 
-     {props.userData.role =="3"? <iframe
+      {props.userData.role == "3" ? <iframe
         title="Grievances Portal - Page 1"
         width="100%"
         height="750px"
-        src="https://app.powerbi.com/view?r=eyJrIjoiYWY5NzI5ODItOGIxOS00MDMzLWE4MDctMDllNzBhYjUwNWU2IiwidCI6ImUzNzJhNzI2LTNiYzMtNDdiOS05MWU0LWE0M2E5ZmU2YzQ2YyJ9"
-        frameborder="0"
+        src="https://app.powerbi.com/view?r=eyJrIjoiNTE4NDk5OWEtM2IxOS00ODUxLWJiM2ItOWMyYmRhYTIzYmM0IiwidCI6ImUzNzJhNzI2LTNiYzMtNDdiOS05MWU0LWE0M2E5ZmU2YzQ2YyJ9" frameborder="0"
         allowFullScreen="true"
       ></iframe> :
-       <Flex flexDirection={['column','column','row','row']}
-                paddingLeft={8}
-                marginTop={5}
-                w="100%" h={["100%","100%","100%","100%"]}>
+        <Flex flexDirection={['column', 'column', 'row', 'row']}
+          paddingLeft={8}
+          marginTop={5}
+          w="100%" h={["100%", "100%", "100%", "100%"]}>
 
-                <Flex w={["100%","100%","100%","20%" ]} h="100%" marginTop={["65vh",5,5,5]}
-                flexDirection={['column','column','column','column']}
-                >
-                    <Box
-                        borderRadius={20}
-                        boxShadow={'xl'}
-                        w="100%" h={["40%"]}>
-                        <VStack w="100%" h="100%">
-                            <Box w="100%" h="30%" px={10} py={10}>
-                                <Text w="100%" h="100%"
-                                    fontFamily={'monospace'}
-                                    fontWeight={700} fontSize={'xl'}>
-                                    New users
-                                </Text>
-                            </Box>
-                            <HStack w="100%" h="30%" px={10}>
-                                <Text w="50%" h="100%"
-                                    fontFamily={'monospace'}
-                                    fontWeight={700} fontSize={'5xl'}>
-                                    43
-                                </Text>
-
-
-                                <Tag
-
-                                    w="50%" h="50%"
-                                    background={'green.100'}
-                                    fontWeight={500}
-                                    color={'green.700'}
-                                >+4.3%</Tag>
+          <Flex w={["100%", "100%", "100%", "20%"]} h="100%" marginTop={["65vh", 5, 5, 5]}
+            flexDirection={['column', 'column', 'column', 'column']}
+          >
+            <Box
+              borderRadius={20}
+              boxShadow={'xl'}
+              w="100%" h={["40%"]}>
+              <VStack w="100%" h="100%">
+                <Box w="100%" h="30%" px={10} py={10}>
+                  <Text w="100%" h="100%"
+                    fontFamily={'monospace'}
+                    fontWeight={700} fontSize={'xl'}>
+                    New users
+                  </Text>
+                </Box>
+                <HStack w="100%" h="30%" px={10}>
+                  <Text w="50%" h="100%"
+                    fontFamily={'monospace'}
+                    fontWeight={700} fontSize={'5xl'}>
+                    43
+                  </Text>
 
 
-                            </HStack>
+                  <Tag
+
+                    w="50%" h="50%"
+                    background={'green.100'}
+                    fontWeight={500}
+                    color={'green.700'}
+                  >+4.3%</Tag>
+
+
+                </HStack>
+              </VStack>
+            </Box>
+            <Box
+              borderRadius={20}
+              boxShadow={'xl'}
+              w="100%" h="40%">
+              <VStack w="100%" h="100%">
+                <Box w="100%" h="30%" px={10} py={10}>
+                  <Text w="100%" h="100%"
+                    fontFamily={'monospace'}
+                    fontWeight={700} fontSize={'xl'}>
+                    Missed grievances
+                  </Text>
+                </Box>
+                <HStack w="100%" h="30%" px={10}>
+                  <Text w="50%" h="100%"
+                    fontFamily={'monospace'}
+
+                    fontWeight={700} fontSize={'5xl'}>
+                    21
+                  </Text>
+
+
+                  <Tag
+                    w="50%" h="50%"
+                    background={'red.100'}
+                    fontWeight={500}
+                    color={'red.700'}
+                  >-5.2%</Tag>
+
+                </HStack>
+              </VStack>
+            </Box>
+
+          </Flex>
+
+          <Flex w={["100%", "100%", "80%", "80%"]} h="100%" flexDirection={['column', 'column', 'row', 'row']} >
+            <VStack w={["100%", "100%", "60%", "60%"]}>
+              <Text px={5} w="100%" h="100%"
+                fontFamily={'monospace'}
+                fontWeight={700} fontSize={'xl'}>
+                Recently contacted
+              </Text>
+              <ChartComponent />
+            </VStack>
+
+            <Box w={["100%", "100%", "40%", "40%"]} h="100%" paddingBottom={5}>
+              <VStack w="100%" h="85%">
+                <Text w="100%" h="100%"
+                  fontFamily={'monospace'}
+                  fontWeight={700} fontSize={'xl'}>
+                  Recently contacted
+                </Text>
+                {
+                  RecentlyContacted?.map((item, i) => (
+                    <Box key={i} w="100%"
+                      borderRadius={20}
+                      boxShadow={'md'}
+                      h={["100%", "100%", "25%", "25%"]}>
+                      <HStack w="100%" h="100%">
+                        <Box px={[2, 2, 6, 6]} py={[4, 4, 6, 8]} w={["100%", "100%", "20%", "20%"]} h="100%">
+                          <Avatar
+
+                            size={'sm'} />
+                        </Box>
+                        <VStack spacing={0} p={[0, 0, 4, 4]} w="60%" h="100%">
+                          <Box w="100%" h="50%">
+                            <Text
+                              fontWeight={600}
+                              fontSize={['md', 'xl', 'xl']}
+                            >{item.username}</Text>
+                          </Box>
+                          <Box w="100%" h="30%">
+                            <Text>{item.email}</Text>
+                          </Box>
                         </VStack>
+
+                        <IconButton
+                          size={'sm'}
+                          background={'#5A4FCF'}
+                          color="white"
+                          icon={<BsChat />}
+                          w="10%">
+
+                        </IconButton>
+                      </HStack>
                     </Box>
-                    <Box
-                        borderRadius={20}
-                        boxShadow={'xl'} 
-                        w="100%" h="40%">
-                        <VStack w="100%" h="100%">
-                            <Box w="100%" h="30%" px={10} py={10}>
-                                <Text w="100%" h="100%"
-                                    fontFamily={'monospace'}
-                                    fontWeight={700} fontSize={'xl'}>
-                                    Missed grievances
-                                </Text>
-                            </Box>
-                            <HStack w="100%" h="30%" px={10}>
-                            <Text w="50%" h="100%"
-                                    fontFamily={'monospace'}
-                                    
-                                    fontWeight={700} fontSize={'5xl'}>
-                                    21
-                                </Text>
-
-
-                                <Tag
-                                    w="50%" h="50%"
-                                    background={'red.100'}
-                                    fontWeight={500}
-                                    color={'red.700'}
-                                >-5.2%</Tag>
-
-                            </HStack>
-                        </VStack>
-                    </Box>
-                    
-                </Flex>
-
-                <Flex w={["100%","100%","80%","80%"]} h="100%" flexDirection={['column','column','row','row']} >
-                    <VStack w={["100%","100%","60%","60%"]}>
-                    <Text px={5} w="100%" h="100%"
-                                    fontFamily={'monospace'}
-                                    fontWeight={700} fontSize={'xl'}>
-                                    Recently contacted
-                                </Text>
-                    <ChartComponent/>
-                    </VStack>
-
-                    <Box w={["100%","100%","40%","40%"]} h="100%" paddingBottom={5}>
-                        <VStack w="100%" h="85%">
-                        <Text w="100%" h="100%"
-                                    fontFamily={'monospace'}
-                                    fontWeight={700} fontSize={'xl'}>
-                                    Recently contacted
-                                </Text>
-                            {
-                                RecentlyContacted?.map((item,i)=>(
-                                    <Box key={i} w="100%"
-                                    borderRadius={20}
-                                    boxShadow={'md'}
-                                    h={["100%","100%","25%","25%"]}>
-                                        <HStack w="100%" h="100%">
-                                            <Box px={[2,2,6,6]} py={[4,4,6,8]} w={["100%","100%","20%","20%"]} h="100%">
-                                               <Avatar
-                                               
-                                               size={'sm'}/>
-                                            </Box>
-                                            <VStack spacing={0} p={[0,0,4,4]} w="60%" h="100%">
-                                            <Box w="100%" h="50%">
-                                                <Text
-                                                fontWeight={600}
-                                                fontSize={['md','xl','xl']}
-                                                >{item.username}</Text>
-                                            </Box>
-                                            <Box w="100%" h="30%">
-                                                <Text>{item.email}</Text>
-                                            </Box>
-                                            </VStack>
-
-                                            <IconButton 
-                                            size={'sm'}
-                                            background={'#5A4FCF'}
-                                            color="white"
-                                            icon={<BsChat/>}
-                                            w="10%">
-
-                                            </IconButton>
-                                        </HStack>
-                                    </Box>
-                                ))
-                            }
-                        </VStack>
-                    </Box>
-                </Flex>
-            </Flex>}
+                  ))
+                }
+              </VStack>
+            </Box>
+          </Flex>
+        </Flex>}
     </Flex>
   );
 };

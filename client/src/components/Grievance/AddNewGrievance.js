@@ -48,7 +48,13 @@ function AddNewGrievance(props) {
     const navigate = useNavigate()
 
     const HandleSubmit = async (data) => {
+        const date = Date.now();
+        console.log(date); // 👉️ Wed Jun 22 2022
 
+        // const timestampInMs = date.getTime();
+
+        const unixTimestamp = Math.floor(date / 1000);
+        console.log(unixTimestamp);
         try {
             let obj = {
                 grievant_id: User?._id,
@@ -59,8 +65,8 @@ function AddNewGrievance(props) {
                 grievance_description: data.description,
                 grievant_university: "mu",
                 imgs: Files,
-                region: User?.region ? User.region : "east"
-
+                region: User?.region ? User.region : "east",
+                short_id: `GRIEV_${unixTimestamp}`,
             }
 
             await props.AddGrievance(obj)
@@ -85,13 +91,13 @@ function AddNewGrievance(props) {
                         position: 'top',
                         render: () => (
                             <Box color='white' p={3} bg='green.500'>
-                                Grievance submitted
+                                Grievance submitted {d.short_id}
                             </Box>
                         ),
                     })
 
                     console.log(d)
-                    // navigate('/TrackGrievance/34-20')
+                    navigate("/TrackGrievance/" + `${d._id}`);
                 }
 
 
@@ -229,7 +235,7 @@ function AddNewGrievance(props) {
                             <Textarea variant={'flushed'} id="discription" name="discription"
                                 placeholder='Add discription of your Grievance...' wrap='true'
                                 cols={95} rows={5} style={{ border: '1px solid grey', padding: '5px', borderRadius: '5px' }}
-                                {...register('discription', { required: { value: true, message: "Discription is required!", } })} />
+                                {...register('discription', { required: { value: true, message: "Description is required!", } })} />
 
                             {errors.discription && errors.discription.message ? (
                                 <Box textAlign={'left'} fontSize={'12px'} py={1} maxH={'0px'} color={'red'}>
@@ -241,9 +247,17 @@ function AddNewGrievance(props) {
 
                         <Box w={'100%'} bg='white' py={3} px={[2, 2, 10, 10]} >
                             <Text fontSize={'18px'} pb={2} paddingLeft={0}>Please upload image related to grievance if any:</Text>
-                            <input name="file1" type="file" 
-                                         onChange={(e) => { HandleFileSubmit(e) }}
-                                        accept="application/pdf"></input>
+                            <input name="file1" id="file1" type="file"
+                                onChange={(e) => { HandleFileSubmit(e) }}
+                                accept="application/pdf" >
+                                
+                            </input>
+                            {errors.file1 && errors.file1.message ? (
+                                <Box textAlign={'left'} fontSize={'12px'} py={1} maxH={'0px'} color={'red'}>
+                                    {errors.file1.message}
+                                </Box>
+                            ) : (null)
+                            }
                         </Box>
 
 

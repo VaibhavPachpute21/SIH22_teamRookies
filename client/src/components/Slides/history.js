@@ -126,7 +126,7 @@ const DashboardHistory = (props) => {
                     >
                       <HStack w="40%" h="100%">
                         <Text fontWeight={600}>Grievance id</Text>
-                        <Text>{item?.grievance_id}</Text>
+                        <Text>{item?.short_id}</Text>
                       </HStack>
 
                       <HStack w="15%" h="100%" alignItems={"center"}>
@@ -172,7 +172,7 @@ const DashboardHistory = (props) => {
                 >
                   <HStack w="40%" h="100%">
                     <Text fontWeight={600}>Grievance id</Text>
-                    <Text>{item?._id}</Text>
+                    <Text>{item?.short_id}</Text>
                   </HStack>
 
                   <HStack w="15%" h="100%" alignItems={"center"}>

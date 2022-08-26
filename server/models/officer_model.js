@@ -18,6 +18,10 @@ const officerSchema = new mongoose.Schema({
         minlength: 6,
         select: false
     },
+    officer_on_leave:{
+        type:Boolean,
+        default:false
+    },
     role: {
         type: String,
         enum:["1A","1B"]

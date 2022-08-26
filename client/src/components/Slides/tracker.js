@@ -35,7 +35,10 @@ const DashboardTracker = (props) => {
   const [counts, setCounts] = useState([]);
 
   const [FromTo, setFromTo] = useState([]);
-
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return new Date(dateString).toLocaleTimeString(undefined, options);
+  };
   const chart = {
     options: {
       chart: {
@@ -421,9 +424,7 @@ const DashboardTracker = (props) => {
                       <Box w="100%" h="10%">
                         <HStack w="100%" h="100%">
                           <Text w="80%" fontWeight={600} fontSize={"sm"}>
-                            AICTE/{item?.region}/{item?.grievant_university}/
-                            {item?.createdAt.split("-")[0]}/
-                            {item?._id.slice(0, 5)}
+                           {item.short_id}
                           </Text>
                         </HStack>
                       </Box>
@@ -526,7 +527,7 @@ const DashboardTracker = (props) => {
                           </Box>
                           <Box w="40%">
                             <Text w="100%">
-                              {item.createdAt?.split("T")[0]}
+                              {formatDate(item?.createdAt)}
                             </Text>
                           </Box>
                         </HStack>

@@ -270,7 +270,7 @@ function Dashboard(props) {
         } */}
         {
           shutter === 5 ? (
-            User.role == 0 || User.role != "0I" ? <UserProfile userData={User} /> : <InstituteProfile userData={User} />
+            User.role == 0 || User.role != "0I" ? <UserProfile User={User ? User : null} /> : <InstituteProfile userData={User} />
           ) : (null)
         }
 

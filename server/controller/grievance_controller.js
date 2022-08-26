@@ -13,7 +13,7 @@ exports.CreateGrievance = async (req, res, next) => {
         grievance_nature, grievant_name, principal_name, grievance_title, grievance_description, imgs, short_id } = req.body
 
     try {
-        const firstOfficerReciever = await Officer.findOne({ "university": grievant_university, "role": "1A" }).sort('university_nodal_no')
+        const firstOfficerReciever = await Officer.findOne({ "university": grievant_university, "role": "1A",officer_on_leave:false }).sort('university_nodal_no')
         if (!firstOfficerReciever) {
             console.log("No nodal officer for university")
         }
